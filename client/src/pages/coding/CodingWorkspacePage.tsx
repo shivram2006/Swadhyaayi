@@ -18,6 +18,74 @@ import {
   Sparkles,
 } from 'lucide-react';
 
+const getDefaultBoilerplate = (lang: string, title: string = 'solution'): string => {
+  const cleanTitle = title.replace(/[^a-zA-Z0-9]/g, ' ').trim();
+  const pascalName = cleanTitle ? cleanTitle.split(/\s+/).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join('') : 'Solution';
+  const camelName = pascalName.charAt(0).toLowerCase() + pascalName.slice(1);
+
+  if (lang === 'cpp') {
+    return `#include <iostream>
+#include <vector>
+#include <string>
+#include <unordered_map>
+#include <algorithm>
+
+using namespace std;
+
+// Solution
+void ${camelName}() {
+    // Write your solution here
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    ${camelName}();
+    return 0;
+}
+`;
+  }
+
+  if (lang === 'java') {
+    return `import java.util.*;
+
+public class Solution {
+    // Write your solution here
+    public static void ${camelName}() {
+        
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ${camelName}();
+        scanner.close();
+    }
+}
+`;
+  }
+
+  if (lang === 'javascript') {
+    return `function ${camelName}(input) {
+    // Write your solution here
+}
+
+const fs = require('fs');
+const input = fs.readFileSync(0, 'utf-8').trim();
+console.log(${camelName}(input));
+`;
+  }
+
+  return `def ${camelName}():
+    # Write your solution here
+    pass
+
+import sys
+input_data = sys.stdin.read().strip()
+print(${camelName}())
+`;
+};
+
 export const CodingWorkspacePage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const [question, setQuestion] = useState<any>(null);
@@ -29,6 +97,7 @@ export const CodingWorkspacePage: React.FC = () => {
   // Editor states
   const [selectedLanguage, setSelectedLanguage] = useState('python');
   const [code, setCode] = useState('');
+  const [codeByLanguage, setCodeByLanguage] = useState<Record<string, string>>({});
   const [customInput, setCustomInput] = useState('');
 
   // Execution states
@@ -46,12 +115,24 @@ export const CodingWorkspacePage: React.FC = () => {
           const q = res.data.data;
           setQuestion(q);
 
-          // Find starter code for default language
-          const starter = q.starterCode?.find((s: any) => s.language === selectedLanguage) || q.starterCode?.[0];
-          if (starter) {
-            setCode(starter.boilerplate);
-            setSelectedLanguage(starter.language);
+          // Populate cache with seeded starter codes
+          const initialMap: Record<string, string> = {};
+          if (Array.isArray(q.starterCode)) {
+            q.starterCode.forEach((sc: any) => {
+              if (sc.language && sc.boilerplate) {
+                initialMap[sc.language] = sc.boilerplate;
+              }
+            });
           }
+
+          // Default language and code
+          const initialLang = initialMap['python'] ? 'python' : (q.starterCode?.[0]?.language || 'python');
+          const initialCode = initialMap[initialLang] || getDefaultBoilerplate(initialLang, q.title);
+          initialMap[initialLang] = initialCode;
+
+          setCodeByLanguage(initialMap);
+          setSelectedLanguage(initialLang);
+          setCode(initialCode);
 
           // Fetch submissions
           const subRes = await axios.get(`/coding/${q._id}/submissions`);
@@ -67,12 +148,34 @@ export const CodingWorkspacePage: React.FC = () => {
     fetchQuestion();
   }, [slug]);
 
-  const handleLanguageChange = (lang: string) => {
-    setSelectedLanguage(lang);
-    const starter = question?.starterCode?.find((s: any) => s.language === lang);
-    if (starter) {
-      setCode(starter.boilerplate);
+  const handleLanguageChange = (newLang: string) => {
+    // 1. Cache current code
+    const updatedMap: Record<string, string> = {
+      ...codeByLanguage,
+      [selectedLanguage]: code,
+    };
+
+    // 2. Fetch or generate code for selected language
+    let targetCode = updatedMap[newLang];
+    if (!targetCode) {
+      const seeded = question?.starterCode?.find((s: any) => s.language === newLang);
+      targetCode = seeded?.boilerplate || getDefaultBoilerplate(newLang, question?.title);
+      updatedMap[newLang] = targetCode;
     }
+
+    setCodeByLanguage(updatedMap);
+    setSelectedLanguage(newLang);
+    setCode(targetCode);
+  };
+
+  const handleResetToBoilerplate = () => {
+    const seeded = question?.starterCode?.find((s: any) => s.language === selectedLanguage);
+    const freshBoilerplate = seeded?.boilerplate || getDefaultBoilerplate(selectedLanguage, question?.title);
+    setCode(freshBoilerplate);
+    setCodeByLanguage((prev) => ({
+      ...prev,
+      [selectedLanguage]: freshBoilerplate,
+    }));
   };
 
   const handleRunCode = async () => {
@@ -373,10 +476,7 @@ export const CodingWorkspacePage: React.FC = () => {
             </div>
 
             <button
-              onClick={() => {
-                const starter = question?.starterCode?.find((s: any) => s.language === selectedLanguage);
-                if (starter) setCode(starter.boilerplate);
-              }}
+              onClick={handleResetToBoilerplate}
               className="text-slate-400 hover:text-white transition-colors"
             >
               Reset to Boilerplate
@@ -388,7 +488,11 @@ export const CodingWorkspacePage: React.FC = () => {
             <textarea
               className="flex-1 w-full bg-slate-950 text-slate-100 font-mono text-xs p-4 leading-5 resize-none focus:outline-none scrollbar-thin selection:bg-brand-500 selection:text-white"
               value={code}
-              onChange={(e) => setCode(e.target.value)}
+              onChange={(e) => {
+                const val = e.target.value;
+                setCode(val);
+                setCodeByLanguage((prev) => ({ ...prev, [selectedLanguage]: val }));
+              }}
               spellCheck={false}
               autoCapitalize="off"
               autoComplete="off"

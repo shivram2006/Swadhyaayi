@@ -76,6 +76,89 @@ if (lines.length >= 2) {
 }
 `,
         },
+        {
+          language: 'cpp',
+          boilerplate: `#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <string>
+#include <sstream>
+
+using namespace std;
+
+vector<int> twoSum(vector<int>& nums, int target) {
+    // Write your solution here
+    unordered_map<int, int> seen;
+    for (int i = 0; i < nums.size(); ++i) {
+        int diff = target - nums[i];
+        if (seen.find(diff) != seen.end()) {
+            return {seen[diff], i};
+        }
+        seen[nums[i]] = i;
+    }
+    return {};
+}
+
+int main() {
+    string line;
+    if (getline(cin, line)) {
+        vector<int> nums;
+        stringstream ss(line);
+        char ch;
+        int val;
+        while (ss >> ch) {
+            if (ch == '[' || ch == ',' || ch == ']') continue;
+            ss.putback(ch);
+            if (ss >> val) nums.push_back(val);
+        }
+        int target = 0;
+        if (cin >> target) {
+            vector<int> res = twoSum(nums, target);
+            cout << "[" << res[0] << ", " << res[1] << "]" << endl;
+        }
+    }
+    return 0;
+}
+`,
+        },
+        {
+          language: 'java',
+          boilerplate: `import java.util.*;
+
+public class Solution {
+    public static int[] twoSum(int[] nums, int target) {
+        // Write your solution here
+        Map<Integer, Integer> seen = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int diff = target - nums[i];
+            if (seen.containsKey(diff)) {
+                return new int[] { seen.get(diff), i };
+            }
+            seen.put(nums[i], i);
+        }
+        return new int[0];
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        if (sc.hasNextLine()) {
+            String line = sc.nextLine().replaceAll("[\\[\\]\\s]", "");
+            String[] parts = line.split(",");
+            int[] nums = new int[parts.length];
+            for (int i = 0; i < parts.length; i++) {
+                nums[i] = Integer.parseInt(parts[i]);
+            }
+            if (sc.hasNextInt()) {
+                int target = sc.nextInt();
+                int[] res = twoSum(nums, target);
+                System.out.println("[" + res[0] + ", " + res[1] + "]");
+            }
+        }
+        sc.close();
+    }
+}
+`,
+        },
       ],
       sampleTestCases: [
         {
@@ -177,6 +260,67 @@ const s = fs.readFileSync(0, 'utf-8').trim();
 console.log(lengthOfLongestSubstring(s));
 `,
         },
+        {
+          language: 'cpp',
+          boilerplate: `#include <iostream>
+#include <string>
+#include <unordered_map>
+#include <algorithm>
+
+using namespace std;
+
+int lengthOfLongestSubstring(string s) {
+    unordered_map<char, int> charMap;
+    int left = 0, maxLen = 0;
+    for (int right = 0; right < s.length(); ++right) {
+        if (charMap.find(s[right]) != charMap.end() && charMap[s[right]] >= left) {
+            left = charMap[s[right]] + 1;
+        }
+        charMap[s[right]] = right;
+        maxLen = max(maxLen, right - left + 1);
+    }
+    return maxLen;
+}
+
+int main() {
+    string s;
+    if (getline(cin, s)) {
+        cout << lengthOfLongestSubstring(s) << endl;
+    } else {
+        cout << 0 << endl;
+    }
+    return 0;
+}
+`,
+        },
+        {
+          language: 'java',
+          boilerplate: `import java.util.*;
+
+public class Solution {
+    public static int lengthOfLongestSubstring(String s) {
+        Map<Character, Integer> charMap = new HashMap<>();
+        int left = 0, maxLen = 0;
+        for (int right = 0; right < s.length(); right++) {
+            char c = s.charAt(right);
+            if (charMap.containsKey(c) && charMap.get(c) >= left) {
+                left = charMap.get(c) + 1;
+            }
+            charMap.put(c, right);
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+        return maxLen;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.hasNextLine() ? sc.nextLine().trim() : "";
+        System.out.println(lengthOfLongestSubstring(s));
+        sc.close();
+    }
+}
+`,
+        },
       ],
       sampleTestCases: [
         { input: `abcabcbb`, output: `3`, explanation: 'The answer is "abc"' },
@@ -221,7 +365,7 @@ Output: [1,1,4,2,1,1,0,0]
         { company: 'Amazon', yearReported: 2024, verified: true, frequencyCount: 45, sourceNote: 'SDE-2 Interview' },
         { company: 'Meta', yearReported: 2023, verified: true, frequencyCount: 38, sourceNote: 'E4 Onsite' },
       ],
-      supportedLanguages: ['python', 'javascript'],
+      supportedLanguages: ['python', 'javascript', 'cpp', 'java'],
       starterCode: [
         {
           language: 'python',
@@ -241,6 +385,118 @@ data = sys.stdin.read().strip()
 if data:
     temps = json.loads(data)
     print(json.dumps(dailyTemperatures(temps)))
+`,
+        },
+        {
+          language: 'javascript',
+          boilerplate: `function dailyTemperatures(temperatures) {
+    const n = temperatures.length;
+    const ans = new Array(n).fill(0);
+    const stack = [];
+    for (let i = 0; i < n; i++) {
+        while (stack.length && temperatures[stack[stack.length - 1]] < temperatures[i]) {
+            const prev = stack.pop();
+            ans[prev] = i - prev;
+        }
+        stack.push(i);
+    }
+    return ans;
+}
+
+const fs = require('fs');
+const data = fs.readFileSync(0, 'utf-8').trim();
+if (data) {
+    const temps = JSON.parse(data);
+    console.log(JSON.stringify(dailyTemperatures(temps)));
+}
+`,
+        },
+        {
+          language: 'cpp',
+          boilerplate: `#include <iostream>
+#include <vector>
+#include <stack>
+#include <string>
+#include <sstream>
+
+using namespace std;
+
+vector<int> dailyTemperatures(vector<int>& temperatures) {
+    int n = temperatures.size();
+    vector<int> ans(n, 0);
+    stack<int> st;
+    for (int i = 0; i < n; ++i) {
+        while (!st.empty() && temperatures[st.top()] < temperatures[i]) {
+            int prev = st.top();
+            st.pop();
+            ans[prev] = i - prev;
+        }
+        st.push(i);
+    }
+    return ans;
+}
+
+int main() {
+    string line;
+    if (getline(cin, line)) {
+        vector<int> temps;
+        stringstream ss(line);
+        char ch;
+        int val;
+        while (ss >> ch) {
+            if (ch == '[' || ch == ',' || ch == ']') continue;
+            ss.putback(ch);
+            if (ss >> val) temps.push_back(val);
+        }
+        vector<int> res = dailyTemperatures(temps);
+        cout << "[";
+        for (size_t i = 0; i < res.size(); ++i) {
+            cout << res[i] << (i < res.size() - 1 ? ", " : "");
+        }
+        cout << "]" << endl;
+    }
+    return 0;
+}
+`,
+        },
+        {
+          language: 'java',
+          boilerplate: `import java.util.*;
+
+public class Solution {
+    public static int[] dailyTemperatures(int[] temperatures) {
+        int n = temperatures.length;
+        int[] ans = new int[n];
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            while (!stack.isEmpty() && temperatures[stack.peek()] < temperatures[i]) {
+                int prev = stack.pop();
+                ans[prev] = i - prev;
+            }
+            stack.push(i);
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        if (sc.hasNextLine()) {
+            String line = sc.nextLine().replaceAll("[\\[\\]\\s]", "");
+            String[] parts = line.split(",");
+            int[] temps = new int[parts.length];
+            for (int i = 0; i < parts.length; i++) {
+                temps[i] = Integer.parseInt(parts[i]);
+            }
+            int[] res = dailyTemperatures(temps);
+            System.out.print("[");
+            for (int i = 0; i < res.length; i++) {
+                System.out.print(res[i] + (i < res.length - 1 ? ", " : ""));
+            }
+            System.out.println("]");
+        }
+        sc.close();
+    }
+}
 `,
         },
       ],
