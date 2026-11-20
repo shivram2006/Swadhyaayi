@@ -1,0 +1,30 @@
+{
+  "name": "swadhyayi-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Swadhyayi — University/College Placement Preparation & Technical Skill Development SaaS",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev:server": "npm run dev --workspace=server",
+    "dev:client": "npm run dev --workspace=client",
+    "build:server": "npm run build --workspace=server",
+    "build:client": "npm run build --workspace=client",
+    "test:server": "npm run test --workspace=server",
+    "test:client": "npm run test --workspace=client",
+    "test": "npm run test --workspace=server && npm run test --workspace=client"
+  },
+  "keywords": [
+    "edtech",
+    "placement-preparation",
+    "saas",
+    "multi-tenant",
+    "dsa",
+    "aptitude",
+    "ats-resume"
+  ],
+  "author": "Swadhyayi Team",
+  "license": "ISC"
+}

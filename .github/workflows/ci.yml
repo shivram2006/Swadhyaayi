@@ -1,0 +1,67 @@
+name: Swadhyayi Enterprise CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test_and_build:
+    name: Lint, Test & Compile
+    runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo:7.0
+        ports:
+          - 27017:27017
+
+      redis:
+        image: redis:7.0-alpine
+        ports:
+          - 6379:6379
+
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'npm'
+
+      - name: Install Monorepo Dependencies
+        run: npm ci
+
+      - name: Run Server Automated Tests (151+ Vitest Tests)
+        run: npm run test --workspace=server
+        env:
+          NODE_ENV: test
+          MONGO_URI: mongodb://localhost:27017/swadhyayi-test
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+          JWT_ACCESS_SECRET: test_jwt_access_secret_key_1234567890
+          JWT_REFRESH_SECRET: test_jwt_refresh_secret_key_1234567890
+
+      - name: Run Client Automated Tests
+        run: npm run test --workspace=client
+
+      - name: Compile Server TypeScript
+        run: npm run build --workspace=server
+
+      - name: Build Client Production Bundle (Vite)
+        run: npm run build --workspace=client
+
+  docker_validation:
+    name: Docker Configuration Validation
+    needs: test_and_build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Validate Docker Compose Configuration
+        run: docker compose config

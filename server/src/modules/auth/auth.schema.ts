@@ -1,0 +1,42 @@
+import { z } from 'zod';
+
+export const registerInstitutionSchema = z.object({
+  body: z.object({
+    institutionName: z.string().min(3, 'Institution name must have at least 3 characters'),
+    institutionCode: z
+      .string()
+      .min(2, 'Code must have at least 2 characters')
+      .max(20, 'Code too long')
+      .regex(/^[a-zA-Z0-9-]+$/, 'Code must be alphanumeric with optional hyphens'),
+    contactEmail: z.string().email('Invalid contact email'),
+    adminFirstName: z.string().min(1, 'First name is required'),
+    adminLastName: z.string().min(1, 'Last name is required'),
+    adminEmail: z.string().email('Invalid admin email'),
+    adminPassword: z.string().min(8, 'Password must be at least 8 characters long'),
+  }),
+});
+
+export const loginSchema = z.object({
+  body: z.object({
+    email: z.string().email('Invalid email address'),
+    password: z.string().min(1, 'Password is required'),
+  }),
+});
+
+export const refreshTokenSchema = z.object({
+  body: z.object({
+    refreshToken: z.string().optional(),
+  }),
+});
+
+export const studentRegisterSchema = z.object({
+  body: z.object({
+    institutionCode: z.string().min(2),
+    firstName: z.string().min(1),
+    lastName: z.string().min(1),
+    email: z.string().email(),
+    password: z.string().min(8),
+    rollNumber: z.string().min(1),
+    departmentCode: z.string().min(2),
+  }),
+});
