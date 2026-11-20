@@ -16,7 +16,18 @@ export const seedDatabase = async () => {
 
     await Promise.all([
       Institution.deleteMany({ code: 'nit-surat' }),
-      User.deleteMany({ email: { $in: ['admin@nit.ac.in', 'faculty@nit.ac.in', 'student@nit.ac.in', 'super@swadhyayi.com'] } }),
+      User.deleteMany({
+        email: {
+          $in: [
+            'admin@nit.ac.in',
+            'faculty@nit.ac.in',
+            'student@nit.ac.in',
+            'student1@nit.ac.in',
+            'student2@nit.ac.in',
+            'super@swadhyayi.com',
+          ],
+        },
+      }),
     ]);
 
     console.log('[SEED] Creating Demo Institution: NIT Surat...');
@@ -111,10 +122,10 @@ export const seedDatabase = async () => {
       status: 'ACTIVE',
     });
 
-    // 4. Student
+    // 4. Student 1 (Aarav Patel)
     await User.create({
       institutionId: institution._id,
-      email: 'student@nit.ac.in',
+      email: 'student1@nit.ac.in',
       passwordHash: commonPasswordHash,
       role: 'STUDENT',
       firstName: 'Aarav',
@@ -124,13 +135,85 @@ export const seedDatabase = async () => {
       batchId: batch2027._id,
       classId: classCSE_A._id,
       status: 'ACTIVE',
+      profile: {
+        skills: ['C++', 'Python', 'React', 'Node.js', 'DSA', 'Tailwind CSS'],
+        targetDomain: 'Full Stack MERN Developer',
+        cgpa: 8.65,
+      },
       metrics: {
         codingProblemsSolved: 68,
+        codingScore: 1850,
         aptitudeTestsTaken: 22,
+        aptitudeScore: 600,
         globalRank: 112,
         institutionRank: 4,
         currentStreak: 18,
         longestStreak: 25,
+        lastActiveDate: new Date(),
+        totalPoints: 2450,
+      },
+    });
+
+    // 5. Student 2 (Priya Sharma)
+    await User.create({
+      institutionId: institution._id,
+      email: 'student2@nit.ac.in',
+      passwordHash: commonPasswordHash,
+      role: 'STUDENT',
+      firstName: 'Priya',
+      lastName: 'Sharma',
+      rollNumber: 'U23CS089',
+      departmentId: deptCSE._id,
+      batchId: batch2027._id,
+      classId: classCSE_A._id,
+      status: 'ACTIVE',
+      profile: {
+        skills: ['Java', 'Spring Boot', 'TypeScript', 'SQL', 'Algorithms', 'Docker'],
+        targetDomain: 'Software Development Engineering (SDE)',
+        cgpa: 9.35,
+      },
+      metrics: {
+        codingProblemsSolved: 94,
+        codingScore: 2420,
+        aptitudeTestsTaken: 31,
+        aptitudeScore: 880,
+        globalRank: 42,
+        institutionRank: 1,
+        currentStreak: 24,
+        longestStreak: 30,
+        lastActiveDate: new Date(),
+        totalPoints: 3300,
+      },
+    });
+
+    // Also maintain student@nit.ac.in as default student alias for compatibility
+    await User.create({
+      institutionId: institution._id,
+      email: 'student@nit.ac.in',
+      passwordHash: commonPasswordHash,
+      role: 'STUDENT',
+      firstName: 'Aarav',
+      lastName: 'Patel',
+      rollNumber: 'U23CS001',
+      departmentId: deptCSE._id,
+      batchId: batch2027._id,
+      classId: classCSE_A._id,
+      status: 'ACTIVE',
+      profile: {
+        skills: ['C++', 'Python', 'React', 'Node.js', 'DSA'],
+        targetDomain: 'Full Stack MERN Developer',
+        cgpa: 8.65,
+      },
+      metrics: {
+        codingProblemsSolved: 68,
+        codingScore: 1850,
+        aptitudeTestsTaken: 22,
+        aptitudeScore: 600,
+        globalRank: 112,
+        institutionRank: 4,
+        currentStreak: 18,
+        longestStreak: 25,
+        lastActiveDate: new Date(),
         totalPoints: 2450,
       },
     });
@@ -152,7 +235,8 @@ export const seedDatabase = async () => {
     console.log('------------------------------------------------------');
     console.log('Institution: National Institute of Technology, Surat (nit-surat)');
     console.log('Credentials (Password for all: Password@123):');
-    console.log('  👨‍🎓 Student:           student@nit.ac.in');
+    console.log('  👨‍🎓 Student 1:         student1@nit.ac.in (or student@nit.ac.in)');
+    console.log('  👩‍🎓 Student 2:         student2@nit.ac.in');
     console.log('  👩‍🏫 Faculty:           faculty@nit.ac.in');
     console.log('  🏛️  College Admin:     admin@nit.ac.in');
     console.log('  ⚡ Super Admin:       super@swadhyayi.com');

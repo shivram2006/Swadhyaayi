@@ -8,7 +8,7 @@ interface AuthContextType {
   token: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<User | null>;
   registerInstitution: (data: any) => Promise<void>;
   logout: () => Promise<void>;
 }
@@ -75,7 +75,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     fetchMe();
   }, [token]);
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string, password: string): Promise<User | null> => {
     setIsLoading(true);
     try {
       const res = await axios.post('/auth/login', { email, password });
@@ -83,7 +83,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const { user: userData, tokens } = res.data.data;
         setToken(tokens.accessToken);
         setUser(userData);
+        return userData;
       }
+      return null;
     } finally {
       setIsLoading(false);
     }

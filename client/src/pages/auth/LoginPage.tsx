@@ -20,8 +20,16 @@ export const LoginPage: React.FC = () => {
     setIsLoading(true);
 
     try {
-      await login(email, password);
-      navigate('/dashboard/student');
+      const loggedInUser = await login(email, password);
+      if (loggedInUser?.role === 'SUPER_ADMIN') {
+        navigate('/dashboard/super');
+      } else if (loggedInUser?.role === 'INSTITUTION_ADMIN' || loggedInUser?.role === 'PLACEMENT_OFFICER') {
+        navigate('/dashboard/admin');
+      } else if (loggedInUser?.role === 'FACULTY') {
+        navigate('/dashboard/faculty');
+      } else {
+        navigate('/dashboard/student');
+      }
     } catch (err: any) {
       setError(err.response?.data?.error?.message || 'Login failed. Please verify credentials.');
     } finally {
@@ -129,29 +137,36 @@ export const LoginPage: React.FC = () => {
           <div className="grid grid-cols-2 gap-2 text-xs">
             <button
               type="button"
-              onClick={() => handleDemoLogin('student@nit.ac.in', '/dashboard/student')}
+              onClick={() => handleDemoLogin('student1@nit.ac.in', '/dashboard/student')}
               className="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors text-left"
             >
-              👨‍🎓 <span className="font-medium">Student</span>
+              👨‍🎓 <span className="font-medium">Student 1 (Aarav)</span>
             </button>
             <button
               type="button"
-              onClick={() => handleDemoLogin('admin@nit.ac.in', '/dashboard/admin')}
+              onClick={() => handleDemoLogin('student2@nit.ac.in', '/dashboard/student')}
               className="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors text-left"
             >
-              🏛️ <span className="font-medium">College Admin</span>
+              👩‍🎓 <span className="font-medium">Student 2 (Priya)</span>
             </button>
             <button
               type="button"
               onClick={() => handleDemoLogin('faculty@nit.ac.in', '/dashboard/faculty')}
               className="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors text-left"
             >
-              👩‍🏫 <span className="font-medium">Faculty</span>
+              👩‍🏫 <span className="font-medium">Faculty (Prof. Sharma)</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleDemoLogin('admin@nit.ac.in', '/dashboard/admin')}
+              className="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors text-left"
+            >
+              🏛️ <span className="font-medium">College Admin (Dr. Iyer)</span>
             </button>
             <button
               type="button"
               onClick={() => handleDemoLogin('super@swadhyayi.com', '/dashboard/super')}
-              className="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors text-left"
+              className="col-span-2 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors text-center"
             >
               ⚡ <span className="font-medium">Super Admin</span>
             </button>
