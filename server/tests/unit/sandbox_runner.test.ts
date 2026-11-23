@@ -63,4 +63,40 @@ print(input_num * 2) # Doubler
     expect(result.firstFailedCase?.actualOutput).toBe('10');
     expect(result.firstFailedCase?.expectedOutput).toBe('11');
   });
+
+  it('should successfully compile and execute C++ code using g++', async () => {
+    const code = `
+#include <iostream>
+using namespace std;
+int main() {
+    cout << "true";
+    return 0;
+}
+`;
+    const result = await SandboxRunner.executeSingle('cpp', code, '', 10000);
+    expect(result.status).toBe('ACCEPTED');
+    expect(result.stdout).toBe('true');
+  }, 20000);
+
+  it('should pass stdin input to compiled C++ executable', async () => {
+    const code = `
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+    string a, b;
+    if (cin >> a >> b) {
+        cout << (a == b ? "true" : "false");
+    }
+    return 0;
+}
+`;
+    const result1 = await SandboxRunner.executeSingle('cpp', code, 'hello hello', 10000);
+    expect(result1.status).toBe('ACCEPTED');
+    expect(result1.stdout).toBe('true');
+
+    const result2 = await SandboxRunner.executeSingle('cpp', code, 'hello world', 10000);
+    expect(result2.status).toBe('ACCEPTED');
+    expect(result2.stdout).toBe('false');
+  }, 20000);
 });

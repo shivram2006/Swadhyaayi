@@ -127,7 +127,7 @@ public class Solution {{
             } for hc in q["hidden"]
         ]
 
-        desc = f"{q['desc']}\\n\\n### Example 1:\\n```\\nInput: {q['ex1']['in']}\\nOutput: {q['ex1']['out']}\\nExplanation: {q['ex1']['exp']}\\n```\\n\\n### Example 2:\\n```\\nInput: {q['ex2']['in']}\\nOutput: {q['ex2']['out']}\\nExplanation: {q['ex2']['exp']}\\n```"
+        desc = f"{q['desc']}\n\n### Example 1:\n```\nInput: {q['ex1']['in']}\nOutput: {q['ex1']['out']}\nExplanation: {q['ex1']['exp']}\n```\n\n### Example 2:\n```\nInput: {q['ex2']['in']}\nOutput: {q['ex2']['out']}\nExplanation: {q['ex2']['exp']}\n```"
 
         prob_obj = {
             "title": q["title"],
@@ -159,7 +159,7 @@ public class Solution {{
             "memoryLimitMb": 256,
             "hints": q["hints"],
             "editorial": {
-                "solutionMarkdown": f"### Optimal Solution\\n{q['ed']}",
+                "solutionMarkdown": f"### Optimal Solution\n{q['ed']}",
                 "complexityAnalysis": q["cpx"]
             },
             "isGlobal": True,

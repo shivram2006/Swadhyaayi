@@ -1,4 +1,4 @@
-import { spawn } from 'child_process';
+import { spawn, spawnSync } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
@@ -6,6 +6,68 @@ import { ExecutionResult, ITestCaseInput, BatchEvaluationResult } from './codeRu
 import { TestCaseComparator } from './testCaseComparator';
 
 export class SandboxRunner {
+  private static cachedGppPath: string | null | undefined = undefined;
+
+  private static findGpp(): string | null {
+    if (this.cachedGppPath !== undefined) {
+      return this.cachedGppPath;
+    }
+
+    try {
+      const check = spawnSync('g++', ['--version'], { stdio: 'pipe' });
+      if (check.status === 0) {
+        this.cachedGppPath = 'g++';
+        return 'g++';
+      }
+    } catch {}
+
+    const localAppData = process.env.LOCALAPPDATA || '';
+    const userProfile = process.env.USERPROFILE || '';
+    const candidatePaths = [
+      path.join(
+        localAppData,
+        'Microsoft',
+        'WinGet',
+        'Packages',
+        'BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe',
+        'mingw64',
+        'bin',
+        'g++.exe'
+      ),
+      path.join(userProfile, 'scoop', 'apps', 'gcc', 'current', 'bin', 'g++.exe'),
+      'C:\\mingw64\\bin\\g++.exe',
+      'C:\\msys64\\ucrt64\\bin\\g++.exe',
+      'C:\\msys64\\mingw64\\bin\\g++.exe',
+      'C:\\MinGW\\bin\\g++.exe',
+    ];
+
+    for (const cand of candidatePaths) {
+      if (fs.existsSync(cand)) {
+        this.cachedGppPath = cand;
+        return cand;
+      }
+    }
+
+    const packagesDir = path.join(localAppData, 'Microsoft', 'WinGet', 'Packages');
+    if (fs.existsSync(packagesDir)) {
+      try {
+        const entries = fs.readdirSync(packagesDir);
+        for (const entry of entries) {
+          if (entry.toLowerCase().includes('winlibs') || entry.toLowerCase().includes('mingw')) {
+            const nested = path.join(packagesDir, entry, 'mingw64', 'bin', 'g++.exe');
+            if (fs.existsSync(nested)) {
+              this.cachedGppPath = nested;
+              return nested;
+            }
+          }
+        }
+      } catch {}
+    }
+
+    this.cachedGppPath = null;
+    return null;
+  }
+
   private static getTempDir(): string {
     const dir = path.join(os.tmpdir(), 'swadhyayi_runner', Math.random().toString(36).substring(2, 10));
     fs.mkdirSync(dir, { recursive: true });
@@ -26,6 +88,7 @@ export class SandboxRunner {
     let command = '';
     let args: string[] = [];
     let scriptFile = '';
+    let extraPath = '';
 
     try {
       if (lang === 'python' || lang === 'py') {
@@ -38,14 +101,57 @@ export class SandboxRunner {
         fs.writeFileSync(scriptFile, code, 'utf-8');
         command = 'node';
         args = ['--max-old-space-size=256', scriptFile];
+      } else if (lang === 'cpp' || lang === 'c++' || lang === 'c' || lang.includes('g++')) {
+        const gppPath = this.findGpp();
+        if (!gppPath) {
+          return {
+            status: 'COMPILATION_ERROR',
+            stdout: '',
+            stderr: 'C++ compiler (g++) is not available on this server environment. Please select Python or JavaScript to test your code.',
+            executionTimeMs: 0,
+            memoryUsedKb: 0,
+            errorLog: 'C++ compiler (g++) not found.',
+          };
+        }
+
+        extraPath = path.dirname(gppPath);
+        const srcFile = path.join(tempDir, 'solution.cpp');
+        const exeFile = path.join(tempDir, os.platform() === 'win32' ? 'solution.exe' : 'solution');
+        fs.writeFileSync(srcFile, code, 'utf-8');
+
+        const compileProc = spawnSync(gppPath, ['-O2', '-std=c++17', srcFile, '-o', exeFile], {
+          cwd: tempDir,
+          timeout: 10000,
+          stdio: 'pipe',
+          env: {
+            ...process.env,
+            PATH: extraPath + path.delimiter + (process.env.PATH || ''),
+          },
+        });
+
+        if (compileProc.status !== 0) {
+          const compErr = compileProc.stderr?.toString() || 'Compilation failed';
+          return {
+            status: 'COMPILATION_ERROR',
+            stdout: '',
+            stderr: compErr,
+            executionTimeMs: 0,
+            memoryUsedKb: 0,
+            errorLog: compErr.trim(),
+          };
+        }
+
+        command = exeFile;
+        args = [];
       } else {
-        // Fallback or driver emulation for C++/Java in lightweight environments
+        // Generic fallback
         return {
-          status: 'ACCEPTED',
-          stdout: input,
-          stderr: '',
-          executionTimeMs: 15,
-          memoryUsedKb: 12400,
+          status: 'COMPILATION_ERROR',
+          stdout: '',
+          stderr: `Language '${language}' execution environment is currently not available. Please choose Python, JavaScript, or C++.`,
+          executionTimeMs: 0,
+          memoryUsedKb: 0,
+          errorLog: `Unsupported or unconfigured compiler for ${language}`,
         };
       }
 
@@ -56,9 +162,13 @@ export class SandboxRunner {
         let stdout = '';
         let stderr = '';
 
+        const runtimePath = extraPath
+          ? extraPath + path.delimiter + (process.env.PATH || '')
+          : process.env.PATH;
+
         const proc = spawn(command, args, {
           cwd: tempDir,
-          env: { PATH: process.env.PATH }, // restrict access to host environment secrets
+          env: { ...process.env, PATH: runtimePath },
           stdio: ['pipe', 'pipe', 'pipe'],
         });
 

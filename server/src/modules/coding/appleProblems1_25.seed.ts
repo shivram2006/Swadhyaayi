@@ -4,7 +4,7 @@ export const apple1_25 = [
   {
   "title": "Two Sum",
   "slug": "two-sum",
-  "description": "Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.\n\nYou may assume that each input would have ***exactly one solution***, and you may not use the same element twice.\\n\\n### Example 1:\\n```\\nInput: [2,7,11,15]\n9\\nOutput: [0, 1]\\nExplanation: nums[0] + nums[1] == 9, we return [0, 1].\\n```\\n\\n### Example 2:\\n```\\nInput: [3,2,4]\n6\\nOutput: [1, 2]\\nExplanation: nums[1] + nums[2] == 6, we return [1, 2].\\n```",
+  "description": "Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.\n\nYou may assume that each input would have ***exactly one solution***, and you may not use the same element twice.\n\n### Example 1:\n```\nInput: [2,7,11,15]\n9\nOutput: [0, 1]\nExplanation: nums[0] + nums[1] == 9, we return [0, 1].\n```\n\n### Example 2:\n```\nInput: [3,2,4]\n6\nOutput: [1, 2]\nExplanation: nums[1] + nums[2] == 6, we return [1, 2].\n```",
   "difficulty": "EASY",
   "category": "DSA",
   "patterns": [
@@ -90,7 +90,7 @@ export const apple1_25 = [
     "Can we use a Hash Map to store seen complements in O(1)?"
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nStore visited elements in a map: complement = target - num. If complement in map, return indices.",
+    "solutionMarkdown": "### Optimal Solution\nStore visited elements in a map: complement = target - num. If complement in map, return indices.",
     "complexityAnalysis": "Time: O(N), Space: O(N)"
   },
   "isGlobal": true,
@@ -99,7 +99,7 @@ export const apple1_25 = [
   {
   "title": "Longest Substring Without Repeating Characters",
   "slug": "longest-substring-without-repeating-characters",
-  "description": "Given a string `s`, find the length of the **longest substring** without repeating characters.\\n\\n### Example 1:\\n```\\nInput: abcabcbb\\nOutput: 3\\nExplanation: The answer is 'abc', with length 3.\\n```\\n\\n### Example 2:\\n```\\nInput: bbbbb\\nOutput: 1\\nExplanation: The answer is 'b', with length 1.\\n```",
+  "description": "Given a string `s`, find the length of the **longest substring** without repeating characters.\n\n### Example 1:\n```\nInput: abcabcbb\nOutput: 3\nExplanation: The answer is 'abc', with length 3.\n```\n\n### Example 2:\n```\nInput: bbbbb\nOutput: 1\nExplanation: The answer is 'b', with length 1.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -190,7 +190,7 @@ export const apple1_25 = [
     "Use a dynamic sliding window [left, right] with last seen index map."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nTrack last seen positions of each char. Advance left pointer past previous occurrence.",
+    "solutionMarkdown": "### Optimal Solution\nTrack last seen positions of each char. Advance left pointer past previous occurrence.",
     "complexityAnalysis": "Time: O(N), Space: O(min(N, M)) where M is alphabet size"
   },
   "isGlobal": true,
@@ -199,7 +199,7 @@ export const apple1_25 = [
   {
   "title": "Longest Common Prefix",
   "slug": "longest-common-prefix",
-  "description": "Write a function to find the longest common prefix string amongst an array of strings.\n\nIf there is no common prefix, return an empty string `\"\"`.\\n\\n### Example 1:\\n```\\nInput: [\"flower\",\"flow\",\"flight\"]\\nOutput: \"fl\"\\nExplanation: Common prefix is 'fl'.\\n```\\n\\n### Example 2:\\n```\\nInput: [\"dog\",\"racecar\",\"car\"]\\nOutput: \"\"\\nExplanation: There is no common prefix.\\n```",
+  "description": "Write a function to find the longest common prefix string amongst an array of strings.\n\nIf there is no common prefix, return an empty string `\"\"`.\n\n### Example 1:\n```\nInput: [\"flower\",\"flow\",\"flight\"]\nOutput: \"fl\"\nExplanation: Common prefix is 'fl'.\n```\n\n### Example 2:\n```\nInput: [\"dog\",\"racecar\",\"car\"]\nOutput: \"\"\nExplanation: There is no common prefix.\n```",
   "difficulty": "EASY",
   "category": "DSA",
   "patterns": [
@@ -283,7 +283,7 @@ export const apple1_25 = [
     "Sort the strings or compare character by character across all words."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nVertical scanning or comparing prefix of first and last strings after sorting.",
+    "solutionMarkdown": "### Optimal Solution\nVertical scanning or comparing prefix of first and last strings after sorting.",
     "complexityAnalysis": "Time: O(S) where S is sum of all characters, Space: O(1)"
   },
   "isGlobal": true,
@@ -292,7 +292,7 @@ export const apple1_25 = [
   {
   "title": "Valid Parentheses",
   "slug": "valid-parentheses",
-  "description": "Given a string `s` containing just the characters `'('`, `')'`, `'{'`, `'}'`, `'['` and `']'`, determine if the input string is valid.\n\nAn input string is valid if open brackets are closed by the same type of brackets in the correct order.\\n\\n### Example 1:\\n```\\nInput: ()[]{}\\nOutput: true\\nExplanation: All brackets matched correctly.\\n```\\n\\n### Example 2:\\n```\\nInput: (]\\nOutput: false\\nExplanation: Mismatched bracket types.\\n```",
+  "description": "Given a string `s` containing just the characters `'('`, `')'`, `'{'`, `'}'`, `'['` and `']'`, determine if the input string is valid.\n\nAn input string is valid if open brackets are closed by the same type of brackets in the correct order.\n\n### Example 1:\n```\nInput: ()[]{}\nOutput: true\nExplanation: All brackets matched correctly.\n```\n\n### Example 2:\n```\nInput: (]\nOutput: false\nExplanation: Mismatched bracket types.\n```",
   "difficulty": "EASY",
   "category": "DSA",
   "patterns": [
@@ -381,7 +381,7 @@ export const apple1_25 = [
     "Use a LIFO Stack to match closing brackets with recent opening bracket."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nPush opening brackets. On closing bracket, pop stack and check if matches.",
+    "solutionMarkdown": "### Optimal Solution\nPush opening brackets. On closing bracket, pop stack and check if matches.",
     "complexityAnalysis": "Time: O(N), Space: O(N)"
   },
   "isGlobal": true,
@@ -390,7 +390,7 @@ export const apple1_25 = [
   {
   "title": "Median of Two Sorted Arrays",
   "slug": "median-of-two-sorted-arrays",
-  "description": "Given two sorted arrays `nums1` and `nums2` of size `m` and `n` respectively, return the **median** of the two sorted arrays.\n\nThe overall run time complexity should be `O(log (m+n))`.\\n\\n### Example 1:\\n```\\nInput: [1,3]\n[2]\\nOutput: 2.00000\\nExplanation: Merged array = [1,2,3] and median is 2.\\n```\\n\\n### Example 2:\\n```\\nInput: [1,2]\n[3,4]\\nOutput: 2.50000\\nExplanation: Merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.\\n```",
+  "description": "Given two sorted arrays `nums1` and `nums2` of size `m` and `n` respectively, return the **median** of the two sorted arrays.\n\nThe overall run time complexity should be `O(log (m+n))`.\n\n### Example 1:\n```\nInput: [1,3]\n[2]\nOutput: 2.00000\nExplanation: Merged array = [1,2,3] and median is 2.\n```\n\n### Example 2:\n```\nInput: [1,2]\n[3,4]\nOutput: 2.50000\nExplanation: Merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.\n```",
   "difficulty": "HARD",
   "category": "DSA",
   "patterns": [
@@ -476,7 +476,7 @@ export const apple1_25 = [
     "Binary search on the partition of the smaller array."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nPartition both arrays such that left half has (m+n+1)//2 elements and maxLeft <= minRight.",
+    "solutionMarkdown": "### Optimal Solution\nPartition both arrays such that left half has (m+n+1)//2 elements and maxLeft <= minRight.",
     "complexityAnalysis": "Time: O(log(min(M, N))), Space: O(1)"
   },
   "isGlobal": true,
@@ -485,7 +485,7 @@ export const apple1_25 = [
   {
   "title": "Merge Intervals",
   "slug": "merge-intervals",
-  "description": "Given an array of `intervals` where `intervals[i] = [starti, endi]`, merge all overlapping intervals, and return *an array of the non-overlapping intervals that cover all the intervals in the input*.\\n\\n### Example 1:\\n```\\nInput: [[1,3],[2,6],[8,10],[15,18]]\\nOutput: [[1, 6], [8, 10], [15, 18]]\\nExplanation: Since intervals [1,3] and [2,6] overlap, merge them into [1,6].\\n```\\n\\n### Example 2:\\n```\\nInput: [[1,4],[4,5]]\\nOutput: [[1, 5]]\\nExplanation: Intervals [1,4] and [4,5] are considered overlapping.\\n```",
+  "description": "Given an array of `intervals` where `intervals[i] = [starti, endi]`, merge all overlapping intervals, and return *an array of the non-overlapping intervals that cover all the intervals in the input*.\n\n### Example 1:\n```\nInput: [[1,3],[2,6],[8,10],[15,18]]\nOutput: [[1, 6], [8, 10], [15, 18]]\nExplanation: Since intervals [1,3] and [2,6] overlap, merge them into [1,6].\n```\n\n### Example 2:\n```\nInput: [[1,4],[4,5]]\nOutput: [[1, 5]]\nExplanation: Intervals [1,4] and [4,5] are considered overlapping.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -569,7 +569,7 @@ export const apple1_25 = [
     "Sort intervals by start time, then check if current start <= previous end."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nSort by start time. Iterate through intervals; if current overlaps with last merged, update end.",
+    "solutionMarkdown": "### Optimal Solution\nSort by start time. Iterate through intervals; if current overlaps with last merged, update end.",
     "complexityAnalysis": "Time: O(N log N), Space: O(N)"
   },
   "isGlobal": true,
@@ -578,7 +578,7 @@ export const apple1_25 = [
   {
   "title": "Group Anagrams",
   "slug": "group-anagrams",
-  "description": "Given an array of strings `strs`, group **the anagrams** together. You can return the answer in **any order**.\\n\\n### Example 1:\\n```\\nInput: [\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]\\nOutput: [[\"bat\"], [\"nat\", \"tan\"], [\"ate\", \"eat\", \"tea\"]]\\nExplanation: Words with identical character counts are grouped together.\\n```\\n\\n### Example 2:\\n```\\nInput: [\"\"]\\nOutput: [[\"\"]]\\nExplanation: Single empty string.\\n```",
+  "description": "Given an array of strings `strs`, group **the anagrams** together. You can return the answer in **any order**.\n\n### Example 1:\n```\nInput: [\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]\nOutput: [[\"bat\"], [\"nat\", \"tan\"], [\"ate\", \"eat\", \"tea\"]]\nExplanation: Words with identical character counts are grouped together.\n```\n\n### Example 2:\n```\nInput: [\"\"]\nOutput: [[\"\"]]\nExplanation: Single empty string.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -659,7 +659,7 @@ export const apple1_25 = [
     "Use sorted string or 26-element character count tuple as map key."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nHash each word by sorted letters or count array. Return values of map.",
+    "solutionMarkdown": "### Optimal Solution\nHash each word by sorted letters or count array. Return values of map.",
     "complexityAnalysis": "Time: O(N * K log K) or O(N * K), Space: O(N * K)"
   },
   "isGlobal": true,
@@ -668,7 +668,7 @@ export const apple1_25 = [
   {
   "title": "Merge Sorted Array",
   "slug": "merge-sorted-array",
-  "description": "You are given two integer arrays `nums1` and `nums2`, sorted in non-decreasing order, and two integers `m` and `n`. Merge `nums2` into `nums1` as one sorted array in-place.\\n\\n### Example 1:\\n```\\nInput: [1,2,3,0,0,0]\n3\n[2,5,6]\n3\\nOutput: [1, 2, 2, 3, 5, 6]\\nExplanation: Arrays merged into nums1.\\n```\\n\\n### Example 2:\\n```\\nInput: [1]\n1\n[]\n0\\nOutput: [1]\\nExplanation: nums2 is empty.\\n```",
+  "description": "You are given two integer arrays `nums1` and `nums2`, sorted in non-decreasing order, and two integers `m` and `n`. Merge `nums2` into `nums1` as one sorted array in-place.\n\n### Example 1:\n```\nInput: [1,2,3,0,0,0]\n3\n[2,5,6]\n3\nOutput: [1, 2, 2, 3, 5, 6]\nExplanation: Arrays merged into nums1.\n```\n\n### Example 2:\n```\nInput: [1]\n1\n[]\n0\nOutput: [1]\nExplanation: nums2 is empty.\n```",
   "difficulty": "EASY",
   "category": "DSA",
   "patterns": [
@@ -749,7 +749,7 @@ export const apple1_25 = [
     "Fill nums1 from the back using three pointers: p1, p2, and p."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nIterate backwards from m+n-1, placing larger of nums1[p1] and nums2[p2].",
+    "solutionMarkdown": "### Optimal Solution\nIterate backwards from m+n-1, placing larger of nums1[p1] and nums2[p2].",
     "complexityAnalysis": "Time: O(M + N), Space: O(1)"
   },
   "isGlobal": true,
@@ -758,7 +758,7 @@ export const apple1_25 = [
   {
   "title": "Trapping Rain Water",
   "slug": "trapping-rain-water",
-  "description": "Given `n` non-negative integers representing an elevation map where the width of each bar is `1`, compute how much water it can trap after raining.\\n\\n### Example 1:\\n```\\nInput: [0,1,0,2,1,0,1,3,2,1,2,1]\\nOutput: 6\\nExplanation: The elevation map traps 6 units of rain water.\\n```\\n\\n### Example 2:\\n```\\nInput: [4,2,0,3,2,5]\\nOutput: 9\\nExplanation: The map traps 9 units of rain water.\\n```",
+  "description": "Given `n` non-negative integers representing an elevation map where the width of each bar is `1`, compute how much water it can trap after raining.\n\n### Example 1:\n```\nInput: [0,1,0,2,1,0,1,3,2,1,2,1]\nOutput: 6\nExplanation: The elevation map traps 6 units of rain water.\n```\n\n### Example 2:\n```\nInput: [4,2,0,3,2,5]\nOutput: 9\nExplanation: The map traps 9 units of rain water.\n```",
   "difficulty": "HARD",
   "category": "DSA",
   "patterns": [
@@ -844,7 +844,7 @@ export const apple1_25 = [
     "Water trapped above index i is min(maxLeft, maxRight) - height[i]. Use two pointers."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nMaintain left and right pointers with leftMax and rightMax. Process smaller side inward.",
+    "solutionMarkdown": "### Optimal Solution\nMaintain left and right pointers with leftMax and rightMax. Process smaller side inward.",
     "complexityAnalysis": "Time: O(N), Space: O(1)"
   },
   "isGlobal": true,
@@ -853,7 +853,7 @@ export const apple1_25 = [
   {
   "title": "Reverse Integer",
   "slug": "reverse-integer",
-  "description": "Given a signed 32-bit integer `x`, return `x` with its digits reversed. If reversing `x` causes the value to go outside the signed 32-bit integer range `[-2^31, 2^31 - 1]`, then return `0`.\\n\\n### Example 1:\\n```\\nInput: 123\\nOutput: 321\\nExplanation: Reverse of 123 is 321.\\n```\\n\\n### Example 2:\\n```\\nInput: -123\\nOutput: -321\\nExplanation: Negative sign preserved.\\n```",
+  "description": "Given a signed 32-bit integer `x`, return `x` with its digits reversed. If reversing `x` causes the value to go outside the signed 32-bit integer range `[-2^31, 2^31 - 1]`, then return `0`.\n\n### Example 1:\n```\nInput: 123\nOutput: 321\nExplanation: Reverse of 123 is 321.\n```\n\n### Example 2:\n```\nInput: -123\nOutput: -321\nExplanation: Negative sign preserved.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -937,7 +937,7 @@ export const apple1_25 = [
     "Extract last digit using x % 10. Check for 32-bit signed overflow before multiplying by 10."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nPop digit using % 10, push onto rev * 10 + pop. Guard against 32-bit INT_MAX and INT_MIN boundaries.",
+    "solutionMarkdown": "### Optimal Solution\nPop digit using % 10, push onto rev * 10 + pop. Guard against 32-bit INT_MAX and INT_MIN boundaries.",
     "complexityAnalysis": "Time: O(log10(X)), Space: O(1)"
   },
   "isGlobal": true,
@@ -946,7 +946,7 @@ export const apple1_25 = [
   {
   "title": "Valid Sudoku",
   "slug": "valid-sudoku",
-  "description": "Determine if a `9 x 9` Sudoku board is valid. Only the filled cells need to be validated according to standard Sudoku rules: each row, column, and 3x3 sub-box must contain digits 1-9 without repetition.\\n\\n### Example 1:\\n```\\nInput: [[\"5\",\"3\",\".\",\".\",\"7\",\".\",\".\",\".\",\".\"],[\"6\",\".\",\".\",\"1\",\"9\",\"5\",\".\",\".\",\".\"],[\".\",\"9\",\"8\",\".\",\".\",\".\",\".\",\"6\",\".\"],[\"8\",\".\",\".\",\".\",\"6\",\".\",\".\",\".\",\"3\"],[\"4\",\".\",\".\",\"8\",\".\",\"3\",\".\",\".\",\"1\"],[\"7\",\".\",\".\",\".\",\"2\",\".\",\".\",\".\",\"6\"],[\".\",\"6\",\".\",\".\",\".\",\".\",\"2\",\"8\",\".\"],[\".\",\".\",\".\",\"4\",\"1\",\"9\",\".\",\".\",\"5\"],[\".\",\".\",\".\",\".\",\"8\",\".\",\".\",\"7\",\"9\"]]\\nOutput: true\\nExplanation: Valid Sudoku configuration.\\n```\\n\\n### Example 2:\\n```\\nInput: [[\"8\",\"3\",\".\",\".\",\"7\",\".\",\".\",\".\",\".\"],[\"6\",\".\",\".\",\"1\",\"9\",\"5\",\".\",\".\",\".\"],[\".\",\"9\",\"8\",\".\",\".\",\".\",\".\",\"6\",\".\"],[\"8\",\".\",\".\",\".\",\"6\",\".\",\".\",\".\",\"3\"],[\"4\",\".\",\".\",\"8\",\".\",\"3\",\".\",\".\",\"1\"],[\"7\",\".\",\".\",\".\",\"2\",\".\",\".\",\".\",\"6\"],[\".\",\"6\",\".\",\".\",\".\",\".\",\"2\",\"8\",\".\"],[\".\",\".\",\".\",\"4\",\"1\",\"9\",\".\",\".\",\"5\"],[\".\",\".\",\".\",\".\",\"8\",\".\",\".\",\"7\",\"9\"]]\\nOutput: false\\nExplanation: Two 8s in the first column.\\n```",
+  "description": "Determine if a `9 x 9` Sudoku board is valid. Only the filled cells need to be validated according to standard Sudoku rules: each row, column, and 3x3 sub-box must contain digits 1-9 without repetition.\n\n### Example 1:\n```\nInput: [[\"5\",\"3\",\".\",\".\",\"7\",\".\",\".\",\".\",\".\"],[\"6\",\".\",\".\",\"1\",\"9\",\"5\",\".\",\".\",\".\"],[\".\",\"9\",\"8\",\".\",\".\",\".\",\".\",\"6\",\".\"],[\"8\",\".\",\".\",\".\",\"6\",\".\",\".\",\".\",\"3\"],[\"4\",\".\",\".\",\"8\",\".\",\"3\",\".\",\".\",\"1\"],[\"7\",\".\",\".\",\".\",\"2\",\".\",\".\",\".\",\"6\"],[\".\",\"6\",\".\",\".\",\".\",\".\",\"2\",\"8\",\".\"],[\".\",\".\",\".\",\"4\",\"1\",\"9\",\".\",\".\",\"5\"],[\".\",\".\",\".\",\".\",\"8\",\".\",\".\",\"7\",\"9\"]]\nOutput: true\nExplanation: Valid Sudoku configuration.\n```\n\n### Example 2:\n```\nInput: [[\"8\",\"3\",\".\",\".\",\"7\",\".\",\".\",\".\",\".\"],[\"6\",\".\",\".\",\"1\",\"9\",\"5\",\".\",\".\",\".\"],[\".\",\"9\",\"8\",\".\",\".\",\".\",\".\",\"6\",\".\"],[\"8\",\".\",\".\",\".\",\"6\",\".\",\".\",\".\",\"3\"],[\"4\",\".\",\".\",\"8\",\".\",\"3\",\".\",\".\",\"1\"],[\"7\",\".\",\".\",\".\",\"2\",\".\",\".\",\".\",\"6\"],[\".\",\"6\",\".\",\".\",\".\",\".\",\"2\",\"8\",\".\"],[\".\",\".\",\".\",\"4\",\"1\",\"9\",\".\",\".\",\"5\"],[\".\",\".\",\".\",\".\",\"8\",\".\",\".\",\"7\",\"9\"]]\nOutput: false\nExplanation: Two 8s in the first column.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -1015,7 +1015,7 @@ export const apple1_25 = [
     "Use sets for rows, cols, and 3x3 blocks indexed by (r//3, c//3)."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nTrack seen digits using 9 row sets, 9 col sets, and 9 box sets.",
+    "solutionMarkdown": "### Optimal Solution\nTrack seen digits using 9 row sets, 9 col sets, and 9 box sets.",
     "complexityAnalysis": "Time: O(1) for fixed 9x9 board, Space: O(1)"
   },
   "isGlobal": true,
@@ -1024,7 +1024,7 @@ export const apple1_25 = [
   {
   "title": "Climbing Stairs",
   "slug": "climbing-stairs",
-  "description": "You are climbing a staircase. It takes `n` steps to reach the top. Each time you can either climb `1` or `2` steps. In how many distinct ways can you climb to the top?\\n\\n### Example 1:\\n```\\nInput: 2\\nOutput: 2\\nExplanation: 1 step + 1 step, or 2 steps.\\n```\\n\\n### Example 2:\\n```\\nInput: 3\\nOutput: 3\\nExplanation: 1+1+1, 1+2, or 2+1.\\n```",
+  "description": "You are climbing a staircase. It takes `n` steps to reach the top. Each time you can either climb `1` or `2` steps. In how many distinct ways can you climb to the top?\n\n### Example 1:\n```\nInput: 2\nOutput: 2\nExplanation: 1 step + 1 step, or 2 steps.\n```\n\n### Example 2:\n```\nInput: 3\nOutput: 3\nExplanation: 1+1+1, 1+2, or 2+1.\n```",
   "difficulty": "EASY",
   "category": "DP",
   "patterns": [
@@ -1113,7 +1113,7 @@ export const apple1_25 = [
     "dp[i] = dp[i-1] + dp[i-2], equivalent to Fibonacci numbers."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nMaintain two variables prev1 and prev2 for constant space Fibonacci sequence.",
+    "solutionMarkdown": "### Optimal Solution\nMaintain two variables prev1 and prev2 for constant space Fibonacci sequence.",
     "complexityAnalysis": "Time: O(N), Space: O(1)"
   },
   "isGlobal": true,
@@ -1122,7 +1122,7 @@ export const apple1_25 = [
   {
   "title": "Rotate Array",
   "slug": "rotate-array",
-  "description": "Given an integer array `nums`, rotate the array to the right by `k` steps, where `k` is non-negative.\\n\\n### Example 1:\\n```\\nInput: [1,2,3,4,5,6,7]\n3\\nOutput: [5, 6, 7, 1, 2, 3, 4]\\nExplanation: Rotate 3 steps right.\\n```\\n\\n### Example 2:\\n```\\nInput: [-1,-100,3,99]\n2\\nOutput: [3, 99, -1, -100]\\nExplanation: Rotate 2 steps right.\\n```",
+  "description": "Given an integer array `nums`, rotate the array to the right by `k` steps, where `k` is non-negative.\n\n### Example 1:\n```\nInput: [1,2,3,4,5,6,7]\n3\nOutput: [5, 6, 7, 1, 2, 3, 4]\nExplanation: Rotate 3 steps right.\n```\n\n### Example 2:\n```\nInput: [-1,-100,3,99]\n2\nOutput: [3, 99, -1, -100]\nExplanation: Rotate 2 steps right.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -1201,7 +1201,7 @@ export const apple1_25 = [
     "Reverse entire array, then reverse first k, then reverse remaining n-k."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nThree in-place reversals: reverse(0, n-1), reverse(0, k-1), reverse(k, n-1).",
+    "solutionMarkdown": "### Optimal Solution\nThree in-place reversals: reverse(0, n-1), reverse(0, k-1), reverse(k, n-1).",
     "complexityAnalysis": "Time: O(N), Space: O(1)"
   },
   "isGlobal": true,
@@ -1210,7 +1210,7 @@ export const apple1_25 = [
   {
   "title": "Number of Islands",
   "slug": "number-of-islands",
-  "description": "Given an `m x n` 2D binary grid `grid` which represents a map of `'1'`s (land) and `'0'`s (water), return the number of islands.\n\nAn island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.\\n\\n### Example 1:\\n```\\nInput: [[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]\\nOutput: 1\\nExplanation: All land connected into 1 island.\\n```\\n\\n### Example 2:\\n```\\nInput: [[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"1\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"1\",\"1\"]]\\nOutput: 3\\nExplanation: 3 separate connected components.\\n```",
+  "description": "Given an `m x n` 2D binary grid `grid` which represents a map of `'1'`s (land) and `'0'`s (water), return the number of islands.\n\nAn island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.\n\n### Example 1:\n```\nInput: [[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]\nOutput: 1\nExplanation: All land connected into 1 island.\n```\n\n### Example 2:\n```\nInput: [[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"1\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"1\",\"1\"]]\nOutput: 3\nExplanation: 3 separate connected components.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -1291,7 +1291,7 @@ export const apple1_25 = [
     "Traverse grid. When encountering '1', increment count and run BFS/DFS to sink the island."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nStandard BFS/DFS flood-fill. Mark visited cells as '0' to avoid visiting twice.",
+    "solutionMarkdown": "### Optimal Solution\nStandard BFS/DFS flood-fill. Mark visited cells as '0' to avoid visiting twice.",
     "complexityAnalysis": "Time: O(M * N), Space: O(M * N) recursion stack / queue"
   },
   "isGlobal": true,
@@ -1300,7 +1300,7 @@ export const apple1_25 = [
   {
   "title": "Best Time to Buy and Sell Stock",
   "slug": "best-time-to-buy-and-sell-stock",
-  "description": "You are given an array `prices` where `prices[i]` is the price of a given stock on the `i-th` day. Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return `0`.\\n\\n### Example 1:\\n```\\nInput: [7,1,5,3,6,4]\\nOutput: 5\\nExplanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6 - 1 = 5.\\n```\\n\\n### Example 2:\\n```\\nInput: [7,6,4,3,1]\\nOutput: 0\\nExplanation: In this case, no transactions are done and max profit = 0.\\n```",
+  "description": "You are given an array `prices` where `prices[i]` is the price of a given stock on the `i-th` day. Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return `0`.\n\n### Example 1:\n```\nInput: [7,1,5,3,6,4]\nOutput: 5\nExplanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6 - 1 = 5.\n```\n\n### Example 2:\n```\nInput: [7,6,4,3,1]\nOutput: 0\nExplanation: In this case, no transactions are done and max profit = 0.\n```",
   "difficulty": "EASY",
   "category": "DSA",
   "patterns": [
@@ -1386,7 +1386,7 @@ export const apple1_25 = [
     "Track minPrice seen so far, and compute profit at current price."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nOne-pass: min_price = min(min_price, price), max_profit = max(max_profit, price - min_price).",
+    "solutionMarkdown": "### Optimal Solution\nOne-pass: min_price = min(min_price, price), max_profit = max(max_profit, price - min_price).",
     "complexityAnalysis": "Time: O(N), Space: O(1)"
   },
   "isGlobal": true,
@@ -1395,7 +1395,7 @@ export const apple1_25 = [
   {
   "title": "Design Hit Counter",
   "slug": "design-hit-counter",
-  "description": "Design a hit counter which counts the number of hits received in the past 5 minutes (i.e., the past 300 seconds).\n\nYour system should accept timestamp parameter (in seconds granularity) and calls are made in chronological order.\\n\\n### Example 1:\\n```\\nInput: [\"HitCounter\",\"hit\",\"hit\",\"hit\",\"getHits\",\"hit\",\"getHits\",\"getHits\"]\n[[],[1],[2],[3],[4],[300],[300],[301]]\\nOutput: [null, null, null, null, 3, null, 4, 3]\\nExplanation: Hits at 1, 2, 3 counted within 300 seconds.\\n```\\n\\n### Example 2:\\n```\\nInput: [\"HitCounter\",\"hit\",\"getHits\"]\n[[],[1],[301]]\\nOutput: [null, null, 0]\\nExplanation: Timestamp 1 is expired at 301.\\n```",
+  "description": "Design a hit counter which counts the number of hits received in the past 5 minutes (i.e., the past 300 seconds).\n\nYour system should accept timestamp parameter (in seconds granularity) and calls are made in chronological order.\n\n### Example 1:\n```\nInput: [\"HitCounter\",\"hit\",\"hit\",\"hit\",\"getHits\",\"hit\",\"getHits\",\"getHits\"]\n[[],[1],[2],[3],[4],[300],[300],[301]]\nOutput: [null, null, null, null, 3, null, 4, 3]\nExplanation: Hits at 1, 2, 3 counted within 300 seconds.\n```\n\n### Example 2:\n```\nInput: [\"HitCounter\",\"hit\",\"getHits\"]\n[[],[1],[301]]\nOutput: [null, null, 0]\nExplanation: Timestamp 1 is expired at 301.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -1466,7 +1466,7 @@ export const apple1_25 = [
     "Use a queue to store timestamps and evict timestamps <= timestamp - 300, or use circular array of size 300."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nMaintain queue or 300-bucket circular buffer with timestamps and counts.",
+    "solutionMarkdown": "### Optimal Solution\nMaintain queue or 300-bucket circular buffer with timestamps and counts.",
     "complexityAnalysis": "Time: O(1) amortized, Space: O(1) fixed size 300"
   },
   "isGlobal": true,
@@ -1475,7 +1475,7 @@ export const apple1_25 = [
   {
   "title": "Top K Frequent Elements",
   "slug": "top-k-frequent-elements",
-  "description": "Given an integer array `nums` and an integer `k`, return the `k` most frequent elements. You may return the answer in any order.\\n\\n### Example 1:\\n```\\nInput: [1,1,1,2,2,3]\n2\\nOutput: [1, 2]\\nExplanation: 1 appears 3 times, 2 appears 2 times.\\n```\\n\\n### Example 2:\\n```\\nInput: [1]\n1\\nOutput: [1]\\nExplanation: Single element is most frequent.\\n```",
+  "description": "Given an integer array `nums` and an integer `k`, return the `k` most frequent elements. You may return the answer in any order.\n\n### Example 1:\n```\nInput: [1,1,1,2,2,3]\n2\nOutput: [1, 2]\nExplanation: 1 appears 3 times, 2 appears 2 times.\n```\n\n### Example 2:\n```\nInput: [1]\n1\nOutput: [1]\nExplanation: Single element is most frequent.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -1556,7 +1556,7 @@ export const apple1_25 = [
     "Count frequencies with map, then use Bucket Sort or Min-Heap of size k."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nBucket sort by frequency in O(N) or Min-Heap of size k in O(N log k).",
+    "solutionMarkdown": "### Optimal Solution\nBucket sort by frequency in O(N) or Min-Heap of size k in O(N log k).",
     "complexityAnalysis": "Time: O(N), Space: O(N)"
   },
   "isGlobal": true,
@@ -1565,7 +1565,7 @@ export const apple1_25 = [
   {
   "title": "Longest Common Subsequence",
   "slug": "longest-common-subsequence",
-  "description": "Given two strings `text1` and `text2`, return the length of their longest common subsequence. If there is no common subsequence, return `0`.\\n\\n### Example 1:\\n```\\nInput: abcde\nace\\nOutput: 3\\nExplanation: The longest common subsequence is 'ace' and its length is 3.\\n```\\n\\n### Example 2:\\n```\\nInput: abc\nabc\\nOutput: 3\\nExplanation: The longest common subsequence is 'abc'.\\n```",
+  "description": "Given two strings `text1` and `text2`, return the length of their longest common subsequence. If there is no common subsequence, return `0`.\n\n### Example 1:\n```\nInput: abcde\nace\nOutput: 3\nExplanation: The longest common subsequence is 'ace' and its length is 3.\n```\n\n### Example 2:\n```\nInput: abc\nabc\nOutput: 3\nExplanation: The longest common subsequence is 'abc'.\n```",
   "difficulty": "MEDIUM",
   "category": "DP",
   "patterns": [
@@ -1649,7 +1649,7 @@ export const apple1_25 = [
     "2D DP table: dp[i][j] = 1 + dp[i-1][j-1] if match, else max(dp[i-1][j], dp[i][j-1])."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nStandard 2D DP LCS state matrix with 1D rolling array optimization.",
+    "solutionMarkdown": "### Optimal Solution\nStandard 2D DP LCS state matrix with 1D rolling array optimization.",
     "complexityAnalysis": "Time: O(M * N), Space: O(min(M, N))"
   },
   "isGlobal": true,
@@ -1658,7 +1658,7 @@ export const apple1_25 = [
   {
   "title": "Product of Array Except Self",
   "slug": "product-of-array-except-self",
-  "description": "Given an integer array `nums`, return an array `answer` such that `answer[i]` is equal to the product of all the elements of `nums` except `nums[i]`.\n\nYou must write an algorithm that runs in `O(n)` time and without using the division operation.\\n\\n### Example 1:\\n```\\nInput: [1,2,3,4]\\nOutput: [24, 12, 8, 6]\\nExplanation: 24 = 2*3*4, 12 = 1*3*4, 8 = 1*2*4, 6 = 1*2*3.\\n```\\n\\n### Example 2:\\n```\\nInput: [-1,1,0,-3,3]\\nOutput: [0, 0, 9, 0, 0]\\nExplanation: Zero handled cleanly.\\n```",
+  "description": "Given an integer array `nums`, return an array `answer` such that `answer[i]` is equal to the product of all the elements of `nums` except `nums[i]`.\n\nYou must write an algorithm that runs in `O(n)` time and without using the division operation.\n\n### Example 1:\n```\nInput: [1,2,3,4]\nOutput: [24, 12, 8, 6]\nExplanation: 24 = 2*3*4, 12 = 1*3*4, 8 = 1*2*4, 6 = 1*2*3.\n```\n\n### Example 2:\n```\nInput: [-1,1,0,-3,3]\nOutput: [0, 0, 9, 0, 0]\nExplanation: Zero handled cleanly.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -1737,7 +1737,7 @@ export const apple1_25 = [
     "Compute prefix products in first pass, then multiply suffix products backwards."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nResult array stores left prefix products. Second pass multiplies right running product in-place.",
+    "solutionMarkdown": "### Optimal Solution\nResult array stores left prefix products. Second pass multiplies right running product in-place.",
     "complexityAnalysis": "Time: O(N), Space: O(1) extra auxiliary space"
   },
   "isGlobal": true,
@@ -1746,7 +1746,7 @@ export const apple1_25 = [
   {
   "title": "Maximum Subarray",
   "slug": "maximum-subarray",
-  "description": "Given an integer array `nums`, find the subarray with the largest sum, and return *its sum*.\\n\\n### Example 1:\\n```\\nInput: [-2,1,-3,4,-1,2,1,-5,4]\\nOutput: 6\\nExplanation: The subarray [4,-1,2,1] has the largest sum 6.\\n```\\n\\n### Example 2:\\n```\\nInput: [1]\\nOutput: 1\\nExplanation: Single element subarray.\\n```",
+  "description": "Given an integer array `nums`, find the subarray with the largest sum, and return *its sum*.\n\n### Example 1:\n```\nInput: [-2,1,-3,4,-1,2,1,-5,4]\nOutput: 6\nExplanation: The subarray [4,-1,2,1] has the largest sum 6.\n```\n\n### Example 2:\n```\nInput: [1]\nOutput: 1\nExplanation: Single element subarray.\n```",
   "difficulty": "MEDIUM",
   "category": "DP",
   "patterns": [
@@ -1832,7 +1832,7 @@ export const apple1_25 = [
     "Kadane's algorithm: curr_sum = max(num, curr_sum + num)."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nKadane's linear algorithm tracking local and global max sum.",
+    "solutionMarkdown": "### Optimal Solution\nKadane's linear algorithm tracking local and global max sum.",
     "complexityAnalysis": "Time: O(N), Space: O(1)"
   },
   "isGlobal": true,
@@ -1841,7 +1841,7 @@ export const apple1_25 = [
   {
   "title": "Spiral Matrix",
   "slug": "spiral-matrix",
-  "description": "Given an `m x n` matrix, return all elements of the `matrix` in spiral order.\\n\\n### Example 1:\\n```\\nInput: [[1,2,3],[4,5,6],[7,8,9]]\\nOutput: [1, 2, 3, 6, 9, 8, 7, 4, 5]\\nExplanation: Spiral traversal clockwise.\\n```\\n\\n### Example 2:\\n```\\nInput: [[1,2,3,4],[5,6,7,8],[9,10,11,12]]\\nOutput: [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]\\nExplanation: Rectangular matrix spiral.\\n```",
+  "description": "Given an `m x n` matrix, return all elements of the `matrix` in spiral order.\n\n### Example 1:\n```\nInput: [[1,2,3],[4,5,6],[7,8,9]]\nOutput: [1, 2, 3, 6, 9, 8, 7, 4, 5]\nExplanation: Spiral traversal clockwise.\n```\n\n### Example 2:\n```\nInput: [[1,2,3,4],[5,6,7,8],[9,10,11,12]]\nOutput: [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]\nExplanation: Rectangular matrix spiral.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -1915,7 +1915,7 @@ export const apple1_25 = [
     "Maintain four boundaries: top, bottom, left, right. Increment/decrement after each border traversal."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nShrink four pointers top, bottom, left, right inward until they cross.",
+    "solutionMarkdown": "### Optimal Solution\nShrink four pointers top, bottom, left, right inward until they cross.",
     "complexityAnalysis": "Time: O(M * N), Space: O(1) auxiliary"
   },
   "isGlobal": true,
@@ -1924,7 +1924,7 @@ export const apple1_25 = [
   {
   "title": "Reverse Words in a String",
   "slug": "reverse-words-in-a-string",
-  "description": "Given an input string `s`, reverse the order of the **words**. Return a string of the words in reverse order concatenated by a single space.\\n\\n### Example 1:\\n```\\nInput: the sky is blue\\nOutput: \"blue is sky the\"\\nExplanation: Words reversed with single space.\\n```\\n\\n### Example 2:\\n```\\nInput:   hello world  \\nOutput: \"world hello\"\\nExplanation: Leading and trailing spaces stripped.\\n```",
+  "description": "Given an input string `s`, reverse the order of the **words**. Return a string of the words in reverse order concatenated by a single space.\n\n### Example 1:\n```\nInput: the sky is blue\nOutput: \"blue is sky the\"\nExplanation: Words reversed with single space.\n```\n\n### Example 2:\n```\nInput:   hello world  \nOutput: \"world hello\"\nExplanation: Leading and trailing spaces stripped.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -2003,7 +2003,7 @@ export const apple1_25 = [
     "Split by whitespace, filter empty, reverse and join with space."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nSplit tokens or reverse whole string then reverse individual words in-place.",
+    "solutionMarkdown": "### Optimal Solution\nSplit tokens or reverse whole string then reverse individual words in-place.",
     "complexityAnalysis": "Time: O(N), Space: O(N)"
   },
   "isGlobal": true,
@@ -2012,7 +2012,7 @@ export const apple1_25 = [
   {
   "title": "Kth Largest Element in an Array",
   "slug": "kth-largest-element-in-an-array",
-  "description": "Given an integer array `nums` and an integer `k`, return the `k-th` largest element in the array.\n\nNote that it is the `k-th` largest element in the sorted order, not the `k-th` distinct element.\\n\\n### Example 1:\\n```\\nInput: [3,2,1,5,6,4]\n2\\nOutput: 5\\nExplanation: 2nd largest element is 5.\\n```\\n\\n### Example 2:\\n```\\nInput: [3,2,3,1,2,4,5,5,6]\n4\\nOutput: 4\\nExplanation: 4th largest element is 4.\\n```",
+  "description": "Given an integer array `nums` and an integer `k`, return the `k-th` largest element in the array.\n\nNote that it is the `k-th` largest element in the sorted order, not the `k-th` distinct element.\n\n### Example 1:\n```\nInput: [3,2,1,5,6,4]\n2\nOutput: 5\nExplanation: 2nd largest element is 5.\n```\n\n### Example 2:\n```\nInput: [3,2,3,1,2,4,5,5,6]\n4\nOutput: 4\nExplanation: 4th largest element is 4.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -2093,7 +2093,7 @@ export const apple1_25 = [
     "Use a Min-Heap of size k or the Quickselect algorithm."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nMin-heap of capacity k maintains the k largest items, heap root is kth largest.",
+    "solutionMarkdown": "### Optimal Solution\nMin-heap of capacity k maintains the k largest items, heap root is kth largest.",
     "complexityAnalysis": "Time: O(N log k) with heap or O(N) average Quickselect, Space: O(k)"
   },
   "isGlobal": true,
@@ -2102,7 +2102,7 @@ export const apple1_25 = [
   {
   "title": "Time Based Key-Value Store",
   "slug": "time-based-key-value-store",
-  "description": "Design a time-based key-value data structure that can store multiple values for the same key at different time stamps and retrieve the key's value at a certain timestamp.\\n\\n### Example 1:\\n```\\nInput: [\"TimeMap\",\"set\",\"get\",\"get\",\"set\",\"get\",\"get\"]\n[[],[\"foo\",\"bar\",1],[\"foo\",1],[\"foo\",3],[\"foo\",\"bar2\",4],[\"foo\",4],[\"foo\",5]]\\nOutput: [null, null, \"bar\", \"bar\", null, \"bar2\", \"bar2\"]\\nExplanation: TimeMap correctly fetches closest timestamp <= target.\\n```\\n\\n### Example 2:\\n```\\nInput: [\"TimeMap\",\"set\",\"get\"]\n[[],[\"love\",\"high\",10],[\"love\",5]]\\nOutput: [null, null, \"\"]\\nExplanation: No timestamp <= 5 exists.\\n```",
+  "description": "Design a time-based key-value data structure that can store multiple values for the same key at different time stamps and retrieve the key's value at a certain timestamp.\n\n### Example 1:\n```\nInput: [\"TimeMap\",\"set\",\"get\",\"get\",\"set\",\"get\",\"get\"]\n[[],[\"foo\",\"bar\",1],[\"foo\",1],[\"foo\",3],[\"foo\",\"bar2\",4],[\"foo\",4],[\"foo\",5]]\nOutput: [null, null, \"bar\", \"bar\", null, \"bar2\", \"bar2\"]\nExplanation: TimeMap correctly fetches closest timestamp <= target.\n```\n\n### Example 2:\n```\nInput: [\"TimeMap\",\"set\",\"get\"]\n[[],[\"love\",\"high\",10],[\"love\",5]]\nOutput: [null, null, \"\"]\nExplanation: No timestamp <= 5 exists.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -2173,7 +2173,7 @@ export const apple1_25 = [
     "Map key to sorted list of (timestamp, value) pairs. Use binary search (upper_bound / bisect_right) to find largest timestamp <= target."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nHash map storing timestamp-value vectors per key; query uses binary search.",
+    "solutionMarkdown": "### Optimal Solution\nHash map storing timestamp-value vectors per key; query uses binary search.",
     "complexityAnalysis": "Time: set O(1), get O(log N), Space: O(N)"
   },
   "isGlobal": true,
@@ -2182,7 +2182,7 @@ export const apple1_25 = [
   {
   "title": "Merge k Sorted Lists",
   "slug": "merge-k-sorted-lists",
-  "description": "You are given an array of `k` linked-lists `lists`, each linked-list is sorted in ascending order. Merge all the linked-lists into one sorted linked-list and return it.\\n\\n### Example 1:\\n```\\nInput: [[1,4,5],[1,3,4],[2,6]]\\nOutput: [1, 1, 2, 3, 4, 4, 5, 6]\\nExplanation: Lists merged into one ascending list.\\n```\\n\\n### Example 2:\\n```\\nInput: []\\nOutput: []\\nExplanation: Empty lists.\\n```",
+  "description": "You are given an array of `k` linked-lists `lists`, each linked-list is sorted in ascending order. Merge all the linked-lists into one sorted linked-list and return it.\n\n### Example 1:\n```\nInput: [[1,4,5],[1,3,4],[2,6]]\nOutput: [1, 1, 2, 3, 4, 4, 5, 6]\nExplanation: Lists merged into one ascending list.\n```\n\n### Example 2:\n```\nInput: []\nOutput: []\nExplanation: Empty lists.\n```",
   "difficulty": "HARD",
   "category": "DSA",
   "patterns": [
@@ -2263,7 +2263,7 @@ export const apple1_25 = [
     "Use a Min-Heap of size k holding the current head of each list, or divide and conquer pairwise merge."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nMin-heap storing (val, node). Always pop smallest and advance list pointer.",
+    "solutionMarkdown": "### Optimal Solution\nMin-heap storing (val, node). Always pop smallest and advance list pointer.",
     "complexityAnalysis": "Time: O(N log k) where N is total nodes, Space: O(k)"
   },
   "isGlobal": true,

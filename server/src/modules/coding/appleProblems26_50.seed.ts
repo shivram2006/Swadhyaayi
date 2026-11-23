@@ -4,7 +4,7 @@ export const apple26_50 = [
   {
   "title": "Course Schedule II",
   "slug": "course-schedule-ii",
-  "description": "There are a total of `numCourses` courses you have to take, labeled from `0` to `numCourses - 1`. You are given an array `prerequisites` where `prerequisites[i] = [ai, bi]` indicates that you must take course `bi` first if you want to take course `ai`.\n\nReturn *the ordering of courses you should take to finish all courses*. If it is impossible to finish all courses, return **an empty array**.\\n\\n### Example 1:\\n```\\nInput: 2\n[[1,0]]\\nOutput: [0, 1]\\nExplanation: To take course 1 you should take course 0 first.\\n```\\n\\n### Example 2:\\n```\\nInput: 4\n[[1,0],[2,0],[3,1],[3,2]]\\nOutput: [0, 1, 2, 3]\\nExplanation: Course 0 must be taken first, then 1 and 2, then 3.\\n```",
+  "description": "There are a total of `numCourses` courses you have to take, labeled from `0` to `numCourses - 1`. You are given an array `prerequisites` where `prerequisites[i] = [ai, bi]` indicates that you must take course `bi` first if you want to take course `ai`.\n\nReturn *the ordering of courses you should take to finish all courses*. If it is impossible to finish all courses, return **an empty array**.\n\n### Example 1:\n```\nInput: 2\n[[1,0]]\nOutput: [0, 1]\nExplanation: To take course 1 you should take course 0 first.\n```\n\n### Example 2:\n```\nInput: 4\n[[1,0],[2,0],[3,1],[3,2]]\nOutput: [0, 1, 2, 3]\nExplanation: Course 0 must be taken first, then 1 and 2, then 3.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -90,7 +90,7 @@ export const apple26_50 = [
     "Use Kahn's Algorithm with indegree array and BFS queue."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nKahn's BFS topological sort. Add 0 indegree nodes to queue and decrement neighbors.",
+    "solutionMarkdown": "### Optimal Solution\nKahn's BFS topological sort. Add 0 indegree nodes to queue and decrement neighbors.",
     "complexityAnalysis": "Time: O(V + E), Space: O(V + E)"
   },
   "isGlobal": true,
@@ -99,7 +99,7 @@ export const apple26_50 = [
   {
   "title": "Course Schedule",
   "slug": "course-schedule",
-  "description": "There are a total of `numCourses` courses you have to take, labeled from `0` to `numCourses - 1`. You are given an array `prerequisites` where `prerequisites[i] = [ai, bi]`.\n\nReturn `true` if you can finish all courses. Otherwise, return `false`.\\n\\n### Example 1:\\n```\\nInput: 2\n[[1,0]]\\nOutput: true\\nExplanation: You can finish courses in order [0, 1].\\n```\\n\\n### Example 2:\\n```\\nInput: 2\n[[1,0],[0,1]]\\nOutput: false\\nExplanation: Cyclic prerequisite dependency.\\n```",
+  "description": "There are a total of `numCourses` courses you have to take, labeled from `0` to `numCourses - 1`. You are given an array `prerequisites` where `prerequisites[i] = [ai, bi]`.\n\nReturn `true` if you can finish all courses. Otherwise, return `false`.\n\n### Example 1:\n```\nInput: 2\n[[1,0]]\nOutput: true\nExplanation: You can finish courses in order [0, 1].\n```\n\n### Example 2:\n```\nInput: 2\n[[1,0],[0,1]]\nOutput: false\nExplanation: Cyclic prerequisite dependency.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -180,7 +180,7 @@ export const apple26_50 = [
     "Check if the directed graph contains a cycle using Kahn's algorithm or 3-color DFS."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nDetect cycles in directed graph using BFS indegrees or DFS with recursion state.",
+    "solutionMarkdown": "### Optimal Solution\nDetect cycles in directed graph using BFS indegrees or DFS with recursion state.",
     "complexityAnalysis": "Time: O(V + E), Space: O(V + E)"
   },
   "isGlobal": true,
@@ -189,7 +189,7 @@ export const apple26_50 = [
   {
   "title": "Valid Palindrome",
   "slug": "valid-palindrome",
-  "description": "A phrase is a **palindrome** if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward.\\n\\n### Example 1:\\n```\\nInput: A man, a plan, a canal: Panama\\nOutput: true\\nExplanation: 'amanaplanacanalpanama' is a palindrome.\\n```\\n\\n### Example 2:\\n```\\nInput: race a car\\nOutput: false\\nExplanation: 'raceacar' is not a palindrome.\\n```",
+  "description": "A phrase is a **palindrome** if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward.\n\n### Example 1:\n```\nInput: A man, a plan, a canal: Panama\nOutput: true\nExplanation: 'amanaplanacanalpanama' is a palindrome.\n```\n\n### Example 2:\n```\nInput: race a car\nOutput: false\nExplanation: 'raceacar' is not a palindrome.\n```",
   "difficulty": "EASY",
   "category": "DSA",
   "patterns": [
@@ -273,7 +273,7 @@ export const apple26_50 = [
     "Two pointers from left and right skipping non-alphanumeric chars."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nTwo pointer inward scan skipping non-alphanumeric and comparing lowercased chars.",
+    "solutionMarkdown": "### Optimal Solution\nTwo pointer inward scan skipping non-alphanumeric and comparing lowercased chars.",
     "complexityAnalysis": "Time: O(N), Space: O(1)"
   },
   "isGlobal": true,
@@ -282,7 +282,7 @@ export const apple26_50 = [
   {
   "title": "Search Insert Position",
   "slug": "search-insert-position",
-  "description": "Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.\n\nYou must write an algorithm with `O(log n)` runtime complexity.\\n\\n### Example 1:\\n```\\nInput: [1,3,5,6]\n5\\nOutput: 2\\nExplanation: 5 is found at index 2.\\n```\\n\\n### Example 2:\\n```\\nInput: [1,3,5,6]\n2\\nOutput: 1\\nExplanation: 2 would be inserted at index 1.\\n```",
+  "description": "Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.\n\nYou must write an algorithm with `O(log n)` runtime complexity.\n\n### Example 1:\n```\nInput: [1,3,5,6]\n5\nOutput: 2\nExplanation: 5 is found at index 2.\n```\n\n### Example 2:\n```\nInput: [1,3,5,6]\n2\nOutput: 1\nExplanation: 2 would be inserted at index 1.\n```",
   "difficulty": "EASY",
   "category": "DSA",
   "patterns": [
@@ -366,7 +366,7 @@ export const apple26_50 = [
     "Standard binary search lower bound: find first element >= target."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nBinary search with left <= right. When loop ends, left is insert position.",
+    "solutionMarkdown": "### Optimal Solution\nBinary search with left <= right. When loop ends, left is insert position.",
     "complexityAnalysis": "Time: O(log N), Space: O(1)"
   },
   "isGlobal": true,
@@ -375,7 +375,7 @@ export const apple26_50 = [
   {
   "title": "Reverse Linked List",
   "slug": "reverse-linked-list",
-  "description": "Given the `head` of a singly linked list, reverse the list, and return *the reversed list*.\\n\\n### Example 1:\\n```\\nInput: [1,2,3,4,5]\\nOutput: [5, 4, 3, 2, 1]\\nExplanation: Reversed linked list.\\n```\\n\\n### Example 2:\\n```\\nInput: [1,2]\\nOutput: [2, 1]\\nExplanation: Two-node list reversed.\\n```",
+  "description": "Given the `head` of a singly linked list, reverse the list, and return *the reversed list*.\n\n### Example 1:\n```\nInput: [1,2,3,4,5]\nOutput: [5, 4, 3, 2, 1]\nExplanation: Reversed linked list.\n```\n\n### Example 2:\n```\nInput: [1,2]\nOutput: [2, 1]\nExplanation: Two-node list reversed.\n```",
   "difficulty": "EASY",
   "category": "DSA",
   "patterns": [
@@ -456,7 +456,7 @@ export const apple26_50 = [
     "Iteratively reverse next pointers using prev, curr, and next_temp pointers."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nIterate curr: next_temp = curr.next, curr.next = prev, prev = curr, curr = next_temp.",
+    "solutionMarkdown": "### Optimal Solution\nIterate curr: next_temp = curr.next, curr.next = prev, prev = curr, curr = next_temp.",
     "complexityAnalysis": "Time: O(N), Space: O(1)"
   },
   "isGlobal": true,
@@ -465,7 +465,7 @@ export const apple26_50 = [
   {
   "title": "LRU Cache",
   "slug": "lru-cache",
-  "description": "Design a data structure that follows the constraints of a **Least Recently Used (LRU) cache**.\n\nImplement the `LRUCache` class with `get(key)` and `put(key, value)` both running in `O(1)` average time complexity.\\n\\n### Example 1:\\n```\\nInput: [\"LRUCache\",\"put\",\"put\",\"get\",\"put\",\"get\",\"put\",\"get\",\"get\",\"get\"]\n[[2],[1,1],[2,2],[1],[3,3],[2],[4,4],[1],[3],[4]]\\nOutput: [null, null, null, 1, null, -1, null, -1, 3, 4]\\nExplanation: Key 2 evicted when key 3 is added; key 1 evicted when key 4 is added.\\n```\\n\\n### Example 2:\\n```\\nInput: [\"LRUCache\",\"put\",\"get\"]\n[[1],[2,1],[2]]\\nOutput: [null, null, 1]\\nExplanation: Single capacity LRU.\\n```",
+  "description": "Design a data structure that follows the constraints of a **Least Recently Used (LRU) cache**.\n\nImplement the `LRUCache` class with `get(key)` and `put(key, value)` both running in `O(1)` average time complexity.\n\n### Example 1:\n```\nInput: [\"LRUCache\",\"put\",\"put\",\"get\",\"put\",\"get\",\"put\",\"get\",\"get\",\"get\"]\n[[2],[1,1],[2,2],[1],[3,3],[2],[4,4],[1],[3],[4]]\nOutput: [null, null, null, 1, null, -1, null, -1, 3, 4]\nExplanation: Key 2 evicted when key 3 is added; key 1 evicted when key 4 is added.\n```\n\n### Example 2:\n```\nInput: [\"LRUCache\",\"put\",\"get\"]\n[[1],[2,1],[2]]\nOutput: [null, null, 1]\nExplanation: Single capacity LRU.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -536,7 +536,7 @@ export const apple26_50 = [
     "Combine a Hash Map with a Doubly Linked List with dummy head and tail."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nHash map maps keys to DLL nodes. Accessing moves node to head; eviction removes node from tail.",
+    "solutionMarkdown": "### Optimal Solution\nHash map maps keys to DLL nodes. Accessing moves node to head; eviction removes node from tail.",
     "complexityAnalysis": "Time: O(1) for both get and put, Space: O(capacity)"
   },
   "isGlobal": true,
@@ -545,7 +545,7 @@ export const apple26_50 = [
   {
   "title": "First Missing Positive",
   "slug": "first-missing-positive",
-  "description": "Given an unsorted integer array `nums`, return the smallest missing positive integer.\n\nYou must implement an algorithm that runs in `O(n)` time and uses `O(1)` auxiliary space.\\n\\n### Example 1:\\n```\\nInput: [1,2,0]\\nOutput: 3\\nExplanation: Numbers 1 and 2 are present, 3 is the smallest missing.\\n```\\n\\n### Example 2:\\n```\\nInput: [3,4,-1,1]\\nOutput: 2\\nExplanation: 1 is in array, 2 is missing.\\n```",
+  "description": "Given an unsorted integer array `nums`, return the smallest missing positive integer.\n\nYou must implement an algorithm that runs in `O(n)` time and uses `O(1)` auxiliary space.\n\n### Example 1:\n```\nInput: [1,2,0]\nOutput: 3\nExplanation: Numbers 1 and 2 are present, 3 is the smallest missing.\n```\n\n### Example 2:\n```\nInput: [3,4,-1,1]\nOutput: 2\nExplanation: 1 is in array, 2 is missing.\n```",
   "difficulty": "HARD",
   "category": "DSA",
   "patterns": [
@@ -629,7 +629,7 @@ export const apple26_50 = [
     "Place each number x in its bucket index x-1 if 1 <= x <= n using cyclic swap."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nCyclic sort: while 1 <= nums[i] <= n and nums[nums[i]-1] != nums[i], swap(nums[i], nums[nums[i]-1]). First index i where nums[i] != i+1 is answer i+1.",
+    "solutionMarkdown": "### Optimal Solution\nCyclic sort: while 1 <= nums[i] <= n and nums[nums[i]-1] != nums[i], swap(nums[i], nums[nums[i]-1]). First index i where nums[i] != i+1 is answer i+1.",
     "complexityAnalysis": "Time: O(N), Space: O(1)"
   },
   "isGlobal": true,
@@ -638,7 +638,7 @@ export const apple26_50 = [
   {
   "title": "Find First and Last Position of Element in Sorted Array",
   "slug": "find-first-and-last-position-of-element-in-sorted-array",
-  "description": "Given an array of integers `nums` sorted in non-decreasing order, find the starting and ending position of a given `target` value. If target is not found in the array, return `[-1, -1]`.\n\nYou must write an algorithm with `O(log n)` runtime complexity.\\n\\n### Example 1:\\n```\\nInput: [5,7,7,8,8,10]\n8\\nOutput: [3, 4]\\nExplanation: 8 is found from index 3 to 4.\\n```\\n\\n### Example 2:\\n```\\nInput: [5,7,7,8,8,10]\n6\\nOutput: [-1, -1]\\nExplanation: 6 is not in the array.\\n```",
+  "description": "Given an array of integers `nums` sorted in non-decreasing order, find the starting and ending position of a given `target` value. If target is not found in the array, return `[-1, -1]`.\n\nYou must write an algorithm with `O(log n)` runtime complexity.\n\n### Example 1:\n```\nInput: [5,7,7,8,8,10]\n8\nOutput: [3, 4]\nExplanation: 8 is found from index 3 to 4.\n```\n\n### Example 2:\n```\nInput: [5,7,7,8,8,10]\n6\nOutput: [-1, -1]\nExplanation: 6 is not in the array.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -722,7 +722,7 @@ export const apple26_50 = [
     "Run two binary searches: one for lower bound (first index) and one for upper bound (last index)."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nTwo binary search passes: left boundary search and right boundary search in O(log N).",
+    "solutionMarkdown": "### Optimal Solution\nTwo binary search passes: left boundary search and right boundary search in O(log N).",
     "complexityAnalysis": "Time: O(log N), Space: O(1)"
   },
   "isGlobal": true,
@@ -731,7 +731,7 @@ export const apple26_50 = [
   {
   "title": "Combination Sum",
   "slug": "combination-sum",
-  "description": "Given an array of **distinct** integers `candidates` and a target integer `target`, return a list of all **unique combinations** of `candidates` where the chosen numbers sum to `target`. You may return the combinations in any order. The same number may be chosen unlimited times.\\n\\n### Example 1:\\n```\\nInput: [2,3,6,7]\n7\\nOutput: [[2, 2, 3], [7]]\\nExplanation: 2+2+3=7 and 7=7.\\n```\\n\\n### Example 2:\\n```\\nInput: [2,3,5]\n8\\nOutput: [[2, 2, 2, 2], [2, 3, 3], [3, 5]]\\nExplanation: 3 distinct valid combinations.\\n```",
+  "description": "Given an array of **distinct** integers `candidates` and a target integer `target`, return a list of all **unique combinations** of `candidates` where the chosen numbers sum to `target`. You may return the combinations in any order. The same number may be chosen unlimited times.\n\n### Example 1:\n```\nInput: [2,3,6,7]\n7\nOutput: [[2, 2, 3], [7]]\nExplanation: 2+2+3=7 and 7=7.\n```\n\n### Example 2:\n```\nInput: [2,3,5]\n8\nOutput: [[2, 2, 2, 2], [2, 3, 3], [3, 5]]\nExplanation: 3 distinct valid combinations.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -810,7 +810,7 @@ export const apple26_50 = [
     "Backtrack with index: at each step choose candidates[i] without advancing index, or skip to index + 1."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nDFS backtracking tree. Prune branches when remaining target < 0.",
+    "solutionMarkdown": "### Optimal Solution\nDFS backtracking tree. Prune branches when remaining target < 0.",
     "complexityAnalysis": "Time: O(2^T) where T is target/min_candidate, Space: O(T)"
   },
   "isGlobal": true,
@@ -819,7 +819,7 @@ export const apple26_50 = [
   {
   "title": "Word Search",
   "slug": "word-search",
-  "description": "Given an `m x n` grid of characters `board` and a string `word`, return `true` if `word` exists in the grid. The word can be constructed from letters of sequentially adjacent cells (horizontally or vertically neighboring). The same letter cell may not be used more than once.\\n\\n### Example 1:\\n```\\nInput: [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\nABCCED\\nOutput: true\\nExplanation: The word 'ABCCED' exists.\\n```\\n\\n### Example 2:\\n```\\nInput: [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\nABCB\\nOutput: false\\nExplanation: 'ABCB' cannot be formed without reusing cell 'B'.\\n```",
+  "description": "Given an `m x n` grid of characters `board` and a string `word`, return `true` if `word` exists in the grid. The word can be constructed from letters of sequentially adjacent cells (horizontally or vertically neighboring). The same letter cell may not be used more than once.\n\n### Example 1:\n```\nInput: [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\nABCCED\nOutput: true\nExplanation: The word 'ABCCED' exists.\n```\n\n### Example 2:\n```\nInput: [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\nABCB\nOutput: false\nExplanation: 'ABCB' cannot be formed without reusing cell 'B'.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -895,7 +895,7 @@ export const apple26_50 = [
     "Start DFS from each matching first character. Temporarily modify board[r][c] to '#' to mark visited."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nDFS backtracking in 4 directions. Restore cell character upon backtrack.",
+    "solutionMarkdown": "### Optimal Solution\nDFS backtracking in 4 directions. Restore cell character upon backtrack.",
     "complexityAnalysis": "Time: O(M * N * 3^L) where L is word length, Space: O(L)"
   },
   "isGlobal": true,
@@ -904,7 +904,7 @@ export const apple26_50 = [
   {
   "title": "Rotate Image",
   "slug": "rotate-image",
-  "description": "You are given an `n x n` 2D matrix representing an image, rotate the image by **90 degrees (clockwise)** in-place.\\n\\n### Example 1:\\n```\\nInput: [[1,2,3],[4,5,6],[7,8,9]]\\nOutput: [[7, 4, 1], [8, 5, 2], [9, 6, 3]]\\nExplanation: Rotated 90 degrees clockwise.\\n```\\n\\n### Example 2:\\n```\\nInput: [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]\\nOutput: [[15, 13, 2, 5], [14, 3, 4, 1], [12, 6, 8, 9], [16, 7, 10, 11]]\\nExplanation: 4x4 matrix rotated.\\n```",
+  "description": "You are given an `n x n` 2D matrix representing an image, rotate the image by **90 degrees (clockwise)** in-place.\n\n### Example 1:\n```\nInput: [[1,2,3],[4,5,6],[7,8,9]]\nOutput: [[7, 4, 1], [8, 5, 2], [9, 6, 3]]\nExplanation: Rotated 90 degrees clockwise.\n```\n\n### Example 2:\n```\nInput: [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]\nOutput: [[15, 13, 2, 5], [14, 3, 4, 1], [12, 6, 8, 9], [16, 7, 10, 11]]\nExplanation: 4x4 matrix rotated.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -978,7 +978,7 @@ export const apple26_50 = [
     "Transpose matrix along main diagonal, then reverse each row horizontally."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nTwo-step in-place transformation: matrix.transpose() followed by matrix.reverse_rows().",
+    "solutionMarkdown": "### Optimal Solution\nTwo-step in-place transformation: matrix.transpose() followed by matrix.reverse_rows().",
     "complexityAnalysis": "Time: O(N^2), Space: O(1)"
   },
   "isGlobal": true,
@@ -987,7 +987,7 @@ export const apple26_50 = [
   {
   "title": "Jump Game",
   "slug": "jump-game",
-  "description": "You are given an integer array `nums`. You are initially positioned at the array's **first index**, and each element in the array represents your maximum jump length at that position.\n\nReturn `true` if you can reach the last index, or `false` otherwise.\\n\\n### Example 1:\\n```\\nInput: [2,3,1,1,4]\\nOutput: true\\nExplanation: Jump 1 step from index 0 to 1, then 3 steps to last index.\\n```\\n\\n### Example 2:\\n```\\nInput: [3,2,1,0,4]\\nOutput: false\\nExplanation: Always arrive at index 3 with jump length 0.\\n```",
+  "description": "You are given an integer array `nums`. You are initially positioned at the array's **first index**, and each element in the array represents your maximum jump length at that position.\n\nReturn `true` if you can reach the last index, or `false` otherwise.\n\n### Example 1:\n```\nInput: [2,3,1,1,4]\nOutput: true\nExplanation: Jump 1 step from index 0 to 1, then 3 steps to last index.\n```\n\n### Example 2:\n```\nInput: [3,2,1,0,4]\nOutput: false\nExplanation: Always arrive at index 3 with jump length 0.\n```",
   "difficulty": "MEDIUM",
   "category": "DSA",
   "patterns": [
@@ -1073,7 +1073,7 @@ export const apple26_50 = [
     "Track maxReach index. If current index i > maxReach, return false."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nGreedy scan: maxReach = max(maxReach, i + nums[i]). If maxReach >= n-1, return true.",
+    "solutionMarkdown": "### Optimal Solution\nGreedy scan: maxReach = max(maxReach, i + nums[i]). If maxReach >= n-1, return true.",
     "complexityAnalysis": "Time: O(N), Space: O(1)"
   },
   "isGlobal": true,
@@ -1082,7 +1082,7 @@ export const apple26_50 = [
   {
   "title": "Coin Change",
   "slug": "coin-change",
-  "description": "You are given an integer array `coins` representing coins of different denominations and an integer `amount` representing a total amount of money.\n\nReturn *the fewest number of coins that you need to make up that amount*. If that amount cannot be made up, return `-1`.\\n\\n### Example 1:\\n```\\nInput: [1,2,5]\n11\\nOutput: 3\\nExplanation: 11 = 5 + 5 + 1 (3 coins).\\n```\\n\\n### Example 2:\\n```\\nInput: [2]\n3\\nOutput: -1\\nExplanation: Cannot make amount 3 with coin 2.\\n```",
+  "description": "You are given an integer array `coins` representing coins of different denominations and an integer `amount` representing a total amount of money.\n\nReturn *the fewest number of coins that you need to make up that amount*. If that amount cannot be made up, return `-1`.\n\n### Example 1:\n```\nInput: [1,2,5]\n11\nOutput: 3\nExplanation: 11 = 5 + 5 + 1 (3 coins).\n```\n\n### Example 2:\n```\nInput: [2]\n3\nOutput: -1\nExplanation: Cannot make amount 3 with coin 2.\n```",
   "difficulty": "MEDIUM",
   "category": "DP",
   "patterns": [
@@ -1166,7 +1166,7 @@ export const apple26_50 = [
     "dp[x] = min(dp[x], dp[x - coin] + 1) for each coin <= x."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\n1D Bottom-up DP initialized to infinity. dp[0] = 0.",
+    "solutionMarkdown": "### Optimal Solution\n1D Bottom-up DP initialized to infinity. dp[0] = 0.",
     "complexityAnalysis": "Time: O(amount * len(coins)), Space: O(amount)"
   },
   "isGlobal": true,
@@ -1175,7 +1175,7 @@ export const apple26_50 = [
   {
   "title": "Coin Change II",
   "slug": "coin-change-ii",
-  "description": "You are given an integer array `coins` representing coins of different denominations and an integer `amount`. Return the number of combinations that make up that amount. You may assume an infinite number of each kind of coin.\\n\\n### Example 1:\\n```\\nInput: 5\n[1,2,5]\\nOutput: 4\\nExplanation: 5=5, 5=2+2+1, 5=2+1+1+1, 5=1+1+1+1+1.\\n```\\n\\n### Example 2:\\n```\\nInput: 3\n[2]\\nOutput: 0\\nExplanation: Cannot make 3 using only 2s.\\n```",
+  "description": "You are given an integer array `coins` representing coins of different denominations and an integer `amount`. Return the number of combinations that make up that amount. You may assume an infinite number of each kind of coin.\n\n### Example 1:\n```\nInput: 5\n[1,2,5]\nOutput: 4\nExplanation: 5=5, 5=2+2+1, 5=2+1+1+1, 5=1+1+1+1+1.\n```\n\n### Example 2:\n```\nInput: 3\n[2]\nOutput: 0\nExplanation: Cannot make 3 using only 2s.\n```",
   "difficulty": "MEDIUM",
   "category": "DP",
   "patterns": [
@@ -1254,7 +1254,7 @@ export const apple26_50 = [
     "Unbounded knapsack: loop coins outer, amount inner from coin to amount."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nOuter loop over coins, inner loop over amounts ensures combinations rather than permutations.",
+    "solutionMarkdown": "### Optimal Solution\nOuter loop over coins, inner loop over amounts ensures combinations rather than permutations.",
     "complexityAnalysis": "Time: O(amount * len(coins)), Space: O(amount)"
   },
   "isGlobal": true,
@@ -1263,7 +1263,7 @@ export const apple26_50 = [
   {
   "title": "Maximum Product Subarray",
   "slug": "maximum-product-subarray",
-  "description": "Given an integer array `nums`, find a subarray that has the largest product, and return *the product*.\\n\\n### Example 1:\\n```\\nInput: [2,3,-2,4]\\nOutput: 6\\nExplanation: [2,3] has the largest product 6.\\n```\\n\\n### Example 2:\\n```\\nInput: [-2,0,-1]\\nOutput: 0\\nExplanation: Max product is 0.\\n```",
+  "description": "Given an integer array `nums`, find a subarray that has the largest product, and return *the product*.\n\n### Example 1:\n```\nInput: [2,3,-2,4]\nOutput: 6\nExplanation: [2,3] has the largest product 6.\n```\n\n### Example 2:\n```\nInput: [-2,0,-1]\nOutput: 0\nExplanation: Max product is 0.\n```",
   "difficulty": "MEDIUM",
   "category": "DP",
   "patterns": [
@@ -1342,7 +1342,7 @@ export const apple26_50 = [
     "Maintain both max_prod and min_prod because multiplying negative by negative flips to positive."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nAt each index, if nums[i] < 0 swap max_prod and min_prod, then update max_prod = max(nums[i], max_prod * nums[i]).",
+    "solutionMarkdown": "### Optimal Solution\nAt each index, if nums[i] < 0 swap max_prod and min_prod, then update max_prod = max(nums[i], max_prod * nums[i]).",
     "complexityAnalysis": "Time: O(N), Space: O(1)"
   },
   "isGlobal": true,
@@ -1351,7 +1351,7 @@ export const apple26_50 = [
   {
   "title": "Longest Increasing Subsequence",
   "slug": "longest-increasing-subsequence",
-  "description": "Given an integer array `nums`, return the length of the longest strictly increasing subsequence.\\n\\n### Example 1:\\n```\\nInput: [10,9,2,5,3,7,101,18]\\nOutput: 4\\nExplanation: The longest increasing subsequence is [2,3,7,101], length 4.\\n```\\n\\n### Example 2:\\n```\\nInput: [0,1,0,3,2,3]\\nOutput: 4\\nExplanation: [0,1,2,3] has length 4.\\n```",
+  "description": "Given an integer array `nums`, return the length of the longest strictly increasing subsequence.\n\n### Example 1:\n```\nInput: [10,9,2,5,3,7,101,18]\nOutput: 4\nExplanation: The longest increasing subsequence is [2,3,7,101], length 4.\n```\n\n### Example 2:\n```\nInput: [0,1,0,3,2,3]\nOutput: 4\nExplanation: [0,1,2,3] has length 4.\n```",
   "difficulty": "MEDIUM",
   "category": "DP",
   "patterns": [
@@ -1430,7 +1430,7 @@ export const apple26_50 = [
     "Patience sorting using binary search (bisect_left) runs in O(N log N)."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nTails array where tails[i] stores smallest tail of all increasing subsequences of length i+1.",
+    "solutionMarkdown": "### Optimal Solution\nTails array where tails[i] stores smallest tail of all increasing subsequences of length i+1.",
     "complexityAnalysis": "Time: O(N log N), Space: O(N)"
   },
   "isGlobal": true,
@@ -1439,7 +1439,7 @@ export const apple26_50 = [
   {
   "title": "Word Break",
   "slug": "word-break",
-  "description": "Given a string `s` and a dictionary of strings `wordDict`, return `true` if `s` can be segmented into a space-separated sequence of one or more dictionary words.\\n\\n### Example 1:\\n```\\nInput: leetcode\n[\"leet\",\"code\"]\\nOutput: true\\nExplanation: 'leetcode' can be segmented as 'leet code'.\\n```\\n\\n### Example 2:\\n```\\nInput: applepenapple\n[\"apple\",\"pen\"]\\nOutput: true\\nExplanation: 'apple pen apple'.\\n```",
+  "description": "Given a string `s` and a dictionary of strings `wordDict`, return `true` if `s` can be segmented into a space-separated sequence of one or more dictionary words.\n\n### Example 1:\n```\nInput: leetcode\n[\"leet\",\"code\"]\nOutput: true\nExplanation: 'leetcode' can be segmented as 'leet code'.\n```\n\n### Example 2:\n```\nInput: applepenapple\n[\"apple\",\"pen\"]\nOutput: true\nExplanation: 'apple pen apple'.\n```",
   "difficulty": "MEDIUM",
   "category": "DP",
   "patterns": [
@@ -1520,7 +1520,7 @@ export const apple26_50 = [
     "dp[i] = true if dp[j] == true and s[j:i] in wordDict."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\n1D DP array of size n+1. dp[0] = true. Check valid prefix splits.",
+    "solutionMarkdown": "### Optimal Solution\n1D DP array of size n+1. dp[0] = true. Check valid prefix splits.",
     "complexityAnalysis": "Time: O(N^2 * K) or O(N^3), Space: O(N)"
   },
   "isGlobal": true,
@@ -1529,7 +1529,7 @@ export const apple26_50 = [
   {
   "title": "House Robber",
   "slug": "house-robber",
-  "description": "You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected.\n\nReturn the maximum amount of money you can rob tonight without alerting the police.\\n\\n### Example 1:\\n```\\nInput: [1,2,3,1]\\nOutput: 4\\nExplanation: Rob house 1 (money = 1) and house 3 (money = 3), total = 4.\\n```\\n\\n### Example 2:\\n```\\nInput: [2,7,9,3,1]\\nOutput: 12\\nExplanation: Rob house 1 (2), house 3 (9) and house 5 (1), total = 12.\\n```",
+  "description": "You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected.\n\nReturn the maximum amount of money you can rob tonight without alerting the police.\n\n### Example 1:\n```\nInput: [1,2,3,1]\nOutput: 4\nExplanation: Rob house 1 (money = 1) and house 3 (money = 3), total = 4.\n```\n\n### Example 2:\n```\nInput: [2,7,9,3,1]\nOutput: 12\nExplanation: Rob house 1 (2), house 3 (9) and house 5 (1), total = 12.\n```",
   "difficulty": "MEDIUM",
   "category": "DP",
   "patterns": [
@@ -1613,7 +1613,7 @@ export const apple26_50 = [
     "dp[i] = max(dp[i-1], dp[i-2] + nums[i])."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nTwo variables rob1, rob2 tracking max loot without robbing adjacent houses.",
+    "solutionMarkdown": "### Optimal Solution\nTwo variables rob1, rob2 tracking max loot without robbing adjacent houses.",
     "complexityAnalysis": "Time: O(N), Space: O(1)"
   },
   "isGlobal": true,
@@ -1622,7 +1622,7 @@ export const apple26_50 = [
   {
   "title": "House Robber II",
   "slug": "house-robber-ii",
-  "description": "All houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Return the maximum amount of money you can rob tonight without alerting the police.\\n\\n### Example 1:\\n```\\nInput: [2,3,2]\\nOutput: 3\\nExplanation: You cannot rob house 1 (2) and house 3 (2) because they are neighbors.\\n```\\n\\n### Example 2:\\n```\\nInput: [1,2,3,1]\\nOutput: 4\\nExplanation: Rob house 1 (1) and house 3 (3), total = 4.\\n```",
+  "description": "All houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Return the maximum amount of money you can rob tonight without alerting the police.\n\n### Example 1:\n```\nInput: [2,3,2]\nOutput: 3\nExplanation: You cannot rob house 1 (2) and house 3 (2) because they are neighbors.\n```\n\n### Example 2:\n```\nInput: [1,2,3,1]\nOutput: 4\nExplanation: Rob house 1 (1) and house 3 (3), total = 4.\n```",
   "difficulty": "MEDIUM",
   "category": "DP",
   "patterns": [
@@ -1701,7 +1701,7 @@ export const apple26_50 = [
     "Max of robbing nums[0:n-1] or nums[1:n]."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nDecompose circular array into two linear subproblems: excluding first house or excluding last house.",
+    "solutionMarkdown": "### Optimal Solution\nDecompose circular array into two linear subproblems: excluding first house or excluding last house.",
     "complexityAnalysis": "Time: O(N), Space: O(1)"
   },
   "isGlobal": true,
@@ -1710,7 +1710,7 @@ export const apple26_50 = [
   {
   "title": "Unique Paths",
   "slug": "unique-paths",
-  "description": "There is a robot on an `m x n` grid. The robot is initially located at the top-left corner (`grid[0][0]`). The robot tries to move to the bottom-right corner (`grid[m - 1][n - 1]`). The robot can only move either down or right at any point in time.\n\nGiven the two integers `m` and `n`, return *the number of possible unique paths*.\\n\\n### Example 1:\\n```\\nInput: 3\n7\\nOutput: 28\\nExplanation: 28 unique paths from (0,0) to (2,6).\\n```\\n\\n### Example 2:\\n```\\nInput: 3\n2\\nOutput: 3\\nExplanation: Right->Down->Down, Down->Down->Right, Down->Right->Down.\\n```",
+  "description": "There is a robot on an `m x n` grid. The robot is initially located at the top-left corner (`grid[0][0]`). The robot tries to move to the bottom-right corner (`grid[m - 1][n - 1]`). The robot can only move either down or right at any point in time.\n\nGiven the two integers `m` and `n`, return *the number of possible unique paths*.\n\n### Example 1:\n```\nInput: 3\n7\nOutput: 28\nExplanation: 28 unique paths from (0,0) to (2,6).\n```\n\n### Example 2:\n```\nInput: 3\n2\nOutput: 3\nExplanation: Right->Down->Down, Down->Down->Right, Down->Right->Down.\n```",
   "difficulty": "MEDIUM",
   "category": "DP",
   "patterns": [
@@ -1791,7 +1791,7 @@ export const apple26_50 = [
     "dp[r][c] = dp[r-1][c] + dp[r][c-1], or combinations (m+n-2) choose (m-1)."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\n1D rolling DP row or combinatorial calculation C(m+n-2, m-1).",
+    "solutionMarkdown": "### Optimal Solution\n1D rolling DP row or combinatorial calculation C(m+n-2, m-1).",
     "complexityAnalysis": "Time: O(M * N) or O(min(M, N)), Space: O(N)"
   },
   "isGlobal": true,
@@ -1800,7 +1800,7 @@ export const apple26_50 = [
   {
   "title": "Minimum Path Sum",
   "slug": "minimum-path-sum",
-  "description": "Given a `m x n` `grid` filled with non-negative numbers, find a path from top left to bottom right, which minimizes the sum of all numbers along its path. You can only move either down or right.\\n\\n### Example 1:\\n```\\nInput: [[1,3,1],[1,5,1],[4,2,1]]\\nOutput: 7\\nExplanation: Path 1 -> 3 -> 1 -> 1 -> 1 minimizes sum to 7.\\n```\\n\\n### Example 2:\\n```\\nInput: [[1,2,3],[4,5,6]]\\nOutput: 12\\nExplanation: Minimum path sum is 12.\\n```",
+  "description": "Given a `m x n` `grid` filled with non-negative numbers, find a path from top left to bottom right, which minimizes the sum of all numbers along its path. You can only move either down or right.\n\n### Example 1:\n```\nInput: [[1,3,1],[1,5,1],[4,2,1]]\nOutput: 7\nExplanation: Path 1 -> 3 -> 1 -> 1 -> 1 minimizes sum to 7.\n```\n\n### Example 2:\n```\nInput: [[1,2,3],[4,5,6]]\nOutput: 12\nExplanation: Minimum path sum is 12.\n```",
   "difficulty": "MEDIUM",
   "category": "DP",
   "patterns": [
@@ -1874,7 +1874,7 @@ export const apple26_50 = [
     "grid[r][c] += min(grid[r-1][c], grid[r][c-1]) in-place."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nBottom-up 2D grid DP computing minimal cumulative cost.",
+    "solutionMarkdown": "### Optimal Solution\nBottom-up 2D grid DP computing minimal cumulative cost.",
     "complexityAnalysis": "Time: O(M * N), Space: O(1) in-place"
   },
   "isGlobal": true,
@@ -1883,7 +1883,7 @@ export const apple26_50 = [
   {
   "title": "Decode Ways",
   "slug": "decode-ways",
-  "description": "A message containing letters from `A-Z` can be encoded into numbers using the mapping `'A' -> \"1\" ... 'Z' -> \"26\"`. Given a string `s` containing only digits, return *the number of ways to decode it*.\\n\\n### Example 1:\\n```\\nInput: 12\\nOutput: 2\\nExplanation: '12' could be decoded as 'AB' (1 2) or 'L' (12).\\n```\\n\\n### Example 2:\\n```\\nInput: 226\\nOutput: 3\\nExplanation: 'BZ' (2 26), 'VF' (22 6), or 'BBF' (2 2 6).\\n```",
+  "description": "A message containing letters from `A-Z` can be encoded into numbers using the mapping `'A' -> \"1\" ... 'Z' -> \"26\"`. Given a string `s` containing only digits, return *the number of ways to decode it*.\n\n### Example 1:\n```\nInput: 12\nOutput: 2\nExplanation: '12' could be decoded as 'AB' (1 2) or 'L' (12).\n```\n\n### Example 2:\n```\nInput: 226\nOutput: 3\nExplanation: 'BZ' (2 26), 'VF' (22 6), or 'BBF' (2 2 6).\n```",
   "difficulty": "MEDIUM",
   "category": "DP",
   "patterns": [
@@ -1962,7 +1962,7 @@ export const apple26_50 = [
     "Check 1-digit code (1-9) and 2-digit code (10-26)."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\n1D DP with two states tracking valid single and double digit transitions.",
+    "solutionMarkdown": "### Optimal Solution\n1D DP with two states tracking valid single and double digit transitions.",
     "complexityAnalysis": "Time: O(N), Space: O(1)"
   },
   "isGlobal": true,
@@ -1971,7 +1971,7 @@ export const apple26_50 = [
   {
   "title": "Edit Distance",
   "slug": "edit-distance",
-  "description": "Given two strings `word1` and `word2`, return *the minimum number of operations required to convert `word1` to `word2`* (insert, delete, or replace a character).\\n\\n### Example 1:\\n```\\nInput: horse\nros\\nOutput: 3\\nExplanation: horse -> rorse -> rose -> ros.\\n```\\n\\n### Example 2:\\n```\\nInput: intention\nexecution\\nOutput: 5\\nExplanation: 5 operations needed.\\n```",
+  "description": "Given two strings `word1` and `word2`, return *the minimum number of operations required to convert `word1` to `word2`* (insert, delete, or replace a character).\n\n### Example 1:\n```\nInput: horse\nros\nOutput: 3\nExplanation: horse -> rorse -> rose -> ros.\n```\n\n### Example 2:\n```\nInput: intention\nexecution\nOutput: 5\nExplanation: 5 operations needed.\n```",
   "difficulty": "HARD",
   "category": "DP",
   "patterns": [
@@ -2050,7 +2050,7 @@ export const apple26_50 = [
     "Levenshtein distance: dp[i][j] = 1 + min(insert, delete, replace)."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\nStandard Levenshtein matrix: dp[i][j] = dp[i-1][j-1] if match else 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]).",
+    "solutionMarkdown": "### Optimal Solution\nStandard Levenshtein matrix: dp[i][j] = dp[i-1][j-1] if match else 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]).",
     "complexityAnalysis": "Time: O(M * N), Space: O(min(M, N))"
   },
   "isGlobal": true,
@@ -2059,7 +2059,7 @@ export const apple26_50 = [
   {
   "title": "Interleaving String",
   "slug": "interleaving-string",
-  "description": "Given strings `s1`, `s2`, and `s3`, find whether `s3` is formed by an **interleaving** of `s1` and `s2`.\\n\\n### Example 1:\\n```\\nInput: aabcc\ndbbca\naadbbcbcac\\nOutput: true\\nExplanation: 'aabcc' and 'dbbca' interleave to form 'aadbbcbcac'.\\n```\\n\\n### Example 2:\\n```\\nInput: aabcc\ndbbca\naadbbbaccc\\nOutput: false\\nExplanation: Characters cannot be interleaved in order.\\n```",
+  "description": "Given strings `s1`, `s2`, and `s3`, find whether `s3` is formed by an **interleaving** of `s1` and `s2`.\n\n### Example 1:\n```\nInput: aabcc\ndbbca\naadbbcbcac\nOutput: true\nExplanation: 'aabcc' and 'dbbca' interleave to form 'aadbbcbcac'.\n```\n\n### Example 2:\n```\nInput: aabcc\ndbbca\naadbbbaccc\nOutput: false\nExplanation: Characters cannot be interleaved in order.\n```",
   "difficulty": "MEDIUM",
   "category": "DP",
   "patterns": [
@@ -2138,7 +2138,7 @@ export const apple26_50 = [
     "dp[i][j] = (dp[i-1][j] and s1[i-1] == s3[i+j-1]) or (dp[i][j-1] and s2[j-1] == s3[i+j-1])."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\n2D grid state tracking valid character matching prefixes from s1 and s2.",
+    "solutionMarkdown": "### Optimal Solution\n2D grid state tracking valid character matching prefixes from s1 and s2.",
     "complexityAnalysis": "Time: O(M * N), Space: O(min(M, N))"
   },
   "isGlobal": true,
@@ -2147,7 +2147,7 @@ export const apple26_50 = [
   {
   "title": "Partition Equal Subset Sum",
   "slug": "partition-equal-subset-sum",
-  "description": "Given an integer array `nums`, return `true` if you can partition the array into two subsets such that the sum of the elements in both subsets is equal or `false` otherwise.\\n\\n### Example 1:\\n```\\nInput: [1,5,11,5]\\nOutput: true\\nExplanation: Array can be partitioned as [1, 5, 5] and [11].\\n```\\n\\n### Example 2:\\n```\\nInput: [1,2,3,5]\\nOutput: false\\nExplanation: Total sum is 11 (odd), cannot partition.\\n```",
+  "description": "Given an integer array `nums`, return `true` if you can partition the array into two subsets such that the sum of the elements in both subsets is equal or `false` otherwise.\n\n### Example 1:\n```\nInput: [1,5,11,5]\nOutput: true\nExplanation: Array can be partitioned as [1, 5, 5] and [11].\n```\n\n### Example 2:\n```\nInput: [1,2,3,5]\nOutput: false\nExplanation: Total sum is 11 (odd), cannot partition.\n```",
   "difficulty": "MEDIUM",
   "category": "DP",
   "patterns": [
@@ -2226,7 +2226,7 @@ export const apple26_50 = [
     "If total sum is odd return false. Reduce to 0/1 knapsack subset sum with target = total / 2."
   ],
   "editorial": {
-    "solutionMarkdown": "### Optimal Solution\\n0/1 Knapsack bitset / boolean array of size target+1. Iterate backwards from target down to num.",
+    "solutionMarkdown": "### Optimal Solution\n0/1 Knapsack bitset / boolean array of size target+1. Iterate backwards from target down to num.",
     "complexityAnalysis": "Time: O(N * Target), Space: O(Target)"
   },
   "isGlobal": true,
