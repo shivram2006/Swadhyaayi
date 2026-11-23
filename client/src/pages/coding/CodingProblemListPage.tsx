@@ -12,6 +12,8 @@ import {
   Building2,
   Filter,
   ArrowRight,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 
 const PATTERNS_LIST = [
@@ -49,13 +51,17 @@ export const CodingProblemListPage: React.FC = () => {
   const [meta, setMeta] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(25);
+
   // Filters
   const [search, setSearch] = useState('');
   const [selectedPattern, setSelectedPattern] = useState('All Patterns');
   const [selectedCompany, setSelectedCompany] = useState('All Companies');
   const [selectedDifficulty, setSelectedDifficulty] = useState('');
 
-  const fetchQuestions = async () => {
+  const fetchQuestions = async (page = currentPage, limit = pageSize) => {
     setIsLoading(true);
     try {
       const res = await axios.get('/coding', {
@@ -64,6 +70,8 @@ export const CodingProblemListPage: React.FC = () => {
           pattern: selectedPattern !== 'All Patterns' ? selectedPattern : undefined,
           company: selectedCompany !== 'All Companies' ? selectedCompany : undefined,
           difficulty: selectedDifficulty || undefined,
+          page,
+          limit,
         },
       });
 
@@ -79,12 +87,21 @@ export const CodingProblemListPage: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchQuestions();
-  }, [selectedPattern, selectedCompany, selectedDifficulty]);
+    setCurrentPage(1);
+    fetchQuestions(1, pageSize);
+  }, [selectedPattern, selectedCompany, selectedDifficulty, pageSize]);
+
+  const handlePageChange = (newPage: number) => {
+    if (!meta || newPage < 1 || newPage > (meta.totalPages || 1) || newPage === currentPage) return;
+    setCurrentPage(newPage);
+    fetchQuestions(newPage, pageSize);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    fetchQuestions();
+    setCurrentPage(1);
+    fetchQuestions(1, pageSize);
   };
 
   const getDifficultyBadge = (diff: string) => {
@@ -297,9 +314,117 @@ export const CodingProblemListPage: React.FC = () => {
         </div>
 
         {meta && (
-          <div className="p-3 bg-slate-950 border-t border-slate-800 flex justify-between items-center text-xs text-slate-400">
-            <span>Showing {questions.length} of {meta.totalCount} questions</span>
-            <span>Page {meta.page} of {meta.totalPages || 1}</span>
+          <div className="p-4 bg-slate-950 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-400">
+            {/* Left: Summary and Page Size */}
+            <div className="flex flex-wrap items-center gap-3">
+              <span>
+                Showing{' '}
+                <strong className="text-slate-200">
+                  {meta.totalCount === 0 ? 0 : (meta.page - 1) * meta.limit + 1}
+                </strong>{' '}
+                to{' '}
+                <strong className="text-slate-200">
+                  {Math.min(meta.page * meta.limit, meta.totalCount)}
+                </strong>{' '}
+                of <strong className="text-brand-400">{meta.totalCount}</strong> questions
+              </span>
+
+              {/* Per page selector */}
+              <div className="flex items-center gap-1.5 border-l border-slate-800 pl-3">
+                <span className="text-slate-500">Per page:</span>
+                <select
+                  value={pageSize}
+                  onChange={(e) => {
+                    const newLimit = parseInt(e.target.value, 10);
+                    setPageSize(newLimit);
+                    setCurrentPage(1);
+                  }}
+                  className="bg-slate-900 border border-slate-800 text-slate-300 rounded px-2 py-1 text-xs focus:outline-none focus:border-brand-500"
+                >
+                  <option value={25}>25</option>
+                  <option value={50}>50</option>
+                  <option value={100}>100</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Right: Controls & Page Number Pills */}
+            <div className="flex items-center gap-1.5">
+              {/* Previous Button */}
+              <button
+                type="button"
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage <= 1 || isLoading}
+                className={`px-3 py-1.5 rounded-lg border text-xs font-medium flex items-center gap-1 transition-colors ${
+                  currentPage <= 1 || isLoading
+                    ? 'border-slate-800/60 text-slate-600 cursor-not-allowed bg-slate-900/40'
+                    : 'border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 bg-slate-900 active:bg-slate-800 cursor-pointer'
+                }`}
+              >
+                <ChevronLeft className="w-3.5 h-3.5" />
+                <span>Prev</span>
+              </button>
+
+              {/* Page Number Pills */}
+              <div className="flex items-center gap-1">
+                {Array.from({ length: meta.totalPages || 1 }, (_, i) => i + 1)
+                  .filter((p) => {
+                    const total = meta.totalPages || 1;
+                    if (total <= 7) return true;
+                    if (p === 1 || p === total) return true;
+                    if (Math.abs(p - currentPage) <= 1) return true;
+                    return false;
+                  })
+                  .reduce<(number | string)[]>((acc, p, idx, arr) => {
+                    if (idx > 0 && (p as number) - (arr[idx - 1] as number) > 1) {
+                      acc.push('...');
+                    }
+                    acc.push(p);
+                    return acc;
+                  }, [])
+                  .map((item, idx) => {
+                    if (item === '...') {
+                      return (
+                        <span key={`ellipsis-${idx}`} className="px-2 py-1 text-slate-600">
+                          ...
+                        </span>
+                      );
+                    }
+                    const pageNum = item as number;
+                    const isActive = pageNum === currentPage;
+                    return (
+                      <button
+                        key={pageNum}
+                        type="button"
+                        onClick={() => handlePageChange(pageNum)}
+                        disabled={isLoading}
+                        className={`min-w-[2rem] h-8 px-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                          isActive
+                            ? 'bg-brand-600 text-white shadow-md shadow-brand-600/30'
+                            : 'bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700'
+                        }`}
+                      >
+                        {pageNum}
+                      </button>
+                    );
+                  })}
+              </div>
+
+              {/* Next Button */}
+              <button
+                type="button"
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage >= (meta.totalPages || 1) || isLoading}
+                className={`px-3 py-1.5 rounded-lg border text-xs font-medium flex items-center gap-1 transition-colors ${
+                  currentPage >= (meta.totalPages || 1) || isLoading
+                    ? 'border-slate-800/60 text-slate-600 cursor-not-allowed bg-slate-900/40'
+                    : 'border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 bg-slate-900 active:bg-slate-800 cursor-pointer'
+                }`}
+              >
+                <span>Next</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
         )}
       </Card>
