@@ -1,5 +1,5 @@
 import { QuestionCoding } from './coding.model';
-import { appleQuestionsList } from './appleProblems.seed';
+import { faangQuestionsList } from './faangProblems.seed';
 
 export const seedInitialCodingProblems = async () => {
   const problems = [
@@ -523,7 +523,7 @@ public class Solution {
   ];
 
   const problemMap = new Map();
-  for (const prob of [...problems, ...appleQuestionsList]) {
+  for (const prob of [...problems, ...faangQuestionsList]) {
     problemMap.set(prob.slug, prob);
   }
   const allProblems = Array.from(problemMap.values());
@@ -532,5 +532,5 @@ public class Solution {
     await QuestionCoding.findOneAndUpdate({ slug: prob.slug }, prob, { upsert: true, new: true });
   }
 
-  console.log(`[SEED] Pre-seeded ${allProblems.length} algorithmic pattern questions (including Apple interview catalog of 100 questions).`);
+  console.log(`[SEED] Pre-seeded ${allProblems.length} algorithmic pattern questions (including complete FAANG catalog: Apple 100, Meta 100, Microsoft 100, Google 100).`);
 };

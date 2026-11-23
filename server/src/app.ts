@@ -62,6 +62,17 @@ export const createApp = (): Application => {
     app.use(morgan('dev'));
   }
 
+  // Root landing endpoint
+  app.get('/', (_req: Request, res: Response) => {
+    sendSuccess(res, {
+      service: 'Swadhyaayi Enterprise API',
+      status: 'ONLINE',
+      version: '1.0.0',
+      timestamp: new Date().toISOString(),
+      health: '/api/health',
+    });
+  });
+
   // Health check endpoint
   app.get('/api/health', (_req: Request, res: Response) => {
     sendSuccess(res, {

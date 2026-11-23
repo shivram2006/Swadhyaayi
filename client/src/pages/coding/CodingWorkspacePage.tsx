@@ -358,7 +358,7 @@ export const CodingWorkspacePage: React.FC = () => {
 
                 {/* Problem Description Markdown */}
                 <div className="text-slate-300 whitespace-pre-line font-sans text-sm leading-6">
-                  {question.description}
+                  {question.description?.replace(/\\n/g, '\n')}
                 </div>
 
                 {/* Sample Testcases */}
@@ -412,7 +412,7 @@ export const CodingWorkspacePage: React.FC = () => {
                   <span>Editorial Solution & Complexity Analysis</span>
                 </div>
                 <div className="whitespace-pre-line text-slate-300 text-sm leading-relaxed">
-                  {question.editorial?.solutionMarkdown || 'Editorial solution will be published shortly.'}
+                  {question.editorial?.solutionMarkdown?.replace(/\\n/g, '\n') || 'Editorial solution will be published shortly.'}
                 </div>
                 {question.editorial?.complexityAnalysis && (
                   <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 font-mono text-xs">
