@@ -2,21 +2,29 @@ import mongoose from 'mongoose';
 import { createApp } from './app';
 import { config } from './config';
 
+const connectWithRetry = async () => {
+  while (true) {
+    try {
+      console.log('[SWADHYAYI] Connecting to MongoDB Atlas at:', config.mongoUri.replace(/:([^:@]+)@/, ':****@'));
+      await mongoose.connect(config.mongoUri, { serverSelectionTimeoutMS: 5000 });
+      console.log('[SWADHYAYI] ✅ Connected to MongoDB database successfully.');
+      break;
+    } catch (err: any) {
+      console.error('[SWADHYAYI] ⚠️ MongoDB Atlas connection waiting. Possible cause: Current IP not whitelisted in Atlas.');
+      console.error('[SWADHYAYI] 👉 Please ensure 0.0.0.0/0 is added in MongoDB Atlas -> Security -> Network Access.');
+      console.log('[SWADHYAYI] Retrying connection in 5 seconds...');
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+    }
+  }
+};
+
 const startServer = async () => {
   try {
-    console.log('[SWADHYAYI] Connecting to MongoDB at:', config.mongoUri);
-    await mongoose.connect(config.mongoUri, {
-      maxPoolSize: 100,
-      minPoolSize: 20,
-      maxIdleTimeMS: 30000,
-      socketTimeoutMS: 45000,
-      serverSelectionTimeoutMS: 5000,
-    });
-    console.log('[SWADHYAYI] Connected to MongoDB database successfully.');
+    await connectWithRetry();
 
     const app = createApp();
     const server = app.listen(config.port, () => {
-      console.log(`[SWADHYAYI] Server running in ${config.env} mode on http://localhost:${config.port}`);
+      console.log(`[SWADHYAYI] 🚀 Server running in ${config.env} mode on http://localhost:${config.port}`);
     });
 
     const shutdown = async (signal: string) => {
@@ -36,6 +44,4 @@ const startServer = async () => {
   }
 };
 
-if (require.main === module) {
-  startServer();
-}
+startServer();

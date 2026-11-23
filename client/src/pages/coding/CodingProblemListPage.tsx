@@ -31,6 +31,7 @@ const PATTERNS_LIST = [
 
 const COMPANIES_LIST = [
   'All Companies',
+  'Apple',
   'Google',
   'Amazon',
   'Microsoft',

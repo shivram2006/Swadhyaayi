@@ -1,4 +1,5 @@
 import { QuestionCoding } from './coding.model';
+import { appleQuestionsList } from './appleProblems.seed';
 
 export const seedInitialCodingProblems = async () => {
   const problems = [
@@ -26,6 +27,7 @@ Output: [1,2]
       patterns: ['Hashing', 'Two Pointers'],
       topics: ['Array', 'Hash Table'],
       companyTags: [
+        { company: 'Apple', yearReported: 2025, verified: true, frequencyCount: 40, sourceNote: 'Apple Practice Bank #1' },
         { company: 'Google', yearReported: 2024, verified: true, frequencyCount: 42, sourceNote: 'L3 Onsite' },
         { company: 'Amazon', yearReported: 2024, verified: true, frequencyCount: 78, sourceNote: 'SDE-1 OA' },
         { company: 'Microsoft', yearReported: 2023, verified: true, frequencyCount: 35, sourceNote: 'Campus Technical' },
@@ -215,6 +217,7 @@ Explanation: The answer is "b", with the length of 1.
       patterns: ['Sliding Window', 'Two Pointers', 'Hashing'],
       topics: ['Hash Table', 'String', 'Sliding Window'],
       companyTags: [
+        { company: 'Apple', yearReported: 2025, verified: true, frequencyCount: 45, sourceNote: 'Apple Technical Round / Practice Bank #12' },
         { company: 'Microsoft', yearReported: 2024, verified: true, frequencyCount: 52, sourceNote: 'Campus Placement Round 2' },
         { company: 'Amazon', yearReported: 2024, verified: true, frequencyCount: 64, sourceNote: 'SDE OA' },
         { company: 'Adobe', yearReported: 2023, verified: true, frequencyCount: 29, sourceNote: 'Product Specialist' },
@@ -362,6 +365,7 @@ Output: [1,1,4,2,1,1,0,0]
       patterns: ['Monotonic Stack'],
       topics: ['Array', 'Stack', 'Monotonic Stack'],
       companyTags: [
+        { company: 'Apple', yearReported: 2024, verified: true, frequencyCount: 18, sourceNote: 'Apple SWE Interview / Practice Bank #77' },
         { company: 'Amazon', yearReported: 2024, verified: true, frequencyCount: 45, sourceNote: 'SDE-2 Interview' },
         { company: 'Meta', yearReported: 2023, verified: true, frequencyCount: 38, sourceNote: 'E4 Onsite' },
       ],
@@ -518,9 +522,11 @@ public class Solution {
     },
   ];
 
-  for (const prob of problems) {
+  const allProblems = [...problems, ...appleQuestionsList];
+
+  for (const prob of allProblems) {
     await QuestionCoding.findOneAndUpdate({ slug: prob.slug }, prob, { upsert: true, new: true });
   }
 
-  console.log(`[SEED] Pre-seeded ${problems.length} algorithmic pattern questions.`);
+  console.log(`[SEED] Pre-seeded ${allProblems.length} algorithmic pattern questions (including Apple interview catalog).`);
 };
