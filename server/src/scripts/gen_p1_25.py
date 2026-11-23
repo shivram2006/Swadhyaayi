@@ -1,0 +1,310 @@
+# Generate questions 1 to 25
+import json
+
+P1_25 = [
+    {
+        "index": 1, "title": "Two Sum", "slug": "two-sum", "lc": 1, "difficulty": "EASY", "category": "DSA",
+        "patterns": ["Array", "Hash Table", "Two Pointers"],
+        "desc": "Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.\n\nYou may assume that each input would have ***exactly one solution***, and you may not use the same element twice.",
+        "ex1": {"in": "[2,7,11,15]\n9", "out": "[0, 1]", "exp": "nums[0] + nums[1] == 9, we return [0, 1]."},
+        "ex2": {"in": "[3,2,4]\n6", "out": "[1, 2]", "exp": "nums[1] + nums[2] == 6, we return [1, 2]."},
+        "hidden": [{"in": "[2,7,11,15]\n9", "out": "[0, 1]"}, {"in": "[3,2,4]\n6", "out": "[1, 2]"}, {"in": "[3,3]\n6", "out": "[0, 1]"}, {"in": "[-1,-2,-3,-4,-5]\n-8", "out": "[2, 4]"}],
+        "hints": ["Can we use a Hash Map to store seen complements in O(1)?"],
+        "ed": "Store visited elements in a map: complement = target - num. If complement in map, return indices.",
+        "cpx": "Time: O(N), Space: O(N)",
+        "source": "Apple Practice Bank #1", "freq": 45
+    },
+    {
+        "index": 2, "title": "Longest Substring Without Repeating Characters", "slug": "longest-substring-without-repeating-characters", "lc": 3, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Sliding Window", "Hash Table", "Two Pointers"],
+        "desc": "Given a string `s`, find the length of the **longest substring** without repeating characters.",
+        "ex1": {"in": "abcabcbb", "out": "3", "exp": "The answer is 'abc', with length 3."},
+        "ex2": {"in": "bbbbb", "out": "1", "exp": "The answer is 'b', with length 1."},
+        "hidden": [{"in": "abcabcbb", "out": "3"}, {"in": "bbbbb", "out": "1"}, {"in": "pwwkew", "out": "3"}, {"in": "", "out": "0"}, {"in": "dvdf", "out": "3"}],
+        "hints": ["Use a dynamic sliding window [left, right] with last seen index map."],
+        "ed": "Track last seen positions of each char. Advance left pointer past previous occurrence.",
+        "cpx": "Time: O(N), Space: O(min(N, M)) where M is alphabet size",
+        "source": "Apple Practice Bank #2", "freq": 40
+    },
+    {
+        "index": 3, "title": "Longest Common Prefix", "slug": "longest-common-prefix", "lc": 14, "difficulty": "EASY", "category": "DSA",
+        "patterns": ["String", "Trie"],
+        "desc": "Write a function to find the longest common prefix string amongst an array of strings.\n\nIf there is no common prefix, return an empty string `\"\"`.",
+        "ex1": {"in": "[\"flower\",\"flow\",\"flight\"]", "out": "\"fl\"", "exp": "Common prefix is 'fl'."},
+        "ex2": {"in": "[\"dog\",\"racecar\",\"car\"]", "out": "\"\"", "exp": "There is no common prefix."},
+        "hidden": [{"in": "[\"flower\",\"flow\",\"flight\"]", "out": "\"fl\""}, {"in": "[\"dog\",\"racecar\",\"car\"]", "out": "\"\""}, {"in": "[\"interspecies\",\"interstellar\",\"interstate\"]", "out": "\"inters\""}, {"in": "[\"a\"]", "out": "\"a\""}],
+        "hints": ["Sort the strings or compare character by character across all words."],
+        "ed": "Vertical scanning or comparing prefix of first and last strings after sorting.",
+        "cpx": "Time: O(S) where S is sum of all characters, Space: O(1)",
+        "source": "Apple Practice Bank #3", "freq": 32
+    },
+    {
+        "index": 4, "title": "Valid Parentheses", "slug": "valid-parentheses", "lc": 20, "difficulty": "EASY", "category": "DSA",
+        "patterns": ["Stack", "String"],
+        "desc": "Given a string `s` containing just the characters `'('`, `')'`, `'{'`, `'}'`, `'['` and `']'`, determine if the input string is valid.\n\nAn input string is valid if open brackets are closed by the same type of brackets in the correct order.",
+        "ex1": {"in": "()[]{}", "out": "true", "exp": "All brackets matched correctly."},
+        "ex2": {"in": "(]", "out": "false", "exp": "Mismatched bracket types."},
+        "hidden": [{"in": "()[]{}", "out": "true"}, {"in": "(]", "out": "false"}, {"in": "([{}])", "out": "true"}, {"in": "((", "out": "false"}, {"in": "){", "out": "false"}],
+        "hints": ["Use a LIFO Stack to match closing brackets with recent opening bracket."],
+        "ed": "Push opening brackets. On closing bracket, pop stack and check if matches.",
+        "cpx": "Time: O(N), Space: O(N)",
+        "source": "Apple Practice Bank #4", "freq": 50
+    },
+    {
+        "index": 5, "title": "Median of Two Sorted Arrays", "slug": "median-of-two-sorted-arrays", "lc": 4, "difficulty": "HARD", "category": "DSA",
+        "patterns": ["Binary Search", "Divide and Conquer", "Array"],
+        "desc": "Given two sorted arrays `nums1` and `nums2` of size `m` and `n` respectively, return the **median** of the two sorted arrays.\n\nThe overall run time complexity should be `O(log (m+n))`.",
+        "ex1": {"in": "[1,3]\n[2]", "out": "2.00000", "exp": "Merged array = [1,2,3] and median is 2."},
+        "ex2": {"in": "[1,2]\n[3,4]", "out": "2.50000", "exp": "Merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5."},
+        "hidden": [{"in": "[1,3]\n[2]", "out": "2.00000"}, {"in": "[1,2]\n[3,4]", "out": "2.50000"}, {"in": "[0,0]\n[0,0]", "out": "0.00000"}, {"in": "[]\n[1]", "out": "1.00000"}],
+        "hints": ["Binary search on the partition of the smaller array."],
+        "ed": "Partition both arrays such that left half has (m+n+1)//2 elements and maxLeft <= minRight.",
+        "cpx": "Time: O(log(min(M, N))), Space: O(1)",
+        "source": "Apple Candidate Report S01 (ICT3)", "freq": 35
+    },
+    {
+        "index": 6, "title": "Merge Intervals", "slug": "merge-intervals", "lc": 56, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Sorting", "Intervals"],
+        "desc": "Given an array of `intervals` where `intervals[i] = [starti, endi]`, merge all overlapping intervals, and return *an array of the non-overlapping intervals that cover all the intervals in the input*.",
+        "ex1": {"in": "[[1,3],[2,6],[8,10],[15,18]]", "out": "[[1, 6], [8, 10], [15, 18]]", "exp": "Since intervals [1,3] and [2,6] overlap, merge them into [1,6]."},
+        "ex2": {"in": "[[1,4],[4,5]]", "out": "[[1, 5]]", "exp": "Intervals [1,4] and [4,5] are considered overlapping."},
+        "hidden": [{"in": "[[1,3],[2,6],[8,10],[15,18]]", "out": "[[1, 6], [8, 10], [15, 18]]"}, {"in": "[[1,4],[4,5]]", "out": "[[1, 5]]"}, {"in": "[[1,4],[0,4]]", "out": "[[0, 4]]"}, {"in": "[[1,4],[2,3]]", "out": "[[1, 4]]"}],
+        "hints": ["Sort intervals by start time, then check if current start <= previous end."],
+        "ed": "Sort by start time. Iterate through intervals; if current overlaps with last merged, update end.",
+        "cpx": "Time: O(N log N), Space: O(N)",
+        "source": "Apple Candidate Report S12 & S15", "freq": 48
+    },
+    {
+        "index": 7, "title": "Group Anagrams", "slug": "group-anagrams", "lc": 49, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Hash Table", "String", "Sorting"],
+        "desc": "Given an array of strings `strs`, group **the anagrams** together. You can return the answer in **any order**.",
+        "ex1": {"in": "[\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]", "out": "[[\"bat\"], [\"nat\", \"tan\"], [\"ate\", \"eat\", \"tea\"]]", "exp": "Words with identical character counts are grouped together."},
+        "ex2": {"in": "[\"\"]", "out": "[[\"\"]]", "exp": "Single empty string."},
+        "hidden": [{"in": "[\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]", "out": "[[\"bat\"], [\"nat\", \"tan\"], [\"ate\", \"eat\", \"tea\"]]"}, {"in": "[\"\"]", "out": "[[\"\"]]"}, {"in": "[\"a\"]", "out": "[[\"a\"]]"}],
+        "hints": ["Use sorted string or 26-element character count tuple as map key."],
+        "ed": "Hash each word by sorted letters or count array. Return values of map.",
+        "cpx": "Time: O(N * K log K) or O(N * K), Space: O(N * K)",
+        "source": "Apple Practice Bank #7 / S02", "freq": 38
+    },
+    {
+        "index": 8, "title": "Merge Sorted Array", "slug": "merge-sorted-array", "lc": 88, "difficulty": "EASY", "category": "DSA",
+        "patterns": ["Two Pointers", "Sorting", "Array"],
+        "desc": "You are given two integer arrays `nums1` and `nums2`, sorted in non-decreasing order, and two integers `m` and `n`. Merge `nums2` into `nums1` as one sorted array in-place.",
+        "ex1": {"in": "[1,2,3,0,0,0]\n3\n[2,5,6]\n3", "out": "[1, 2, 2, 3, 5, 6]", "exp": "Arrays merged into nums1."},
+        "ex2": {"in": "[1]\n1\n[]\n0", "out": "[1]", "exp": "nums2 is empty."},
+        "hidden": [{"in": "[1,2,3,0,0,0]\n3\n[2,5,6]\n3", "out": "[1, 2, 2, 3, 5, 6]"}, {"in": "[1]\n1\n[]\n0", "out": "[1]"}, {"in": "[0]\n0\n[1]\n1", "out": "[1]"}],
+        "hints": ["Fill nums1 from the back using three pointers: p1, p2, and p."],
+        "ed": "Iterate backwards from m+n-1, placing larger of nums1[p1] and nums2[p2].",
+        "cpx": "Time: O(M + N), Space: O(1)",
+        "source": "Apple Practice Bank #8", "freq": 34
+    },
+    {
+        "index": 9, "title": "Trapping Rain Water", "slug": "trapping-rain-water", "lc": 42, "difficulty": "HARD", "category": "DSA",
+        "patterns": ["Two Pointers", "Monotonic Stack", "Dynamic Programming"],
+        "desc": "Given `n` non-negative integers representing an elevation map where the width of each bar is `1`, compute how much water it can trap after raining.",
+        "ex1": {"in": "[0,1,0,2,1,0,1,3,2,1,2,1]", "out": "6", "exp": "The elevation map traps 6 units of rain water."},
+        "ex2": {"in": "[4,2,0,3,2,5]", "out": "9", "exp": "The map traps 9 units of rain water."},
+        "hidden": [{"in": "[0,1,0,2,1,0,1,3,2,1,2,1]", "out": "6"}, {"in": "[4,2,0,3,2,5]", "out": "9"}, {"in": "[3,0,2,0,4]", "out": "7"}, {"in": "[1,1,1]", "out": "0"}],
+        "hints": ["Water trapped above index i is min(maxLeft, maxRight) - height[i]. Use two pointers."],
+        "ed": "Maintain left and right pointers with leftMax and rightMax. Process smaller side inward.",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #9", "freq": 55
+    },
+    {
+        "index": 10, "title": "Reverse Integer", "slug": "reverse-integer", "lc": 7, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Math", "Digit Processing"],
+        "desc": "Given a signed 32-bit integer `x`, return `x` with its digits reversed. If reversing `x` causes the value to go outside the signed 32-bit integer range `[-2^31, 2^31 - 1]`, then return `0`.",
+        "ex1": {"in": "123", "out": "321", "exp": "Reverse of 123 is 321."},
+        "ex2": {"in": "-123", "out": "-321", "exp": "Negative sign preserved."},
+        "hidden": [{"in": "123", "out": "321"}, {"in": "-123", "out": "-321"}, {"in": "120", "out": "21"}, {"in": "1534236469", "out": "0"}],
+        "hints": ["Extract last digit using x % 10. Check for 32-bit signed overflow before multiplying by 10."],
+        "ed": "Pop digit using % 10, push onto rev * 10 + pop. Guard against 32-bit INT_MAX and INT_MIN boundaries.",
+        "cpx": "Time: O(log10(X)), Space: O(1)",
+        "source": "Apple Practice Bank #10", "freq": 28
+    },
+    {
+        "index": 11, "title": "Valid Sudoku", "slug": "valid-sudoku", "lc": 36, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Hash Table", "Matrix"],
+        "desc": "Determine if a `9 x 9` Sudoku board is valid. Only the filled cells need to be validated according to standard Sudoku rules: each row, column, and 3x3 sub-box must contain digits 1-9 without repetition.",
+        "ex1": {"in": "[[\"5\",\"3\",\".\",\".\",\"7\",\".\",\".\",\".\",\".\"],[\"6\",\".\",\".\",\"1\",\"9\",\"5\",\".\",\".\",\".\"],[\".\",\"9\",\"8\",\".\",\".\",\".\",\".\",\"6\",\".\"],[\"8\",\".\",\".\",\".\",\"6\",\".\",\".\",\".\",\"3\"],[\"4\",\".\",\".\",\"8\",\".\",\"3\",\".\",\".\",\"1\"],[\"7\",\".\",\".\",\".\",\"2\",\".\",\".\",\".\",\"6\"],[\".\",\"6\",\".\",\".\",\".\",\".\",\"2\",\"8\",\".\"],[\".\",\".\",\".\",\"4\",\"1\",\"9\",\".\",\".\",\"5\"],[\".\",\".\",\".\",\".\",\"8\",\".\",\".\",\"7\",\"9\"]]", "out": "true", "exp": "Valid Sudoku configuration."},
+        "ex2": {"in": "[[\"8\",\"3\",\".\",\".\",\"7\",\".\",\".\",\".\",\".\"],[\"6\",\".\",\".\",\"1\",\"9\",\"5\",\".\",\".\",\".\"],[\".\",\"9\",\"8\",\".\",\".\",\".\",\".\",\"6\",\".\"],[\"8\",\".\",\".\",\".\",\"6\",\".\",\".\",\".\",\"3\"],[\"4\",\".\",\".\",\"8\",\".\",\"3\",\".\",\".\",\"1\"],[\"7\",\".\",\".\",\".\",\"2\",\".\",\".\",\".\",\"6\"],[\".\",\"6\",\".\",\".\",\".\",\".\",\"2\",\"8\",\".\"],[\".\",\".\",\".\",\"4\",\"1\",\"9\",\".\",\".\",\"5\"],[\".\",\".\",\".\",\".\",\"8\",\".\",\".\",\"7\",\"9\"]]", "out": "false", "exp": "Two 8s in the first column."},
+        "hidden": [{"in": "[[\"5\",\"3\",\".\",\".\",\"7\",\".\",\".\",\".\",\".\"],[\"6\",\".\",\".\",\"1\",\"9\",\"5\",\".\",\".\",\".\"],[\".\",\"9\",\"8\",\".\",\".\",\".\",\".\",\"6\",\".\"],[\"8\",\".\",\".\",\".\",\"6\",\".\",\".\",\".\",\"3\"],[\"4\",\".\",\".\",\"8\",\".\",\"3\",\".\",\".\",\"1\"],[\"7\",\".\",\".\",\".\",\"2\",\".\",\".\",\".\",\"6\"],[\".\",\"6\",\".\",\".\",\".\",\".\",\"2\",\"8\",\".\"],[\".\",\".\",\".\",\"4\",\"1\",\"9\",\".\",\".\",\"5\"],[\".\",\".\",\".\",\".\",\"8\",\".\",\".\",\"7\",\"9\"]]", "out": "true"}],
+        "hints": ["Use sets for rows, cols, and 3x3 blocks indexed by (r//3, c//3)."],
+        "ed": "Track seen digits using 9 row sets, 9 col sets, and 9 box sets.",
+        "cpx": "Time: O(1) for fixed 9x9 board, Space: O(1)",
+        "source": "Apple Candidate Report S15", "freq": 36
+    },
+    {
+        "index": 12, "title": "Climbing Stairs", "slug": "climbing-stairs", "lc": 70, "difficulty": "EASY", "category": "DP",
+        "patterns": ["Dynamic Programming", "Math"],
+        "desc": "You are climbing a staircase. It takes `n` steps to reach the top. Each time you can either climb `1` or `2` steps. In how many distinct ways can you climb to the top?",
+        "ex1": {"in": "2", "out": "2", "exp": "1 step + 1 step, or 2 steps."},
+        "ex2": {"in": "3", "out": "3", "exp": "1+1+1, 1+2, or 2+1."},
+        "hidden": [{"in": "2", "out": "2"}, {"in": "3", "out": "3"}, {"in": "4", "out": "5"}, {"in": "5", "out": "8"}, {"in": "10", "out": "89"}],
+        "hints": ["dp[i] = dp[i-1] + dp[i-2], equivalent to Fibonacci numbers."],
+        "ed": "Maintain two variables prev1 and prev2 for constant space Fibonacci sequence.",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #12", "freq": 42
+    },
+    {
+        "index": 13, "title": "Rotate Array", "slug": "rotate-array", "lc": 189, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Array", "Two Pointers"],
+        "desc": "Given an integer array `nums`, rotate the array to the right by `k` steps, where `k` is non-negative.",
+        "ex1": {"in": "[1,2,3,4,5,6,7]\n3", "out": "[5, 6, 7, 1, 2, 3, 4]", "exp": "Rotate 3 steps right."},
+        "ex2": {"in": "[-1,-100,3,99]\n2", "out": "[3, 99, -1, -100]", "exp": "Rotate 2 steps right."},
+        "hidden": [{"in": "[1,2,3,4,5,6,7]\n3", "out": "[5, 6, 7, 1, 2, 3, 4]"}, {"in": "[-1,-100,3,99]\n2", "out": "[3, 99, -1, -100]"}, {"in": "[1,2]\n3", "out": "[2, 1]"}],
+        "hints": ["Reverse entire array, then reverse first k, then reverse remaining n-k."],
+        "ed": "Three in-place reversals: reverse(0, n-1), reverse(0, k-1), reverse(k, n-1).",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #13", "freq": 35
+    },
+    {
+        "index": 14, "title": "Number of Islands", "slug": "number-of-islands", "lc": 200, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["BFS / DFS", "Matrix", "Union Find"],
+        "desc": "Given an `m x n` 2D binary grid `grid` which represents a map of `'1'`s (land) and `'0'`s (water), return the number of islands.\n\nAn island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.",
+        "ex1": {"in": "[[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]", "out": "1", "exp": "All land connected into 1 island."},
+        "ex2": {"in": "[[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"1\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"1\",\"1\"]]", "out": "3", "exp": "3 separate connected components."},
+        "hidden": [{"in": "[[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]", "out": "1"}, {"in": "[[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"1\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"1\",\"1\"]]", "out": "3"}, {"in": "[[\"0\"]]", "out": "0"}],
+        "hints": ["Traverse grid. When encountering '1', increment count and run BFS/DFS to sink the island."],
+        "ed": "Standard BFS/DFS flood-fill. Mark visited cells as '0' to avoid visiting twice.",
+        "cpx": "Time: O(M * N), Space: O(M * N) recursion stack / queue",
+        "source": "Apple Candidate Report S11", "freq": 52
+    },
+    {
+        "index": 15, "title": "Best Time to Buy and Sell Stock", "slug": "best-time-to-buy-and-sell-stock", "lc": 121, "difficulty": "EASY", "category": "DSA",
+        "patterns": ["Array", "Dynamic Programming", "Greedy"],
+        "desc": "You are given an array `prices` where `prices[i]` is the price of a given stock on the `i-th` day. Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return `0`.",
+        "ex1": {"in": "[7,1,5,3,6,4]", "out": "5", "exp": "Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6 - 1 = 5."},
+        "ex2": {"in": "[7,6,4,3,1]", "out": "0", "exp": "In this case, no transactions are done and max profit = 0."},
+        "hidden": [{"in": "[7,1,5,3,6,4]", "out": "5"}, {"in": "[7,6,4,3,1]", "out": "0"}, {"in": "[1,2]", "out": "1"}, {"in": "[2,4,1]", "out": "2"}],
+        "hints": ["Track minPrice seen so far, and compute profit at current price."],
+        "ed": "One-pass: min_price = min(min_price, price), max_profit = max(max_profit, price - min_price).",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #15", "freq": 45
+    },
+    {
+        "index": 16, "title": "Design Hit Counter", "slug": "design-hit-counter", "lc": 362, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Queue", "Binary Search", "Design"],
+        "desc": "Design a hit counter which counts the number of hits received in the past 5 minutes (i.e., the past 300 seconds).\n\nYour system should accept timestamp parameter (in seconds granularity) and calls are made in chronological order.",
+        "ex1": {"in": "[\"HitCounter\",\"hit\",\"hit\",\"hit\",\"getHits\",\"hit\",\"getHits\",\"getHits\"]\n[[],[1],[2],[3],[4],[300],[300],[301]]", "out": "[null, null, null, null, 3, null, 4, 3]", "exp": "Hits at 1, 2, 3 counted within 300 seconds."},
+        "ex2": {"in": "[\"HitCounter\",\"hit\",\"getHits\"]\n[[],[1],[301]]", "out": "[null, null, 0]", "exp": "Timestamp 1 is expired at 301."},
+        "hidden": [{"in": "[\"HitCounter\",\"hit\",\"hit\",\"hit\",\"getHits\",\"hit\",\"getHits\",\"getHits\"]\n[[],[1],[2],[3],[4],[300],[300],[301]]", "out": "[null, null, null, null, 3, null, 4, 3]"}],
+        "hints": ["Use a queue to store timestamps and evict timestamps <= timestamp - 300, or use circular array of size 300."],
+        "ed": "Maintain queue or 300-bucket circular buffer with timestamps and counts.",
+        "cpx": "Time: O(1) amortized, Space: O(1) fixed size 300",
+        "source": "Apple Practice Bank #16", "freq": 30
+    },
+    {
+        "index": 17, "title": "Top K Frequent Elements", "slug": "top-k-frequent-elements", "lc": 347, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Hash Table", "Heaps / Priority Queue", "Bucket Sort"],
+        "desc": "Given an integer array `nums` and an integer `k`, return the `k` most frequent elements. You may return the answer in any order.",
+        "ex1": {"in": "[1,1,1,2,2,3]\n2", "out": "[1, 2]", "exp": "1 appears 3 times, 2 appears 2 times."},
+        "ex2": {"in": "[1]\n1", "out": "[1]", "exp": "Single element is most frequent."},
+        "hidden": [{"in": "[1,1,1,2,2,3]\n2", "out": "[1, 2]"}, {"in": "[1]\n1", "out": "[1]"}, {"in": "[4,1,-1,2,-1,2,3]\n2", "out": "[-1, 2]"}],
+        "hints": ["Count frequencies with map, then use Bucket Sort or Min-Heap of size k."],
+        "ed": "Bucket sort by frequency in O(N) or Min-Heap of size k in O(N log k).",
+        "cpx": "Time: O(N), Space: O(N)",
+        "source": "Apple Practice Bank #17", "freq": 44
+    },
+    {
+        "index": 18, "title": "Longest Common Subsequence", "slug": "longest-common-subsequence", "lc": 1143, "difficulty": "MEDIUM", "category": "DP",
+        "patterns": ["Dynamic Programming", "String"],
+        "desc": "Given two strings `text1` and `text2`, return the length of their longest common subsequence. If there is no common subsequence, return `0`.",
+        "ex1": {"in": "abcde\nace", "out": "3", "exp": "The longest common subsequence is 'ace' and its length is 3."},
+        "ex2": {"in": "abc\nabc", "out": "3", "exp": "The longest common subsequence is 'abc'."},
+        "hidden": [{"in": "abcde\nace", "out": "3"}, {"in": "abc\nabc", "out": "3"}, {"in": "abc\ndef", "out": "0"}, {"in": "bsbininm\njmjkbkjkv", "out": "1"}],
+        "hints": ["2D DP table: dp[i][j] = 1 + dp[i-1][j-1] if match, else max(dp[i-1][j], dp[i][j-1])."],
+        "ed": "Standard 2D DP LCS state matrix with 1D rolling array optimization.",
+        "cpx": "Time: O(M * N), Space: O(min(M, N))",
+        "source": "Apple Practice Bank #18", "freq": 39
+    },
+    {
+        "index": 19, "title": "Product of Array Except Self", "slug": "product-of-array-except-self", "lc": 238, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Array", "Prefix Sum"],
+        "desc": "Given an integer array `nums`, return an array `answer` such that `answer[i]` is equal to the product of all the elements of `nums` except `nums[i]`.\n\nYou must write an algorithm that runs in `O(n)` time and without using the division operation.",
+        "ex1": {"in": "[1,2,3,4]", "out": "[24, 12, 8, 6]", "exp": "24 = 2*3*4, 12 = 1*3*4, 8 = 1*2*4, 6 = 1*2*3."},
+        "ex2": {"in": "[-1,1,0,-3,3]", "out": "[0, 0, 9, 0, 0]", "exp": "Zero handled cleanly."},
+        "hidden": [{"in": "[1,2,3,4]", "out": "[24, 12, 8, 6]"}, {"in": "[-1,1,0,-3,3]", "out": "[0, 0, 9, 0, 0]"}, {"in": "[2,3]", "out": "[3, 2]"}],
+        "hints": ["Compute prefix products in first pass, then multiply suffix products backwards."],
+        "ed": "Result array stores left prefix products. Second pass multiplies right running product in-place.",
+        "cpx": "Time: O(N), Space: O(1) extra auxiliary space",
+        "source": "Apple Practice Bank #19", "freq": 47
+    },
+    {
+        "index": 20, "title": "Maximum Subarray", "slug": "maximum-subarray", "lc": 53, "difficulty": "MEDIUM", "category": "DP",
+        "patterns": ["Dynamic Programming", "Array", "Divide and Conquer"],
+        "desc": "Given an integer array `nums`, find the subarray with the largest sum, and return *its sum*.",
+        "ex1": {"in": "[-2,1,-3,4,-1,2,1,-5,4]", "out": "6", "exp": "The subarray [4,-1,2,1] has the largest sum 6."},
+        "ex2": {"in": "[1]", "out": "1", "exp": "Single element subarray."},
+        "hidden": [{"in": "[-2,1,-3,4,-1,2,1,-5,4]", "out": "6"}, {"in": "[1]", "out": "1"}, {"in": "[5,4,-1,7,8]", "out": "23"}, {"in": "[-1]", "out": "-1"}],
+        "hints": ["Kadane's algorithm: curr_sum = max(num, curr_sum + num)."],
+        "ed": "Kadane's linear algorithm tracking local and global max sum.",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #20", "freq": 48
+    },
+    {
+        "index": 21, "title": "Spiral Matrix", "slug": "spiral-matrix", "lc": 54, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Matrix", "Simulation"],
+        "desc": "Given an `m x n` matrix, return all elements of the `matrix` in spiral order.",
+        "ex1": {"in": "[[1,2,3],[4,5,6],[7,8,9]]", "out": "[1, 2, 3, 6, 9, 8, 7, 4, 5]", "exp": "Spiral traversal clockwise."},
+        "ex2": {"in": "[[1,2,3,4],[5,6,7,8],[9,10,11,12]]", "out": "[1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]", "exp": "Rectangular matrix spiral."},
+        "hidden": [{"in": "[[1,2,3],[4,5,6],[7,8,9]]", "out": "[1, 2, 3, 6, 9, 8, 7, 4, 5]"}, {"in": "[[1]]", "out": "[1]"}],
+        "hints": ["Maintain four boundaries: top, bottom, left, right. Increment/decrement after each border traversal."],
+        "ed": "Shrink four pointers top, bottom, left, right inward until they cross.",
+        "cpx": "Time: O(M * N), Space: O(1) auxiliary",
+        "source": "Apple Practice Bank #21", "freq": 34
+    },
+    {
+        "index": 22, "title": "Reverse Words in a String", "slug": "reverse-words-in-a-string", "lc": 151, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Two Pointers", "String"],
+        "desc": "Given an input string `s`, reverse the order of the **words**. Return a string of the words in reverse order concatenated by a single space.",
+        "ex1": {"in": "the sky is blue", "out": "\"blue is sky the\"", "exp": "Words reversed with single space."},
+        "ex2": {"in": "  hello world  ", "out": "\"world hello\"", "exp": "Leading and trailing spaces stripped."},
+        "hidden": [{"in": "the sky is blue", "out": "\"blue is sky the\""}, {"in": "  hello world  ", "out": "\"world hello\""}, {"in": "a good   example", "out": "\"example good a\""}],
+        "hints": ["Split by whitespace, filter empty, reverse and join with space."],
+        "ed": "Split tokens or reverse whole string then reverse individual words in-place.",
+        "cpx": "Time: O(N), Space: O(N)",
+        "source": "Apple Practice Bank #22", "freq": 37
+    },
+    {
+        "index": 23, "title": "Kth Largest Element in an Array", "slug": "kth-largest-element-in-an-array", "lc": 215, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Heaps / Priority Queue", "Divide and Conquer", "Quickselect"],
+        "desc": "Given an integer array `nums` and an integer `k`, return the `k-th` largest element in the array.\n\nNote that it is the `k-th` largest element in the sorted order, not the `k-th` distinct element.",
+        "ex1": {"in": "[3,2,1,5,6,4]\n2", "out": "5", "exp": "2nd largest element is 5."},
+        "ex2": {"in": "[3,2,3,1,2,4,5,5,6]\n4", "out": "4", "exp": "4th largest element is 4."},
+        "hidden": [{"in": "[3,2,1,5,6,4]\n2", "out": "5"}, {"in": "[3,2,3,1,2,4,5,5,6]\n4", "out": "4"}, {"in": "[1]\n1", "out": "1"}],
+        "hints": ["Use a Min-Heap of size k or the Quickselect algorithm."],
+        "ed": "Min-heap of capacity k maintains the k largest items, heap root is kth largest.",
+        "cpx": "Time: O(N log k) with heap or O(N) average Quickselect, Space: O(k)",
+        "source": "Apple Practice Bank #23", "freq": 42
+    },
+    {
+        "index": 24, "title": "Time Based Key-Value Store", "slug": "time-based-key-value-store", "lc": 981, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Hash Table", "Binary Search", "Design"],
+        "desc": "Design a time-based key-value data structure that can store multiple values for the same key at different time stamps and retrieve the key's value at a certain timestamp.",
+        "ex1": {"in": "[\"TimeMap\",\"set\",\"get\",\"get\",\"set\",\"get\",\"get\"]\n[[],[\"foo\",\"bar\",1],[\"foo\",1],[\"foo\",3],[\"foo\",\"bar2\",4],[\"foo\",4],[\"foo\",5]]", "out": "[null, null, \"bar\", \"bar\", null, \"bar2\", \"bar2\"]", "exp": "TimeMap correctly fetches closest timestamp <= target."},
+        "ex2": {"in": "[\"TimeMap\",\"set\",\"get\"]\n[[],[\"love\",\"high\",10],[\"love\",5]]", "out": "[null, null, \"\"]", "exp": "No timestamp <= 5 exists."},
+        "hidden": [{"in": "[\"TimeMap\",\"set\",\"get\",\"get\",\"set\",\"get\",\"get\"]\n[[],[\"foo\",\"bar\",1],[\"foo\",1],[\"foo\",3],[\"foo\",\"bar2\",4],[\"foo\",4],[\"foo\",5]]", "out": "[null, null, \"bar\", \"bar\", null, \"bar2\", \"bar2\"]"}],
+        "hints": ["Map key to sorted list of (timestamp, value) pairs. Use binary search (upper_bound / bisect_right) to find largest timestamp <= target."],
+        "ed": "Hash map storing timestamp-value vectors per key; query uses binary search.",
+        "cpx": "Time: set O(1), get O(log N), Space: O(N)",
+        "source": "Apple Practice Bank #24", "freq": 31
+    },
+    {
+        "index": 25, "title": "Merge k Sorted Lists", "slug": "merge-k-sorted-lists", "lc": 23, "difficulty": "HARD", "category": "DSA",
+        "patterns": ["Linked List", "Divide and Conquer", "Heaps / Priority Queue"],
+        "desc": "You are given an array of `k` linked-lists `lists`, each linked-list is sorted in ascending order. Merge all the linked-lists into one sorted linked-list and return it.",
+        "ex1": {"in": "[[1,4,5],[1,3,4],[2,6]]", "out": "[1, 1, 2, 3, 4, 4, 5, 6]", "exp": "Lists merged into one ascending list."},
+        "ex2": {"in": "[]", "out": "[]", "exp": "Empty lists."},
+        "hidden": [{"in": "[[1,4,5],[1,3,4],[2,6]]", "out": "[1, 1, 2, 3, 4, 4, 5, 6]"}, {"in": "[]", "out": "[]"}, {"in": "[[]]", "out": "[]"}],
+        "hints": ["Use a Min-Heap of size k holding the current head of each list, or divide and conquer pairwise merge."],
+        "ed": "Min-heap storing (val, node). Always pop smallest and advance list pointer.",
+        "cpx": "Time: O(N log k) where N is total nodes, Space: O(k)",
+        "source": "Apple Candidate Report S10", "freq": 46
+    }
+]
+
+with open('p1_25.json', 'w', encoding='utf-8') as f:
+    json.dump(P1_25, f, indent=2)
+
+print("P1-25 generated successfully.")

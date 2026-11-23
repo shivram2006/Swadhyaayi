@@ -522,11 +522,15 @@ public class Solution {
     },
   ];
 
-  const allProblems = [...problems, ...appleQuestionsList];
+  const problemMap = new Map();
+  for (const prob of [...problems, ...appleQuestionsList]) {
+    problemMap.set(prob.slug, prob);
+  }
+  const allProblems = Array.from(problemMap.values());
 
   for (const prob of allProblems) {
     await QuestionCoding.findOneAndUpdate({ slug: prob.slug }, prob, { upsert: true, new: true });
   }
 
-  console.log(`[SEED] Pre-seeded ${allProblems.length} algorithmic pattern questions (including Apple interview catalog).`);
+  console.log(`[SEED] Pre-seeded ${allProblems.length} algorithmic pattern questions (including Apple interview catalog of 100 questions).`);
 };

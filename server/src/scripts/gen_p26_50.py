@@ -1,0 +1,310 @@
+# Generate questions 26 to 50
+import json
+
+P26_50 = [
+    {
+        "index": 26, "title": "Course Schedule II", "slug": "course-schedule-ii", "lc": 210, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Topological Sort", "Graph", "BFS / DFS"],
+        "desc": "There are a total of `numCourses` courses you have to take, labeled from `0` to `numCourses - 1`. You are given an array `prerequisites` where `prerequisites[i] = [ai, bi]` indicates that you must take course `bi` first if you want to take course `ai`.\n\nReturn *the ordering of courses you should take to finish all courses*. If it is impossible to finish all courses, return **an empty array**.",
+        "ex1": {"in": "2\n[[1,0]]", "out": "[0, 1]", "exp": "To take course 1 you should take course 0 first."},
+        "ex2": {"in": "4\n[[1,0],[2,0],[3,1],[3,2]]", "out": "[0, 1, 2, 3]", "exp": "Course 0 must be taken first, then 1 and 2, then 3."},
+        "hidden": [{"in": "2\n[[1,0]]", "out": "[0, 1]"}, {"in": "4\n[[1,0],[2,0],[3,1],[3,2]]", "out": "[0, 1, 2, 3]"}, {"in": "1\n[]", "out": "[0]"}, {"in": "2\n[[0,1],[1,0]]", "out": "[]"}],
+        "hints": ["Use Kahn's Algorithm with indegree array and BFS queue."],
+        "ed": "Kahn's BFS topological sort. Add 0 indegree nodes to queue and decrement neighbors.",
+        "cpx": "Time: O(V + E), Space: O(V + E)",
+        "source": "Apple Practice Bank #26", "freq": 41
+    },
+    {
+        "index": 27, "title": "Course Schedule", "slug": "course-schedule", "lc": 207, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Topological Sort", "Graph", "Cycle Detection"],
+        "desc": "There are a total of `numCourses` courses you have to take, labeled from `0` to `numCourses - 1`. You are given an array `prerequisites` where `prerequisites[i] = [ai, bi]`.\n\nReturn `true` if you can finish all courses. Otherwise, return `false`.",
+        "ex1": {"in": "2\n[[1,0]]", "out": "true", "exp": "You can finish courses in order [0, 1]."},
+        "ex2": {"in": "2\n[[1,0],[0,1]]", "out": "false", "exp": "Cyclic prerequisite dependency."},
+        "hidden": [{"in": "2\n[[1,0]]", "out": "true"}, {"in": "2\n[[1,0],[0,1]]", "out": "false"}, {"in": "3\n[[0,1],[1,2]]", "out": "true"}],
+        "hints": ["Check if the directed graph contains a cycle using Kahn's algorithm or 3-color DFS."],
+        "ed": "Detect cycles in directed graph using BFS indegrees or DFS with recursion state.",
+        "cpx": "Time: O(V + E), Space: O(V + E)",
+        "source": "Apple Practice Bank #27", "freq": 44
+    },
+    {
+        "index": 28, "title": "Valid Palindrome", "slug": "valid-palindrome", "lc": 125, "difficulty": "EASY", "category": "DSA",
+        "patterns": ["Two Pointers", "String"],
+        "desc": "A phrase is a **palindrome** if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward.",
+        "ex1": {"in": "A man, a plan, a canal: Panama", "out": "true", "exp": "'amanaplanacanalpanama' is a palindrome."},
+        "ex2": {"in": "race a car", "out": "false", "exp": "'raceacar' is not a palindrome."},
+        "hidden": [{"in": "A man, a plan, a canal: Panama", "out": "true"}, {"in": "race a car", "out": "false"}, {"in": " ", "out": "true"}, {"in": "0P", "out": "false"}],
+        "hints": ["Two pointers from left and right skipping non-alphanumeric chars."],
+        "ed": "Two pointer inward scan skipping non-alphanumeric and comparing lowercased chars.",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #28", "freq": 35
+    },
+    {
+        "index": 29, "title": "Search Insert Position", "slug": "search-insert-position", "lc": 35, "difficulty": "EASY", "category": "DSA",
+        "patterns": ["Binary Search", "Array"],
+        "desc": "Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.\n\nYou must write an algorithm with `O(log n)` runtime complexity.",
+        "ex1": {"in": "[1,3,5,6]\n5", "out": "2", "exp": "5 is found at index 2."},
+        "ex2": {"in": "[1,3,5,6]\n2", "out": "1", "exp": "2 would be inserted at index 1."},
+        "hidden": [{"in": "[1,3,5,6]\n5", "out": "2"}, {"in": "[1,3,5,6]\n2", "out": "1"}, {"in": "[1,3,5,6]\n7", "out": "4"}, {"in": "[1,3,5,6]\n0", "out": "0"}],
+        "hints": ["Standard binary search lower bound: find first element >= target."],
+        "ed": "Binary search with left <= right. When loop ends, left is insert position.",
+        "cpx": "Time: O(log N), Space: O(1)",
+        "source": "Apple Practice Bank #29", "freq": 30
+    },
+    {
+        "index": 30, "title": "Reverse Linked List", "slug": "reverse-linked-list", "lc": 206, "difficulty": "EASY", "category": "DSA",
+        "patterns": ["Linked List", "Recursion", "Two Pointers"],
+        "desc": "Given the `head` of a singly linked list, reverse the list, and return *the reversed list*.",
+        "ex1": {"in": "[1,2,3,4,5]", "out": "[5, 4, 3, 2, 1]", "exp": "Reversed linked list."},
+        "ex2": {"in": "[1,2]", "out": "[2, 1]", "exp": "Two-node list reversed."},
+        "hidden": [{"in": "[1,2,3,4,5]", "out": "[5, 4, 3, 2, 1]"}, {"in": "[1,2]", "out": "[2, 1]"}, {"in": "[]", "out": "[]"}],
+        "hints": ["Iteratively reverse next pointers using prev, curr, and next_temp pointers."],
+        "ed": "Iterate curr: next_temp = curr.next, curr.next = prev, prev = curr, curr = next_temp.",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Candidate Report S01 & S07", "freq": 55
+    },
+    {
+        "index": 31, "title": "LRU Cache", "slug": "lru-cache", "lc": 146, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Hash Table", "Doubly Linked List", "Design"],
+        "desc": "Design a data structure that follows the constraints of a **Least Recently Used (LRU) cache**.\n\nImplement the `LRUCache` class with `get(key)` and `put(key, value)` both running in `O(1)` average time complexity.",
+        "ex1": {"in": "[\"LRUCache\",\"put\",\"put\",\"get\",\"put\",\"get\",\"put\",\"get\",\"get\",\"get\"]\n[[2],[1,1],[2,2],[1],[3,3],[2],[4,4],[1],[3],[4]]", "out": "[null, null, null, 1, null, -1, null, -1, 3, 4]", "exp": "Key 2 evicted when key 3 is added; key 1 evicted when key 4 is added."},
+        "ex2": {"in": "[\"LRUCache\",\"put\",\"get\"]\n[[1],[2,1],[2]]", "out": "[null, null, 1]", "exp": "Single capacity LRU."},
+        "hidden": [{"in": "[\"LRUCache\",\"put\",\"put\",\"get\",\"put\",\"get\",\"put\",\"get\",\"get\",\"get\"]\n[[2],[1,1],[2,2],[1],[3,3],[2],[4,4],[1],[3],[4]]", "out": "[null, null, null, 1, null, -1, null, -1, 3, 4]"}],
+        "hints": ["Combine a Hash Map with a Doubly Linked List with dummy head and tail."],
+        "ed": "Hash map maps keys to DLL nodes. Accessing moves node to head; eviction removes node from tail.",
+        "cpx": "Time: O(1) for both get and put, Space: O(capacity)",
+        "source": "Apple Candidate Report S10", "freq": 60
+    },
+    {
+        "index": 32, "title": "First Missing Positive", "slug": "first-missing-positive", "lc": 41, "difficulty": "HARD", "category": "DSA",
+        "patterns": ["Array", "Hash Table"],
+        "desc": "Given an unsorted integer array `nums`, return the smallest missing positive integer.\n\nYou must implement an algorithm that runs in `O(n)` time and uses `O(1)` auxiliary space.",
+        "ex1": {"in": "[1,2,0]", "out": "3", "exp": "Numbers 1 and 2 are present, 3 is the smallest missing."},
+        "ex2": {"in": "[3,4,-1,1]", "out": "2", "exp": "1 is in array, 2 is missing."},
+        "hidden": [{"in": "[1,2,0]", "out": "3"}, {"in": "[3,4,-1,1]", "out": "2"}, {"in": "[7,8,9,11,12]", "out": "1"}, {"in": "[1]", "out": "2"}],
+        "hints": ["Place each number x in its bucket index x-1 if 1 <= x <= n using cyclic swap."],
+        "ed": "Cyclic sort: while 1 <= nums[i] <= n and nums[nums[i]-1] != nums[i], swap(nums[i], nums[nums[i]-1]). First index i where nums[i] != i+1 is answer i+1.",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #32", "freq": 37
+    },
+    {
+        "index": 33, "title": "Find First and Last Position of Element in Sorted Array", "slug": "find-first-and-last-position-of-element-in-sorted-array", "lc": 34, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Binary Search", "Array"],
+        "desc": "Given an array of integers `nums` sorted in non-decreasing order, find the starting and ending position of a given `target` value. If target is not found in the array, return `[-1, -1]`.\n\nYou must write an algorithm with `O(log n)` runtime complexity.",
+        "ex1": {"in": "[5,7,7,8,8,10]\n8", "out": "[3, 4]", "exp": "8 is found from index 3 to 4."},
+        "ex2": {"in": "[5,7,7,8,8,10]\n6", "out": "[-1, -1]", "exp": "6 is not in the array."},
+        "hidden": [{"in": "[5,7,7,8,8,10]\n8", "out": "[3, 4]"}, {"in": "[5,7,7,8,8,10]\n6", "out": "[-1, -1]"}, {"in": "[]\n0", "out": "[-1, -1]"}, {"in": "[1]\n1", "out": "[0, 0]"}],
+        "hints": ["Run two binary searches: one for lower bound (first index) and one for upper bound (last index)."],
+        "ed": "Two binary search passes: left boundary search and right boundary search in O(log N).",
+        "cpx": "Time: O(log N), Space: O(1)",
+        "source": "Apple Candidate Report S01", "freq": 40
+    },
+    {
+        "index": 34, "title": "Combination Sum", "slug": "combination-sum", "lc": 39, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Backtracking", "Array"],
+        "desc": "Given an array of **distinct** integers `candidates` and a target integer `target`, return a list of all **unique combinations** of `candidates` where the chosen numbers sum to `target`. You may return the combinations in any order. The same number may be chosen unlimited times.",
+        "ex1": {"in": "[2,3,6,7]\n7", "out": "[[2, 2, 3], [7]]", "exp": "2+2+3=7 and 7=7."},
+        "ex2": {"in": "[2,3,5]\n8", "out": "[[2, 2, 2, 2], [2, 3, 3], [3, 5]]", "exp": "3 distinct valid combinations."},
+        "hidden": [{"in": "[2,3,6,7]\n7", "out": "[[2, 2, 3], [7]]"}, {"in": "[2,3,5]\n8", "out": "[[2, 2, 2, 2], [2, 3, 3], [3, 5]]"}, {"in": "[2]\n1", "out": "[]"}],
+        "hints": ["Backtrack with index: at each step choose candidates[i] without advancing index, or skip to index + 1."],
+        "ed": "DFS backtracking tree. Prune branches when remaining target < 0.",
+        "cpx": "Time: O(2^T) where T is target/min_candidate, Space: O(T)",
+        "source": "Apple Practice Bank #34", "freq": 39
+    },
+    {
+        "index": 35, "title": "Word Search", "slug": "word-search", "lc": 79, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Backtracking", "Matrix", "BFS / DFS"],
+        "desc": "Given an `m x n` grid of characters `board` and a string `word`, return `true` if `word` exists in the grid. The word can be constructed from letters of sequentially adjacent cells (horizontally or vertically neighboring). The same letter cell may not be used more than once.",
+        "ex1": {"in": "[[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\nABCCED", "out": "true", "exp": "The word 'ABCCED' exists."},
+        "ex2": {"in": "[[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\nABCB", "out": "false", "exp": "'ABCB' cannot be formed without reusing cell 'B'."},
+        "hidden": [{"in": "[[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\nABCCED", "out": "true"}, {"in": "[[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\nABCB", "out": "false"}],
+        "hints": ["Start DFS from each matching first character. Temporarily modify board[r][c] to '#' to mark visited."],
+        "ed": "DFS backtracking in 4 directions. Restore cell character upon backtrack.",
+        "cpx": "Time: O(M * N * 3^L) where L is word length, Space: O(L)",
+        "source": "Apple Practice Bank #35", "freq": 43
+    },
+    {
+        "index": 36, "title": "Rotate Image", "slug": "rotate-image", "lc": 48, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Matrix", "Math"],
+        "desc": "You are given an `n x n` 2D matrix representing an image, rotate the image by **90 degrees (clockwise)** in-place.",
+        "ex1": {"in": "[[1,2,3],[4,5,6],[7,8,9]]", "out": "[[7, 4, 1], [8, 5, 2], [9, 6, 3]]", "exp": "Rotated 90 degrees clockwise."},
+        "ex2": {"in": "[[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]", "out": "[[15, 13, 2, 5], [14, 3, 4, 1], [12, 6, 8, 9], [16, 7, 10, 11]]", "exp": "4x4 matrix rotated."},
+        "hidden": [{"in": "[[1,2,3],[4,5,6],[7,8,9]]", "out": "[[7, 4, 1], [8, 5, 2], [9, 6, 3]]"}, {"in": "[[1]]", "out": "[[1]]"}],
+        "hints": ["Transpose matrix along main diagonal, then reverse each row horizontally."],
+        "ed": "Two-step in-place transformation: matrix.transpose() followed by matrix.reverse_rows().",
+        "cpx": "Time: O(N^2), Space: O(1)",
+        "source": "Apple Candidate Report S10", "freq": 45
+    },
+    {
+        "index": 37, "title": "Jump Game", "slug": "jump-game", "lc": 55, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Greedy", "Array", "Dynamic Programming"],
+        "desc": "You are given an integer array `nums`. You are initially positioned at the array's **first index**, and each element in the array represents your maximum jump length at that position.\n\nReturn `true` if you can reach the last index, or `false` otherwise.",
+        "ex1": {"in": "[2,3,1,1,4]", "out": "true", "exp": "Jump 1 step from index 0 to 1, then 3 steps to last index."},
+        "ex2": {"in": "[3,2,1,0,4]", "out": "false", "exp": "Always arrive at index 3 with jump length 0."},
+        "hidden": [{"in": "[2,3,1,1,4]", "out": "true"}, {"in": "[3,2,1,0,4]", "out": "false"}, {"in": "[0]", "out": "true"}, {"in": "[2,0,0]", "out": "true"}],
+        "hints": ["Track maxReach index. If current index i > maxReach, return false."],
+        "ed": "Greedy scan: maxReach = max(maxReach, i + nums[i]). If maxReach >= n-1, return true.",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Candidate Report S04", "freq": 47
+    },
+    {
+        "index": 38, "title": "Coin Change", "slug": "coin-change", "lc": 322, "difficulty": "MEDIUM", "category": "DP",
+        "patterns": ["Dynamic Programming", "BFS / DFS"],
+        "desc": "You are given an integer array `coins` representing coins of different denominations and an integer `amount` representing a total amount of money.\n\nReturn *the fewest number of coins that you need to make up that amount*. If that amount cannot be made up, return `-1`.",
+        "ex1": {"in": "[1,2,5]\n11", "out": "3", "exp": "11 = 5 + 5 + 1 (3 coins)."},
+        "ex2": {"in": "[2]\n3", "out": "-1", "exp": "Cannot make amount 3 with coin 2."},
+        "hidden": [{"in": "[1,2,5]\n11", "out": "3"}, {"in": "[2]\n3", "out": "-1"}, {"in": "[1]\n0", "out": "0"}, {"in": "[1]\n2", "out": "2"}],
+        "hints": ["dp[x] = min(dp[x], dp[x - coin] + 1) for each coin <= x."],
+        "ed": "1D Bottom-up DP initialized to infinity. dp[0] = 0.",
+        "cpx": "Time: O(amount * len(coins)), Space: O(amount)",
+        "source": "Apple Candidate Report S08", "freq": 52
+    },
+    {
+        "index": 39, "title": "Coin Change II", "slug": "coin-change-ii", "lc": 518, "difficulty": "MEDIUM", "category": "DP",
+        "patterns": ["Dynamic Programming", "Knapsack"],
+        "desc": "You are given an integer array `coins` representing coins of different denominations and an integer `amount`. Return the number of combinations that make up that amount. You may assume an infinite number of each kind of coin.",
+        "ex1": {"in": "5\n[1,2,5]", "out": "4", "exp": "5=5, 5=2+2+1, 5=2+1+1+1, 5=1+1+1+1+1."},
+        "ex2": {"in": "3\n[2]", "out": "0", "exp": "Cannot make 3 using only 2s."},
+        "hidden": [{"in": "5\n[1,2,5]", "out": "4"}, {"in": "3\n[2]", "out": "0"}, {"in": "10\n[10]", "out": "1"}],
+        "hints": ["Unbounded knapsack: loop coins outer, amount inner from coin to amount."],
+        "ed": "Outer loop over coins, inner loop over amounts ensures combinations rather than permutations.",
+        "cpx": "Time: O(amount * len(coins)), Space: O(amount)",
+        "source": "Apple Candidate Report S08", "freq": 40
+    },
+    {
+        "index": 40, "title": "Maximum Product Subarray", "slug": "maximum-product-subarray", "lc": 152, "difficulty": "MEDIUM", "category": "DP",
+        "patterns": ["Dynamic Programming", "Array"],
+        "desc": "Given an integer array `nums`, find a subarray that has the largest product, and return *the product*.",
+        "ex1": {"in": "[2,3,-2,4]", "out": "6", "exp": "[2,3] has the largest product 6."},
+        "ex2": {"in": "[-2,0,-1]", "out": "0", "exp": "Max product is 0."},
+        "hidden": [{"in": "[2,3,-2,4]", "out": "6"}, {"in": "[-2,0,-1]", "out": "0"}, {"in": "[-2,3,-4]", "out": "24"}],
+        "hints": ["Maintain both max_prod and min_prod because multiplying negative by negative flips to positive."],
+        "ed": "At each index, if nums[i] < 0 swap max_prod and min_prod, then update max_prod = max(nums[i], max_prod * nums[i]).",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #40", "freq": 39
+    },
+    {
+        "index": 41, "title": "Longest Increasing Subsequence", "slug": "longest-increasing-subsequence", "lc": 300, "difficulty": "MEDIUM", "category": "DP",
+        "patterns": ["Dynamic Programming", "Binary Search"],
+        "desc": "Given an integer array `nums`, return the length of the longest strictly increasing subsequence.",
+        "ex1": {"in": "[10,9,2,5,3,7,101,18]", "out": "4", "exp": "The longest increasing subsequence is [2,3,7,101], length 4."},
+        "ex2": {"in": "[0,1,0,3,2,3]", "out": "4", "exp": "[0,1,2,3] has length 4."},
+        "hidden": [{"in": "[10,9,2,5,3,7,101,18]", "out": "4"}, {"in": "[0,1,0,3,2,3]", "out": "4"}, {"in": "[7,7,7,7,7,7,7]", "out": "1"}],
+        "hints": ["Patience sorting using binary search (bisect_left) runs in O(N log N)."],
+        "ed": "Tails array where tails[i] stores smallest tail of all increasing subsequences of length i+1.",
+        "cpx": "Time: O(N log N), Space: O(N)",
+        "source": "Apple Practice Bank #41", "freq": 45
+    },
+    {
+        "index": 42, "title": "Word Break", "slug": "word-break", "lc": 139, "difficulty": "MEDIUM", "category": "DP",
+        "patterns": ["Dynamic Programming", "Hash Table", "Trie"],
+        "desc": "Given a string `s` and a dictionary of strings `wordDict`, return `true` if `s` can be segmented into a space-separated sequence of one or more dictionary words.",
+        "ex1": {"in": "leetcode\n[\"leet\",\"code\"]", "out": "true", "exp": "'leetcode' can be segmented as 'leet code'."},
+        "ex2": {"in": "applepenapple\n[\"apple\",\"pen\"]", "out": "true", "exp": "'apple pen apple'."},
+        "hidden": [{"in": "leetcode\n[\"leet\",\"code\"]", "out": "true"}, {"in": "applepenapple\n[\"apple\",\"pen\"]", "out": "true"}, {"in": "catsandog\n[\"cats\",\"dog\",\"sand\",\"and\",\"cat\"]", "out": "false"}],
+        "hints": ["dp[i] = true if dp[j] == true and s[j:i] in wordDict."],
+        "ed": "1D DP array of size n+1. dp[0] = true. Check valid prefix splits.",
+        "cpx": "Time: O(N^2 * K) or O(N^3), Space: O(N)",
+        "source": "Apple Practice Bank #42", "freq": 43
+    },
+    {
+        "index": 43, "title": "House Robber", "slug": "house-robber", "lc": 198, "difficulty": "MEDIUM", "category": "DP",
+        "patterns": ["Dynamic Programming", "Array"],
+        "desc": "You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected.\n\nReturn the maximum amount of money you can rob tonight without alerting the police.",
+        "ex1": {"in": "[1,2,3,1]", "out": "4", "exp": "Rob house 1 (money = 1) and house 3 (money = 3), total = 4."},
+        "ex2": {"in": "[2,7,9,3,1]", "out": "12", "exp": "Rob house 1 (2), house 3 (9) and house 5 (1), total = 12."},
+        "hidden": [{"in": "[1,2,3,1]", "out": "4"}, {"in": "[2,7,9,3,1]", "out": "12"}, {"in": "[0]", "out": "0"}, {"in": "[2,1,1,2]", "out": "4"}],
+        "hints": ["dp[i] = max(dp[i-1], dp[i-2] + nums[i])."],
+        "ed": "Two variables rob1, rob2 tracking max loot without robbing adjacent houses.",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #43", "freq": 42
+    },
+    {
+        "index": 44, "title": "House Robber II", "slug": "house-robber-ii", "lc": 213, "difficulty": "MEDIUM", "category": "DP",
+        "patterns": ["Dynamic Programming", "Array"],
+        "desc": "All houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Return the maximum amount of money you can rob tonight without alerting the police.",
+        "ex1": {"in": "[2,3,2]", "out": "3", "exp": "You cannot rob house 1 (2) and house 3 (2) because they are neighbors."},
+        "ex2": {"in": "[1,2,3,1]", "out": "4", "exp": "Rob house 1 (1) and house 3 (3), total = 4."},
+        "hidden": [{"in": "[2,3,2]", "out": "3"}, {"in": "[1,2,3,1]", "out": "4"}, {"in": "[1,2,3]", "out": "3"}],
+        "hints": ["Max of robbing nums[0:n-1] or nums[1:n]."],
+        "ed": "Decompose circular array into two linear subproblems: excluding first house or excluding last house.",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #44", "freq": 36
+    },
+    {
+        "index": 45, "title": "Unique Paths", "slug": "unique-paths", "lc": 62, "difficulty": "MEDIUM", "category": "DP",
+        "patterns": ["Dynamic Programming", "Math", "Grid"],
+        "desc": "There is a robot on an `m x n` grid. The robot is initially located at the top-left corner (`grid[0][0]`). The robot tries to move to the bottom-right corner (`grid[m - 1][n - 1]`). The robot can only move either down or right at any point in time.\n\nGiven the two integers `m` and `n`, return *the number of possible unique paths*.",
+        "ex1": {"in": "3\n7", "out": "28", "exp": "28 unique paths from (0,0) to (2,6)."},
+        "ex2": {"in": "3\n2", "out": "3", "exp": "Right->Down->Down, Down->Down->Right, Down->Right->Down."},
+        "hidden": [{"in": "3\n7", "out": "28"}, {"in": "3\n2", "out": "3"}, {"in": "1\n1", "out": "1"}],
+        "hints": ["dp[r][c] = dp[r-1][c] + dp[r][c-1], or combinations (m+n-2) choose (m-1)."],
+        "ed": "1D rolling DP row or combinatorial calculation C(m+n-2, m-1).",
+        "cpx": "Time: O(M * N) or O(min(M, N)), Space: O(N)",
+        "source": "Apple Practice Bank #45", "freq": 41
+    },
+    {
+        "index": 46, "title": "Minimum Path Sum", "slug": "minimum-path-sum", "lc": 64, "difficulty": "MEDIUM", "category": "DP",
+        "patterns": ["Dynamic Programming", "Grid"],
+        "desc": "Given a `m x n` `grid` filled with non-negative numbers, find a path from top left to bottom right, which minimizes the sum of all numbers along its path. You can only move either down or right.",
+        "ex1": {"in": "[[1,3,1],[1,5,1],[4,2,1]]", "out": "7", "exp": "Path 1 -> 3 -> 1 -> 1 -> 1 minimizes sum to 7."},
+        "ex2": {"in": "[[1,2,3],[4,5,6]]", "out": "12", "exp": "Minimum path sum is 12."},
+        "hidden": [{"in": "[[1,3,1],[1,5,1],[4,2,1]]", "out": "7"}, {"in": "[[1,2,3],[4,5,6]]", "out": "12"}],
+        "hints": ["grid[r][c] += min(grid[r-1][c], grid[r][c-1]) in-place."],
+        "ed": "Bottom-up 2D grid DP computing minimal cumulative cost.",
+        "cpx": "Time: O(M * N), Space: O(1) in-place",
+        "source": "Apple Practice Bank #46", "freq": 38
+    },
+    {
+        "index": 47, "title": "Decode Ways", "slug": "decode-ways", "lc": 91, "difficulty": "MEDIUM", "category": "DP",
+        "patterns": ["Dynamic Programming", "String"],
+        "desc": "A message containing letters from `A-Z` can be encoded into numbers using the mapping `'A' -> \"1\" ... 'Z' -> \"26\"`. Given a string `s` containing only digits, return *the number of ways to decode it*.",
+        "ex1": {"in": "12", "out": "2", "exp": "'12' could be decoded as 'AB' (1 2) or 'L' (12)."},
+        "ex2": {"in": "226", "out": "3", "exp": "'BZ' (2 26), 'VF' (22 6), or 'BBF' (2 2 6)."},
+        "hidden": [{"in": "12", "out": "2"}, {"in": "226", "out": "3"}, {"in": "06", "out": "0"}],
+        "hints": ["Check 1-digit code (1-9) and 2-digit code (10-26)."],
+        "ed": "1D DP with two states tracking valid single and double digit transitions.",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #47", "freq": 37
+    },
+    {
+        "index": 48, "title": "Edit Distance", "slug": "edit-distance", "lc": 72, "difficulty": "HARD", "category": "DP",
+        "patterns": ["Dynamic Programming", "String"],
+        "desc": "Given two strings `word1` and `word2`, return *the minimum number of operations required to convert `word1` to `word2`* (insert, delete, or replace a character).",
+        "ex1": {"in": "horse\nros", "out": "3", "exp": "horse -> rorse -> rose -> ros."},
+        "ex2": {"in": "intention\nexecution", "out": "5", "exp": "5 operations needed."},
+        "hidden": [{"in": "horse\nros", "out": "3"}, {"in": "intention\nexecution", "out": "5"}, {"in": "\na", "out": "1"}],
+        "hints": ["Levenshtein distance: dp[i][j] = 1 + min(insert, delete, replace)."],
+        "ed": "Standard Levenshtein matrix: dp[i][j] = dp[i-1][j-1] if match else 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]).",
+        "cpx": "Time: O(M * N), Space: O(min(M, N))",
+        "source": "Apple Practice Bank #48", "freq": 44
+    },
+    {
+        "index": 49, "title": "Interleaving String", "slug": "interleaving-string", "lc": 97, "difficulty": "MEDIUM", "category": "DP",
+        "patterns": ["Dynamic Programming", "String"],
+        "desc": "Given strings `s1`, `s2`, and `s3`, find whether `s3` is formed by an **interleaving** of `s1` and `s2`.",
+        "ex1": {"in": "aabcc\ndbbca\naadbbcbcac", "out": "true", "exp": "'aabcc' and 'dbbca' interleave to form 'aadbbcbcac'."},
+        "ex2": {"in": "aabcc\ndbbca\naadbbbaccc", "out": "false", "exp": "Characters cannot be interleaved in order."},
+        "hidden": [{"in": "aabcc\ndbbca\naadbbcbcac", "out": "true"}, {"in": "aabcc\ndbbca\naadbbbaccc", "out": "false"}, {"in": "\n\n", "out": "true"}],
+        "hints": ["dp[i][j] = (dp[i-1][j] and s1[i-1] == s3[i+j-1]) or (dp[i][j-1] and s2[j-1] == s3[i+j-1])."],
+        "ed": "2D grid state tracking valid character matching prefixes from s1 and s2.",
+        "cpx": "Time: O(M * N), Space: O(min(M, N))",
+        "source": "Apple Practice Bank #49", "freq": 33
+    },
+    {
+        "index": 50, "title": "Partition Equal Subset Sum", "slug": "partition-equal-subset-sum", "lc": 416, "difficulty": "MEDIUM", "category": "DP",
+        "patterns": ["Dynamic Programming", "0/1 Knapsack"],
+        "desc": "Given an integer array `nums`, return `true` if you can partition the array into two subsets such that the sum of the elements in both subsets is equal or `false` otherwise.",
+        "ex1": {"in": "[1,5,11,5]", "out": "true", "exp": "Array can be partitioned as [1, 5, 5] and [11]."},
+        "ex2": {"in": "[1,2,3,5]", "out": "false", "exp": "Total sum is 11 (odd), cannot partition."},
+        "hidden": [{"in": "[1,5,11,5]", "out": "true"}, {"in": "[1,2,3,5]", "out": "false"}, {"in": "[2,2]", "out": "true"}],
+        "hints": ["If total sum is odd return false. Reduce to 0/1 knapsack subset sum with target = total / 2."],
+        "ed": "0/1 Knapsack bitset / boolean array of size target+1. Iterate backwards from target down to num.",
+        "cpx": "Time: O(N * Target), Space: O(Target)",
+        "source": "Apple Practice Bank #50", "freq": 41
+    }
+]
+
+with open('p26_50.json', 'w', encoding='utf-8') as f:
+    json.dump(P26_50, f, indent=2)
+
+print("P26-50 generated successfully.")

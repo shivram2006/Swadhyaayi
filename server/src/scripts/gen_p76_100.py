@@ -1,0 +1,310 @@
+# Generate questions 76 to 100
+import json
+
+P76_100 = [
+    {
+        "index": 76, "title": "Add Two Numbers", "slug": "add-two-numbers", "lc": 2, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Linked List", "Math"],
+        "desc": "You are given two **non-empty** linked lists representing two non-negative integers. The digits are stored in **reverse order**, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.",
+        "ex1": {"in": "[2,4,3]\n[5,6,4]", "out": "[7, 0, 8]", "exp": "342 + 465 = 807."},
+        "ex2": {"in": "[0]\n[0]", "out": "[0]", "exp": "0 + 0 = 0."},
+        "hidden": [{"in": "[2,4,3]\n[5,6,4]", "out": "[7, 0, 8]"}, {"in": "[9,9,9,9,9,9,9]\n[9,9,9,9]", "out": "[8, 9, 9, 9, 0, 0, 0, 1]"}],
+        "hints": ["Simulate digit by digit addition with a carry variable."],
+        "ed": "Iterate both lists simultaneously while l1 or l2 or carry > 0. Link sum % 10 and propagate sum // 10.",
+        "cpx": "Time: O(max(N, M)), Space: O(max(N, M))",
+        "source": "Apple Practice Bank #76", "freq": 47
+    },
+    {
+        "index": 77, "title": "Reorder List", "slug": "reorder-list", "lc": 143, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Linked List", "Two Pointers", "Fast & Slow Pointers"],
+        "desc": "You are given the head of a singly linked-list: `L0 -> L1 -> ... -> Ln - 1 -> Ln`. Reorder the list to be on the following form: `L0 -> Ln -> L1 -> Ln - 1 -> L2 -> Ln - 2 -> ...` in-place.",
+        "ex1": {"in": "[1,2,3,4]", "out": "[1, 4, 2, 3]", "exp": "List reordered from ends inward."},
+        "ex2": {"in": "[1,2,3,4,5]", "out": "[1, 5, 2, 4, 3]", "exp": "5-node list reordered."},
+        "hidden": [{"in": "[1,2,3,4]", "out": "[1, 4, 2, 3]"}, {"in": "[1,2,3,4,5]", "out": "[1, 5, 2, 4, 3]"}, {"in": "[1]", "out": "[1]"}],
+        "hints": ["1. Find middle with slow/fast. 2. Reverse second half. 3. Merge two halves alternatingly."],
+        "ed": "Three-step in-place transformation: middle finding, reversal of second half, and interweaving merge.",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #77", "freq": 38
+    },
+    {
+        "index": 78, "title": "Valid Anagram", "slug": "valid-anagram", "lc": 242, "difficulty": "EASY", "category": "DSA",
+        "patterns": ["Hash Table", "String", "Sorting"],
+        "desc": "Given two strings `s` and `t`, return `true` if `t` is an **anagram** of `s`, and `false` otherwise.",
+        "ex1": {"in": "anagram\nnagaram", "out": "true", "exp": "Same character frequencies."},
+        "ex2": {"in": "rat\ncar", "out": "false", "exp": "'r', 'a', 't' != 'c', 'a', 'r'."},
+        "hidden": [{"in": "anagram\nnagaram", "out": "true"}, {"in": "rat\ncar", "out": "false"}, {"in": "a\nab", "out": "false"}],
+        "hints": ["Count character frequencies using an array of size 26 or a hash map."],
+        "ed": "Compare 26-character frequency histograms or hash maps.",
+        "cpx": "Time: O(N), Space: O(1) for fixed alphabet",
+        "source": "Apple Practice Bank #78", "freq": 45
+    },
+    {
+        "index": 79, "title": "Minimum Window Substring", "slug": "minimum-window-substring", "lc": 76, "difficulty": "HARD", "category": "DSA",
+        "patterns": ["Sliding Window", "Hash Table", "String"],
+        "desc": "Given two strings `s` and `t` of lengths `m` and `n` respectively, return the **minimum window substring** of `s` such that every character in `t` (including duplicates) is included in the window. If there is no such substring, return the empty string `\"\"`.",
+        "ex1": {"in": "ADOBECODEBANC\nABC", "out": "\"BANC\"", "exp": "Minimum window substring is 'BANC'."},
+        "ex2": {"in": "a\na", "out": "\"a\"", "exp": "Single char match."},
+        "hidden": [{"in": "ADOBECODEBANC\nABC", "out": "\"BANC\""}, {"in": "a\na", "out": "\"a\""}, {"in": "a\naa", "out": "\"\""}],
+        "hints": ["Sliding window with target count map and have/need match counter."],
+        "ed": "Expand right until window is valid (have == need). Contract left to find minimal valid length.",
+        "cpx": "Time: O(M + N), Space: O(1) alphabet size",
+        "source": "Apple Practice Bank #79", "freq": 49
+    },
+    {
+        "index": 80, "title": "Permutation in String", "slug": "permutation-in-string", "lc": 567, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Sliding Window", "Hash Table", "Two Pointers"],
+        "desc": "Given two strings `s1` and `s2`, return `true` if `s2` contains a **permutation** of `s1`, or `false` otherwise.",
+        "ex1": {"in": "ab\neidbaooo", "out": "true", "exp": "s2 contains 'ba' which is a permutation of 'ab'."},
+        "ex2": {"in": "ab\neidboaoo", "out": "false", "exp": "No permutation found in s2."},
+        "hidden": [{"in": "ab\neidbaooo", "out": "true"}, {"in": "ab\neidboaoo", "out": "false"}, {"in": "adc\ndcda", "out": "true"}],
+        "hints": ["Maintain a fixed sliding window of size len(s1) and compare character frequency arrays."],
+        "ed": "Rolling frequency vector of size 26 across window of length len(s1).",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #80", "freq": 39
+    },
+    {
+        "index": 81, "title": "Find All Anagrams in a String", "slug": "find-all-anagrams-in-a-string", "lc": 438, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Sliding Window", "Hash Table"],
+        "desc": "Given two strings `s` and `p`, return *an array of all the start indices of `p`'s **anagrams** in `s`*.",
+        "ex1": {"in": "cbaebabacd\nabc", "out": "[0, 6]", "exp": "The substrings with start index = 0 is 'cba', and at index = 6 is 'bac'."},
+        "ex2": {"in": "abab\nab", "out": "[0, 1, 2]", "exp": "Substrings at 0, 1, 2 are anagrams."},
+        "hidden": [{"in": "cbaebabacd\nabc", "out": "[0, 6]"}, {"in": "abab\nab", "out": "[0, 1, 2]"}],
+        "hints": ["Sliding window of length len(p) tracking character matches."],
+        "ed": "Maintain frequency map comparison over fixed window of size len(p).",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #81", "freq": 41
+    },
+    {
+        "index": 82, "title": "Subarray Sum Equals K", "slug": "subarray-sum-equals-k", "lc": 560, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Prefix Sum", "Hash Table"],
+        "desc": "Given an array of integers `nums` and an integer `k`, return *the total number of subarrays whose sum equals to `k`*.",
+        "ex1": {"in": "[1,1,1]\n2", "out": "2", "exp": "[1,1] at [0,1] and [1,2]."},
+        "ex2": {"in": "[1,2,3]\n3", "out": "2", "exp": "[1,2] and [3]."},
+        "hidden": [{"in": "[1,1,1]\n2", "out": "2"}, {"in": "[1,2,3]\n3", "out": "2"}, {"in": "[1,-1,0]\n0", "out": "3"}],
+        "hints": ["Track prefix sum frequencies in a hash map. Subarray sum(i, j) = pref[j] - pref[i-1] == k."],
+        "ed": "At each index, count += pref_map.get(curr_sum - k, 0). Record curr_sum in map.",
+        "cpx": "Time: O(N), Space: O(N)",
+        "source": "Apple Practice Bank #82", "freq": 47
+    },
+    {
+        "index": 83, "title": "3Sum", "slug": "3sum", "lc": 15, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Two Pointers", "Sorting", "Array"],
+        "desc": "Given an integer array nums, return all the triplets `[nums[i], nums[j], nums[k]]` such that `i != j`, `i != k`, and `j != k`, and `nums[i] + nums[j] + nums[k] == 0`. Notice that the solution set must not contain duplicate triplets.",
+        "ex1": {"in": "[-1,0,1,2,-1,-4]", "out": "[[-1, -1, 2], [-1, 0, 1]]", "exp": "Distinct triplets summing to 0."},
+        "ex2": {"in": "[0,1,1]", "out": "[]", "exp": "No triplet sums to 0."},
+        "hidden": [{"in": "[-1,0,1,2,-1,-4]", "out": "[[-1, -1, 2], [-1, 0, 1]]"}, {"in": "[0,1,1]", "out": "[]"}, {"in": "[0,0,0]", "out": "[[0, 0, 0]]"}],
+        "hints": ["Sort array. For each i, use two pointers left and right to find nums[left] + nums[right] == -nums[i]. Skip duplicates."],
+        "ed": "Sort + two pointers. Skip adjacent duplicate values to avoid duplicate triplets.",
+        "cpx": "Time: O(N^2), Space: O(1) or O(N) for sorting",
+        "source": "Apple Practice Bank #83", "freq": 52
+    },
+    {
+        "index": 84, "title": "Container With Most Water", "slug": "container-with-most-water", "lc": 11, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Two Pointers", "Greedy", "Array"],
+        "desc": "You are given an integer array `height` of length `n`. Find two lines that together with the x-axis form a container, such that the container contains the most water. Return the maximum amount of water a container can store.",
+        "ex1": {"in": "[1,8,6,2,5,4,8,3,7]", "out": "49", "exp": "Max water between height[1]=8 and height[8]=7 is 7 * (8-1) = 49."},
+        "ex2": {"in": "[1,1]", "out": "1", "exp": "Area is 1 * 1 = 1."},
+        "hidden": [{"in": "[1,8,6,2,5,4,8,3,7]", "out": "49"}, {"in": "[1,1]", "out": "1"}, {"in": "[4,3,2,1,4]", "out": "16"}],
+        "hints": ["Start pointers at ends: left=0, right=n-1. Move pointer with smaller height inward."],
+        "ed": "Two pointer greedy inward search moving smaller bar.",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #84", "freq": 48
+    },
+    {
+        "index": 85, "title": "Sort Colors", "slug": "sort-colors", "lc": 75, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Two Pointers", "Sorting", "Array"],
+        "desc": "Given an array `nums` with `n` objects colored red (0), white (1), or blue (2), sort them **in-place** so that objects of the same color are adjacent, with the colors in the order red, white, and blue (Dutch National Flag problem).",
+        "ex1": {"in": "[2,0,2,1,1,0]", "out": "[0, 0, 1, 1, 2, 2]", "exp": "Sorted in-place."},
+        "ex2": {"in": "[2,0,1]", "out": "[0, 1, 2]", "exp": "[0, 1, 2]."},
+        "hidden": [{"in": "[2,0,2,1,1,0]", "out": "[0, 0, 1, 1, 2, 2]"}, {"in": "[2,0,1]", "out": "[0, 1, 2]"}, {"in": "[0]", "out": "[0]"}],
+        "hints": ["Dutch National Flag: three pointers low, mid, high. Swap 0 to low, 2 to high."],
+        "ed": "One-pass three-way partitioning placing 0s at front and 2s at back.",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #85", "freq": 43
+    },
+    {
+        "index": 86, "title": "Daily Temperatures", "slug": "daily-temperatures", "lc": 739, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Monotonic Stack", "Array"],
+        "desc": "Given an array of integers `temperatures` represents the daily temperatures, return *an array `answer` such that `answer[i]` is the number of days you have to wait after the `i-th` day to get a warmer temperature*.",
+        "ex1": {"in": "[73,74,75,71,69,72,76,73]", "out": "[1, 1, 4, 2, 1, 1, 0, 0]", "exp": "Days until next warmer temperature."},
+        "ex2": {"in": "[30,40,50,60]", "out": "[1, 1, 1, 0]", "exp": "Monotonically increasing temperatures."},
+        "hidden": [{"in": "[73,74,75,71,69,72,76,73]", "out": "[1, 1, 4, 2, 1, 1, 0, 0]"}, {"in": "[30,40,50,60]", "out": "[1, 1, 1, 0]"}, {"in": "[30,60,90]", "out": "[1, 1, 0]"}],
+        "hints": ["Monotonic Decreasing Stack storing day indices."],
+        "ed": "Maintain indices of unresolved cooler days on stack. Pop when warmer day is encountered.",
+        "cpx": "Time: O(N), Space: O(N)",
+        "source": "Apple Practice Bank #86 / #77", "freq": 45
+    },
+    {
+        "index": 87, "title": "Largest Rectangle in Histogram", "slug": "largest-rectangle-in-histogram", "lc": 84, "difficulty": "HARD", "category": "DSA",
+        "patterns": ["Monotonic Stack", "Array"],
+        "desc": "Given an array of integers `heights` representing the histogram's bar height where the width of each bar is `1`, return *the area of the largest rectangle in the histogram*.",
+        "ex1": {"in": "[2,1,5,6,2,3]", "out": "10", "exp": "The largest rectangle is formed by heights 5 and 6: area = 2 * 5 = 10."},
+        "ex2": {"in": "[2,4]", "out": "4", "exp": "Max area = 4."},
+        "hidden": [{"in": "[2,1,5,6,2,3]", "out": "10"}, {"in": "[2,4]", "out": "4"}, {"in": "[1]", "out": "1"}],
+        "hints": ["Monotonic Increasing Stack of indices. When popping height h, width is right_boundary - left_boundary - 1."],
+        "ed": "Monotonic increasing stack computes left and right lower boundaries in linear time.",
+        "cpx": "Time: O(N), Space: O(N)",
+        "source": "Apple Practice Bank #87", "freq": 44
+    },
+    {
+        "index": 88, "title": "Min Stack", "slug": "min-stack", "lc": 155, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Stack", "Design"],
+        "desc": "Design a stack that supports push, pop, top, and retrieving the minimum element in constant time `O(1)`.",
+        "ex1": {"in": "[\"MinStack\",\"push\",\"push\",\"push\",\"getMin\",\"pop\",\"top\",\"getMin\"]\n[[],[-2],[0],[-3],[],[],[],[]]", "out": "[null, null, null, null, -3, null, 0, -2]", "exp": "Minimums tracked accurately through push and pop operations."},
+        "ex2": {"in": "[\"MinStack\",\"push\",\"getMin\"]\n[[],[1],[]]", "out": "[null, null, 1]", "exp": "Single element minimum."},
+        "hidden": [{"in": "[\"MinStack\",\"push\",\"push\",\"push\",\"getMin\",\"pop\",\"top\",\"getMin\"]\n[[],[-2],[0],[-3],[],[],[],[]]", "out": "[null, null, null, null, -3, null, 0, -2]"}],
+        "hints": ["Maintain an auxiliary min_stack storing minimum value at each depth."],
+        "ed": "Paired elements on stack (val, current_min) or secondary min_stack.",
+        "cpx": "Time: O(1) for all operations, Space: O(N)",
+        "source": "Apple Practice Bank #88", "freq": 46
+    },
+    {
+        "index": 89, "title": "Meeting Rooms II", "slug": "meeting-rooms-ii", "lc": 253, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Heaps / Priority Queue", "Intervals", "Sorting"],
+        "desc": "Given an array of meeting time intervals `intervals` where `intervals[i] = [starti, endi]`, return *the minimum number of conference rooms required*.",
+        "ex1": {"in": "[[0,30],[5,10],[15,20]]", "out": "2", "exp": "[0,30] overlaps with [5,10] and [15,20], requiring 2 conference rooms."},
+        "ex2": {"in": "[[7,10],[2,4]]", "out": "1", "exp": "Meetings do not overlap, only 1 room needed."},
+        "hidden": [{"in": "[[0,30],[5,10],[15,20]]", "out": "2"}, {"in": "[[7,10],[2,4]]", "out": "1"}, {"in": "[[1,5],[8,9],[8,9]]", "out": "2"}],
+        "hints": ["Sort intervals by start time. Use a Min-Heap of meeting end times."],
+        "ed": "Min-heap tracks earliest ending meeting. If current start >= heap root, room reused; else allocate new room.",
+        "cpx": "Time: O(N log N), Space: O(N)",
+        "source": "Apple Candidate Report S01 & S09", "freq": 65
+    },
+    {
+        "index": 90, "title": "Insert Interval", "slug": "insert-interval", "lc": 57, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Intervals", "Array"],
+        "desc": "You are given an array of non-overlapping intervals `intervals` sorted by `starti` and `newInterval = [start, end]`. Insert `newInterval` into `intervals` such that `intervals` is still sorted and non-overlapping (merge overlapping intervals).",
+        "ex1": {"in": "[[1,3],[6,9]]\n[2,5]", "out": "[[1, 5], [6, 9]]", "exp": "[2,5] merges with [1,3] into [1,5]."},
+        "ex2": {"in": "[[1,2],[3,5],[6,7],[8,10],[12,16]]\n[4,8]", "out": "[[1, 2], [3, 10], [12, 16]]", "exp": "Merges multiple intervals."},
+        "hidden": [{"in": "[[1,3],[6,9]]\n[2,5]", "out": "[[1, 5], [6, 9]]"}, {"in": "[[1,2],[3,5],[6,7],[8,10],[12,16]]\n[4,8]", "out": "[[1, 2], [3, 10], [12, 16]]"}, {"in": "[]\n[5,7]", "out": "[[5, 7]]"}],
+        "hints": ["Three phases: 1. Add all intervals ending before newInterval. 2. Merge overlapping intervals. 3. Add remaining."],
+        "ed": "Linear scan partitioning into left disjoint, overlapping merge, and right disjoint sections.",
+        "cpx": "Time: O(N), Space: O(N)",
+        "source": "Apple Practice Bank #90", "freq": 40
+    },
+    {
+        "index": 91, "title": "Task Scheduler", "slug": "task-scheduler", "lc": 621, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Greedy", "Heaps / Priority Queue", "Counting"],
+        "desc": "Given a characters array `tasks`, representing the tasks a CPU needs to do, and a non-negative integer `n` cooling time between identical tasks. Return the least number of units of times that the CPU will take to finish all the given tasks.",
+        "ex1": {"in": "[\"A\",\"A\",\"A\",\"B\",\"B\",\"B\"]\n2", "out": "8", "exp": "A -> B -> idle -> A -> B -> idle -> A -> B."},
+        "ex2": {"in": "[\"A\",\"A\",\"A\",\"B\",\"B\",\"B\"]\n0", "out": "6", "exp": "No cooldown needed, duration is 6."},
+        "hidden": [{"in": "[\"A\",\"A\",\"A\",\"B\",\"B\",\"B\"]\n2", "out": "8"}, {"in": "[\"A\",\"A\",\"A\",\"B\",\"B\",\"B\"]\n0", "out": "6"}, {"in": "[\"A\",\"A\",\"A\",\"A\",\"A\",\"A\",\"B\",\"C\",\"D\",\"E\",\"F\",\"G\"]\n2", "out": "16"}],
+        "hints": ["Formula based on most frequent task: max_time = max(len(tasks), (max_freq - 1) * (n + 1) + count_of_max_freq)."],
+        "ed": "Greedy formula: schedule most frequent task first with (max_freq - 1) chunks of size (n+1).",
+        "cpx": "Time: O(N), Space: O(1) 26 tasks",
+        "source": "Apple Practice Bank #91", "freq": 41
+    },
+    {
+        "index": 92, "title": "Design Twitter", "slug": "design-twitter", "lc": 355, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Design", "Hash Table", "Heaps / Priority Queue"],
+        "desc": "Design a simplified version of Twitter where users can post tweets, follow/unfollow another user, and see the `10` most recent tweets in the user's news feed.",
+        "ex1": {"in": "[\"Twitter\",\"postTweet\",\"getNewsFeed\",\"follow\",\"postTweet\",\"getNewsFeed\",\"unfollow\",\"getNewsFeed\"]\n[[],[1,5],[1],[1,2],[2,6],[1],[1,2],[1]]", "out": "[null, null, [5], null, null, [6, 5], null, [5]]", "exp": "Newsfeed returns 10 most recent tweets across followed users."},
+        "ex2": {"in": "[\"Twitter\",\"postTweet\",\"getNewsFeed\"]\n[[],[1,10],[1]]", "out": "[null, null, [10]]", "exp": "Single post."},
+        "hidden": [{"in": "[\"Twitter\",\"postTweet\",\"getNewsFeed\",\"follow\",\"postTweet\",\"getNewsFeed\",\"unfollow\",\"getNewsFeed\"]\n[[],[1,5],[1],[1,2],[2,6],[1],[1,2],[1]]", "out": "[null, null, [5], null, null, [6, 5], null, [5]]"}],
+        "hints": ["Map user to set of followees and list of tweets with timestamp. Use a Max-Heap to merge the top 10 tweets across all followees."],
+        "ed": "K-way merge of tweets from user's followees using a Priority Queue.",
+        "cpx": "Time: postTweet O(1), follow O(1), getNewsFeed O(F log F), Space: O(U + T)",
+        "source": "Apple Practice Bank #92", "freq": 36
+    },
+    {
+        "index": 93, "title": "Find Median from Data Stream", "slug": "find-median-from-data-stream", "lc": 295, "difficulty": "HARD", "category": "DSA",
+        "patterns": ["Two Heaps", "Heaps / Priority Queue", "Design"],
+        "desc": "The **median** is the middle value in an ordered integer list. Design a data structure that supports adding numbers from a data stream and finding the median of the current numbers in `O(1)` time.",
+        "ex1": {"in": "[\"MedianFinder\",\"addNum\",\"addNum\",\"findMedian\",\"addNum\",\"findMedian\"]\n[[],[1],[2],[],[3],[]]", "out": "[null, null, null, 1.50000, null, 2.00000]", "exp": "Medians computed dynamically."},
+        "ex2": {"in": "[\"MedianFinder\",\"addNum\",\"findMedian\"]\n[[],[5],[]]", "out": "[null, null, 5.00000]", "exp": "Single element median."},
+        "hidden": [{"in": "[\"MedianFinder\",\"addNum\",\"addNum\",\"findMedian\",\"addNum\",\"findMedian\"]\n[[],[1],[2],[],[3],[]]", "out": "[null, null, null, 1.50000, null, 2.00000]"}],
+        "hints": ["Maintain two heaps: max-heap for lower half and min-heap for upper half."],
+        "ed": "Balance sizes so len(small) == len(large) or len(small) == len(large) + 1.",
+        "cpx": "Time: addNum O(log N), findMedian O(1), Space: O(N)",
+        "source": "Apple Practice Bank #93", "freq": 54
+    },
+    {
+        "index": 94, "title": "Implement Trie (Prefix Tree)", "slug": "implement-trie-prefix-tree", "lc": 208, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Trie", "Design", "String"],
+        "desc": "A **trie** (pronounced as \"try\") or **prefix tree** is a tree data structure used to efficiently store and retrieve keys in a dataset of strings. Implement the `Trie` class with `insert`, `search`, and `startsWith`.",
+        "ex1": {"in": "[\"Trie\",\"insert\",\"search\",\"search\",\"startsWith\",\"insert\",\"search\"]\n[[],[\"apple\"],[\"apple\"],[\"app\"],[\"app\"],[\"app\"],[\"app\"]]", "out": "[null, null, true, false, true, null, true]", "exp": "Prefix tree correctly verifies words and prefixes."},
+        "ex2": {"in": "[\"Trie\",\"search\"]\n[[],[\"a\"]]", "out": "[null, false]", "exp": "Search in empty trie."},
+        "hidden": [{"in": "[\"Trie\",\"insert\",\"search\",\"search\",\"startsWith\",\"insert\",\"search\"]\n[[],[\"apple\"],[\"apple\"],[\"app\"],[\"app\"],[\"app\"],[\"app\"]]", "out": "[null, null, true, false, true, null, true]"}],
+        "hints": ["Each TrieNode contains a dictionary or 26-size array of child nodes and an isEnd boolean."],
+        "ed": "Trie nodes store child maps and word termination flags. All three operations run in O(L).",
+        "cpx": "Time: O(L) where L is string length, Space: O(N * L * Alphabet)",
+        "source": "Apple Practice Bank #94", "freq": 47
+    },
+    {
+        "index": 95, "title": "Word Search II", "slug": "word-search-ii", "lc": 212, "difficulty": "HARD", "category": "DSA",
+        "patterns": ["Trie", "Backtracking", "Matrix"],
+        "desc": "Given an `m x n` `board` of characters and a list of strings `words`, return *all words on the board*.\n\nEach word must be constructed from letters of sequentially adjacent cells (horizontally or vertically).",
+        "ex1": {"in": "[[\"o\",\"a\",\"a\",\"n\"],[\"e\",\"t\",\"a\",\"e\"],[\"i\",\"h\",\"k\",\"r\"],[\"i\",\"f\",\"l\",\"v\"]]\n[\"oath\",\"pea\",\"eat\",\"rain\"]", "out": "[\"eat\", \"oath\"]", "exp": "The words 'eat' and 'oath' exist on the board."},
+        "ex2": {"in": "[[\"a\",\"b\"],[\"c\",\"d\"]]\n[\"abcb\"]", "out": "[]", "exp": "'abcb' cannot be formed without reusing 'b'."},
+        "hidden": [{"in": "[[\"o\",\"a\",\"a\",\"n\"],[\"e\",\"t\",\"a\",\"e\"],[\"i\",\"h\",\"k\",\"r\"],[\"i\",\"f\",\"l\",\"v\"]]\n[\"oath\",\"pea\",\"eat\",\"rain\"]", "out": "[\"eat\", \"oath\"]"}, {"in": "[[\"a\",\"b\"],[\"c\",\"d\"]]\n[\"abcb\"]", "out": "[]"}],
+        "hints": ["Insert all words into a Prefix Trie, then run DFS on board matching against Trie nodes."],
+        "ed": "Trie pruning: prune trie branches as words are matched to prevent redundant searches.",
+        "cpx": "Time: O(M * N * 4 * 3^(L-1)), Space: O(Total characters in words)",
+        "source": "Apple Practice Bank #95", "freq": 45
+    },
+    {
+        "index": 96, "title": "Subsets", "slug": "subsets", "lc": 78, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Backtracking", "Bitmask", "Recursion"],
+        "desc": "Given an integer array `nums` of **unique** elements, return *all possible subsets (the power set)*. The solution set must not contain duplicate subsets. Return the solution in **any order**.",
+        "ex1": {"in": "[1,2,3]", "out": "[[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]", "exp": "All 2^3 = 8 subsets."},
+        "ex2": {"in": "[0]", "out": "[[], [0]]", "exp": "2 subsets."},
+        "hidden": [{"in": "[1,2,3]", "out": "[[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]"}, {"in": "[0]", "out": "[[], [0]]"}],
+        "hints": ["Backtrack: at index i, choose to include nums[i] or exclude nums[i], or use bit manipulation from 0 to 2^n - 1."],
+        "ed": "Backtracking decision tree exploring 2^N states.",
+        "cpx": "Time: O(N * 2^N), Space: O(N * 2^N)",
+        "source": "Apple Practice Bank #96", "freq": 44
+    },
+    {
+        "index": 97, "title": "Permutations", "slug": "permutations", "lc": 46, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Backtracking", "Recursion"],
+        "desc": "Given an array `nums` of distinct integers, return *all the possible permutations*. You can return the answer in **any order**.",
+        "ex1": {"in": "[1,2,3]", "out": "[[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]", "exp": "All 3! = 6 permutations."},
+        "ex2": {"in": "[0,1]", "out": "[[0, 1], [1, 0]]", "exp": "2 permutations."},
+        "hidden": [{"in": "[1,2,3]", "out": "[[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]"}, {"in": "[0,1]", "out": "[[0, 1], [1, 0]]"}, {"in": "[1]", "out": "[[1]]"}],
+        "hints": ["Backtracking with in-place element swapping from index start to len(nums)."],
+        "ed": "Swap element nums[start] with nums[i] for i in range(start, n) and recurse.",
+        "cpx": "Time: O(N * N!), Space: O(N!)",
+        "source": "Apple Practice Bank #97", "freq": 43
+    },
+    {
+        "index": 98, "title": "N-Queens", "slug": "n-queens", "lc": 51, "difficulty": "HARD", "category": "DSA",
+        "patterns": ["Backtracking", "Recursion"],
+        "desc": "The **n-queens** puzzle is the problem of placing `n` queens on an `n x n` chessboard such that no two queens attack each other.\n\nGiven an integer `n`, return *all distinct solutions to the **n-queens puzzle***.",
+        "ex1": {"in": "4", "out": "[[\".Q..\", \"...Q\", \"Q...\", \"..Q.\"], [\"..Q.\", \"Q...\", \"...Q\", \".Q..\"]]", "exp": "Two distinct 4-queens board configurations."},
+        "ex2": {"in": "1", "out": "[[\"Q\"]]", "exp": "Single queen on 1x1 board."},
+        "hidden": [{"in": "4", "out": "[[\".Q..\", \"...Q\", \"Q...\", \"..Q.\"], [\"..Q.\", \"Q...\", \"...Q\", \".Q..\"]]"}, {"in": "1", "out": "[[\"Q\"]]"}],
+        "hints": ["Row by row DFS tracking sets of used columns, positive diagonals (r + c), and negative diagonals (r - c)."],
+        "ed": "Backtracking with three hash sets: cols, pos_diag (r+c), neg_diag (r-c).",
+        "cpx": "Time: O(N!), Space: O(N)",
+        "source": "Apple Candidate Report S04", "freq": 45
+    },
+    {
+        "index": 99, "title": "Insert Delete GetRandom O(1)", "slug": "insert-delete-getrandom-o1", "lc": 380, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Hash Table", "Array", "Design"],
+        "desc": "Implement the `RandomizedSet` class: `insert(val)`, `remove(val)`, and `getRandom()` each executing with average `O(1)` time complexity.",
+        "ex1": {"in": "[\"RandomizedSet\",\"insert\",\"remove\",\"insert\",\"getRandom\",\"remove\",\"insert\",\"getRandom\"]\n[[],[1],[2],[2],[],[1],[2],[]]", "out": "[null, true, false, true, 2, true, false, 2]", "exp": "Elements inserted, removed in O(1) with uniform random access."},
+        "ex2": {"in": "[\"RandomizedSet\",\"insert\",\"getRandom\"]\n[[],[10],[]]", "out": "[null, true, 10]", "exp": "Single item."},
+        "hidden": [{"in": "[\"RandomizedSet\",\"insert\",\"remove\",\"insert\",\"getRandom\",\"remove\",\"insert\",\"getRandom\"]\n[[],[1],[2],[2],[],[1],[2],[]]", "out": "[null, true, false, true, 2, true, false, 2]"}],
+        "hints": ["Use a dynamic array (list) for O(1) random index access and a hash map {val: index} for O(1) lookups. In remove, swap with last element."],
+        "ed": "Array + Hash Map. Removal swaps target element with last element, pops array, and updates index map.",
+        "cpx": "Time: O(1) average for all operations, Space: O(N)",
+        "source": "Apple Candidate Report S16", "freq": 52
+    },
+    {
+        "index": 100, "title": "Longest Palindromic Substring", "slug": "longest-palindromic-substring", "lc": 5, "difficulty": "MEDIUM", "category": "DP",
+        "patterns": ["Dynamic Programming", "Two Pointers", "String"],
+        "desc": "Given a string `s`, return the *longest palindromic substring* in `s`.",
+        "ex1": {"in": "babad", "out": "\"bab\"", "exp": "'aba' is also a valid answer."},
+        "ex2": {"in": "cbbd", "out": "\"bb\"", "exp": "'bb' is the longest palindromic substring."},
+        "hidden": [{"in": "babad", "out": "\"bab\""}, {"in": "cbbd", "out": "\"bb\""}, {"in": "a", "out": "\"a\""}, {"in": "ac", "out": "\"a\""}],
+        "hints": ["Expand around center for each index i (odd center) and (i, i+1) (even center)."],
+        "ed": "Expand around center checks 2n-1 centers in O(N^2) time and O(1) extra space.",
+        "cpx": "Time: O(N^2), Space: O(1)",
+        "source": "Apple Practice Bank #100", "freq": 50
+    }
+]
+
+with open('p76_100.json', 'w', encoding='utf-8') as f:
+    json.dump(P76_100, f, indent=2)
+
+print("P76-100 generated successfully.")

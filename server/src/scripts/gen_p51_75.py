@@ -1,0 +1,310 @@
+# Generate questions 51 to 75
+import json
+
+P51_75 = [
+    {
+        "index": 51, "title": "Number of Provinces", "slug": "number-of-provinces", "lc": 547, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Graph", "BFS / DFS", "Union Find"],
+        "desc": "There are `n` cities. Some of them are connected, while some are not. A province is a group of directly or indirectly connected cities and no other cities outside the group.\n\nGiven an `n x n` matrix `isConnected` where `isConnected[i][j] = 1` if city `i` and `j` are directly connected, return *the total number of provinces*.",
+        "ex1": {"in": "[[1,1,0],[1,1,0],[0,0,1]]", "out": "2", "exp": "Cities 0 and 1 form 1 province, city 2 forms another."},
+        "ex2": {"in": "[[1,0,0],[0,1,0],[0,0,1]]", "out": "3", "exp": "3 isolated cities."},
+        "hidden": [{"in": "[[1,1,0],[1,1,0],[0,0,1]]", "out": "2"}, {"in": "[[1,0,0],[0,1,0],[0,0,1]]", "out": "3"}, {"in": "[[1]]", "out": "1"}],
+        "hints": ["Count connected components using DFS/BFS or Disjoint Set Union (Union Find)."],
+        "ed": "Iterate nodes 0..n-1 with visited set, run DFS to mark entire province, increment count.",
+        "cpx": "Time: O(N^2), Space: O(N)",
+        "source": "Apple Practice Bank #51", "freq": 38
+    },
+    {
+        "index": 52, "title": "Clone Graph", "slug": "clone-graph", "lc": 133, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Graph", "BFS / DFS", "Hash Table"],
+        "desc": "Given a reference of a node in a **connected** undirected graph. Return a **deep copy** (clone) of the graph.",
+        "ex1": {"in": "[[2,4],[1,3],[2,4],[1,3]]", "out": "[[2, 4], [1, 3], [2, 4], [1, 3]]", "exp": "Graph cloned with identical structure."},
+        "ex2": {"in": "[[]]", "out": "[[]]", "exp": "Node with 0 neighbors."},
+        "hidden": [{"in": "[[2,4],[1,3],[2,4],[1,3]]", "out": "[[2, 4], [1, 3], [2, 4], [1, 3]]"}, {"in": "[[]]", "out": "[[]]"}, {"in": "[]", "out": "[]"}],
+        "hints": ["Use a hash map mapping original node pointer to clone node pointer."],
+        "ed": "DFS/BFS with map {old_node: new_node}. Clone neighbors recursively.",
+        "cpx": "Time: O(V + E), Space: O(V)",
+        "source": "Apple Practice Bank #52", "freq": 42
+    },
+    {
+        "index": 53, "title": "Rotting Oranges", "slug": "rotting-oranges", "lc": 994, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["BFS / DFS", "Matrix"],
+        "desc": "You are given an `m x n` `grid` where each cell can have one of three values: `0` empty, `1` fresh orange, or `2` rotten orange. Every minute, any fresh orange that is 4-directionally adjacent to a rotten orange becomes rotten.\n\nReturn the minimum number of minutes that must elapse until no cell has a fresh orange. If this is impossible, return `-1`.",
+        "ex1": {"in": "[[2,1,1],[1,1,0],[0,1,1]]", "out": "4", "exp": "All oranges rotten in 4 minutes."},
+        "ex2": {"in": "[[2,1,1],[0,1,1],[1,0,1]]", "out": "-1", "exp": "Orange in bottom left corner can never rot."},
+        "hidden": [{"in": "[[2,1,1],[1,1,0],[0,1,1]]", "out": "4"}, {"in": "[[2,1,1],[0,1,1],[1,0,1]]", "out": "-1"}, {"in": "[[0,2]]", "out": "0"}],
+        "hints": ["Multi-source BFS: add all rotten oranges (2) into queue initially and track fresh orange count."],
+        "ed": "Multi-source BFS expands level by level (minutes). If fresh count > 0 at end, return -1.",
+        "cpx": "Time: O(M * N), Space: O(M * N)",
+        "source": "Apple Practice Bank #53", "freq": 46
+    },
+    {
+        "index": 54, "title": "Pacific Atlantic Water Flow", "slug": "pacific-atlantic-water-flow", "lc": 417, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Matrix", "BFS / DFS"],
+        "desc": "There is an `m x n` rectangular island that borders both the Pacific Ocean and Atlantic Ocean. Water can only flow from cells to height equal or lower.\n\nReturn a 2D list of grid coordinates `result` where `result[i] = [ri, ci]` denotes that rain water can flow from `(ri, ci)` to **both** oceans.",
+        "ex1": {"in": "[[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]", "out": "[[0, 4], [1, 3], [1, 4], [2, 2], [3, 0], [3, 1], [4, 0]]", "exp": "Coordinates that can reach both Pacific and Atlantic oceans."},
+        "ex2": {"in": "[[1]]", "out": "[[0, 0]]", "exp": "Single cell connects to both oceans."},
+        "hidden": [{"in": "[[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]", "out": "[[0, 4], [1, 3], [1, 4], [2, 2], [3, 0], [3, 1], [4, 0]]"}, {"in": "[[1]]", "out": "[[0, 0]]"}],
+        "hints": ["Start DFS backwards from ocean edges: Pacific (top/left) and Atlantic (bottom/right). Find intersection of visited sets."],
+        "ed": "Reverse water flow starting from ocean borders moving only to cells of >= height.",
+        "cpx": "Time: O(M * N), Space: O(M * N)",
+        "source": "Apple Practice Bank #54", "freq": 35
+    },
+    {
+        "index": 55, "title": "Word Ladder", "slug": "word-ladder", "lc": 127, "difficulty": "HARD", "category": "DSA",
+        "patterns": ["Graph", "BFS / DFS", "Hash Table"],
+        "desc": "A transformation sequence from word `beginWord` to word `endWord` using a dictionary `wordList` is a sequence of words `beginWord -> s1 -> s2 -> ... -> sk` such that each adjacent pair differs by a single letter.\n\nReturn *the number of words in the shortest transformation sequence*, or `0` if no such sequence exists.",
+        "ex1": {"in": "hit\ncog\n[\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]", "out": "5", "exp": "hit -> hot -> dot -> dog -> cog (5 words)."},
+        "ex2": {"in": "hit\ncog\n[\"hot\",\"dot\",\"dog\",\"lot\",\"log\"]", "out": "0", "exp": "endWord 'cog' is not in wordList."},
+        "hidden": [{"in": "hit\ncog\n[\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]", "out": "5"}, {"in": "hit\ncog\n[\"hot\",\"dot\",\"dog\",\"lot\",\"log\"]", "out": "0"}],
+        "hints": ["Bidirectional BFS or BFS with wildcard intermediate states like 'h*t'."],
+        "ed": "BFS shortest path on word graph. Intermediate generic patterns optimize neighbor generation.",
+        "cpx": "Time: O(M^2 * N) where M is word length and N is dictionary size, Space: O(M * N)",
+        "source": "Apple Practice Bank #55", "freq": 44
+    },
+    {
+        "index": 56, "title": "Accounts Merge", "slug": "accounts-merge", "lc": 721, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Union Find", "Graph", "DFS / BFS"],
+        "desc": "Given a list of `accounts` where each element `accounts[i]` is a list of strings, the first element `accounts[i][0]` is a name, and the rest are emails representing that account. Merge accounts that share common emails.",
+        "ex1": {"in": "[[\"John\",\"johnsmith@mail.com\",\"john_newyork@mail.com\"],[\"John\",\"johnsmith@mail.com\",\"john00@mail.com\"],[\"Mary\",\"mary@mail.com\"],[\"John\",\"johnnybravo@mail.com\"]]", "out": "[[\"John\", \"john00@mail.com\", \"john_newyork@mail.com\", \"johnsmith@mail.com\"], [\"Mary\", \"mary@mail.com\"], [\"John\", \"johnnybravo@mail.com\"]]", "exp": "The two Johns with johnsmith@mail.com are merged."},
+        "ex2": {"in": "[[\"Gabe\",\"Gabe0@m.co\",\"Gabe3@m.co\",\"Gabe1@m.co\"],[\"Kevin\",\"Kevin3@m.co\",\"Kevin5@m.co\",\"Kevin0@m.co\"],[\"Ethan\",\"Ethan5@m.co\",\"Ethan4@m.co\",\"Ethan0@m.co\"],[\"Hanzo\",\"Hanzo3@m.co\",\"Hanzo1@m.co\",\"Hanzo0@m.co\"],[\"Fern\",\"Fern5@m.co\",\"Fern1@m.co\",\"Fern0@m.co\"]]", "out": "[[\"Ethan\", \"Ethan0@m.co\", \"Ethan4@m.co\", \"Ethan5@m.co\"], [\"Fern\", \"Fern0@m.co\", \"Fern1@m.co\", \"Fern5@m.co\"], [\"Gabe\", \"Gabe0@m.co\", \"Gabe1@m.co\", \"Gabe3@m.co\"], [\"Hanzo\", \"Hanzo0@m.co\", \"Hanzo1@m.co\", \"Hanzo3@m.co\"], [\"Kevin\", \"Kevin0@m.co\", \"Kevin3@m.co\", \"Kevin5@m.co\"]]", "exp": "Accounts with disjoint emails kept separate."},
+        "hidden": [{"in": "[[\"John\",\"johnsmith@mail.com\",\"john_newyork@mail.com\"],[\"John\",\"johnsmith@mail.com\",\"john00@mail.com\"],[\"Mary\",\"mary@mail.com\"],[\"John\",\"johnnybravo@mail.com\"]]", "out": "[[\"John\", \"john00@mail.com\", \"john_newyork@mail.com\", \"johnsmith@mail.com\"], [\"Mary\", \"mary@mail.com\"], [\"John\", \"johnnybravo@mail.com\"]]"}],
+        "hints": ["Use Disjoint Set Union (DSU) to union emails belonging to the same account."],
+        "ed": "Union-find connects email parents. Group emails by root and sort lexicographically.",
+        "cpx": "Time: O(N * K log(N * K)), Space: O(N * K)",
+        "source": "Apple Practice Bank #56", "freq": 39
+    },
+    {
+        "index": 57, "title": "Network Delay Time", "slug": "network-delay-time", "lc": 743, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Dijkstra", "Graph", "Heaps / Priority Queue"],
+        "desc": "You are given a network of `n` nodes, labeled from `1` to `n`. You are also given `times`, a list of travel times as directed edges `times[i] = (ui, vi, wi)`. Return *the minimum time it takes for all the `n` nodes to receive the signal* from node `k`. If it is impossible, return `-1`.",
+        "ex1": {"in": "[[2,1,1],[2,3,1],[3,4,1]]\n4\n2", "out": "2", "exp": "Signal reaches all nodes in 2 time units."},
+        "ex2": {"in": "[[1,2,1]]\n2\n1", "out": "1", "exp": "Direct edge delay 1."},
+        "hidden": [{"in": "[[2,1,1],[2,3,1],[3,4,1]]\n4\n2", "out": "2"}, {"in": "[[1,2,1]]\n2\n1", "out": "1"}, {"in": "[[1,2,1]]\n2\n2", "out": "-1"}],
+        "hints": ["Run Dijkstra's shortest path algorithm using a Min-Heap."],
+        "ed": "Dijkstra with priority queue. Return max distance in dist table or -1 if any node unreached.",
+        "cpx": "Time: O(E log V), Space: O(V + E)",
+        "source": "Apple Practice Bank #57", "freq": 34
+    },
+    {
+        "index": 58, "title": "Find if Path Exists in Graph", "slug": "find-if-path-exists-in-graph", "lc": 1971, "difficulty": "EASY", "category": "DSA",
+        "patterns": ["Graph", "BFS / DFS", "Union Find"],
+        "desc": "There is a bi-directional graph with `n` vertices, where each vertex is labeled from `0` to `n - 1`. Given `edges` and integers `source` and `destination`, return `true` if there is a valid path from `source` to `destination`, or `false` otherwise.",
+        "ex1": {"in": "3\n[[0,1],[1,2],[2,0]]\n0\n2", "out": "true", "exp": "Path 0 -> 1 -> 2 exists."},
+        "ex2": {"in": "6\n[[0,1],[0,2],[3,5],[5,4],[4,3]]\n0\n5", "out": "false", "exp": "No path between component {0,1,2} and {3,4,5}."},
+        "hidden": [{"in": "3\n[[0,1],[1,2],[2,0]]\n0\n2", "out": "true"}, {"in": "6\n[[0,1],[0,2],[3,5],[5,4],[4,3]]\n0\n5", "out": "false"}],
+        "hints": ["Use BFS/DFS traversal or Disjoint Set Union (find(source) == find(dest))."],
+        "ed": "Union-find or BFS search from source to destination.",
+        "cpx": "Time: O(V + E), Space: O(V + E)",
+        "source": "Apple Practice Bank #58", "freq": 30
+    },
+    {
+        "index": 59, "title": "Binary Tree Level Order Traversal", "slug": "binary-tree-level-order-traversal", "lc": 102, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Tree", "BFS / DFS", "Queue"],
+        "desc": "Given the `root` of a binary tree, return *the level order traversal of its nodes' values*. (i.e., from left to right, level by level).",
+        "ex1": {"in": "[3,9,20,null,null,15,7]", "out": "[[3], [9, 20], [15, 7]]", "exp": "Level 0: [3], Level 1: [9,20], Level 2: [15,7]."},
+        "ex2": {"in": "[1]", "out": "[[1]]", "exp": "Single node tree."},
+        "hidden": [{"in": "[3,9,20,null,null,15,7]", "out": "[[3], [9, 20], [15, 7]]"}, {"in": "[1]", "out": "[[1]]"}, {"in": "[]", "out": "[]"}],
+        "hints": ["Queue BFS: iterate level by level using queue length."],
+        "ed": "BFS queue processing node count at each level before pushing children.",
+        "cpx": "Time: O(N), Space: O(N)",
+        "source": "Apple Practice Bank #59", "freq": 47
+    },
+    {
+        "index": 60, "title": "Validate Binary Search Tree", "slug": "validate-binary-search-tree", "lc": 98, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Tree", "Binary Search", "BFS / DFS"],
+        "desc": "Given the `root` of a binary tree, *determine if it is a valid binary search tree (BST)*.",
+        "ex1": {"in": "[2,1,3]", "out": "true", "exp": "Left child 1 < 2 < right child 3."},
+        "ex2": {"in": "[5,1,4,null,null,3,6]", "out": "false", "exp": "The root node's value is 5 but its right child's value is 4."},
+        "hidden": [{"in": "[2,1,3]", "out": "true"}, {"in": "[5,1,4,null,null,3,6]", "out": "false"}, {"in": "[2,2,2]", "out": "false"}],
+        "hints": ["Pass down valid range (minVal, maxVal) recursively, or verify that Inorder traversal is strictly increasing."],
+        "ed": "Recursively check low < node.val < high, updating bounds for left and right subtrees.",
+        "cpx": "Time: O(N), Space: O(H) where H is tree height",
+        "source": "Apple Practice Bank #60", "freq": 50
+    },
+    {
+        "index": 61, "title": "Lowest Common Ancestor of a Binary Tree", "slug": "lowest-common-ancestor-of-a-binary-tree", "lc": 236, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Tree", "BFS / DFS", "Recursion"],
+        "desc": "Given a binary tree, find the lowest common ancestor (LCA) of two given nodes `p` and `q`.",
+        "ex1": {"in": "[3,5,1,6,2,0,8,null,null,7,4]\n5\n1", "out": "3", "exp": "The LCA of nodes 5 and 1 is 3."},
+        "ex2": {"in": "[3,5,1,6,2,0,8,null,null,7,4]\n5\n4", "out": "5", "exp": "The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself."},
+        "hidden": [{"in": "[3,5,1,6,2,0,8,null,null,7,4]\n5\n1", "out": "3"}, {"in": "[3,5,1,6,2,0,8,null,null,7,4]\n5\n4", "out": "5"}],
+        "hints": ["If root is p or q or null return root. If both left and right recursion return non-null, root is LCA."],
+        "ed": "Post-order DFS returning matching nodes. If both subtrees return targets, current node is LCA.",
+        "cpx": "Time: O(N), Space: O(H)",
+        "source": "Apple Practice Bank #61", "freq": 48
+    },
+    {
+        "index": 62, "title": "Serialize and Deserialize Binary Tree", "slug": "serialize-and-deserialize-binary-tree", "lc": 297, "difficulty": "HARD", "category": "DSA",
+        "patterns": ["Tree", "Design", "BFS / DFS"],
+        "desc": "Serialization is the process of converting a data structure or object into a sequence of bits so that it can be stored in a file or memory buffer. Design an algorithm to serialize and deserialize a binary tree.",
+        "ex1": {"in": "[1,2,3,null,null,4,5]", "out": "[1, 2, 3, null, null, 4, 5]", "exp": "Tree preserved identically through serialize and deserialize roundtrip."},
+        "ex2": {"in": "[]", "out": "[]", "exp": "Empty tree."},
+        "hidden": [{"in": "[1,2,3,null,null,4,5]", "out": "[1, 2, 3, null, null, 4, 5]"}, {"in": "[]", "out": "[]"}],
+        "hints": ["Use preorder traversal with 'null' markers, or level-order BFS traversal."],
+        "ed": "Preorder string serialization using delimiter and recursive iterator reconstruction.",
+        "cpx": "Time: O(N), Space: O(N)",
+        "source": "Apple Practice Bank #62", "freq": 41
+    },
+    {
+        "index": 63, "title": "Maximum Depth of Binary Tree", "slug": "maximum-depth-of-binary-tree", "lc": 104, "difficulty": "EASY", "category": "DSA",
+        "patterns": ["Tree", "BFS / DFS", "Recursion"],
+        "desc": "Given the `root` of a binary tree, return *its maximum depth*.",
+        "ex1": {"in": "[3,9,20,null,null,15,7]", "out": "3", "exp": "Longest root-to-leaf path depth is 3."},
+        "ex2": {"in": "[1,null,2]", "out": "2", "exp": "Depth is 2."},
+        "hidden": [{"in": "[3,9,20,null,null,15,7]", "out": "3"}, {"in": "[1,null,2]", "out": "2"}, {"in": "[]", "out": "0"}],
+        "hints": ["maxDepth(root) = 1 + max(maxDepth(root.left), maxDepth(root.right))."],
+        "ed": "Recursive post-order DFS: return 0 if null else 1 + max(left, right).",
+        "cpx": "Time: O(N), Space: O(H)",
+        "source": "Apple Practice Bank #63", "freq": 40
+    },
+    {
+        "index": 64, "title": "Diameter of Binary Tree", "slug": "diameter-of-binary-tree", "lc": 543, "difficulty": "EASY", "category": "DSA",
+        "patterns": ["Tree", "BFS / DFS", "Recursion"],
+        "desc": "Given the `root` of a binary tree, return *the length of the **diameter** of the tree*.\n\nThe diameter of a binary tree is the length of the longest path between any two nodes in a tree.",
+        "ex1": {"in": "[1,2,3,4,5]", "out": "3", "exp": "Path 4 -> 2 -> 1 -> 3 or 5 -> 2 -> 1 -> 3 has length 3."},
+        "ex2": {"in": "[1,2]", "out": "1", "exp": "Path length 1."},
+        "hidden": [{"in": "[1,2,3,4,5]", "out": "3"}, {"in": "[1,2]", "out": "1"}],
+        "hints": ["At each node, compute height of left and right subtrees. Diameter through node is left_height + right_height."],
+        "ed": "Global max diameter tracker updated with left_depth + right_depth at every DFS node.",
+        "cpx": "Time: O(N), Space: O(H)",
+        "source": "Apple Practice Bank #64", "freq": 43
+    },
+    {
+        "index": 65, "title": "Binary Tree Right Side View", "slug": "binary-tree-right-side-view", "lc": 199, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Tree", "BFS / DFS", "Queue"],
+        "desc": "Given the `root` of a binary tree, imagine yourself standing on the **right side** of it, return *the values of the nodes you can see ordered from top to bottom*.",
+        "ex1": {"in": "[1,2,3,null,5,null,4]", "out": "[1, 3, 4]", "exp": "Right-most visible nodes at each level."},
+        "ex2": {"in": "[1,null,3]", "out": "[1, 3]", "exp": "Right nodes [1, 3]."},
+        "hidden": [{"in": "[1,2,3,null,5,null,4]", "out": "[1, 3, 4]"}, {"in": "[1,null,3]", "out": "[1, 3]"}, {"in": "[]", "out": "[]"}],
+        "hints": ["BFS level order taking the last element at each level, or DFS right-child first tracking seen depth."],
+        "ed": "Level-order BFS recording the rightmost node at each depth.",
+        "cpx": "Time: O(N), Space: O(D) where D is max tree width",
+        "source": "Apple Practice Bank #65", "freq": 41
+    },
+    {
+        "index": 66, "title": "Construct Binary Tree from Preorder and Inorder Traversal", "slug": "construct-binary-tree-from-preorder-and-inorder-traversal", "lc": 105, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Tree", "Divide and Conquer", "Hash Table"],
+        "desc": "Given two integer arrays `preorder` and `inorder` where `preorder` is the preorder traversal of a binary tree and `inorder` is the inorder traversal of the same tree, construct and return *the binary tree*.",
+        "ex1": {"in": "[3,9,20,15,7]\n[9,3,15,20,7]", "out": "[3, 9, 20, null, null, 15, 7]", "exp": "Root is 3, left subtree [9], right subtree [20,15,7]."},
+        "ex2": {"in": "[-1]\n[-1]", "out": "[-1]", "exp": "Single node tree."},
+        "hidden": [{"in": "[3,9,20,15,7]\n[9,3,15,20,7]", "out": "[3, 9, 20, null, null, 15, 7]"}, {"in": "[-1]\n[-1]", "out": "[-1]"}],
+        "hints": ["Preorder first element is root. Find root position in inorder array to divide into left and right subtrees."],
+        "ed": "Hash map stores inorder value indices. Divide and conquer constructs root, left, right.",
+        "cpx": "Time: O(N), Space: O(N)",
+        "source": "Apple Practice Bank #66", "freq": 42
+    },
+    {
+        "index": 67, "title": "Kth Smallest Element in a BST", "slug": "kth-smallest-element-in-a-bst", "lc": 230, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Tree", "Binary Search", "BFS / DFS"],
+        "desc": "Given the `root` of a binary search tree, and an integer `k`, return *the `k-th` smallest value (**1-indexed**) of all the values of the nodes in the tree*.",
+        "ex1": {"in": "[3,1,4,null,2]\n1", "out": "1", "exp": "Smallest element is 1."},
+        "ex2": {"in": "[5,3,6,2,4,null,null,1]\n3", "out": "3", "exp": "3rd smallest element is 3."},
+        "hidden": [{"in": "[3,1,4,null,2]\n1", "out": "1"}, {"in": "[5,3,6,2,4,null,null,1]\n3", "out": "3"}],
+        "hints": ["Inorder traversal of a BST visits nodes in strictly ascending order."],
+        "ed": "Iterative Inorder traversal using stack; return value when k reaches 0.",
+        "cpx": "Time: O(H + k), Space: O(H)",
+        "source": "Apple Practice Bank #67", "freq": 39
+    },
+    {
+        "index": 68, "title": "Subtree of Another Tree", "slug": "subtree-of-another-tree", "lc": 572, "difficulty": "EASY", "category": "DSA",
+        "patterns": ["Tree", "BFS / DFS", "Recursion"],
+        "desc": "Given the roots of two binary trees `root` and `subRoot`, return `true` if there is a subtree of `root` with the same structure and node values of `subRoot` and `false` otherwise.",
+        "ex1": {"in": "[3,4,5,1,2]\n[4,1,2]", "out": "true", "exp": "subRoot matches subtree rooted at node 4."},
+        "ex2": {"in": "[3,4,5,1,2,null,null,null,null,0]\n[4,1,2]", "out": "false", "exp": "Extra node 0 prevents match."},
+        "hidden": [{"in": "[3,4,5,1,2]\n[4,1,2]", "out": "true"}, {"in": "[3,4,5,1,2,null,null,null,null,0]\n[4,1,2]", "out": "false"}],
+        "hints": ["isSameTree(s, t) helper called at root, or recurse on root.left and root.right."],
+        "ed": "Tree matching recursion with isSameTree verification.",
+        "cpx": "Time: O(M * N), Space: O(H)",
+        "source": "Apple Practice Bank #68", "freq": 35
+    },
+    {
+        "index": 69, "title": "Same Tree", "slug": "same-tree", "lc": 100, "difficulty": "EASY", "category": "DSA",
+        "patterns": ["Tree", "BFS / DFS", "Recursion"],
+        "desc": "Given the roots of two binary trees `p` and `q`, write a function to check if they are the same or not.",
+        "ex1": {"in": "[1,2,3]\n[1,2,3]", "out": "true", "exp": "Identical structure and values."},
+        "ex2": {"in": "[1,2]\n[1,null,2]", "out": "false", "exp": "Different structures."},
+        "hidden": [{"in": "[1,2,3]\n[1,2,3]", "out": "true"}, {"in": "[1,2]\n[1,null,2]", "out": "false"}],
+        "hints": ["Base cases: if both null return true; if one null or values differ return false."],
+        "ed": "Recursive traversal: p.val == q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right).",
+        "cpx": "Time: O(N), Space: O(H)",
+        "source": "Apple Practice Bank #69", "freq": 33
+    },
+    {
+        "index": 70, "title": "Invert Binary Tree", "slug": "invert-binary-tree", "lc": 226, "difficulty": "EASY", "category": "DSA",
+        "patterns": ["Tree", "BFS / DFS", "Recursion"],
+        "desc": "Given the `root` of a binary tree, invert the tree, and return *its root*.",
+        "ex1": {"in": "[4,2,7,1,3,6,9]", "out": "[4, 7, 2, 9, 6, 3, 1]", "exp": "Binary tree mirrored horizontally."},
+        "ex2": {"in": "[2,1,3]", "out": "[2, 3, 1]", "exp": "Inverted tree."},
+        "hidden": [{"in": "[4,2,7,1,3,6,9]", "out": "[4, 7, 2, 9, 6, 3, 1]"}, {"in": "[2,1,3]", "out": "[2, 3, 1]"}, {"in": "[]", "out": "[]"}],
+        "hints": ["Swap root.left and root.right, then recursively invert left and right subtrees."],
+        "ed": "Post-order or pre-order recursive swap of left and right pointers.",
+        "cpx": "Time: O(N), Space: O(H)",
+        "source": "Apple Practice Bank #70", "freq": 45
+    },
+    {
+        "index": 71, "title": "Linked List Cycle", "slug": "linked-list-cycle", "lc": 141, "difficulty": "EASY", "category": "DSA",
+        "patterns": ["Linked List", "Two Pointers", "Fast & Slow Pointers"],
+        "desc": "Given `head`, the head of a linked list, determine if the linked list has a cycle in it.",
+        "ex1": {"in": "[3,2,0,-4]\n1", "out": "true", "exp": "Tail connects to the 1st node (0-indexed)."},
+        "ex2": {"in": "[1,2]\n0", "out": "true", "exp": "Tail connects to the 0th node."},
+        "hidden": [{"in": "[3,2,0,-4]\n1", "out": "true"}, {"in": "[1,2]\n0", "out": "true"}, {"in": "[1]\n-1", "out": "false"}],
+        "hints": ["Floyd's Tortoise and Hare: slow moves 1 step, fast moves 2 steps."],
+        "ed": "Fast & slow pointers meet if cycle exists; fast reaching null indicates acyclic list.",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #71", "freq": 48
+    },
+    {
+        "index": 72, "title": "Merge Two Sorted Lists", "slug": "merge-two-sorted-lists", "lc": 21, "difficulty": "EASY", "category": "DSA",
+        "patterns": ["Linked List", "Recursion", "Two Pointers"],
+        "desc": "You are given the heads of two sorted linked lists `list1` and `list2`. Merge the two lists into one **sorted** list.",
+        "ex1": {"in": "[1,2,4]\n[1,3,4]", "out": "[1, 1, 2, 3, 4, 4]", "exp": "Merged sorted linked list."},
+        "ex2": {"in": "[]\n[]", "out": "[]", "exp": "Both lists empty."},
+        "hidden": [{"in": "[1,2,4]\n[1,3,4]", "out": "[1, 1, 2, 3, 4, 4]"}, {"in": "[]\n[]", "out": "[]"}, {"in": "[]\n[0]", "out": "[0]"}],
+        "hints": ["Create dummy node and link smaller of list1.val and list2.val at each step."],
+        "ed": "Dummy head iterative merge advancing pointer of smaller head.",
+        "cpx": "Time: O(N + M), Space: O(1)",
+        "source": "Apple Practice Bank #72", "freq": 46
+    },
+    {
+        "index": 73, "title": "Remove Nth Node From End of List", "slug": "remove-nth-node-from-end-of-list", "lc": 19, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Linked List", "Two Pointers"],
+        "desc": "Given the `head` of a linked list, remove the `n-th` node from the end of the list and return its head.",
+        "ex1": {"in": "[1,2,3,4,5]\n2", "out": "[1, 2, 3, 5]", "exp": "2nd node from end (4) is removed."},
+        "ex2": {"in": "[1]\n1", "out": "[]", "exp": "Head is removed."},
+        "hidden": [{"in": "[1,2,3,4,5]\n2", "out": "[1, 2, 3, 5]"}, {"in": "[1]\n1", "out": "[]"}, {"in": "[1,2]\n1", "out": "[1]"}],
+        "hints": ["Two pointers with gap of n nodes. When fast reaches end, slow is just before target."],
+        "ed": "Advance fast pointer n+1 steps from dummy head. Advance slow and fast together until fast is null.",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #73", "freq": 40
+    },
+    {
+        "index": 74, "title": "Reverse Nodes in k-Group", "slug": "reverse-nodes-in-k-group", "lc": 25, "difficulty": "HARD", "category": "DSA",
+        "patterns": ["Linked List", "Recursion", "Two Pointers"],
+        "desc": "Given the `head` of a linked list, reverse the nodes of the list `k` at a time, and return *the modified list*. Nodes left over at the end should remain as-is.",
+        "ex1": {"in": "[1,2,3,4,5]\n2", "out": "[2, 1, 4, 3, 5]", "exp": "Groups of 2 reversed: [2,1] and [4,3]."},
+        "ex2": {"in": "[1,2,3,4,5]\n3", "out": "[3, 2, 1, 4, 5]", "exp": "Group of 3 reversed: [3,2,1], remaining [4,5] intact."},
+        "hidden": [{"in": "[1,2,3,4,5]\n2", "out": "[2, 1, 4, 3, 5]"}, {"in": "[1,2,3,4,5]\n3", "out": "[3, 2, 1, 4, 5]"}],
+        "hints": ["Check if k nodes exist first. If so, reverse k nodes and link recursively to next group."],
+        "ed": "Find kth node. Reverse sub-segment of length k and connect prev and next segment pointers.",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Candidate Report S01", "freq": 42
+    },
+    {
+        "index": 75, "title": "Copy List with Random Pointer", "slug": "copy-list-with-random-pointer", "lc": 138, "difficulty": "MEDIUM", "category": "DSA",
+        "patterns": ["Linked List", "Hash Table"],
+        "desc": "A linked list of length `n` is given such that each node contains an additional random pointer, which could point to any node in the list, or `null`. Construct a **deep copy** of the list.",
+        "ex1": {"in": "[[7,null],[13,0],[11,4],[10,2],[1,0]]", "out": "[[7, null], [13, 0], [11, 4], [10, 2], [1, 0]]", "exp": "Deep copied list with intact random pointers."},
+        "ex2": {"in": "[[1,1],[2,1]]", "out": "[[1, 1], [2, 1]]", "exp": "Random pointers cloned."},
+        "hidden": [{"in": "[[7,null],[13,0],[11,4],[10,2],[1,0]]", "out": "[[7, null], [13, 0], [11, 4], [10, 2], [1, 0]]"}, {"in": "[]", "out": "[]"}],
+        "hints": ["Interweave cloned nodes between original nodes: A -> A' -> B -> B', assign randoms, then unweave."],
+        "ed": "O(1) auxiliary space interweaving technique or Hash Map mapping original to clone.",
+        "cpx": "Time: O(N), Space: O(1)",
+        "source": "Apple Practice Bank #75", "freq": 44
+    }
+]
+
+with open('p51_75.json', 'w', encoding='utf-8') as f:
+    json.dump(P51_75, f, indent=2)
+
+print("P51-75 generated successfully.")
