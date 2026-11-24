@@ -114,6 +114,31 @@ export class AssessmentController {
     }
   }
 
+  static async runCode(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+      const user = (req as any).user;
+      const userId = user?.userId || user?._id?.toString();
+      const { questionId, language, code, customInput } = req.body;
+
+      if (!questionId || !code) {
+        throw new ValidationError('Question ID and code are required to test solution');
+      }
+
+      const result = await AssessmentService.runCode(
+        id,
+        userId,
+        questionId,
+        language || 'python',
+        code,
+        customInput
+      );
+      sendSuccess(res, result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async submitAssessment(req: Request, res: Response, next: NextFunction) {
     try {
       const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;

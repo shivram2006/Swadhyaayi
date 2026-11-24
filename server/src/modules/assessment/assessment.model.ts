@@ -143,6 +143,9 @@ export interface IStudentAnswer {
   isCorrect?: boolean;
   scoreAwarded: number;
   timeSpentSeconds: number;
+  testCasesPassed?: number;
+  totalTestCases?: number;
+  executionStatus?: string;
 }
 
 export interface IAssessmentSession extends Document {
@@ -204,6 +207,9 @@ const AssessmentSessionSchema = new Schema<IAssessmentSession>(
         isCorrect: { type: Boolean },
         scoreAwarded: { type: Number, default: 0 },
         timeSpentSeconds: { type: Number, default: 0 },
+        testCasesPassed: { type: Number },
+        totalTestCases: { type: Number },
+        executionStatus: { type: String },
       },
     ],
     proctoringEvents: [

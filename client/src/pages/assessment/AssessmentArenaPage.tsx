@@ -11,10 +11,118 @@ import {
   Maximize2,
   Award,
   ArrowLeft,
+  Play,
+  RotateCcw,
+  Terminal,
+  Check,
+  Code2,
+  FileCode,
 } from 'lucide-react';
 import { Card } from '../../components/common/Card';
 import { Badge } from '../../components/common/Badge';
 import { Button } from '../../components/common/Button';
+
+const getDefaultBoilerplate = (lang: string, title: string = 'solution'): string => {
+  const cleanTitle = title.replace(/[^a-zA-Z0-9]/g, ' ').trim();
+  const pascalName = cleanTitle
+    ? cleanTitle
+        .split(/\s+/)
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join('')
+    : 'Solution';
+  const camelName = pascalName.charAt(0).toLowerCase() + pascalName.slice(1);
+
+  if (lang === 'cpp') {
+    return `#include <iostream>
+#include <vector>
+#include <string>
+#include <unordered_map>
+#include <algorithm>
+
+using namespace std;
+
+// Solution Class / Function
+class Solution {
+public:
+    void ${camelName}() {
+        // Write your algorithmic solution here
+    }
+};
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    Solution solver;
+    solver.${camelName}();
+    return 0;
+}
+`;
+  }
+
+  if (lang === 'java') {
+    return `import java.util.*;
+
+public class Solution {
+    // LeetCode-style Solution Method
+    public void ${camelName}() {
+        // Write your solution here
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Solution solver = new Solution();
+        solver.${camelName}();
+        scanner.close();
+    }
+}
+`;
+  }
+
+  if (lang === 'javascript') {
+    return `// JavaScript (Node.js) Solution
+const fs = require('fs');
+
+function ${camelName}(input) {
+    // Write your algorithmic solution here
+    return input;
+}
+
+try {
+    const input = fs.readFileSync(0, 'utf-8').trim();
+    const result = ${camelName}(input);
+    if (result !== undefined) {
+        console.log(result);
+    }
+} catch (e) {
+    ${camelName}("");
+}
+`;
+  }
+
+  // Default: Python 3
+  return `# Python 3 Solution
+import sys
+
+def ${camelName}():
+    # Write your algorithmic solution here
+    pass
+
+if __name__ == "__main__":
+    try:
+        input_data = sys.stdin.read().strip()
+    except Exception:
+        input_data = ""
+    ${camelName}()
+`;
+};
+
+const SUPPORTED_LANGUAGES = [
+  { id: 'python', label: 'Python 3', ext: '.py' },
+  { id: 'javascript', label: 'JavaScript (Node)', ext: '.js' },
+  { id: 'cpp', label: 'C++ (GCC)', ext: '.cpp' },
+  { id: 'java', label: 'Java 17', ext: '.java' },
+];
 
 export const AssessmentArenaPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -29,6 +137,18 @@ export const AssessmentArenaPage: React.FC = () => {
   // Student answers mapping: questionId -> answer payload
   const [answers, setAnswers] = useState<Record<string, any>>({});
   const [timeRemainingSeconds, setTimeRemainingSeconds] = useState<number>(0);
+
+  // Language & Code states
+  const [selectedLanguage, setSelectedLanguage] = useState<string>('python');
+  const [codeByLangByQuestion, setCodeByLangByQuestion] = useState<Record<string, Record<string, string>>>({});
+  const [saveStatus, setSaveStatus] = useState<string | null>(null);
+
+  // Execution & Console states
+  const [activeConsoleTab, setActiveConsoleTab] = useState<'testcases' | 'custom' | 'result'>('testcases');
+  const [activeTestCaseIdx, setActiveTestCaseIdx] = useState<number>(0);
+  const [customInput, setCustomInput] = useState<string>('');
+  const [isRunningCode, setIsRunningCode] = useState<boolean>(false);
+  const [executionResult, setExecutionResult] = useState<any>(null);
 
   // Proctoring telemetry states
   const [tabSwitchCount, setTabSwitchCount] = useState<number>(0);
@@ -49,16 +169,25 @@ export const AssessmentArenaPage: React.FC = () => {
       if (res.data?.success) {
         setAssessment(res.data.data.assessment);
         setSession(res.data.data.session);
-        setQuestions(res.data.data.questions || []);
+        const qList = res.data.data.questions || [];
+        setQuestions(qList);
 
         // Populate existing answers if resuming
         const initialAnswers: Record<string, any> = {};
+        const initialCodeMap: Record<string, Record<string, string>> = {};
+
         if (res.data.data.session.answers) {
           res.data.data.session.answers.forEach((ans: any) => {
-            initialAnswers[ans.questionId.toString()] = ans;
+            const qIdStr = ans.questionId.toString();
+            initialAnswers[qIdStr] = ans;
+            if (ans.code && ans.language) {
+              if (!initialCodeMap[qIdStr]) initialCodeMap[qIdStr] = {};
+              initialCodeMap[qIdStr][ans.language] = ans.code;
+            }
           });
         }
         setAnswers(initialAnswers);
+        setCodeByLangByQuestion(initialCodeMap);
         setTabSwitchCount(res.data.data.session.tabSwitchCount || 0);
 
         // Timer calculation
@@ -130,6 +259,60 @@ export const AssessmentArenaPage: React.FC = () => {
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, [id, scorecard, session, assessment]);
 
+  // Synchronize language and starter boilerplate whenever active question changes
+  useEffect(() => {
+    const currentQ = questions[currentIdx];
+    if (!currentQ || currentQ.type !== 'CODING') return;
+
+    const qIdStr = currentQ.questionId.toString();
+    const existingAns = answers[qIdStr];
+    const lang = existingAns?.language || selectedLanguage || 'python';
+    setSelectedLanguage(lang);
+
+    // Look for existing code draft
+    let currentCode = codeByLangByQuestion[qIdStr]?.[lang];
+    if (!currentCode && existingAns?.code) {
+      currentCode = existingAns.code;
+    }
+
+    // If still no code, extract starterCode from question data or default boilerplate
+    if (!currentCode) {
+      const starterCodes = currentQ.questionData?.starterCode;
+      if (Array.isArray(starterCodes)) {
+        const found = starterCodes.find(
+          (sc: any) => sc.language?.toLowerCase() === lang.toLowerCase()
+        );
+        if (found?.boilerplate) {
+          currentCode = found.boilerplate;
+        }
+      }
+      if (!currentCode) {
+        currentCode = getDefaultBoilerplate(lang, currentQ.questionData?.title || 'solution');
+      }
+    }
+
+    setCodeByLangByQuestion((prev) => ({
+      ...prev,
+      [qIdStr]: {
+        ...(prev[qIdStr] || {}),
+        [lang]: currentCode,
+      },
+    }));
+
+    if (!answers[qIdStr]?.code) {
+      setAnswers((prev) => ({
+        ...prev,
+        [qIdStr]: {
+          ...(prev[qIdStr] || {}),
+          questionId: currentQ.questionId,
+          type: 'CODING',
+          code: currentCode,
+          language: lang,
+        },
+      }));
+    }
+  }, [currentIdx, questions]);
+
   const handleSelectOption = (optionId: string) => {
     const currentQ = questions[currentIdx];
     if (!currentQ) return;
@@ -147,11 +330,67 @@ export const AssessmentArenaPage: React.FC = () => {
     setAnswers(updated);
 
     // Auto-save in background
-    axios.post(`/assessments/${id}/save-answer`, {
-      questionId: currentQ.questionId,
-      type: currentQ.type,
-      selectedOptionId: optionId,
-    }).catch((e) => console.error('Save answer error:', e));
+    axios
+      .post(`/assessments/${id}/save-answer`, {
+        questionId: currentQ.questionId,
+        type: currentQ.type,
+        selectedOptionId: optionId,
+      })
+      .catch((e) => console.error('Save answer error:', e));
+  };
+
+  const handleLanguageChange = (newLang: string) => {
+    const currentQ = questions[currentIdx];
+    if (!currentQ || currentQ.type !== 'CODING') return;
+
+    const qIdStr = currentQ.questionId.toString();
+    setSelectedLanguage(newLang);
+
+    // Check if code exists for this language
+    let langCode = codeByLangByQuestion[qIdStr]?.[newLang];
+    if (!langCode) {
+      const starterCodes = currentQ.questionData?.starterCode;
+      if (Array.isArray(starterCodes)) {
+        const found = starterCodes.find(
+          (sc: any) => sc.language?.toLowerCase() === newLang.toLowerCase()
+        );
+        if (found?.boilerplate) {
+          langCode = found.boilerplate;
+        }
+      }
+      if (!langCode) {
+        langCode = getDefaultBoilerplate(newLang, currentQ.questionData?.title || 'solution');
+      }
+    }
+
+    setCodeByLangByQuestion((prev) => ({
+      ...prev,
+      [qIdStr]: {
+        ...(prev[qIdStr] || {}),
+        [newLang]: langCode,
+      },
+    }));
+
+    setAnswers((prev) => ({
+      ...prev,
+      [qIdStr]: {
+        ...(prev[qIdStr] || {}),
+        questionId: currentQ.questionId,
+        type: 'CODING',
+        code: langCode,
+        language: newLang,
+      },
+    }));
+
+    // Auto-save draft
+    axios
+      .post(`/assessments/${id}/save-answer`, {
+        questionId: currentQ.questionId,
+        type: 'CODING',
+        code: langCode,
+        language: newLang,
+      })
+      .catch((e) => console.error('Save code draft error:', e));
   };
 
   const handleCodeChange = (codeVal: string) => {
@@ -159,33 +398,119 @@ export const AssessmentArenaPage: React.FC = () => {
     if (!currentQ) return;
 
     const qIdStr = currentQ.questionId.toString();
-    const updated = {
-      ...answers,
+    setCodeByLangByQuestion((prev) => ({
+      ...prev,
       [qIdStr]: {
-        ...answers[qIdStr],
+        ...(prev[qIdStr] || {}),
+        [selectedLanguage]: codeVal,
+      },
+    }));
+
+    setAnswers((prev) => ({
+      ...prev,
+      [qIdStr]: {
+        ...prev[qIdStr],
         questionId: currentQ.questionId,
         type: currentQ.type,
         code: codeVal,
+        language: selectedLanguage,
       },
-    };
-    setAnswers(updated);
+    }));
   };
 
-  const handleSaveCode = () => {
+  const handleResetBoilerplate = () => {
+    const currentQ = questions[currentIdx];
+    if (!currentQ || currentQ.type !== 'CODING') return;
+
+    if (!confirm(`Reset ${selectedLanguage.toUpperCase()} code to LeetCode-style boilerplate?`)) return;
+
+    let bp = '';
+    const starterCodes = currentQ.questionData?.starterCode;
+    if (Array.isArray(starterCodes)) {
+      const found = starterCodes.find(
+        (sc: any) => sc.language?.toLowerCase() === selectedLanguage.toLowerCase()
+      );
+      if (found?.boilerplate) {
+        bp = found.boilerplate;
+      }
+    }
+    if (!bp) {
+      bp = getDefaultBoilerplate(selectedLanguage, currentQ.questionData?.title || 'solution');
+    }
+
+    handleCodeChange(bp);
+  };
+
+  const handleSaveCode = async () => {
     const currentQ = questions[currentIdx];
     if (!currentQ) return;
 
     const qIdStr = currentQ.questionId.toString();
-    axios.post(`/assessments/${id}/save-answer`, {
-      questionId: currentQ.questionId,
-      type: currentQ.type,
-      code: answers[qIdStr]?.code || '',
-      language: 'python',
-    }).catch((e) => console.error('Save code error:', e));
+    const currentCode =
+      codeByLangByQuestion[qIdStr]?.[selectedLanguage] || answers[qIdStr]?.code || '';
+
+    try {
+      await axios.post(`/assessments/${id}/save-answer`, {
+        questionId: currentQ.questionId,
+        type: currentQ.type,
+        code: currentCode,
+        language: selectedLanguage,
+      });
+      setSaveStatus('Draft Saved!');
+      setTimeout(() => setSaveStatus(null), 2500);
+    } catch (e) {
+      console.error('Save code error:', e);
+      setSaveStatus('Save Failed');
+      setTimeout(() => setSaveStatus(null), 2500);
+    }
+  };
+
+  const handleRunCode = async () => {
+    const currentQ = questions[currentIdx];
+    if (!currentQ) return;
+
+    const qIdStr = currentQ.questionId.toString();
+    const currentCode =
+      codeByLangByQuestion[qIdStr]?.[selectedLanguage] || answers[qIdStr]?.code || '';
+
+    if (!currentCode.trim()) {
+      alert('Please write code before running tests.');
+      return;
+    }
+
+    setIsRunningCode(true);
+    setActiveConsoleTab('result');
+    setExecutionResult(null);
+
+    try {
+      const payload: any = {
+        questionId: currentQ.questionId,
+        language: selectedLanguage,
+        code: currentCode,
+      };
+
+      if (activeConsoleTab === 'custom' && customInput.trim()) {
+        payload.customInput = customInput;
+      }
+
+      const res = await axios.post(`/assessments/${id}/run-code`, payload);
+      if (res.data?.success) {
+        setExecutionResult(res.data.data);
+      }
+    } catch (err: any) {
+      console.error('Execution error:', err);
+      setExecutionResult({
+        overallStatus: 'RUNTIME_ERROR',
+        errorLog: err.response?.data?.error?.message || err.message || 'Execution failed',
+      });
+    } finally {
+      setIsRunningCode(false);
+    }
   };
 
   const handleSubmitTest = async () => {
-    if (!confirm('Are you sure you want to finish and submit this test?')) return;
+    if (!confirm('Are you sure you want to finish and submit this test? All algorithmic and aptitude answers will be evaluated.'))
+      return;
     try {
       const res = await axios.post(`/assessments/${id}/submit`);
       if (res.data?.success) {
@@ -227,12 +552,19 @@ export const AssessmentArenaPage: React.FC = () => {
   const currentQ = questions[currentIdx];
   const qData = currentQ?.questionData;
   const isAnswered = currentQ && !!answers[currentQ.questionId.toString()];
+  const currentCode =
+    currentQ &&
+    (codeByLangByQuestion[currentQ.questionId.toString()]?.[selectedLanguage] ??
+      answers[currentQ.questionId.toString()]?.code ??
+      '');
 
   const formatTime = (secs: number) => {
     const m = Math.floor(secs / 60);
     const s = secs % 60;
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
+
+  const sampleTestCases = qData?.sampleTestCases || [];
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between -m-6 p-6">
@@ -247,7 +579,9 @@ export const AssessmentArenaPage: React.FC = () => {
             <div className="text-xs text-slate-400 flex items-center gap-2">
               <span>Section: {currentQ?.sectionId}</span>
               <span className="text-slate-600">•</span>
-              <span>Question {currentIdx + 1} of {questions.length}</span>
+              <span>
+                Question {currentIdx + 1} of {questions.length}
+              </span>
             </div>
           </div>
         </div>
@@ -290,13 +624,13 @@ export const AssessmentArenaPage: React.FC = () => {
 
       {/* Main Examination Workspace */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 py-6 flex-1">
-        {/* Left 3 Columns: Question Presentation */}
-        <div className="lg:col-span-3 space-y-4">
-          <Card className="p-6 bg-slate-900/90 border-slate-800 min-h-[460px] flex flex-col justify-between">
-            <div className="space-y-4">
+        {/* Left 3 Columns: Question Presentation & LeetCode Editor */}
+        <div className="lg:col-span-3 space-y-4 flex flex-col justify-between">
+          <Card className="p-6 bg-slate-900/90 border-slate-800 flex-1 flex flex-col justify-between">
+            <div className="space-y-4 flex-1">
               <div className="flex items-center justify-between pb-3 border-b border-slate-800/80">
-                <Badge variant="brand" className="text-xs">
-                  {currentQ?.type === 'CODING' ? 'Algorithmic Coding' : 'Multiple Choice MCQ'}
+                <Badge variant={currentQ?.type === 'CODING' ? 'brand' : 'neutral'} className="text-xs">
+                  {currentQ?.type === 'CODING' ? 'Algorithmic Coding Challenge' : 'Multiple Choice MCQ'}
                 </Badge>
                 <span className="text-xs font-mono text-emerald-400 font-bold">
                   +{currentQ?.points} Points
@@ -305,14 +639,14 @@ export const AssessmentArenaPage: React.FC = () => {
 
               {/* Question Text */}
               <div className="text-sm sm:text-base font-semibold text-white leading-relaxed">
-                {qData?.title || qData?.problemStatement || 'Loading question...'}
+                {qData?.title || qData?.problemStatement || qData?.questionText || 'Loading question...'}
               </div>
 
               {/* Subtitle / Details */}
               {qData?.description && (
-                <p className="text-xs text-slate-300 whitespace-pre-line leading-relaxed">
+                <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs text-slate-300 whitespace-pre-line leading-relaxed font-sans max-h-48 overflow-y-auto">
                   {qData.description}
-                </p>
+                </div>
               )}
 
               {/* MCQ Options Rendering */}
@@ -349,22 +683,269 @@ export const AssessmentArenaPage: React.FC = () => {
                 </div>
               )}
 
-              {/* Coding Editor Area */}
+              {/* LEETCODE STYLE CODING ARENA */}
               {currentQ?.type === 'CODING' && (
-                <div className="space-y-3 pt-2">
-                  <div className="flex items-center justify-between text-xs text-slate-400">
-                    <span>Write your solution in Python / JS:</span>
-                    <Button onClick={handleSaveCode} variant="outline" size="sm">
-                      Save Code Draft
-                    </Button>
+                <div className="space-y-4 pt-2">
+                  {/* Editor Top Bar: Language Selector & Action Buttons */}
+                  <div className="p-2.5 rounded-xl bg-slate-950 border border-slate-800 flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-2">
+                      <Code2 className="w-4 h-4 text-brand-400" />
+                      <span className="text-xs font-semibold text-slate-300">Language:</span>
+                      <select
+                        value={selectedLanguage}
+                        onChange={(e) => handleLanguageChange(e.target.value)}
+                        className="bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white font-mono focus:outline-none focus:border-brand-500 cursor-pointer"
+                      >
+                        {SUPPORTED_LANGUAGES.map((lang) => (
+                          <option key={lang.id} value={lang.id}>
+                            {lang.label}
+                          </option>
+                        ))}
+                      </select>
+
+                      <button
+                        onClick={handleResetBoilerplate}
+                        className="p-1.5 text-slate-400 hover:text-slate-200 rounded-lg hover:bg-slate-800 transition-colors ml-1 text-xs flex items-center gap-1"
+                        title="Reset code to LeetCode boilerplate"
+                      >
+                        <RotateCcw className="w-3.5 h-3.5" />
+                        <span className="hidden sm:inline text-[11px]">Reset Boilerplate</span>
+                      </button>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      {saveStatus && (
+                        <span className="text-xs text-emerald-400 font-mono animate-fade-in flex items-center gap-1">
+                          <Check className="w-3 h-3" /> {saveStatus}
+                        </span>
+                      )}
+
+                      <Button
+                        onClick={handleSaveCode}
+                        variant="outline"
+                        size="sm"
+                        leftIcon={<FileCode className="w-3.5 h-3.5" />}
+                        className="text-xs border-slate-700 hover:bg-slate-800"
+                      >
+                        Save Draft
+                      </Button>
+
+                      <Button
+                        onClick={handleRunCode}
+                        isLoading={isRunningCode}
+                        variant="primary"
+                        size="sm"
+                        leftIcon={<Play className="w-3.5 h-3.5 fill-emerald-400 text-emerald-400" />}
+                        className="text-xs bg-emerald-600 hover:bg-emerald-500 text-white font-semibold shadow-md shadow-emerald-600/30"
+                      >
+                        Run Code
+                      </Button>
+                    </div>
                   </div>
-                  <textarea
-                    rows={12}
-                    value={answers[currentQ.questionId.toString()]?.code || ''}
-                    onChange={(e) => handleCodeChange(e.target.value)}
-                    placeholder="# Write your algorithmic solution here..."
-                    className="w-full p-4 bg-slate-950 border border-slate-800 rounded-xl font-mono text-xs text-emerald-300 focus:outline-none focus:border-brand-500"
-                  ></textarea>
+
+                  {/* Code Editor Box */}
+                  <div className="relative rounded-xl border border-slate-800 overflow-hidden bg-slate-950 shadow-inner">
+                    <div className="px-3 py-1.5 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                      <span>solution{SUPPORTED_LANGUAGES.find((l) => l.id === selectedLanguage)?.ext || '.py'}</span>
+                      <span className="text-slate-500">Ctrl + S or "Save Draft" to persist</span>
+                    </div>
+
+                    <textarea
+                      rows={14}
+                      value={currentCode}
+                      onChange={(e) => handleCodeChange(e.target.value)}
+                      placeholder="# Write your algorithmic solution here..."
+                      className="w-full p-4 bg-slate-950 font-mono text-xs text-emerald-300 focus:outline-none focus:ring-0 border-0 leading-relaxed resize-y selection:bg-brand-500/30"
+                      spellCheck={false}
+                    ></textarea>
+                  </div>
+
+                  {/* Interactive Testcase & Console Tabs */}
+                  <div className="rounded-xl border border-slate-800 bg-slate-950/90 overflow-hidden text-xs">
+                    <div className="flex border-b border-slate-800 bg-slate-900/80 px-3">
+                      <button
+                        onClick={() => setActiveConsoleTab('testcases')}
+                        className={`py-2 px-3 border-b-2 font-medium transition-colors ${
+                          activeConsoleTab === 'testcases'
+                            ? 'border-brand-500 text-brand-300'
+                            : 'border-transparent text-slate-400 hover:text-slate-200'
+                        }`}
+                      >
+                        Sample Testcases ({sampleTestCases.length || 1})
+                      </button>
+                      <button
+                        onClick={() => setActiveConsoleTab('custom')}
+                        className={`py-2 px-3 border-b-2 font-medium transition-colors ${
+                          activeConsoleTab === 'custom'
+                            ? 'border-brand-500 text-brand-300'
+                            : 'border-transparent text-slate-400 hover:text-slate-200'
+                        }`}
+                      >
+                        Custom Input
+                      </button>
+                      <button
+                        onClick={() => setActiveConsoleTab('result')}
+                        className={`py-2 px-3 border-b-2 font-medium transition-colors flex items-center gap-1.5 ${
+                          activeConsoleTab === 'result'
+                            ? 'border-brand-500 text-brand-300'
+                            : 'border-transparent text-slate-400 hover:text-slate-200'
+                        }`}
+                      >
+                        <Terminal className="w-3.5 h-3.5" />
+                        Run Output
+                        {executionResult && (
+                          <span
+                            className={`w-2 h-2 rounded-full ${
+                              executionResult.overallStatus === 'ACCEPTED' || executionResult.status === 'ACCEPTED'
+                                ? 'bg-emerald-400'
+                                : 'bg-rose-400'
+                            }`}
+                          />
+                        )}
+                      </button>
+                    </div>
+
+                    <div className="p-4">
+                      {/* TAB 1: Sample Test Cases */}
+                      {activeConsoleTab === 'testcases' && (
+                        <div className="space-y-3">
+                          {sampleTestCases.length > 0 ? (
+                            <>
+                              <div className="flex gap-2">
+                                {sampleTestCases.map((_: any, idx: number) => (
+                                  <button
+                                    key={idx}
+                                    onClick={() => setActiveTestCaseIdx(idx)}
+                                    className={`px-3 py-1 rounded-lg font-mono text-xs font-semibold border ${
+                                      activeTestCaseIdx === idx
+                                        ? 'bg-brand-500/20 border-brand-500 text-brand-300'
+                                        : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200'
+                                    }`}
+                                  >
+                                    Case {idx + 1}
+                                  </button>
+                                ))}
+                              </div>
+
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
+                                <div>
+                                  <span className="text-[11px] text-slate-500 uppercase tracking-wider block mb-1">
+                                    Sample Input:
+                                  </span>
+                                  <pre className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 whitespace-pre-wrap">
+                                    {sampleTestCases[activeTestCaseIdx]?.input || '(Empty)'}
+                                  </pre>
+                                </div>
+                                <div>
+                                  <span className="text-[11px] text-slate-500 uppercase tracking-wider block mb-1">
+                                    Expected Output:
+                                  </span>
+                                  <pre className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-emerald-400 whitespace-pre-wrap">
+                                    {sampleTestCases[activeTestCaseIdx]?.output || '(None)'}
+                                  </pre>
+                                </div>
+                              </div>
+                            </>
+                          ) : (
+                            <p className="text-slate-400 text-xs italic">
+                              Standard algorithmic test suite is configured for this problem. Click "Run Code" to test execution.
+                            </p>
+                          )}
+                        </div>
+                      )}
+
+                      {/* TAB 2: Custom Input */}
+                      {activeConsoleTab === 'custom' && (
+                        <div className="space-y-2">
+                          <span className="text-[11px] text-slate-400 block">
+                            Type stdin inputs to evaluate against your solution:
+                          </span>
+                          <textarea
+                            rows={3}
+                            value={customInput}
+                            onChange={(e) => setCustomInput(e.target.value)}
+                            placeholder="e.g. 5&#10;1 2 3 4 5"
+                            className="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 font-mono text-xs text-slate-200 focus:outline-none focus:border-brand-500"
+                          />
+                        </div>
+                      )}
+
+                      {/* TAB 3: Run Result / Console */}
+                      {activeConsoleTab === 'result' && (
+                        <div>
+                          {isRunningCode ? (
+                            <div className="py-6 flex items-center justify-center gap-2 text-slate-400">
+                              <div className="w-4 h-4 border-2 border-brand-500 border-t-transparent rounded-full animate-spin" />
+                              <span>Compiling and running against test suite...</span>
+                            </div>
+                          ) : executionResult ? (
+                            <div className="space-y-3 font-mono text-xs">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-2">
+                                  {executionResult.overallStatus === 'ACCEPTED' || executionResult.status === 'ACCEPTED' ? (
+                                    <Badge variant="success" className="text-xs font-bold">
+                                      Accepted
+                                    </Badge>
+                                  ) : (
+                                    <Badge variant="danger" className="text-xs font-bold">
+                                      {executionResult.overallStatus || executionResult.status || 'Failed'}
+                                    </Badge>
+                                  )}
+
+                                  {executionResult.totalCases !== undefined && (
+                                    <span className="text-slate-400">
+                                      {executionResult.passedCases} / {executionResult.totalCases} Sample Cases Passed
+                                    </span>
+                                  )}
+                                </div>
+
+                                {executionResult.maxExecutionTimeMs !== undefined && (
+                                  <span className="text-slate-500 text-[11px]">
+                                    Runtime: {executionResult.maxExecutionTimeMs} ms
+                                  </span>
+                                )}
+                              </div>
+
+                              {executionResult.output && (
+                                <div>
+                                  <span className="text-[11px] text-slate-500 block mb-1">Standard Output:</span>
+                                  <pre className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 whitespace-pre-wrap">
+                                    {executionResult.output}
+                                  </pre>
+                                </div>
+                              )}
+
+                              {executionResult.firstFailedCase && (
+                                <div className="p-3 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-300 space-y-1.5">
+                                  <span className="font-bold block">
+                                    First Failed Testcase (Case #{executionResult.firstFailedCase.caseNumber}):
+                                  </span>
+                                  <p className="text-[11px]">Input: {executionResult.firstFailedCase.input}</p>
+                                  <p className="text-[11px]">Expected: {executionResult.firstFailedCase.expectedOutput}</p>
+                                  <p className="text-[11px]">Actual Output: {executionResult.firstFailedCase.actualOutput}</p>
+                                  {executionResult.firstFailedCase.errorLog && (
+                                    <pre className="p-2 bg-slate-950 rounded text-rose-400 text-[10px] whitespace-pre-wrap mt-1">
+                                      {executionResult.firstFailedCase.errorLog}
+                                    </pre>
+                                  )}
+                                </div>
+                              )}
+
+                              {executionResult.errorLog && !executionResult.firstFailedCase && (
+                                <pre className="p-2.5 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-300 whitespace-pre-wrap">
+                                  {executionResult.errorLog}
+                                </pre>
+                              )}
+                            </div>
+                          ) : (
+                            <p className="text-slate-500 text-xs italic py-2">
+                              No execution result yet. Click "Run Code" above to compile & verify your solution.
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
@@ -475,38 +1056,108 @@ export const AssessmentArenaPage: React.FC = () => {
         </div>
       )}
 
-      {/* Final Scorecard Modal */}
+      {/* Final Detailed Scorecard Modal */}
       {scorecard && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4">
-          <Card className="max-w-md w-full p-6 bg-slate-900 border-brand-500/40 space-y-5 text-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 overflow-y-auto">
+          <Card className="max-w-xl w-full p-6 bg-slate-900 border-brand-500/40 space-y-5 text-center my-8 shadow-2xl">
             <div className="w-14 h-14 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center mx-auto text-amber-400">
               <Award className="w-7 h-7" />
             </div>
             <div>
-              <h2 className="text-xl font-extrabold text-white">Assessment Submitted</h2>
+              <h2 className="text-xl font-extrabold text-white">Assessment Submitted & Graded</h2>
               <p className="text-xs text-slate-400 mt-1">
-                Your performance scorecard has been recorded in the college placement ledger.
+                Your algorithmic execution results and answers have been evaluated.
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-3">
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-slate-400">Total Score:</span>
-                <span className="text-base font-mono font-bold text-brand-300">
+            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 grid grid-cols-3 gap-3 text-center">
+              <div>
+                <span className="text-[11px] text-slate-500 uppercase tracking-wider block">Total Score</span>
+                <span className="text-lg font-mono font-bold text-brand-300">
                   {scorecard.totalScore} / {scorecard.maxPossibleScore}
                 </span>
               </div>
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-slate-400">Percentage:</span>
-                <span className="font-mono font-bold text-white">{scorecard.percentage}%</span>
+              <div>
+                <span className="text-[11px] text-slate-500 uppercase tracking-wider block">Percentage</span>
+                <span className="text-lg font-mono font-bold text-white">{scorecard.percentage}%</span>
               </div>
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-slate-400">Placement Verdict:</span>
-                <Badge variant={scorecard.isPassed ? 'success' : 'danger'}>
-                  {scorecard.isPassed ? 'QUALIFIED / PASSED' : 'NEEDS PRACTICE'}
+              <div>
+                <span className="text-[11px] text-slate-500 uppercase tracking-wider block">Status</span>
+                <Badge variant={scorecard.isPassed ? 'success' : 'danger'} className="mt-1">
+                  {scorecard.isPassed ? 'QUALIFIED' : 'NEEDS PRACTICE'}
                 </Badge>
               </div>
             </div>
+
+            {/* Detailed per-question scorecard */}
+            {scorecard.answers && scorecard.answers.length > 0 && (
+              <div className="space-y-2 text-left">
+                <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+                  Question Breakdown & Evaluation
+                </h4>
+                <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
+                  {scorecard.answers.map((ansItem: any, idx: number) => {
+                    const matchedQ = questions.find(
+                      (q) => q.questionId.toString() === ansItem.questionId.toString()
+                    );
+                    const qTitle =
+                      matchedQ?.questionData?.title ||
+                      matchedQ?.questionData?.problemStatement ||
+                      `Question ${idx + 1}`;
+
+                    return (
+                      <div
+                        key={idx}
+                        className="p-3 rounded-lg bg-slate-950 border border-slate-800/80 flex items-center justify-between text-xs"
+                      >
+                        <div className="space-y-0.5">
+                          <div className="flex items-center gap-2">
+                            <span className="font-mono text-slate-500 font-bold">#{idx + 1}</span>
+                            <span className="font-semibold text-slate-200">{qTitle}</span>
+                            <Badge variant={ansItem.type === 'CODING' ? 'brand' : 'neutral'} size="sm">
+                              {ansItem.type}
+                            </Badge>
+                          </div>
+
+                          <div className="text-[11px] text-slate-400 flex items-center gap-2">
+                            {ansItem.type === 'CODING' && ansItem.testCasesPassed !== undefined && (
+                              <span>
+                                Testcases: {ansItem.testCasesPassed}/{ansItem.totalTestCases} passed
+                              </span>
+                            )}
+                            {ansItem.executionStatus && (
+                              <span
+                                className={
+                                  ansItem.executionStatus === 'ACCEPTED'
+                                    ? 'text-emerald-400'
+                                    : 'text-amber-400'
+                                }
+                              >
+                                ({ansItem.executionStatus})
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="text-right">
+                          <span
+                            className={`font-mono font-bold text-xs ${
+                              ansItem.scoreAwarded > 0
+                                ? 'text-emerald-400'
+                                : ansItem.scoreAwarded < 0
+                                ? 'text-rose-400'
+                                : 'text-slate-400'
+                            }`}
+                          >
+                            {ansItem.scoreAwarded > 0 ? `+${ansItem.scoreAwarded}` : ansItem.scoreAwarded} pts
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             <Button
               onClick={() => navigate('/assessments')}

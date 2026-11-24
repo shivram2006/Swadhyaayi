@@ -24,6 +24,7 @@ router.get('/:id', AssessmentController.getAssessmentById);
 router.post('/:id/start', requireRoles('STUDENT'), AssessmentController.startSession);
 router.post('/:id/telemetry', requireRoles('STUDENT'), AssessmentController.recordTelemetry);
 router.post('/:id/save-answer', requireRoles('STUDENT'), AssessmentController.saveAnswer);
+router.post('/:id/run-code', requireRoles('STUDENT'), AssessmentController.runCode);
 router.post('/:id/submit', requireRoles('STUDENT'), AssessmentController.submitAssessment);
 
 // Faculty / TPO Proctoring & Analytics

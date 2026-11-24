@@ -2,6 +2,7 @@ import { Types } from 'mongoose';
 import { Assessment, AssessmentSession, IAssessment, ProctoringEventType } from './assessment.model';
 import { QuestionAptitude } from '../aptitude/aptitude.model';
 import { QuestionCoding } from '../coding/coding.model';
+import { SandboxRunner } from '../coding/runner/sandboxRunner';
 import { User } from '../user/user.model';
 import { NotFoundError, ValidationError, ConflictError } from '../../core/utils/appError';
 
@@ -276,6 +277,82 @@ export class AssessmentService {
     return { saved: true, totalAnswers: session.answers.length };
   }
 
+  static async runCode(
+    assessmentId: string,
+    userId: string,
+    questionId: string,
+    language: string,
+    code: string,
+    customInput?: string
+  ) {
+    const aId = new Types.ObjectId(assessmentId);
+    const uId = new Types.ObjectId(userId);
+
+    const session = await AssessmentSession.findOne({
+      assessmentId: aId,
+      userId: uId,
+      status: 'IN_PROGRESS',
+    });
+    if (!session) throw new NotFoundError('Active assessment session not found');
+
+    let question: any = null;
+    if (Types.ObjectId.isValid(questionId)) {
+      question = await QuestionCoding.findById(questionId).lean();
+    }
+
+    const timeLimitMs = question?.timeLimitMs || 2000;
+
+    if (customInput !== undefined && customInput.trim() !== '') {
+      const singleRes = await SandboxRunner.executeSingle(language, code, customInput, timeLimitMs);
+      return {
+        isCustomInput: true,
+        output: singleRes.stdout,
+        error: singleRes.stderr,
+        status: singleRes.status,
+        executionTimeMs: singleRes.executionTimeMs,
+        memoryUsedKb: singleRes.memoryUsedKb,
+      };
+    }
+
+    const sampleCases = (question?.sampleTestCases || []).map((s: any) => ({
+      input: s.input,
+      expectedOutput: s.output,
+    }));
+
+    if (sampleCases.length === 0) {
+      const singleRes = await SandboxRunner.executeSingle(language, code, '', timeLimitMs);
+      return {
+        isCustomInput: false,
+        overallStatus: singleRes.status,
+        totalCases: 1,
+        passedCases: singleRes.status === 'ACCEPTED' ? 1 : 0,
+        maxExecutionTimeMs: singleRes.executionTimeMs,
+        maxMemoryUsedKb: singleRes.memoryUsedKb,
+        firstFailedCase:
+          singleRes.status !== 'ACCEPTED'
+            ? {
+                caseNumber: 1,
+                input: '(None)',
+                expectedOutput: '(Clean Execution)',
+                actualOutput: singleRes.stdout || singleRes.stderr,
+                errorLog: singleRes.errorLog,
+              }
+            : undefined,
+      };
+    }
+
+    const result = await SandboxRunner.evaluateBatch(language, code, sampleCases, timeLimitMs);
+    return {
+      isCustomInput: false,
+      overallStatus: result.overallStatus,
+      totalCases: result.totalCases,
+      passedCases: result.passedCases,
+      maxExecutionTimeMs: result.maxExecutionTimeMs,
+      maxMemoryUsedKb: result.maxMemoryUsedKb,
+      firstFailedCase: result.firstFailedCase,
+    };
+  }
+
   static async submitAssessment(assessmentId: string, userId: string) {
     const aId = new Types.ObjectId(assessmentId);
     const uId = new Types.ObjectId(userId);
@@ -295,8 +372,15 @@ export class AssessmentService {
 
     // Evaluate answers
     const aptitudeIds = session.shuffledQuestions.filter((q) => q.type === 'APTITUDE').map((q) => q.questionId);
-    const aptitudeQuestions = await QuestionAptitude.find({ _id: { $in: aptitudeIds } }).lean();
+    const codingIds = session.shuffledQuestions.filter((q) => q.type === 'CODING').map((q) => q.questionId);
+
+    const [aptitudeQuestions, codingQuestions] = await Promise.all([
+      QuestionAptitude.find({ _id: { $in: aptitudeIds } }).lean(),
+      QuestionCoding.find({ _id: { $in: codingIds } }).lean(),
+    ]);
+
     const aptMap = new Map(aptitudeQuestions.map((q) => [q._id.toString(), q]));
+    const codingMap = new Map(codingQuestions.map((q) => [q._id.toString(), q]));
 
     let totalScore = 0;
 
@@ -320,11 +404,55 @@ export class AssessmentService {
           }
         }
       } else if (sq.type === 'CODING') {
+        const fullQ = codingMap.get(sq.questionId.toString());
         if (ans && ans.code && ans.code.trim().length > 0) {
-          // In test assessment mode: code awarded points
-          ans.isCorrect = true;
-          ans.scoreAwarded = sq.points;
-          totalScore += sq.points;
+          const lang = ans.language || 'python';
+          const testCasesToEvaluate: { input: string; expectedOutput: string; weight?: number }[] = [];
+
+          if (fullQ?.hiddenTestCases && fullQ.hiddenTestCases.length > 0) {
+            fullQ.hiddenTestCases.forEach((tc: any) => {
+              testCasesToEvaluate.push({ input: tc.input, expectedOutput: tc.expectedOutput, weight: tc.weight || 1 });
+            });
+          } else if (fullQ?.sampleTestCases && fullQ.sampleTestCases.length > 0) {
+            fullQ.sampleTestCases.forEach((tc: any) => {
+              testCasesToEvaluate.push({ input: tc.input, expectedOutput: tc.output, weight: 1 });
+            });
+          }
+
+          if (testCasesToEvaluate.length > 0) {
+            try {
+              const evalResult = await SandboxRunner.evaluateBatch(
+                lang,
+                ans.code,
+                testCasesToEvaluate,
+                fullQ?.timeLimitMs || 2000
+              );
+              ans.executionStatus = evalResult.overallStatus;
+              ans.testCasesPassed = evalResult.passedCases;
+              ans.totalTestCases = evalResult.totalCases;
+
+              const passRatio = evalResult.totalCases > 0 ? evalResult.passedCases / evalResult.totalCases : 0;
+              const pointsEarned = Math.round(sq.points * passRatio * 100) / 100;
+              ans.scoreAwarded = pointsEarned;
+              ans.isCorrect = evalResult.passedCases === evalResult.totalCases && evalResult.totalCases > 0;
+              totalScore += pointsEarned;
+            } catch (runnerErr) {
+              console.error(`Assessment coding grading runner error for question ${sq.questionId}:`, runnerErr);
+              ans.executionStatus = 'PENDING_REVIEW';
+              ans.isCorrect = true;
+              ans.scoreAwarded = sq.points;
+              totalScore += sq.points;
+            }
+          } else {
+            ans.executionStatus = 'ACCEPTED';
+            ans.isCorrect = true;
+            ans.scoreAwarded = sq.points;
+            totalScore += sq.points;
+          }
+        } else if (ans) {
+          ans.executionStatus = 'NOT_ATTEMPTED';
+          ans.isCorrect = false;
+          ans.scoreAwarded = 0;
         }
       }
     }
