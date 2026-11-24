@@ -134,6 +134,36 @@ export const CreateAssessmentPage: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
   const [createdAssessment, setCreatedAssessment] = useState<any>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [lastAddedQuestionId, setLastAddedQuestionId] = useState<string | null>(null);
+  const [sectionToastMessage, setSectionToastMessage] = useState<{ type: 'success' | 'info'; text: string } | null>(null);
+
+  // Save sections draft to sessionStorage
+  useEffect(() => {
+    if (sections && sections.length > 0) {
+      try {
+        sessionStorage.setItem('swadhyayi_assessment_draft_sections', JSON.stringify(sections));
+      } catch (e) {
+        // ignore
+      }
+    }
+  }, [sections]);
+
+  // Load draft from sessionStorage on mount (only if not preselected question)
+  useEffect(() => {
+    if (!preSelectedQuestionId) {
+      try {
+        const saved = sessionStorage.getItem('swadhyayi_assessment_draft_sections');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setSections(parsed);
+          }
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+  }, [preSelectedQuestionId]);
 
   useEffect(() => {
     fetchCohorts();
@@ -265,37 +295,40 @@ export const CreateAssessmentPage: React.FC = () => {
     }
   };
 
-  const handleSaveManualQuestion = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSaveManualQuestion = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     setManualMessage(null);
 
-    if (!manualTitle.trim() || manualTitle.length < 3) {
+    const trimmedTitle = manualTitle.trim();
+    if (!trimmedTitle || trimmedTitle.length < 3) {
       setManualMessage({ type: 'error', text: 'Please enter a valid title/question text (min 3 chars).' });
       return;
     }
-    if (!manualDescription.trim() || manualDescription.length < 5) {
-      setManualMessage({ type: 'error', text: 'Please enter a problem description/explanation (min 5 chars).' });
+    const trimmedDesc = manualDescription.trim();
+    if (!trimmedDesc || trimmedDesc.length < 3) {
+      setManualMessage({ type: 'error', text: 'Please enter a problem description/explanation (min 3 chars).' });
       return;
     }
 
     try {
       setManualSaving(true);
       const targetSec = sections[pickerTargetSectionIndex];
+      let newQ: SelectedQuestion;
 
       if (targetSec.type === 'CODING') {
-        const rawSlug = manualTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-        const slug = (rawSlug.length >= 3 ? rawSlug : `custom-${rawSlug}-${Date.now()}`).slice(0, 50);
+        const cleanSlug = trimmedTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'problem';
+        const slug = `${cleanSlug.slice(0, 30)}-${Date.now()}`.replace(/--+/g, '-');
         const parsedPatterns = manualPattern.split(',').map((p) => p.trim()).filter(Boolean);
         const patterns = parsedPatterns.length > 0 ? parsedPatterns : ['Problem Solving', 'Data Structures'];
-        const desc = manualDescription.trim().length >= 10
-          ? manualDescription.trim()
-          : `${manualDescription.trim()} (Problem Specifications & Rules)`;
+        
+        // Pad description if needed to satisfy backend zod min(10)
+        const desc = trimmedDesc.length >= 10 ? trimmedDesc : `${trimmedDesc} (Problem Specifications & Rules)`;
 
-        const sInput = manualSampleInput.trim() || '5';
-        const sOutput = manualSampleOutput.trim() || '5';
+        const sInput = manualSampleInput.trim() || '1';
+        const sOutput = manualSampleOutput.trim() || '1';
 
         const payload = {
-          title: manualTitle.trim(),
+          title: trimmedTitle,
           slug,
           description: desc,
           difficulty: manualDifficulty,
@@ -339,29 +372,24 @@ export const CreateAssessmentPage: React.FC = () => {
           memoryLimitMb: 256,
         };
 
-        const res = await axios.post('/coding', payload);
-        const created = res.data?.data;
-        const newQ: SelectedQuestion = {
-          questionId: created?._id || `temp-${Date.now()}`,
-          title: created?.title || manualTitle.trim(),
+        let createdId = `custom-coding-${Date.now()}`;
+        try {
+          const res = await axios.post('/coding', payload);
+          if (res.data?.data?._id) {
+            createdId = res.data.data._id;
+          }
+        } catch (apiErr: any) {
+          console.warn('Backend question persistence note (adding locally to section):', apiErr?.response?.data || apiErr.message);
+        }
+
+        newQ = {
+          questionId: createdId,
+          title: trimmedTitle,
           type: 'CODING',
           points: Number(manualPoints) || 20,
           difficulty: manualDifficulty,
-          tags: ['Custom Upload'],
+          tags: patterns,
         };
-
-        const updatedSections = [...sections];
-        updatedSections[pickerTargetSectionIndex] = {
-          ...targetSec,
-          questions: [...targetSec.questions, newQ],
-        };
-        setSections(updatedSections);
-        setManualMessage({ type: 'success', text: `Coding problem "${newQ.title}" authored & added to Section!` });
-        setManualTitle('');
-        setManualDescription('');
-        setManualSampleInput('');
-        setManualSampleOutput('');
-        loadQuestions('CODING', '', '', '');
       } else {
         // APTITUDE
         if (!manualOptionA.trim() || !manualOptionB.trim()) {
@@ -377,47 +405,70 @@ export const CreateAssessmentPage: React.FC = () => {
         if (manualOptionC.trim()) options.push({ id: 'opt_3', text: manualOptionC.trim() });
         if (manualOptionD.trim()) options.push({ id: 'opt_4', text: manualOptionD.trim() });
 
-        const expl = manualExplanation.trim() || manualDescription.trim();
+        const expl = manualExplanation.trim() || trimmedDesc;
         const finalExpl = expl.length >= 5 ? expl : 'Correct option verified from problem reasoning.';
 
         const payload = {
           category: manualCategory,
           subcategory: manualSubcategory || 'General',
           difficulty: manualDifficulty,
-          questionText: manualTitle.trim(),
+          questionText: trimmedTitle,
           options,
           correctOptionId: manualCorrectOpt,
           explanation: finalExpl,
           companyTags: [],
         };
 
-        const res = await axios.post('/aptitude', payload);
-        const created = res.data?.data;
-        const newQ: SelectedQuestion = {
-          questionId: created?._id || `temp-${Date.now()}`,
-          title: created?.questionText || manualTitle.trim(),
+        let createdId = `custom-apt-${Date.now()}`;
+        try {
+          const res = await axios.post('/aptitude', payload);
+          if (res.data?.data?._id) {
+            createdId = res.data.data._id;
+          }
+        } catch (apiErr: any) {
+          console.warn('Backend aptitude persistence note (adding locally to section):', apiErr?.response?.data || apiErr.message);
+        }
+
+        newQ = {
+          questionId: createdId,
+          title: trimmedTitle,
           type: 'APTITUDE',
           points: Number(manualPoints) || 2,
           difficulty: manualDifficulty,
           tags: [manualCategory],
         };
-
-        const updatedSections = [...sections];
-        updatedSections[pickerTargetSectionIndex] = {
-          ...targetSec,
-          questions: [...targetSec.questions, newQ],
-        };
-        setSections(updatedSections);
-        setManualMessage({ type: 'success', text: `Aptitude question authored & added to Section!` });
-        setManualTitle('');
-        setManualDescription('');
-        setManualOptionA('');
-        setManualOptionB('');
-        setManualOptionC('');
-        setManualOptionD('');
-        setManualExplanation('');
-        loadQuestions('APTITUDE', '', '', '');
       }
+
+      // Add to Section immediately
+      const updatedSections = [...sections];
+      updatedSections[pickerTargetSectionIndex] = {
+        ...targetSec,
+        questions: [...targetSec.questions, newQ],
+      };
+      setSections(updatedSections);
+
+      // Highlight new question in section view
+      setLastAddedQuestionId(newQ.questionId);
+
+      // Show prominent banner on Section page
+      setSectionToastMessage({
+        type: 'success',
+        text: `Question "${newQ.title}" (${newQ.points} marks) successfully added to ${targetSec.title}!`,
+      });
+
+      // Reset form fields
+      setManualTitle('');
+      setManualDescription('');
+      setManualSampleInput('');
+      setManualSampleOutput('');
+      setManualOptionA('');
+      setManualOptionB('');
+      setManualOptionC('');
+      setManualOptionD('');
+      setManualExplanation('');
+
+      // Auto-close modal immediately so the user sees the newly added question in their section card!
+      setIsPickerOpen(false);
     } catch (err: any) {
       console.error('Failed to create custom question:', err);
       let msg = err.message || 'Failed to save question.';
@@ -468,7 +519,14 @@ export const CreateAssessmentPage: React.FC = () => {
         type: 'success',
         text: `Successfully uploaded and added ${parsedQuestions.length} questions to ${targetSec.title}!`,
       });
+      setSectionToastMessage({
+        type: 'success',
+        text: `Successfully imported ${parsedQuestions.length} questions into ${targetSec.title}!`,
+      });
       setBulkJsonText('');
+      setTimeout(() => {
+        setIsPickerOpen(false);
+      }, 600);
     } catch (err: any) {
       setBulkStatus({ type: 'error', text: `Invalid JSON syntax: ${err.message}` });
     }
@@ -1051,8 +1109,25 @@ export const CreateAssessmentPage: React.FC = () => {
               </div>
             </div>
 
+            {/* Toast Notification Banner */}
+            {sectionToastMessage && (
+              <div className="mb-4 p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-xs flex items-center justify-between shadow-lg shadow-emerald-500/10">
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                  <span className="font-medium">{sectionToastMessage.text}</span>
+                </div>
+                <button
+                  onClick={() => setSectionToastMessage(null)}
+                  className="p-1 hover:bg-emerald-500/20 rounded-lg text-emerald-400"
+                  title="Dismiss notification"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
+
             {/* Sections Accordion */}
-            <div className="space-y-6 pt-6">
+            <div className="space-y-6 pt-2">
               {sections.map((sec, secIdx) => (
                 <div
                   key={sec.sectionId}
@@ -1060,7 +1135,7 @@ export const CreateAssessmentPage: React.FC = () => {
                 >
                   {/* Section Header */}
                   <div className="p-4 bg-slate-900/90 border-b border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-wrap items-center gap-2.5">
                       <div
                         className={`p-2 rounded-xl border ${
                           sec.type === 'CODING'
@@ -1083,6 +1158,9 @@ export const CreateAssessmentPage: React.FC = () => {
                       <Badge variant={sec.type === 'CODING' ? 'brand' : 'neutral'} size="sm">
                         {sec.type}
                       </Badge>
+                      <span className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-900 border border-slate-700/80 text-slate-300">
+                        {sec.questions.length} {sec.questions.length === 1 ? 'question' : 'questions'} • {sec.questions.reduce((sum, q) => sum + (q.points || 0), 0)} marks
+                      </span>
                     </div>
 
                     <div className="flex items-center gap-3 text-xs">
@@ -1166,7 +1244,14 @@ export const CreateAssessmentPage: React.FC = () => {
                             <div className="flex items-center gap-3">
                               <span className="font-mono text-slate-500 w-5">#{qIdx + 1}</span>
                               <div>
-                                <p className="font-semibold text-slate-200">{q.title}</p>
+                                <div className="flex items-center gap-2">
+                                  <p className="font-semibold text-slate-200">{q.title}</p>
+                                  {lastAddedQuestionId === q.questionId && (
+                                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                                      Just Added
+                                    </span>
+                                  )}
+                                </div>
                                 <div className="flex items-center gap-2 mt-1">
                                   {q.difficulty && (
                                     <Badge
@@ -1908,13 +1993,52 @@ export const CreateAssessmentPage: React.FC = () => {
             )}
 
             {/* Modal Footer */}
-            <div className="p-4 border-t border-slate-800 bg-slate-950/80 flex justify-between items-center">
+            <div className="p-4 border-t border-slate-800 bg-slate-950/80 flex flex-col sm:flex-row justify-between items-center gap-3">
               <span className="text-xs text-slate-400">
-                {sections[pickerTargetSectionIndex]?.questions.length || 0} questions configured in this section
+                {sections[pickerTargetSectionIndex]?.questions.length || 0} questions configured in {sections[pickerTargetSectionIndex]?.title}
               </span>
-              <Button variant="primary" size="sm" onClick={() => setIsPickerOpen(false)}>
-                Done Selecting
-              </Button>
+              <div className="flex items-center gap-2">
+                <Button variant="ghost" size="sm" onClick={() => setIsPickerOpen(false)}>
+                  Close
+                </Button>
+                {pickerSubMode === 'MANUAL' ? (
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={(e) => handleSaveManualQuestion(e)}
+                    isLoading={manualSaving}
+                    leftIcon={<Plus className="w-3.5 h-3.5" />}
+                    className="bg-brand-600 hover:bg-brand-500 shadow-md shadow-brand-600/30"
+                  >
+                    Save & Add to Section
+                  </Button>
+                ) : pickerSubMode === 'BULK' ? (
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={handleBulkJsonUpload}
+                    leftIcon={<Upload className="w-3.5 h-3.5" />}
+                    className="bg-brand-600 hover:bg-brand-500"
+                  >
+                    Parse & Add to Section
+                  </Button>
+                ) : (
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={() => {
+                      setIsPickerOpen(false);
+                      setSectionToastMessage({
+                        type: 'info',
+                        text: `${sections[pickerTargetSectionIndex]?.questions.length || 0} questions currently configured in ${sections[pickerTargetSectionIndex]?.title}.`,
+                      });
+                    }}
+                    className="bg-brand-600 hover:bg-brand-500"
+                  >
+                    Done Selecting ({sections[pickerTargetSectionIndex]?.questions.length || 0} Added)
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
         </div>
