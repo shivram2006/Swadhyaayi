@@ -1,6 +1,93 @@
 /* eslint-disable */
-// Auto-generated Coding Problem Catalog (Apple, Meta, Microsoft, Google, Accenture) - Chunk faang1
+// Auto-generated Coding Problem Catalog (Apple, Meta, Microsoft, Google, Accenture, Infosys, TCS) - Chunk faang1
 export const faang1 = [
+  {
+    "title": "0/1 Knapsack",
+    "slug": "0-1-knapsack",
+    "description": "Given `n` items each with a weight and a value, determine the maximum value of items that can be placed in a knapsack of capacity `W`. Each item can either be picked once or not picked (0/1 choice).\n\n### Example 1:\n```\nInput: [60,100,120]\n[10,20,30]\n50\nOutput: 220\nExplanation: Pick item 2 (wt 20, val 100) and item 3 (wt 30, val 120) for total weight 50 and value 220.\n```\n\n### Example 2:\n```\nInput: [10,20,30]\n[1,1,1]\n2\nOutput: 50\nExplanation: Pick items with values 20 and 30 for weight 2.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DP",
+    "patterns": [
+      "Dynamic Programming"
+    ],
+    "topics": [
+      "Dynamic Programming"
+    ],
+    "companyTags": [
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 28,
+        "sourceNote": "Infosys Practice Bank #92"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def 01Knapsack(*args):\n    # TODO: Implement solution for 0/1 Knapsack\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = 01Knapsack(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(01Knapsack(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function 01Knapsack(...args) {\n    // TODO: Implement solution for 0/1 Knapsack\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(01Knapsack(...parsed)));\n    } catch (e) {\n        console.log(01Knapsack(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for 0/1 Knapsack\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[60,100,120]\n[10,20,30]\n50",
+        "output": "220",
+        "explanation": "Pick item 2 (wt 20, val 100) and item 3 (wt 30, val 120) for total weight 50 and value 220."
+      },
+      {
+        "input": "[10,20,30]\n[1,1,1]\n2",
+        "output": "50",
+        "explanation": "Pick items with values 20 and 30 for weight 2."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[60,100,120]\n[10,20,30]\n50",
+        "output": "220",
+        "isHidden": true
+      },
+      {
+        "input": "[10,20,30]\n[1,1,1]\n2",
+        "output": "50",
+        "isHidden": true
+      },
+      {
+        "input": "[10]\n[5]\n3",
+        "output": "0",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "dp[w] represents maximum value with weight capacity w. Iterate weights backwards."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for 0/1 Knapsack",
+      "solutionMarkdown": "### Optimal Solution\n\nClassic 0/1 knapsack using 1D space optimization: dp[w] = max(dp[w], dp[w - wt[i]] + val[i]).\n\n### Complexity\n- Time: O(N * W), Space: O(W)",
+      "timeComplexity": "O(N * W)",
+      "spaceComplexity": "O(W)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
   {
     "title": "1-D Candy Crush (Interview Variant)",
     "slug": "1-d-candy-crush",
@@ -43,11 +130,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for 1-D Candy Crush (Interview Variant)\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for 1-D Candy Crush (Interview Variant)\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for 1-D Candy Crush (Interview Variant)\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -136,6 +223,13 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #40"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #25"
       }
     ],
     "supportedLanguages": [
@@ -155,11 +249,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for 3Sum\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for 3Sum\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for 3Sum\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -246,11 +340,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for 3Sum Closest\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for 3Sum Closest\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for 3Sum Closest\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -337,11 +431,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for 3Sum Smaller\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for 3Sum Smaller\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for 3Sum Smaller\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -435,11 +529,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for 4Sum\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for 4Sum\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for 4Sum\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -516,6 +610,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #77"
       }
     ],
     "supportedLanguages": [
@@ -535,11 +636,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Accounts Merge\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Accounts Merge\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Accounts Merge\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -616,11 +717,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Add Binary\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Add Binary\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Add Binary\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -707,11 +808,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Add Strings\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Add Strings\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Add Strings\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -791,6 +892,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #56"
       }
     ],
     "supportedLanguages": [
@@ -810,11 +918,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Add Two Numbers\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Add Two Numbers\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Add Two Numbers\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -849,6 +957,95 @@ export const faang1 = [
       "solutionMarkdown": "### Optimal Solution\n\nIterate both lists simultaneously while l1 or l2 or carry > 0. Link sum % 10 and propagate sum // 10.\n\n### Complexity\n- Time: O(max(N, M)), Space: O(max(N, M))",
       "timeComplexity": "O(max(N",
       "spaceComplexity": "M))"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Aggressive Cows",
+    "slug": "aggressive-cows",
+    "description": "You are given an array `stalls` representing stall positions on a line and an integer `k` (number of cows). Assign stalls to `k` cows such that the minimum distance between any two cows is as large as possible. Return that largest minimum distance.\n\n### Example 1:\n```\nInput: [1,2,4,8,9]\n3\nOutput: 3\nExplanation: Place cows at stalls 1, 4, and 8 or 9. Minimum distance is 3.\n```\n\n### Example 2:\n```\nInput: [10,1,2,7,5]\n3\nOutput: 4\nExplanation: Stalls sorted: [1, 2, 5, 7, 10]. Place cows at 1, 5, 10. Distance min(4, 5) = 4.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Binary Search",
+      "Greedy"
+    ],
+    "topics": [
+      "Binary Search",
+      "Greedy"
+    ],
+    "companyTags": [
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #34"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def aggressiveCows(*args):\n    # TODO: Implement solution for Aggressive Cows\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = aggressiveCows(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(aggressiveCows(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function aggressiveCows(...args) {\n    // TODO: Implement solution for Aggressive Cows\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(aggressiveCows(...parsed)));\n    } catch (e) {\n        console.log(aggressiveCows(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Aggressive Cows\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1,2,4,8,9]\n3",
+        "output": "3",
+        "explanation": "Place cows at stalls 1, 4, and 8 or 9. Minimum distance is 3."
+      },
+      {
+        "input": "[10,1,2,7,5]\n3",
+        "output": "4",
+        "explanation": "Stalls sorted: [1, 2, 5, 7, 10]. Place cows at 1, 5, 10. Distance min(4, 5) = 4."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1,2,4,8,9]\n3",
+        "output": "3",
+        "isHidden": true
+      },
+      {
+        "input": "[10,1,2,7,5]\n3",
+        "output": "4",
+        "isHidden": true
+      },
+      {
+        "input": "[1,5]\n2",
+        "output": "4",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Sort stalls. Binary search on minimum distance d. Greedily place next cow if distance >= d."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Aggressive Cows",
+      "solutionMarkdown": "### Optimal Solution\n\nBinary search on distance answer range [1, stalls[-1] - stalls[0]]. Greedy check canPlace(d).\n\n### Complexity\n- Time: O(N log(max_dist)), Space: O(1)",
+      "timeComplexity": "O(N log(max_dist))",
+      "spaceComplexity": "O(1)"
     },
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
@@ -896,11 +1093,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for All Nodes Distance K in Binary Tree\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for All Nodes Distance K in Binary Tree\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for All Nodes Distance K in Binary Tree\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -982,11 +1179,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Arithmetic Expression Validation\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Arithmetic Expression Validation\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Arithmetic Expression Validation\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -1052,6 +1249,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 40,
         "sourceNote": "Accenture Interview Question #73 (R [S3])"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #3"
       }
     ],
     "supportedLanguages": [
@@ -1071,11 +1275,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Armstrong Number\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Armstrong Number\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Armstrong Number\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -1126,6 +1330,188 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Array + HashMap + String Rotation Task",
+    "slug": "array-hashmap-string-rotation",
+    "description": "Given an array of strings, group together all strings that are rotations of each other. Two strings `s` and `t` are rotations of each other if `s` and `t` have the same length and `s` is a substring of `t + t`.\n\n### Example 1:\n```\nInput: [\"abc\",\"bca\",\"cab\",\"xyz\",\"yzx\"]\nOutput: [[\"abc\",\"bca\",\"cab\"],[\"xyz\",\"yzx\"]]\nExplanation: \"abc\", \"bca\", \"cab\" are cyclic rotations of each other.\n```\n\n### Example 2:\n```\nInput: [\"a\",\"b\",\"a\"]\nOutput: [[\"a\",\"a\"],[\"b\"]]\nExplanation: \"a\" and \"a\" are identical rotations.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Hash Table",
+      "String",
+      "Two Pointers"
+    ],
+    "topics": [
+      "Hash Table",
+      "String",
+      "Two Pointers"
+    ],
+    "companyTags": [
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 28,
+        "sourceNote": "Infosys Practice Bank #67"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def arrayHashmapStringRotation(*args):\n    # TODO: Implement solution for Array + HashMap + String Rotation Task\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = arrayHashmapStringRotation(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(arrayHashmapStringRotation(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function arrayHashmapStringRotation(...args) {\n    // TODO: Implement solution for Array + HashMap + String Rotation Task\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(arrayHashmapStringRotation(...parsed)));\n    } catch (e) {\n        console.log(arrayHashmapStringRotation(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Array + HashMap + String Rotation Task\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[\"abc\",\"bca\",\"cab\",\"xyz\",\"yzx\"]",
+        "output": "[[\"abc\",\"bca\",\"cab\"],[\"xyz\",\"yzx\"]]",
+        "explanation": "\"abc\", \"bca\", \"cab\" are cyclic rotations of each other."
+      },
+      {
+        "input": "[\"a\",\"b\",\"a\"]",
+        "output": "[[\"a\",\"a\"],[\"b\"]]",
+        "explanation": "\"a\" and \"a\" are identical rotations."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[\"abc\",\"bca\",\"cab\",\"xyz\",\"yzx\"]",
+        "output": "[[\"abc\",\"bca\",\"cab\"],[\"xyz\",\"yzx\"]]",
+        "isHidden": true
+      },
+      {
+        "input": "[\"a\",\"b\",\"a\"]",
+        "output": "[[\"a\",\"a\"],[\"b\"]]",
+        "isHidden": true
+      },
+      {
+        "input": "[\"hello\"]",
+        "output": "[[\"hello\"]]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Find the lexicographically smallest rotation of each string as its canonical signature in a HashMap."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Array + HashMap + String Rotation Task",
+      "solutionMarkdown": "### Optimal Solution\n\nGenerate all n rotations or compute minimal cyclic shift (Booth's algorithm) as HashMap key.\n\n### Complexity\n- Time: O(Total Chars), Space: O(Total Chars)",
+      "timeComplexity": "O(Total Chars)",
+      "spaceComplexity": "O(Total Chars)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Assign Cookies with Same-Parity Constraint",
+    "slug": "assign-cookies-parity-constrained",
+    "description": "Assume you are an awesome parent and want to give your children some cookies. Each child `i` has a greed factor `g[i]`, and each cookie `j` has a size `s[j]`. You can assign cookie `j` to child `i` if `s[j] >= g[i]` AND `s[j]` and `g[i]` have the **same parity** (both even or both odd). Maximize the number of satisfied children.\n\n### Example 1:\n```\nInput: [1,2,3]\n[1,1]\nOutput: 1\nExplanation: Child 1 (greed 1) gets cookie of size 1 (both odd). Child 2 (greed 2) cannot get odd cookie. Child 3 cannot get remaining cookie.\n```\n\n### Example 2:\n```\nInput: [1,2]\n[1,2,3]\nOutput: 2\nExplanation: Child 1 (greed 1, odd) gets cookie 1. Child 2 (greed 2, even) gets cookie 2.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Greedy",
+      "Sorting",
+      "Two Pointers"
+    ],
+    "topics": [
+      "Greedy",
+      "Sorting",
+      "Two Pointers"
+    ],
+    "companyTags": [
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #40"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def assignCookiesParityConstrained(*args):\n    # TODO: Implement solution for Assign Cookies with Same-Parity Constraint\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = assignCookiesParityConstrained(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(assignCookiesParityConstrained(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function assignCookiesParityConstrained(...args) {\n    // TODO: Implement solution for Assign Cookies with Same-Parity Constraint\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(assignCookiesParityConstrained(...parsed)));\n    } catch (e) {\n        console.log(assignCookiesParityConstrained(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Assign Cookies with Same-Parity Constraint\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1,2,3]\n[1,1]",
+        "output": "1",
+        "explanation": "Child 1 (greed 1) gets cookie of size 1 (both odd). Child 2 (greed 2) cannot get odd cookie. Child 3 cannot get remaining cookie."
+      },
+      {
+        "input": "[1,2]\n[1,2,3]",
+        "output": "2",
+        "explanation": "Child 1 (greed 1, odd) gets cookie 1. Child 2 (greed 2, even) gets cookie 2."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1,2,3]\n[1,1]",
+        "output": "1",
+        "isHidden": true
+      },
+      {
+        "input": "[1,2]\n[1,2,3]",
+        "output": "2",
+        "isHidden": true
+      },
+      {
+        "input": "[2,4]\n[1,3,5]",
+        "output": "0",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Split children and cookies into even and odd groups. Sort each and greedily match independently."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Assign Cookies with Same-Parity Constraint",
+      "solutionMarkdown": "### Optimal Solution\n\nSeparate children and cookies by parity. Solve standard Assign Cookies greedy two-pointer for even and odd separately.\n\n### Complexity\n- Time: O(N log N + M log M), Space: O(N + M)",
+      "timeComplexity": "O(N log N + M log M)",
+      "spaceComplexity": "O(N + M)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Balanced Binary Tree",
     "slug": "balanced-binary-tree",
     "description": "Given a binary tree, determine if it is **height-balanced** (a binary tree in which the depth of the two subtrees of every node never differs by more than one).\n\n### Example 1:\n```\nInput: [3,9,20,null,null,15,7]\nOutput: true\nExplanation: Balanced binary tree.\n```\n\n### Example 2:\n```\nInput: [1,2,2,3,3,null,null,4,4]\nOutput: false\nExplanation: Left subtree height is 4, right subtree height is 2, diff > 1.\n```",
@@ -1167,11 +1553,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Balanced Binary Tree\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Balanced Binary Tree\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Balanced Binary Tree\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -1258,11 +1644,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Basic Calculator\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Basic Calculator\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Basic Calculator\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -1356,11 +1742,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Basic Calculator II\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Basic Calculator II\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Basic Calculator II\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -1442,6 +1828,13 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #2"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #15"
       }
     ],
     "supportedLanguages": [
@@ -1461,11 +1854,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Best Time to Buy and Sell Stock\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Best Time to Buy and Sell Stock\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Best Time to Buy and Sell Stock\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -1562,11 +1955,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Best Time to Buy and Sell Stock IV\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Best Time to Buy and Sell Stock IV\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Best Time to Buy and Sell Stock IV\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -1627,6 +2020,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #96"
       }
     ],
     "supportedLanguages": [
@@ -1646,11 +2046,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Best Time to Buy and Sell Stock with Cooldown\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Best Time to Buy and Sell Stock with Cooldown\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Best Time to Buy and Sell Stock with Cooldown\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -1711,6 +2111,20 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #61"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #31"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #31"
       }
     ],
     "supportedLanguages": [
@@ -1730,11 +2144,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Search\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Search\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Binary Search\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -1823,11 +2237,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Inorder Traversal\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Inorder Traversal\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Binary Tree Inorder Traversal\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -1916,6 +2330,20 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #100"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #57"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #64"
       }
     ],
     "supportedLanguages": [
@@ -1935,11 +2363,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Level Order Traversal\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Level Order Traversal\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Binary Tree Level Order Traversal\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -2026,11 +2454,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Level Order Traversal II\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Level Order Traversal II\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Binary Tree Level Order Traversal II\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -2102,6 +2530,20 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #61"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 45,
+        "sourceNote": "TCS Interview Question #68"
       }
     ],
     "supportedLanguages": [
@@ -2121,11 +2563,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Maximum Path Sum\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Maximum Path Sum\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Binary Tree Maximum Path Sum\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -2212,11 +2654,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Paths\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Paths\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Binary Tree Paths\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -2298,11 +2740,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Postorder Traversal\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Postorder Traversal\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Binary Tree Postorder Traversal\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -2403,11 +2845,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Right Side View\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Right Side View\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Binary Tree Right Side View\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -2494,11 +2936,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Vertical Order Traversal\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Vertical Order Traversal\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Binary Tree Vertical Order Traversal\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -2580,11 +3022,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Zigzag Level Order Traversal\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Zigzag Level Order Traversal\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Binary Tree Zigzag Level Order Traversal\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -2664,11 +3106,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Bitwise AND of Numbers Range\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Bitwise AND of Numbers Range\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Bitwise AND of Numbers Range\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -2714,6 +3156,184 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Candies",
+    "slug": "candies",
+    "description": "There are `n` children standing in a line. Each child is assigned a rating value given in the integer array `ratings`. You must give each child at least one candy, and children with a higher rating than their immediate neighbours must get more candies than their neighbour. Return *the minimum number of candies you need to have to distribute*.\n\n### Example 1:\n```\nInput: [1,0,2]\nOutput: 5\nExplanation: Candies distributed: [2, 1, 2]. Total = 5.\n```\n\n### Example 2:\n```\nInput: [1,2,2]\nOutput: 4\nExplanation: Candies distributed: [1, 2, 1]. The third child gets 1 candy because rating equal to second child.\n```",
+    "difficulty": "HARD",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "Greedy"
+    ],
+    "topics": [
+      "Array",
+      "Greedy"
+    ],
+    "companyTags": [
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #41"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def candies(*args):\n    # TODO: Implement solution for Candies\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = candies(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(candies(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function candies(...args) {\n    // TODO: Implement solution for Candies\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(candies(...parsed)));\n    } catch (e) {\n        console.log(candies(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Candies\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1,0,2]",
+        "output": "5",
+        "explanation": "Candies distributed: [2, 1, 2]. Total = 5."
+      },
+      {
+        "input": "[1,2,2]",
+        "output": "4",
+        "explanation": "Candies distributed: [1, 2, 1]. The third child gets 1 candy because rating equal to second child."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1,0,2]",
+        "output": "5",
+        "isHidden": true
+      },
+      {
+        "input": "[1,2,2]",
+        "output": "4",
+        "isHidden": true
+      },
+      {
+        "input": "[1,3,2,2,1]",
+        "output": "7",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Do two passes: left-to-right to satisfy left neighbours, then right-to-left taking max to satisfy right neighbours."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Candies",
+      "solutionMarkdown": "### Optimal Solution\n\nTwo-pass greedy. Left-to-right pass ensures higher rating than left child gets +1. Right-to-left ensures higher than right child gets max.\n\n### Complexity\n- Time: O(N), Space: O(N)",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Capacity To Ship Packages Within D Days",
+    "slug": "capacity-to-ship-packages-within-d-days",
+    "description": "A conveyor belt has packages that must be shipped within `days` days. Given package `weights`, return *the least weight capacity of the ship that will result in all packages being shipped within* `days` *days*.\n\n### Example 1:\n```\nInput: [1,2,3,4,5,6,7,8,9,10]\n5\nOutput: 15\nExplanation: Ship capacity of 15 allows packages to be shipped in 5 days.\n```\n\n### Example 2:\n```\nInput: [3,2,2,4,1,4]\n3\nOutput: 6\nExplanation: Ship capacity of 6 ships in 3 days: [3, 2], [2, 4], [1, 4].\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "Binary Search"
+    ],
+    "topics": [
+      "Array",
+      "Binary Search"
+    ],
+    "companyTags": [
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #35"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def capacityToShipPackagesWithinDDays(*args):\n    # TODO: Implement solution for Capacity To Ship Packages Within D Days\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = capacityToShipPackagesWithinDDays(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(capacityToShipPackagesWithinDDays(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function capacityToShipPackagesWithinDDays(...args) {\n    // TODO: Implement solution for Capacity To Ship Packages Within D Days\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(capacityToShipPackagesWithinDDays(...parsed)));\n    } catch (e) {\n        console.log(capacityToShipPackagesWithinDDays(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Capacity To Ship Packages Within D Days\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1,2,3,4,5,6,7,8,9,10]\n5",
+        "output": "15",
+        "explanation": "Ship capacity of 15 allows packages to be shipped in 5 days."
+      },
+      {
+        "input": "[3,2,2,4,1,4]\n3",
+        "output": "6",
+        "explanation": "Ship capacity of 6 ships in 3 days: [3, 2], [2, 4], [1, 4]."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1,2,3,4,5,6,7,8,9,10]\n5",
+        "output": "15",
+        "isHidden": true
+      },
+      {
+        "input": "[3,2,2,4,1,4]\n3",
+        "output": "6",
+        "isHidden": true
+      },
+      {
+        "input": "[1,2,3,1,1]\n4",
+        "output": "3",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Binary search on capacity in range [max(weights), sum(weights)]. Check days needed with greedy packing."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Capacity To Ship Packages Within D Days",
+      "solutionMarkdown": "### Optimal Solution\n\nBinary search on ship capacity. For mid, simulate greedy daily shipment packing. Adjust low or high based on whether days <= D.\n\n### Complexity\n- Time: O(N log(sum(weights))), Space: O(1)",
+      "timeComplexity": "O(N log(sum(weights)))",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Cheapest Flights Within K Stops",
     "slug": "cheapest-flights-within-k-stops",
     "description": "There are `n` cities connected by some number of flights. You are given an array `flights` where `flights[i] = [fromi, toi, pricei]`. Return *the cheapest price from `src` to `dst` with at most `k` stops*. If no such route exists, return `-1`.\n\n### Example 1:\n```\nInput: 4\n[[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]]\n0\n3\n1\nOutput: 700\nExplanation: Optimal path 0 -> 1 -> 3 has cost 100 + 600 = 700 with 1 stop.\n```\n\n### Example 2:\n```\nInput: 3\n[[0,1,100],[1,2,100],[0,2,500]]\n0\n2\n1\nOutput: 200\nExplanation: 0 -> 1 -> 2 has cost 200 with 1 stop.\n```",
@@ -2736,6 +3356,20 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #74"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #77"
       }
     ],
     "supportedLanguages": [
@@ -2755,11 +3389,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Cheapest Flights Within K Stops\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Cheapest Flights Within K Stops\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Cheapest Flights Within K Stops\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -2800,6 +3434,100 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Check Whether a Number Is Prime",
+    "slug": "check-prime-number",
+    "description": "Given an integer `n`, determine whether it is a **prime number**. A prime number is a natural number greater than 1 that is not a product of two smaller natural numbers.\n\n### Example 1:\n```\nInput: 11\nOutput: true\nExplanation: 11 has only two divisors: 1 and 11.\n```\n\n### Example 2:\n```\nInput: 4\nOutput: false\nExplanation: 4 is divisible by 2.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Math",
+      "Number Theory"
+    ],
+    "topics": [
+      "Math",
+      "Number Theory"
+    ],
+    "companyTags": [
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 45,
+        "sourceNote": "TCS Interview Question #2"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def checkPrimeNumber(*args):\n    # TODO: Implement solution for Check Whether a Number Is Prime\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = checkPrimeNumber(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(checkPrimeNumber(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function checkPrimeNumber(...args) {\n    // TODO: Implement solution for Check Whether a Number Is Prime\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(checkPrimeNumber(...parsed)));\n    } catch (e) {\n        console.log(checkPrimeNumber(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Check Whether a Number Is Prime\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "11",
+        "output": "true",
+        "explanation": "11 has only two divisors: 1 and 11."
+      },
+      {
+        "input": "4",
+        "output": "false",
+        "explanation": "4 is divisible by 2."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "11",
+        "output": "true",
+        "isHidden": true
+      },
+      {
+        "input": "4",
+        "output": "false",
+        "isHidden": true
+      },
+      {
+        "input": "1",
+        "output": "false",
+        "isHidden": true
+      },
+      {
+        "input": "2",
+        "output": "true",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Check divisors up to sqrt(n) with 6k +/- 1 optimization."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Check Whether a Number Is Prime",
+      "solutionMarkdown": "### Optimal Solution\n\nCheck n <= 1, 2, 3. Test divisibility by 2 and 3, then step by 6 checking i and i + 2 up to sqrt(n).\n\n### Complexity\n- Time: O(sqrt(N)), Space: O(1)",
+      "timeComplexity": "O(sqrt(N))",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Climbing Stairs",
     "slug": "climbing-stairs",
     "description": "You are climbing a staircase. It takes `n` steps to reach the top. Each time you can either climb `1` or `2` steps. In how many distinct ways can you climb to the top?\n\n### Example 1:\n```\nInput: 2\nOutput: 2\nExplanation: 1 step + 1 step, or 2 steps.\n```\n\n### Example 2:\n```\nInput: 3\nOutput: 3\nExplanation: 1+1+1, 1+2, or 2+1.\n```",
@@ -2827,6 +3555,20 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #86"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #83"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #79"
       }
     ],
     "supportedLanguages": [
@@ -2846,11 +3588,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Climbing Stairs\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Climbing Stairs\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Climbing Stairs\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -2942,6 +3684,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 45,
+        "sourceNote": "TCS Interview Question #69"
       }
     ],
     "supportedLanguages": [
@@ -2961,11 +3710,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Clone Graph\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Clone Graph\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Clone Graph\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -3052,11 +3801,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Closest Binary Search Tree Value\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Closest Binary Search Tree Value\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Closest Binary Search Tree Value\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -3138,11 +3887,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Closest Binary Search Tree Value II\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Closest Binary Search Tree Value II\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Closest Binary Search Tree Value II\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -3224,6 +3973,20 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #88"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #85"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #80"
       }
     ],
     "supportedLanguages": [
@@ -3243,11 +4006,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Coin Change\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Coin Change\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Coin Change\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -3325,6 +4088,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #81"
       }
     ],
     "supportedLanguages": [
@@ -3344,11 +4114,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Coin Change II\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Coin Change II\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Coin Change II\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -3428,6 +4198,13 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #83"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #92"
       }
     ],
     "supportedLanguages": [
@@ -3447,11 +4224,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Combination Sum\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Combination Sum\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Combination Sum\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -3536,11 +4313,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Combination Sum II\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Combination Sum II\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Combination Sum II\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -3620,11 +4397,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Combination Sum IV\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Combination Sum IV\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Combination Sum IV\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -3704,11 +4481,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Combinations\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Combinations\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Combinations\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -3790,11 +4567,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Concatenated Words\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Concatenated Words\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Concatenated Words\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -3878,11 +4655,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Construct Binary Tree from Preorder and Inorder Traversal\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Construct Binary Tree from Preorder and Inorder Traversal\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Construct Binary Tree from Preorder and Inorder Traversal\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -3959,6 +4736,13 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #39"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #26"
       }
     ],
     "supportedLanguages": [
@@ -3978,11 +4762,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Container With Most Water\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Container With Most Water\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Container With Most Water\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -4050,6 +4834,20 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #3"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #2"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #13"
       }
     ],
     "supportedLanguages": [
@@ -4069,11 +4867,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Contains Duplicate\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Contains Duplicate\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Contains Duplicate\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -4160,11 +4958,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Contains Duplicate II\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Contains Duplicate II\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Contains Duplicate II\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -4204,6 +5002,97 @@ export const faang1 = [
       "solutionMarkdown": "### Optimal Solution\n\nOne-pass: if num in map and i - map[num] <= k return true; map[num] = i.\n\n### Complexity\n- Time: O(N), Space: O(min(N, k))",
       "timeComplexity": "O(N)",
       "spaceComplexity": "O(min(N"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Longest Subarray with Equal 0s and 1s",
+    "slug": "contiguous-array",
+    "description": "Given a binary array `nums`, return *the maximum length of a contiguous subarray with an equal number of* `0` *and* `1`.\n\n### Example 1:\n```\nInput: [0,1]\nOutput: 2\nExplanation: [0, 1] is the longest contiguous subarray with an equal number of 0 and 1.\n```\n\n### Example 2:\n```\nInput: [0,1,0]\nOutput: 2\nExplanation: [0, 1] or [1, 0] are contiguous subarrays with length 2.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "Hash Table",
+      "Prefix Sum"
+    ],
+    "topics": [
+      "Array",
+      "Hash Table",
+      "Prefix Sum"
+    ],
+    "companyTags": [
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #29"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def contiguousArray(*args):\n    # TODO: Implement solution for Longest Subarray with Equal 0s and 1s\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = contiguousArray(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(contiguousArray(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function contiguousArray(...args) {\n    // TODO: Implement solution for Longest Subarray with Equal 0s and 1s\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(contiguousArray(...parsed)));\n    } catch (e) {\n        console.log(contiguousArray(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Longest Subarray with Equal 0s and 1s\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[0,1]",
+        "output": "2",
+        "explanation": "[0, 1] is the longest contiguous subarray with an equal number of 0 and 1."
+      },
+      {
+        "input": "[0,1,0]",
+        "output": "2",
+        "explanation": "[0, 1] or [1, 0] are contiguous subarrays with length 2."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[0,1]",
+        "output": "2",
+        "isHidden": true
+      },
+      {
+        "input": "[0,1,0]",
+        "output": "2",
+        "isHidden": true
+      },
+      {
+        "input": "[0,0,1,0,0,0,1,1]",
+        "output": "6",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Replace 0 with -1. The problem reduces to finding the longest subarray with sum 0."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Longest Subarray with Equal 0s and 1s",
+      "solutionMarkdown": "### Optimal Solution\n\nMap 0 to -1. Maintain running sum and store earliest seen index of each sum in a hash map. Length = i - map[sum].\n\n### Complexity\n- Time: O(N), Space: O(N)",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
     },
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
@@ -4251,11 +5140,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Convert Number to Words (up to 999 crores)\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Convert Number to Words (up to 999 crores)\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Convert Number to Words (up to 999 crores)\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -4354,11 +5243,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Copy List with Random Pointer\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Copy List with Random Pointer\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Copy List with Random Pointer\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -4393,6 +5282,190 @@ export const faang1 = [
       "solutionMarkdown": "### Optimal Solution\n\nO(1) auxiliary space interweaving technique or Hash Map mapping original to clone.\n\n### Complexity\n- Time: O(N), Space: O(1)",
       "timeComplexity": "O(N)",
       "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Count Connected Components / Detect Cycles",
+    "slug": "count-components-detect-cycles",
+    "description": "You have a graph of `n` nodes labeled from `0` to `n - 1` and a list of undirected `edges`. Return an array `[num_components, has_cycle]` where `num_components` is the number of connected components and `has_cycle` is `true` if any cycle exists, `false` otherwise.\n\n### Example 1:\n```\nInput: 5\n[[0,1],[1,2],[3,4]]\nOutput: [2,false]\nExplanation: Two components: {0, 1, 2} and {3, 4}. No cycles.\n```\n\n### Example 2:\n```\nInput: 5\n[[0,1],[1,2],[2,0],[3,4]]\nOutput: [2,true]\nExplanation: Cycle 0-1-2-0 detected. Two components.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Graph",
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Union Find"
+    ],
+    "topics": [
+      "Graph",
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Union Find"
+    ],
+    "companyTags": [
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #78"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def countComponentsDetectCycles(*args):\n    # TODO: Implement solution for Count Connected Components / Detect Cycles\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = countComponentsDetectCycles(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(countComponentsDetectCycles(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function countComponentsDetectCycles(...args) {\n    // TODO: Implement solution for Count Connected Components / Detect Cycles\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(countComponentsDetectCycles(...parsed)));\n    } catch (e) {\n        console.log(countComponentsDetectCycles(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Count Connected Components / Detect Cycles\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "5\n[[0,1],[1,2],[3,4]]",
+        "output": "[2,false]",
+        "explanation": "Two components: {0, 1, 2} and {3, 4}. No cycles."
+      },
+      {
+        "input": "5\n[[0,1],[1,2],[2,0],[3,4]]",
+        "output": "[2,true]",
+        "explanation": "Cycle 0-1-2-0 detected. Two components."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "5\n[[0,1],[1,2],[3,4]]",
+        "output": "[2,false]",
+        "isHidden": true
+      },
+      {
+        "input": "5\n[[0,1],[1,2],[2,0],[3,4]]",
+        "output": "[2,true]",
+        "isHidden": true
+      },
+      {
+        "input": "3\n[]",
+        "output": "[3,false]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Use Disjoint Set Union (DSU). When uniting u and v, if find(u) == find(v), a cycle is detected."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Count Connected Components / Detect Cycles",
+      "solutionMarkdown": "### Optimal Solution\n\nDSU tracking component count initialized to n. Decrement on successful union. If edge connects already connected nodes, flag cycle.\n\n### Complexity\n- Time: O(V + E * alpha(V)), Space: O(V)",
+      "timeComplexity": "O(V + E * alpha(V))",
+      "spaceComplexity": "O(V)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Count Equal-Value Pairs with Distance at Most K",
+    "slug": "count-equal-pairs-within-k-distance",
+    "description": "Given an integer array `nums` and an integer `k`, count the number of pairs `(i, j)` such that `i < j`, `nums[i] == nums[j]`, and `j - i <= k`.\n\n### Example 1:\n```\nInput: [1,2,3,1,1,3]\n3\nOutput: 3\nExplanation: Valid pairs: (0, 3) dist 3, (3, 4) dist 1, (2, 5) dist 3. Total = 3.\n```\n\n### Example 2:\n```\nInput: [1,0,1,1]\n1\nOutput: 1\nExplanation: Pair (2, 3) has distance 1 <= 1.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "Hash Table",
+      "Sliding Window"
+    ],
+    "topics": [
+      "Array",
+      "Hash Table",
+      "Sliding Window"
+    ],
+    "companyTags": [
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #14"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def countEqualPairsWithinKDistance(*args):\n    # TODO: Implement solution for Count Equal-Value Pairs with Distance at Most K\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = countEqualPairsWithinKDistance(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(countEqualPairsWithinKDistance(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function countEqualPairsWithinKDistance(...args) {\n    // TODO: Implement solution for Count Equal-Value Pairs with Distance at Most K\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(countEqualPairsWithinKDistance(...parsed)));\n    } catch (e) {\n        console.log(countEqualPairsWithinKDistance(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Count Equal-Value Pairs with Distance at Most K\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1,2,3,1,1,3]\n3",
+        "output": "3",
+        "explanation": "Valid pairs: (0, 3) dist 3, (3, 4) dist 1, (2, 5) dist 3. Total = 3."
+      },
+      {
+        "input": "[1,0,1,1]\n1",
+        "output": "1",
+        "explanation": "Pair (2, 3) has distance 1 <= 1."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1,2,3,1,1,3]\n3",
+        "output": "3",
+        "isHidden": true
+      },
+      {
+        "input": "[1,0,1,1]\n1",
+        "output": "1",
+        "isHidden": true
+      },
+      {
+        "input": "[1,2,3,4,5]\n2",
+        "output": "0",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Maintain a frequency map of elements in a sliding window of size k."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Count Equal-Value Pairs with Distance at Most K",
+      "solutionMarkdown": "### Optimal Solution\n\nSliding window of size k with frequency map. At step j, add count[nums[j]] to total, increment count, and remove element leaving window j-k.\n\n### Complexity\n- Time: O(N), Space: O(min(N, K))",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(min(N"
     },
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
@@ -4440,11 +5513,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Count Integers in Intervals\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Count Integers in Intervals\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Count Integers in Intervals\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -4521,11 +5594,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Count Primes\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Count Primes\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Count Primes\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -4617,11 +5690,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Count special paths in an N-ary tree (equal endpoint values; path values bounded by endpoint)\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Count special paths in an N-ary tree (equal endpoint values; path values bounded by endpoint)\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Count special paths in an N-ary tree (equal endpoint values; path values bounded by endpoint)\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -4698,6 +5771,20 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #69"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #73"
       }
     ],
     "supportedLanguages": [
@@ -4717,11 +5804,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Course Schedule\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Course Schedule\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Course Schedule\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -4803,6 +5890,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #70"
       }
     ],
     "supportedLanguages": [
@@ -4822,11 +5916,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Course Schedule II\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Course Schedule II\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Course Schedule II\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -4918,6 +6012,20 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #50"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #47"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #44"
       }
     ],
     "supportedLanguages": [
@@ -4937,11 +6045,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Daily Temperatures\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Daily Temperatures\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Daily Temperatures\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -5009,6 +6117,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 40,
         "sourceNote": "Reported in Meta 2021-2026 interview set"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #41"
       }
     ],
     "supportedLanguages": [
@@ -5028,11 +6143,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Decode String\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Decode String\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Decode String\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -5119,6 +6234,20 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 40,
         "sourceNote": "Accenture Interview Question #32 (R [S12; S13])"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #95"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #85"
       }
     ],
     "supportedLanguages": [
@@ -5138,11 +6267,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Decode Ways\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Decode Ways\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Decode Ways\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -5182,6 +6311,183 @@ export const faang1 = [
       "solutionMarkdown": "### Optimal Solution\n\n1D DP with two states tracking valid single and double digit transitions.\n\n### Complexity\n- Time: O(N), Space: O(1)",
       "timeComplexity": "O(N)",
       "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Delete a Node in a Binary Search Tree",
+    "slug": "delete-node-in-a-bst",
+    "description": "Given a root node reference of a BST and a `key`, delete the node with the given key in the BST. Return *the root node reference (possibly updated) of the BST*.\n\n### Example 1:\n```\nInput: [5,3,6,2,4,null,7]\n3\nOutput: [5,4,6,2,null,null,7]\nExplanation: Node 3 deleted and replaced with its inorder successor 4.\n```\n\n### Example 2:\n```\nInput: [5,3,6,2,4,null,7]\n0\nOutput: [5,3,6,2,4,null,7]\nExplanation: Key 0 does not exist in BST.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Tree",
+      "Binary Search Tree",
+      "Binary Tree"
+    ],
+    "topics": [
+      "Tree",
+      "Binary Search Tree",
+      "Binary Tree"
+    ],
+    "companyTags": [
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 45,
+        "sourceNote": "TCS Interview Question #67"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def deleteNodeInABst(*args):\n    # TODO: Implement solution for Delete a Node in a Binary Search Tree\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = deleteNodeInABst(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(deleteNodeInABst(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function deleteNodeInABst(...args) {\n    // TODO: Implement solution for Delete a Node in a Binary Search Tree\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(deleteNodeInABst(...parsed)));\n    } catch (e) {\n        console.log(deleteNodeInABst(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Delete a Node in a Binary Search Tree\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[5,3,6,2,4,null,7]\n3",
+        "output": "[5,4,6,2,null,null,7]",
+        "explanation": "Node 3 deleted and replaced with its inorder successor 4."
+      },
+      {
+        "input": "[5,3,6,2,4,null,7]\n0",
+        "output": "[5,3,6,2,4,null,7]",
+        "explanation": "Key 0 does not exist in BST."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[5,3,6,2,4,null,7]\n3",
+        "output": "[5,4,6,2,null,null,7]",
+        "isHidden": true
+      },
+      {
+        "input": "[5,3,6,2,4,null,7]\n0",
+        "output": "[5,3,6,2,4,null,7]",
+        "isHidden": true
+      },
+      {
+        "input": "[]\n0",
+        "output": "[]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "If node has 0 or 1 child, return the non-null child. If 2 children, replace value with inorder successor and delete successor."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Delete a Node in a Binary Search Tree",
+      "solutionMarkdown": "### Optimal Solution\n\nRecursive BST deletion. Navigate left or right. When found: 0 children return null, 1 child return child, 2 children find min in right subtree.\n\n### Complexity\n- Time: O(H), Space: O(H)",
+      "timeComplexity": "O(H)",
+      "spaceComplexity": "O(H)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Implement a Circular Queue",
+    "slug": "design-circular-queue",
+    "description": "Design your implementation of the circular queue. A circular queue is a linear data structure in which the operations are performed based on FIFO principle and the last position is connected back to the first position to make a circle.\n\n### Example 1:\n```\nInput: [\"MyCircularQueue\",\"enQueue\",\"enQueue\",\"enQueue\",\"enQueue\",\"Rear\",\"isFull\",\"deQueue\",\"enQueue\",\"Rear\"]\n[[3],[1],[2],[3],[4],[],[],[],[4],[]]\nOutput: [null,true,true,true,false,3,true,true,true,4]\nExplanation: Circular queue operations with capacity 3.\n```\n\n### Example 2:\n```\nInput: [\"MyCircularQueue\",\"Front\",\"isEmpty\"]\n[[5],[],[]]\nOutput: [null,-1,true]\nExplanation: Empty queue.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Queue",
+      "Design",
+      "Array"
+    ],
+    "topics": [
+      "Queue",
+      "Design",
+      "Array"
+    ],
+    "companyTags": [
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 45,
+        "sourceNote": "TCS Interview Question #58"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def designCircularQueue(*args):\n    # TODO: Implement solution for Implement a Circular Queue\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = designCircularQueue(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(designCircularQueue(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function designCircularQueue(...args) {\n    // TODO: Implement solution for Implement a Circular Queue\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(designCircularQueue(...parsed)));\n    } catch (e) {\n        console.log(designCircularQueue(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Implement a Circular Queue\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[\"MyCircularQueue\",\"enQueue\",\"enQueue\",\"enQueue\",\"enQueue\",\"Rear\",\"isFull\",\"deQueue\",\"enQueue\",\"Rear\"]\n[[3],[1],[2],[3],[4],[],[],[],[4],[]]",
+        "output": "[null,true,true,true,false,3,true,true,true,4]",
+        "explanation": "Circular queue operations with capacity 3."
+      },
+      {
+        "input": "[\"MyCircularQueue\",\"Front\",\"isEmpty\"]\n[[5],[],[]]",
+        "output": "[null,-1,true]",
+        "explanation": "Empty queue."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[\"MyCircularQueue\",\"enQueue\",\"enQueue\",\"enQueue\",\"enQueue\",\"Rear\",\"isFull\",\"deQueue\",\"enQueue\",\"Rear\"]\n[[3],[1],[2],[3],[4],[],[],[],[4],[]]",
+        "output": "[null,true,true,true,false,3,true,true,true,4]",
+        "isHidden": true
+      },
+      {
+        "input": "[\"MyCircularQueue\",\"Front\",\"isEmpty\"]\n[[5],[],[]]",
+        "output": "[null,-1,true]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Use fixed size array with head, tail, and size counters. Advance pointers using modulo."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Implement a Circular Queue",
+      "solutionMarkdown": "### Optimal Solution\n\nMaintain head pointer and count. enQueue writes at (head + count) % capacity. deQueue advances head = (head + 1) % capacity.\n\n### Complexity\n- Time: O(1) per operation, Space: O(K)",
+      "timeComplexity": "O(1) per operation",
+      "spaceComplexity": "O(K)"
     },
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
@@ -5229,11 +6535,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Design Hit Counter\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Design Hit Counter\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Design Hit Counter\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -5310,11 +6616,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Design Twitter\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Design Twitter\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Design Twitter\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -5350,6 +6656,95 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Determine the Colour of a Chessboard Square",
+    "slug": "determine-color-of-a-chessboard-square",
+    "description": "You are given `coordinates`, a string that represents the coordinates of a square of the chessboard (e.g. `'a1'`, `'h8'`). Return `true` if the square is **white**, and `false` if the square is **black**.\n\n### Example 1:\n```\nInput: \"a1\"\nOutput: false\nExplanation: Square 'a1' is black.\n```\n\n### Example 2:\n```\nInput: \"h3\"\nOutput: true\nExplanation: Square 'h3' is white.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Math",
+      "String"
+    ],
+    "topics": [
+      "Math",
+      "String"
+    ],
+    "companyTags": [
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 45,
+        "sourceNote": "TCS Interview Question #11"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def determineColorOfAChessboardSquare(*args):\n    # TODO: Implement solution for Determine the Colour of a Chessboard Square\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = determineColorOfAChessboardSquare(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(determineColorOfAChessboardSquare(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function determineColorOfAChessboardSquare(...args) {\n    // TODO: Implement solution for Determine the Colour of a Chessboard Square\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(determineColorOfAChessboardSquare(...parsed)));\n    } catch (e) {\n        console.log(determineColorOfAChessboardSquare(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Determine the Colour of a Chessboard Square\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "\"a1\"",
+        "output": "false",
+        "explanation": "Square 'a1' is black."
+      },
+      {
+        "input": "\"h3\"",
+        "output": "true",
+        "explanation": "Square 'h3' is white."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "\"a1\"",
+        "output": "false",
+        "isHidden": true
+      },
+      {
+        "input": "\"h3\"",
+        "output": "true",
+        "isHidden": true
+      },
+      {
+        "input": "\"c7\"",
+        "output": "false",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Convert column char 'a'-'h' to 1-8. Parity of col + row determines color."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Determine the Colour of a Chessboard Square",
+      "solutionMarkdown": "### Optimal Solution\n\ncol = ord(coordinates[0]) - ord('a') + 1, row = int(coordinates[1]). Return (col + row) % 2 != 0.\n\n### Complexity\n- Time: O(1), Space: O(1)",
+      "timeComplexity": "O(1)",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Diameter of Binary Tree",
     "slug": "diameter-of-binary-tree",
     "description": "Given the `root` of a binary tree, return *the length of the **diameter** of the tree*.\n\nThe diameter of a binary tree is the length of the longest path between any two nodes in a tree.\n\n### Example 1:\n```\nInput: [1,2,3,4,5]\nOutput: 3\nExplanation: Path 4 -> 2 -> 1 -> 3 or 5 -> 2 -> 1 -> 3 has length 3.\n```\n\n### Example 2:\n```\nInput: [1,2]\nOutput: 1\nExplanation: Path length 1.\n```",
@@ -5379,6 +6774,20 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 40,
         "sourceNote": "Reported in Meta 2021-2026 interview set"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #63"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 45,
+        "sourceNote": "TCS Interview Question #62"
       }
     ],
     "supportedLanguages": [
@@ -5398,11 +6807,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Diameter of Binary Tree\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Diameter of Binary Tree\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Diameter of Binary Tree\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -5482,11 +6891,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Digit-string partition into K substrings (each starts even, ends odd; length >= M)\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Digit-string partition into K substrings (each starts even, ends odd; length >= M)\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Digit-string partition into K substrings (each starts even, ends odd; length >= M)\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -5568,11 +6977,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Dijkstra on a Grid (candidate-reported variant)\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Dijkstra on a Grid (candidate-reported variant)\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Dijkstra on a Grid (candidate-reported variant)\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -5613,6 +7022,97 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Dijkstra Shortest Path",
+    "slug": "dijkstra-shortest-path",
+    "description": "Given a weighted directed graph of `n` vertices labeled from `0` to `n - 1` and a `src` vertex, return an array of the shortest distances from `src` to all other vertices. If a vertex is unreachable, return `-1`.\n\n### Example 1:\n```\nInput: 4\n[[0,1,1],[0,2,4],[1,2,2],[1,3,6],[2,3,3]]\n0\nOutput: [0,1,3,6]\nExplanation: Shortest paths from 0: 0->0=0, 0->1=1, 0->1->2=3, 0->1->2->3=6.\n```\n\n### Example 2:\n```\nInput: 3\n[[0,1,5]]\n0\nOutput: [0,5,-1]\nExplanation: Node 2 is unreachable.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Graph",
+      "Shortest Path",
+      "Heap / Priority Queue"
+    ],
+    "topics": [
+      "Graph",
+      "Shortest Path",
+      "Heap / Priority Queue"
+    ],
+    "companyTags": [
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #81"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def dijkstraShortestPath(*args):\n    # TODO: Implement solution for Dijkstra Shortest Path\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = dijkstraShortestPath(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(dijkstraShortestPath(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function dijkstraShortestPath(...args) {\n    // TODO: Implement solution for Dijkstra Shortest Path\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(dijkstraShortestPath(...parsed)));\n    } catch (e) {\n        console.log(dijkstraShortestPath(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Dijkstra Shortest Path\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "4\n[[0,1,1],[0,2,4],[1,2,2],[1,3,6],[2,3,3]]\n0",
+        "output": "[0,1,3,6]",
+        "explanation": "Shortest paths from 0: 0->0=0, 0->1=1, 0->1->2=3, 0->1->2->3=6."
+      },
+      {
+        "input": "3\n[[0,1,5]]\n0",
+        "output": "[0,5,-1]",
+        "explanation": "Node 2 is unreachable."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "4\n[[0,1,1],[0,2,4],[1,2,2],[1,3,6],[2,3,3]]\n0",
+        "output": "[0,1,3,6]",
+        "isHidden": true
+      },
+      {
+        "input": "3\n[[0,1,5]]\n0",
+        "output": "[0,5,-1]",
+        "isHidden": true
+      },
+      {
+        "input": "1\n[]\n0",
+        "output": "[0]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Use a min-heap priority queue storing (distance, vertex) pairs."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Dijkstra Shortest Path",
+      "solutionMarkdown": "### Optimal Solution\n\nDijkstra's algorithm: maintain dist array initialized to infinity. Pop min distance vertex, relax outgoing edges, push to heap.\n\n### Complexity\n- Time: O((V + E) log V), Space: O(V + E)",
+      "timeComplexity": "O((V + E) log V)",
+      "spaceComplexity": "O(V + E)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Edit Distance",
     "slug": "edit-distance",
     "description": "Given two strings `word1` and `word2`, return *the minimum number of operations required to convert `word1` to `word2`* (insert, delete, or replace a character).\n\n### Example 1:\n```\nInput: horse\nros\nOutput: 3\nExplanation: horse -> rorse -> rose -> ros.\n```\n\n### Example 2:\n```\nInput: intention\nexecution\nOutput: 5\nExplanation: 5 operations needed.\n```",
@@ -5647,6 +7147,20 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #89"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #84"
       }
     ],
     "supportedLanguages": [
@@ -5666,11 +7180,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Edit Distance\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Edit Distance\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Edit Distance\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -5764,11 +7278,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Evaluate Reverse Polish Notation\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Evaluate Reverse Polish Notation\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Evaluate Reverse Polish Notation\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -5858,11 +7372,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Factorial Trailing Zeroes\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Factorial Trailing Zeroes\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Factorial Trailing Zeroes\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -5913,6 +7427,197 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Fenwick Tree - Prefix Sum and Point Update",
+    "slug": "fenwick-tree-prefix-sum-and-point-update",
+    "description": "Implement a **Binary Indexed Tree (Fenwick Tree)** supporting `update(index, delta)` to add `delta` to an element, and `query(index)` to compute the prefix sum from `1` to `index` in `O(log N)` time.\n\n### Example 1:\n```\nInput: [\"FenwickTree\",\"update\",\"query\",\"update\",\"query\"]\n[[5],[1,3],[1],[3,2],[4]]\nOutput: [null,null,3,null,5]\nExplanation: update(1, 3) makes prefix sum at 1 = 3. update(3, 2) makes prefix sum at 4 = 3 + 2 = 5.\n```\n\n### Example 2:\n```\nInput: [\"FenwickTree\",\"query\"]\n[[10],[5]]\nOutput: [null,0]\nExplanation: Empty tree returns 0 prefix sum.\n```",
+    "difficulty": "HARD",
+    "category": "DSA",
+    "patterns": [
+      "Binary Indexed Tree",
+      "Design",
+      "Array"
+    ],
+    "topics": [
+      "Binary Indexed Tree",
+      "Design",
+      "Array"
+    ],
+    "companyTags": [
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 28,
+        "sourceNote": "Infosys Practice Bank #80"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #100"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def fenwickTreePrefixSumAndPointUpdate(*args):\n    # TODO: Implement solution for Fenwick Tree - Prefix Sum and Point Update\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = fenwickTreePrefixSumAndPointUpdate(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(fenwickTreePrefixSumAndPointUpdate(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function fenwickTreePrefixSumAndPointUpdate(...args) {\n    // TODO: Implement solution for Fenwick Tree - Prefix Sum and Point Update\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(fenwickTreePrefixSumAndPointUpdate(...parsed)));\n    } catch (e) {\n        console.log(fenwickTreePrefixSumAndPointUpdate(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Fenwick Tree - Prefix Sum and Point Update\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[\"FenwickTree\",\"update\",\"query\",\"update\",\"query\"]\n[[5],[1,3],[1],[3,2],[4]]",
+        "output": "[null,null,3,null,5]",
+        "explanation": "update(1, 3) makes prefix sum at 1 = 3. update(3, 2) makes prefix sum at 4 = 3 + 2 = 5."
+      },
+      {
+        "input": "[\"FenwickTree\",\"query\"]\n[[10],[5]]",
+        "output": "[null,0]",
+        "explanation": "Empty tree returns 0 prefix sum."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[\"FenwickTree\",\"update\",\"query\",\"update\",\"query\"]\n[[5],[1,3],[1],[3,2],[4]]",
+        "output": "[null,null,3,null,5]",
+        "isHidden": true
+      },
+      {
+        "input": "[\"FenwickTree\",\"query\"]\n[[10],[5]]",
+        "output": "[null,0]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Use index & (-index) for bitwise traversal of tree nodes."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Fenwick Tree - Prefix Sum and Point Update",
+      "solutionMarkdown": "### Optimal Solution\n\nUpdate: add delta and advance i += i & (-i). Query: sum value and backtrack i -= i & (-i).\n\n### Complexity\n- Time: O(log N) per query/update, Space: O(N)",
+      "timeComplexity": "O(log N) per query/update",
+      "spaceComplexity": "O(N)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Fibonacci Number",
+    "slug": "fibonacci-number",
+    "description": "The **Fibonacci numbers** commonly denoted `F(n)` form a sequence such that each number is the sum of the two preceding ones, starting from `0` and `1`. Given `n`, calculate `F(n)`.\n\n### Example 1:\n```\nInput: 2\nOutput: 1\nExplanation: F(2) = F(1) + F(0) = 1 + 0 = 1.\n```\n\n### Example 2:\n```\nInput: 4\nOutput: 3\nExplanation: F(4) = F(3) + F(2) = 2 + 1 = 3.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Math",
+      "Dynamic Programming",
+      "Recursion",
+      "Memoization"
+    ],
+    "topics": [
+      "Math",
+      "Dynamic Programming",
+      "Recursion",
+      "Memoization"
+    ],
+    "companyTags": [
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #4"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def fibonacciNumber(*args):\n    # TODO: Implement solution for Fibonacci Number\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = fibonacciNumber(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(fibonacciNumber(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function fibonacciNumber(...args) {\n    // TODO: Implement solution for Fibonacci Number\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(fibonacciNumber(...parsed)));\n    } catch (e) {\n        console.log(fibonacciNumber(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Fibonacci Number\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "2",
+        "output": "1",
+        "explanation": "F(2) = F(1) + F(0) = 1 + 0 = 1."
+      },
+      {
+        "input": "4",
+        "output": "3",
+        "explanation": "F(4) = F(3) + F(2) = 2 + 1 = 3."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "2",
+        "output": "1",
+        "isHidden": true
+      },
+      {
+        "input": "4",
+        "output": "3",
+        "isHidden": true
+      },
+      {
+        "input": "0",
+        "output": "0",
+        "isHidden": true
+      },
+      {
+        "input": "10",
+        "output": "55",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Maintain two variables a and b iteratively to use O(1) space."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Fibonacci Number",
+      "solutionMarkdown": "### Optimal Solution\n\nIterative rolling calculation: a, b = 0, 1. For _ in range(n): a, b = b, a + b. Return a.\n\n### Complexity\n- Time: O(N), Space: O(1)",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Find a Path in Grid to Bottom-Right",
     "slug": "find-a-path-in-grid-to-bottom-right",
     "description": "Given an `m x n` binary grid where `0` represents an empty cell and `1` represents an obstacle, return *the path from top-left `(0, 0)` to bottom-right `(m-1, n-1)` as a list of coordinates*. If no path exists, return an empty list.\n\n### Example 1:\n```\nInput: [[0,0,0],[0,1,0],[0,0,0]]\nOutput: [[0, 0], [0, 1], [0, 2], [1, 2], [2, 2]]\nExplanation: Valid path avoiding obstacle.\n```\n\n### Example 2:\n```\nInput: [[0,1],[1,0]]\nOutput: []\nExplanation: Path blocked.\n```",
@@ -5952,11 +7657,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find a Path in Grid to Bottom-Right\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find a Path in Grid to Bottom-Right\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Find a Path in Grid to Bottom-Right\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -6038,6 +7743,13 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #33"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #28"
       }
     ],
     "supportedLanguages": [
@@ -6057,11 +7769,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find All Anagrams in a String\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find All Anagrams in a String\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Find All Anagrams in a String\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -6141,11 +7853,11 @@ export const faang1 = [
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find All Duplicates in an Array\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find All Duplicates in an Array\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Find All Duplicates in an Array\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
@@ -6184,466 +7896,6 @@ export const faang1 = [
       "approach": "Optimal Approach for Find All Duplicates in an Array",
       "solutionMarkdown": "### Optimal Solution\n\nIndex sign negation in-place: for x in nums, idx = abs(x) - 1; if nums[idx] < 0 duplicate else nums[idx] *= -1.\n\n### Complexity\n- Time: O(N), Space: O(1)",
       "timeComplexity": "O(N)",
-      "spaceComplexity": "O(1)"
-    },
-    "totalSubmissions": 0,
-    "acceptedSubmissions": 0,
-    "acceptanceRate": 0
-  },
-  {
-    "title": "Find All Numbers Disappeared in an Array",
-    "slug": "find-all-numbers-disappeared-in-an-array",
-    "description": "Given an array `nums` of `n` integers where `nums[i]` is in the range `[1, n]`, return *an array of all the integers in the range* `[1, n]` *that do not appear in* `nums`.\n\n### Example 1:\n```\nInput: [4,3,2,7,8,2,3,1]\nOutput: [5,6]\nExplanation: Numbers 5 and 6 are missing from range [1, 8].\n```\n\n### Example 2:\n```\nInput: [1,1]\nOutput: [2]\nExplanation: Number 2 is missing from range [1, 2].\n```",
-    "difficulty": "EASY",
-    "category": "DSA",
-    "patterns": [
-      "Array",
-      "Hash Table"
-    ],
-    "topics": [
-      "Array",
-      "Hash Table"
-    ],
-    "companyTags": [
-      {
-        "company": "Accenture",
-        "yearReported": 2025,
-        "verified": false,
-        "frequencyCount": 25,
-        "sourceNote": "Accenture Practice Bank #14"
-      }
-    ],
-    "supportedLanguages": [
-      "python",
-      "javascript",
-      "cpp",
-      "java"
-    ],
-    "starterCode": [
-      {
-        "language": "python",
-        "boilerplate": "def findAllNumbersDisappearedInAnArray(*args):\n    # TODO: Implement solution for Find All Numbers Disappeared in an Array\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findAllNumbersDisappearedInAnArray(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findAllNumbersDisappearedInAnArray(*input_data))\n"
-      },
-      {
-        "language": "javascript",
-        "boilerplate": "function findAllNumbersDisappearedInAnArray(...args) {\n    // TODO: Implement solution for Find All Numbers Disappeared in an Array\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findAllNumbersDisappearedInAnArray(...parsed)));\n    } catch (e) {\n        console.log(findAllNumbersDisappearedInAnArray(...lines));\n    }\n}\n"
-      },
-      {
-        "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find All Numbers Disappeared in an Array\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
-      },
-      {
-        "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Find All Numbers Disappeared in an Array\n            System.out.println(line);\n        }\n    }\n}\n"
-      }
-    ],
-    "sampleTestCases": [
-      {
-        "input": "[4,3,2,7,8,2,3,1]",
-        "output": "[5,6]",
-        "explanation": "Numbers 5 and 6 are missing from range [1, 8]."
-      },
-      {
-        "input": "[1,1]",
-        "output": "[2]",
-        "explanation": "Number 2 is missing from range [1, 2]."
-      }
-    ],
-    "hiddenTestCases": [
-      {
-        "input": "[4,3,2,7,8,2,3,1]",
-        "output": "[5,6]",
-        "isHidden": true
-      },
-      {
-        "input": "[1,1]",
-        "output": "[2]",
-        "isHidden": true
-      },
-      {
-        "input": "[1]",
-        "output": "[]",
-        "isHidden": true
-      }
-    ],
-    "hints": [
-      "Use the array itself as a hash table by negating values at index abs(val) - 1."
-    ],
-    "editorial": {
-      "approach": "Optimal Approach for Find All Numbers Disappeared in an Array",
-      "solutionMarkdown": "### Optimal Solution\n\nFor each val in nums, negate nums[abs(val) - 1]. Indices that remain positive correspond to missing numbers.\n\n### Complexity\n- Time: O(N), Space: O(1) auxiliary",
-      "timeComplexity": "O(N)",
-      "spaceComplexity": "O(1) auxiliary"
-    },
-    "totalSubmissions": 0,
-    "acceptedSubmissions": 0,
-    "acceptanceRate": 0
-  },
-  {
-    "title": "Find First and Last Position of Element in Sorted Array",
-    "slug": "find-first-and-last-position-of-element-in-sorted-array",
-    "description": "Given an array of integers `nums` sorted in non-decreasing order, find the starting and ending position of a given `target` value. If target is not found in the array, return `[-1, -1]`.\n\nYou must write an algorithm with `O(log n)` runtime complexity.\n\n### Example 1:\n```\nInput: [5,7,7,8,8,10]\n8\nOutput: [3, 4]\nExplanation: 8 is found from index 3 to 4.\n```\n\n### Example 2:\n```\nInput: [5,7,7,8,8,10]\n6\nOutput: [-1, -1]\nExplanation: 6 is not in the array.\n```",
-    "difficulty": "MEDIUM",
-    "category": "DSA",
-    "patterns": [
-      "Binary Search",
-      "Array"
-    ],
-    "topics": [
-      "Binary Search",
-      "Array"
-    ],
-    "companyTags": [
-      {
-        "company": "Apple",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 45,
-        "sourceNote": "Reported in Apple 2021-2026 interview set"
-      },
-      {
-        "company": "Accenture",
-        "yearReported": 2025,
-        "verified": false,
-        "frequencyCount": 25,
-        "sourceNote": "Accenture Practice Bank #63"
-      }
-    ],
-    "supportedLanguages": [
-      "python",
-      "javascript",
-      "cpp",
-      "java"
-    ],
-    "starterCode": [
-      {
-        "language": "python",
-        "boilerplate": "def findFirstAndLastPositionOfElementInSortedArray(*args):\n    # TODO: Implement solution for Find First and Last Position of Element in Sorted Array\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findFirstAndLastPositionOfElementInSortedArray(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findFirstAndLastPositionOfElementInSortedArray(*input_data))\n"
-      },
-      {
-        "language": "javascript",
-        "boilerplate": "function findFirstAndLastPositionOfElementInSortedArray(...args) {\n    // TODO: Implement solution for Find First and Last Position of Element in Sorted Array\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findFirstAndLastPositionOfElementInSortedArray(...parsed)));\n    } catch (e) {\n        console.log(findFirstAndLastPositionOfElementInSortedArray(...lines));\n    }\n}\n"
-      },
-      {
-        "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find First and Last Position of Element in Sorted Array\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
-      },
-      {
-        "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Find First and Last Position of Element in Sorted Array\n            System.out.println(line);\n        }\n    }\n}\n"
-      }
-    ],
-    "sampleTestCases": [
-      {
-        "input": "[5,7,7,8,8,10]\n8",
-        "output": "[3, 4]",
-        "explanation": "8 is found from index 3 to 4."
-      },
-      {
-        "input": "[5,7,7,8,8,10]\n6",
-        "output": "[-1, -1]",
-        "explanation": "6 is not in the array."
-      }
-    ],
-    "hiddenTestCases": [
-      {
-        "input": "[5,7,7,8,8,10]\n8",
-        "output": "[3, 4]",
-        "isHidden": true
-      },
-      {
-        "input": "[5,7,7,8,8,10]\n6",
-        "output": "[-1, -1]",
-        "isHidden": true
-      },
-      {
-        "input": "[]\n0",
-        "output": "[-1, -1]",
-        "isHidden": true
-      },
-      {
-        "input": "[1]\n1",
-        "output": "[0, 0]",
-        "isHidden": true
-      }
-    ],
-    "hints": [
-      "Run two binary searches: one for lower bound (first index) and one for upper bound (last index)."
-    ],
-    "editorial": {
-      "approach": "Optimal Approach for Find First and Last Position of Element in Sorted Array",
-      "solutionMarkdown": "### Optimal Solution\n\nTwo binary search passes: left boundary search and right boundary search in O(log N).\n\n### Complexity\n- Time: O(log N), Space: O(1)",
-      "timeComplexity": "O(log N)",
-      "spaceComplexity": "O(1)"
-    },
-    "totalSubmissions": 0,
-    "acceptedSubmissions": 0,
-    "acceptanceRate": 0
-  },
-  {
-    "title": "Find if Path Exists in Graph",
-    "slug": "find-if-path-exists-in-graph",
-    "description": "There is a bi-directional graph with `n` vertices, where each vertex is labeled from `0` to `n - 1`. Given `edges` and integers `source` and `destination`, return `true` if there is a valid path from `source` to `destination`, or `false` otherwise.\n\n### Example 1:\n```\nInput: 3\n[[0,1],[1,2],[2,0]]\n0\n2\nOutput: true\nExplanation: Path 0 -> 1 -> 2 exists.\n```\n\n### Example 2:\n```\nInput: 6\n[[0,1],[0,2],[3,5],[5,4],[4,3]]\n0\n5\nOutput: false\nExplanation: No path between component {0,1,2} and {3,4,5}.\n```",
-    "difficulty": "EASY",
-    "category": "DSA",
-    "patterns": [
-      "Graph",
-      "BFS / DFS",
-      "Union Find"
-    ],
-    "topics": [
-      "Graph",
-      "BFS / DFS",
-      "Union Find"
-    ],
-    "companyTags": [
-      {
-        "company": "Apple",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 45,
-        "sourceNote": "Reported in Apple 2021-2026 interview set"
-      }
-    ],
-    "supportedLanguages": [
-      "python",
-      "javascript",
-      "cpp",
-      "java"
-    ],
-    "starterCode": [
-      {
-        "language": "python",
-        "boilerplate": "def findIfPathExistsInGraph(*args):\n    # TODO: Implement solution for Find if Path Exists in Graph\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findIfPathExistsInGraph(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findIfPathExistsInGraph(*input_data))\n"
-      },
-      {
-        "language": "javascript",
-        "boilerplate": "function findIfPathExistsInGraph(...args) {\n    // TODO: Implement solution for Find if Path Exists in Graph\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findIfPathExistsInGraph(...parsed)));\n    } catch (e) {\n        console.log(findIfPathExistsInGraph(...lines));\n    }\n}\n"
-      },
-      {
-        "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find if Path Exists in Graph\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
-      },
-      {
-        "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Find if Path Exists in Graph\n            System.out.println(line);\n        }\n    }\n}\n"
-      }
-    ],
-    "sampleTestCases": [
-      {
-        "input": "3\n[[0,1],[1,2],[2,0]]\n0\n2",
-        "output": "true",
-        "explanation": "Path 0 -> 1 -> 2 exists."
-      },
-      {
-        "input": "6\n[[0,1],[0,2],[3,5],[5,4],[4,3]]\n0\n5",
-        "output": "false",
-        "explanation": "No path between component {0,1,2} and {3,4,5}."
-      }
-    ],
-    "hiddenTestCases": [
-      {
-        "input": "3\n[[0,1],[1,2],[2,0]]\n0\n2",
-        "output": "true",
-        "isHidden": true
-      },
-      {
-        "input": "6\n[[0,1],[0,2],[3,5],[5,4],[4,3]]\n0\n5",
-        "output": "false",
-        "isHidden": true
-      }
-    ],
-    "hints": [
-      "Use BFS/DFS traversal or Disjoint Set Union (find(source) == find(dest))."
-    ],
-    "editorial": {
-      "approach": "Optimal Approach for Find if Path Exists in Graph",
-      "solutionMarkdown": "### Optimal Solution\n\nUnion-find or BFS search from source to destination.\n\n### Complexity\n- Time: O(V + E), Space: O(V + E)",
-      "timeComplexity": "O(V + E)",
-      "spaceComplexity": "O(V + E)"
-    },
-    "totalSubmissions": 0,
-    "acceptedSubmissions": 0,
-    "acceptanceRate": 0
-  },
-  {
-    "title": "Find Median from Data Stream",
-    "slug": "find-median-from-data-stream",
-    "description": "The **median** is the middle value in an ordered integer list. Design a data structure that supports adding numbers from a data stream and finding the median of the current numbers in `O(1)` time.\n\n### Example 1:\n```\nInput: [\"MedianFinder\",\"addNum\",\"addNum\",\"findMedian\",\"addNum\",\"findMedian\"]\n[[],[1],[2],[],[3],[]]\nOutput: [null, null, null, 1.50000, null, 2.00000]\nExplanation: Medians computed dynamically.\n```\n\n### Example 2:\n```\nInput: [\"MedianFinder\",\"addNum\",\"findMedian\"]\n[[],[5],[]]\nOutput: [null, null, 5.00000]\nExplanation: Single element median.\n```",
-    "difficulty": "HARD",
-    "category": "DSA",
-    "patterns": [
-      "Two Heaps",
-      "Heaps / Priority Queue",
-      "Design"
-    ],
-    "topics": [
-      "Two Heaps",
-      "Heaps / Priority Queue",
-      "Design"
-    ],
-    "companyTags": [
-      {
-        "company": "Apple",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 45,
-        "sourceNote": "Reported in Apple 2021-2026 interview set"
-      },
-      {
-        "company": "Meta",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 40,
-        "sourceNote": "Reported in Meta 2021-2026 interview set"
-      },
-      {
-        "company": "Google",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 50,
-        "sourceNote": "Reported in Google 2021-2026 interview set"
-      }
-    ],
-    "supportedLanguages": [
-      "python",
-      "javascript",
-      "cpp",
-      "java"
-    ],
-    "starterCode": [
-      {
-        "language": "python",
-        "boilerplate": "def findMedianFromDataStream(*args):\n    # TODO: Implement solution for Find Median from Data Stream\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findMedianFromDataStream(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findMedianFromDataStream(*input_data))\n"
-      },
-      {
-        "language": "javascript",
-        "boilerplate": "function findMedianFromDataStream(...args) {\n    // TODO: Implement solution for Find Median from Data Stream\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findMedianFromDataStream(...parsed)));\n    } catch (e) {\n        console.log(findMedianFromDataStream(...lines));\n    }\n}\n"
-      },
-      {
-        "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find Median from Data Stream\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
-      },
-      {
-        "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Find Median from Data Stream\n            System.out.println(line);\n        }\n    }\n}\n"
-      }
-    ],
-    "sampleTestCases": [
-      {
-        "input": "[\"MedianFinder\",\"addNum\",\"addNum\",\"findMedian\",\"addNum\",\"findMedian\"]\n[[],[1],[2],[],[3],[]]",
-        "output": "[null, null, null, 1.50000, null, 2.00000]",
-        "explanation": "Medians computed dynamically."
-      },
-      {
-        "input": "[\"MedianFinder\",\"addNum\",\"findMedian\"]\n[[],[5],[]]",
-        "output": "[null, null, 5.00000]",
-        "explanation": "Single element median."
-      }
-    ],
-    "hiddenTestCases": [
-      {
-        "input": "[\"MedianFinder\",\"addNum\",\"addNum\",\"findMedian\",\"addNum\",\"findMedian\"]\n[[],[1],[2],[],[3],[]]",
-        "output": "[null, null, null, 1.50000, null, 2.00000]",
-        "isHidden": true
-      }
-    ],
-    "hints": [
-      "Maintain two heaps: max-heap for lower half and min-heap for upper half."
-    ],
-    "editorial": {
-      "approach": "Optimal Approach for Find Median from Data Stream",
-      "solutionMarkdown": "### Optimal Solution\n\nBalance sizes so len(small) == len(large) or len(small) == len(large) + 1.\n\n### Complexity\n- Time: addNum O(log N), findMedian O(1), Space: O(N)",
-      "timeComplexity": "addNum O(log N)",
-      "spaceComplexity": "findMedian O(1)"
-    },
-    "totalSubmissions": 0,
-    "acceptedSubmissions": 0,
-    "acceptanceRate": 0
-  },
-  {
-    "title": "Find Minimum in Rotated Sorted Array",
-    "slug": "find-minimum-in-rotated-sorted-array",
-    "description": "Suppose an array of length `n` sorted in ascending order is rotated between `1` and `n` times. Given the sorted rotated array `nums` of **unique** elements, return *the minimum element of this array* in `O(log n)` time.\n\n### Example 1:\n```\nInput: [3,4,5,1,2]\nOutput: 1\nExplanation: The original array was [1,2,3,4,5] rotated 3 times.\n```\n\n### Example 2:\n```\nInput: [4,5,6,7,0,1,2]\nOutput: 0\nExplanation: The original array was [0,1,2,4,5,6,7] and it was rotated 4 times.\n```",
-    "difficulty": "MEDIUM",
-    "category": "DSA",
-    "patterns": [
-      "Array",
-      "Binary Search"
-    ],
-    "topics": [
-      "Array",
-      "Binary Search"
-    ],
-    "companyTags": [
-      {
-        "company": "Accenture",
-        "yearReported": 2025,
-        "verified": false,
-        "frequencyCount": 25,
-        "sourceNote": "Accenture Practice Bank #72"
-      }
-    ],
-    "supportedLanguages": [
-      "python",
-      "javascript",
-      "cpp",
-      "java"
-    ],
-    "starterCode": [
-      {
-        "language": "python",
-        "boilerplate": "def findMinimumInRotatedSortedArray(*args):\n    # TODO: Implement solution for Find Minimum in Rotated Sorted Array\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findMinimumInRotatedSortedArray(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findMinimumInRotatedSortedArray(*input_data))\n"
-      },
-      {
-        "language": "javascript",
-        "boilerplate": "function findMinimumInRotatedSortedArray(...args) {\n    // TODO: Implement solution for Find Minimum in Rotated Sorted Array\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findMinimumInRotatedSortedArray(...parsed)));\n    } catch (e) {\n        console.log(findMinimumInRotatedSortedArray(...lines));\n    }\n}\n"
-      },
-      {
-        "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find Minimum in Rotated Sorted Array\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
-      },
-      {
-        "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Find Minimum in Rotated Sorted Array\n            System.out.println(line);\n        }\n    }\n}\n"
-      }
-    ],
-    "sampleTestCases": [
-      {
-        "input": "[3,4,5,1,2]",
-        "output": "1",
-        "explanation": "The original array was [1,2,3,4,5] rotated 3 times."
-      },
-      {
-        "input": "[4,5,6,7,0,1,2]",
-        "output": "0",
-        "explanation": "The original array was [0,1,2,4,5,6,7] and it was rotated 4 times."
-      }
-    ],
-    "hiddenTestCases": [
-      {
-        "input": "[3,4,5,1,2]",
-        "output": "1",
-        "isHidden": true
-      },
-      {
-        "input": "[4,5,6,7,0,1,2]",
-        "output": "0",
-        "isHidden": true
-      },
-      {
-        "input": "[11,13,15,17]",
-        "output": "11",
-        "isHidden": true
-      }
-    ],
-    "hints": [
-      "Compare nums[mid] with nums[right]. If nums[mid] > nums[right], the minimum is in the right half."
-    ],
-    "editorial": {
-      "approach": "Optimal Approach for Find Minimum in Rotated Sorted Array",
-      "solutionMarkdown": "### Optimal Solution\n\nBinary search. If nums[mid] > nums[right], low = mid + 1; else high = mid. Stop when low == high.\n\n### Complexity\n- Time: O(log N), Space: O(1)",
-      "timeComplexity": "O(log N)",
       "spaceComplexity": "O(1)"
     },
     "totalSubmissions": 0,
