@@ -98,6 +98,15 @@ export interface IATSAnalysisResult {
   quantifiableBullets: string[];
 }
 
+export interface IATSUploadCheckResult {
+  analysis: IATSAnalysisResult;
+  structuredResume: Partial<IResume>;
+  targetRole: TargetRole;
+  filename: string;
+  extractedTextLength: number;
+  snippet: string;
+}
+
 export interface IResume {
   _id: string;
   institutionId: string;

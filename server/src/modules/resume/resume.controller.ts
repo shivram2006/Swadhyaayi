@@ -1,10 +1,45 @@
 import { Request, Response, NextFunction } from 'express';
 import { ResumeService } from './resume.service';
+import { ResumeParser } from './resume.parser';
+import { ResumeAnalyzer } from './resume.analyzer';
 import { sendSuccess } from '../../core/utils/response';
 import { createResumeSchema, updateResumeSchema, analyzeRawResumeSchema } from './resume.schema';
 import { ValidationError } from '../../core/utils/appError';
 
 export class ResumeController {
+  static async checkAts(req: Request, res: Response, next: NextFunction) {
+    try {
+      const file = req.file;
+      const { targetRole = 'sde', customJobDescription, rawText } = req.body;
+
+      let text = (rawText || '').trim();
+
+      if (file && file.buffer) {
+        text = await ResumeParser.extractText(file.buffer, file.mimetype, file.originalname);
+      }
+
+      if (!text || text.length < 20) {
+        throw new ValidationError(
+          'Could not extract readable text from the provided resume. Please upload a valid PDF, DOCX, or paste resume text.'
+        );
+      }
+
+      const structuredResume = ResumeParser.parseTextToResume(text, targetRole as any);
+      const analysis = ResumeAnalyzer.analyze(structuredResume, customJobDescription);
+
+      sendSuccess(res, {
+        analysis,
+        structuredResume,
+        targetRole,
+        filename: file?.originalname || 'Pasted Resume Text',
+        extractedTextLength: text.length,
+        snippet: text.slice(0, 400),
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async createResume(req: Request, res: Response, next: NextFunction) {
     try {
       const parsed = createResumeSchema.parse(req.body);

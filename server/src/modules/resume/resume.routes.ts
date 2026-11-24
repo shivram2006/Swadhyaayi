@@ -1,11 +1,20 @@
 import { Router } from 'express';
+import multer from 'multer';
 import { ResumeController } from './resume.controller';
 import { authenticateToken } from '../../core/middleware/authMiddleware';
 import { requireRoles } from '../../core/middleware/rbacMiddleware';
 
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
+});
+
 const router = Router();
 
 router.use(authenticateToken);
+
+// Upload & Check ATS Score (PDF, DOCX, TXT or raw text)
+router.post('/check-ats', upload.single('file'), ResumeController.checkAts);
 
 // Student creates, lists, syncs, analyzes, updates, and deletes resumes
 router.post(

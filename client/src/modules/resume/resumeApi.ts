@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IResume, IATSAnalysisResult, TargetRole } from './types';
+import { IResume, IATSAnalysisResult, TargetRole, IATSUploadCheckResult } from './types';
 
 export const ResumeApi = {
   getResumes: async (): Promise<IResume[]> => {
@@ -51,6 +51,32 @@ export const ResumeApi = {
     const res = await axios.post(`/resumes/${id}/analyze`, {
       customJobDescription,
       targetRole,
+    });
+    return res.data?.data;
+  },
+
+  checkAtsScore: async (
+    file?: File | null,
+    rawText?: string,
+    targetRole: TargetRole = 'sde',
+    customJobDescription?: string
+  ): Promise<IATSUploadCheckResult> => {
+    const formData = new FormData();
+    if (file) {
+      formData.append('file', file);
+    }
+    if (rawText) {
+      formData.append('rawText', rawText);
+    }
+    formData.append('targetRole', targetRole);
+    if (customJobDescription) {
+      formData.append('customJobDescription', customJobDescription);
+    }
+
+    const res = await axios.post('/resumes/check-ats', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     });
     return res.data?.data;
   },

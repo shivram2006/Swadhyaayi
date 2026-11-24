@@ -10,12 +10,14 @@ import {
   Edit3,
   Award,
   Zap,
+  Upload,
 } from 'lucide-react';
 import { Card } from '../../components/common/Card';
 import { Badge } from '../../components/common/Badge';
 import { Button } from '../../components/common/Button';
 import { ResumeApi } from '../../modules/resume/resumeApi';
 import { IResume } from '../../modules/resume/types';
+import { ResumeAtsCheckerModal } from './ResumeAtsCheckerModal';
 
 export const ResumeListPage: React.FC = () => {
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ export const ResumeListPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [syncing, setSyncing] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [isCheckerOpen, setIsCheckerOpen] = useState<boolean>(false);
 
   useEffect(() => {
     fetchResumes();
@@ -90,6 +93,15 @@ export const ResumeListPage: React.FC = () => {
 
         <div className="flex items-center gap-3">
           <Button
+            variant="primary"
+            onClick={() => setIsCheckerOpen(true)}
+            className="flex items-center gap-2 bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-500 hover:to-purple-500 text-white shadow-lg shadow-brand-500/20"
+          >
+            <Upload className="w-4 h-4" />
+            Upload & Check ATS
+          </Button>
+
+          <Button
             variant="outline"
             onClick={handleSyncProfile}
             disabled={syncing}
@@ -153,6 +165,36 @@ export const ResumeListPage: React.FC = () => {
         </Card>
       </div>
 
+      {/* Upload ATS Score Quick Diagnostic Banner */}
+      <div className="p-4 sm:p-5 rounded-2xl border border-brand-500/30 bg-gradient-to-r from-brand-950/40 via-purple-950/20 to-slate-900/60 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-lg shadow-brand-500/5">
+        <div className="flex items-start sm:items-center gap-3.5">
+          <div className="p-3 rounded-xl bg-brand-500/20 text-brand-300 border border-brand-500/30 shrink-0">
+            <Upload className="w-5 h-5 text-brand-400" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2 flex-wrap">
+              <h3 className="text-sm font-bold text-white">
+                Have an existing resume? Check your ATS Score & Role Match Instantly
+              </h3>
+              <Badge variant="brand" className="text-[10px] py-0 px-2 font-mono">
+                PDF • DOCX • TEXT
+              </Badge>
+            </div>
+            <p className="text-xs text-slate-400 mt-1">
+              Select your role (SDE, MERN, Java, AI/ML, DevOps, Frontend, Backend) and upload your resume to diagnose keywords, power verbs & metrics against recruiter filters.
+            </p>
+          </div>
+        </div>
+        <Button
+          variant="primary"
+          onClick={() => setIsCheckerOpen(true)}
+          className="shrink-0 flex items-center gap-2 text-xs bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-500 hover:to-purple-500 text-white shadow-lg shadow-brand-500/20"
+        >
+          <Sparkles className="w-3.5 h-3.5" />
+          Upload & Check ATS Score
+        </Button>
+      </div>
+
       {/* Error state */}
       {error && (
         <div className="p-4 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-300 text-sm">
@@ -186,6 +228,14 @@ export const ResumeListPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <Button
               variant="primary"
+              onClick={() => setIsCheckerOpen(true)}
+              className="flex items-center gap-2 bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-500 hover:to-purple-500 text-white shadow-lg shadow-brand-500/20"
+            >
+              <Upload className="w-4 h-4" />
+              Upload Resume & Check ATS
+            </Button>
+            <Button
+              variant="outline"
               onClick={handleSyncProfile}
               disabled={syncing}
               className="flex items-center gap-2"
@@ -320,6 +370,13 @@ export const ResumeListPage: React.FC = () => {
           })}
         </div>
       )}
+
+      {/* Upload Resume & ATS Diagnostic Modal */}
+      <ResumeAtsCheckerModal
+        isOpen={isCheckerOpen}
+        onClose={() => setIsCheckerOpen(false)}
+        onSuccessCreated={fetchResumes}
+      />
     </div>
   );
 };
