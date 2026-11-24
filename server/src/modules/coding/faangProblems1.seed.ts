@@ -1,5 +1,5 @@
 /* eslint-disable */
-// Auto-generated FAANG (Apple, Meta, Microsoft, Google) - Chunk faang1
+// Auto-generated Coding Problem Catalog (Apple, Meta, Microsoft, Google, Accenture) - Chunk faang1
 export const faang1 = [
   {
     "title": "1-D Candy Crush (Interview Variant)",
@@ -129,6 +129,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #40"
       }
     ],
     "supportedLanguages": [
@@ -402,6 +409,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #41"
       }
     ],
     "supportedLanguages": [
@@ -1018,6 +1032,100 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Armstrong Number",
+    "slug": "armstrong-number",
+    "description": "Given an integer `n`, return `true` if and only if it is an **Armstrong number**. An Armstrong number of `k` digits is an integer such that the sum of its digits each raised to the power of `k` equals `n`.\n\n### Example 1:\n```\nInput: 153\nOutput: true\nExplanation: 153 is a 3-digit number, and 153 = 1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153.\n```\n\n### Example 2:\n```\nInput: 123\nOutput: false\nExplanation: 123 is a 3-digit number, and 123 != 1^3 + 2^3 + 3^3 = 1 + 8 + 27 = 36.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Math",
+      "Simulation"
+    ],
+    "topics": [
+      "Math",
+      "Simulation"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 40,
+        "sourceNote": "Accenture Interview Question #73 (R [S3])"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def armstrongNumber(*args):\n    # TODO: Implement solution for Armstrong Number\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = armstrongNumber(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(armstrongNumber(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function armstrongNumber(...args) {\n    // TODO: Implement solution for Armstrong Number\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(armstrongNumber(...parsed)));\n    } catch (e) {\n        console.log(armstrongNumber(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Armstrong Number\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Armstrong Number\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "153",
+        "output": "true",
+        "explanation": "153 is a 3-digit number, and 153 = 1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153."
+      },
+      {
+        "input": "123",
+        "output": "false",
+        "explanation": "123 is a 3-digit number, and 123 != 1^3 + 2^3 + 3^3 = 1 + 8 + 27 = 36."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "153",
+        "output": "true",
+        "isHidden": true
+      },
+      {
+        "input": "123",
+        "output": "false",
+        "isHidden": true
+      },
+      {
+        "input": "370",
+        "output": "true",
+        "isHidden": true
+      },
+      {
+        "input": "9474",
+        "output": "true",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "First count the number of digits k, then compute the sum of each digit raised to power k."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Armstrong Number",
+      "solutionMarkdown": "### Optimal Solution\n\nExtract digits repeatedly modulo 10. Compute d^k for each digit and sum them up. Compare with original number n.\n\n### Complexity\n- Time: O(log10 N), Space: O(1)",
+      "timeComplexity": "O(log10 N)",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Balanced Binary Tree",
     "slug": "balanced-binary-tree",
     "description": "Given a binary tree, determine if it is **height-balanced** (a binary tree in which the depth of the two subtrees of every node never differs by more than one).\n\n### Example 1:\n```\nInput: [3,9,20,null,null,15,7]\nOutput: true\nExplanation: Balanced binary tree.\n```\n\n### Example 2:\n```\nInput: [1,2,2,3,3,null,null,4,4]\nOutput: false\nExplanation: Left subtree height is 4, right subtree height is 2, diff > 1.\n```",
@@ -1327,6 +1435,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #2"
       }
     ],
     "supportedLanguages": [
@@ -1576,6 +1691,188 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Binary Search",
+    "slug": "binary-search",
+    "description": "Given an array of integers `nums` which is sorted in ascending order, and an integer `target`, write a function to search `target` in `nums`. If `target` exists, then return its index. Otherwise, return `-1`.\n\n### Example 1:\n```\nInput: [-1,0,3,5,9,12]\n9\nOutput: 4\nExplanation: 9 exists in nums and its index is 4.\n```\n\n### Example 2:\n```\nInput: [-1,0,3,5,9,12]\n2\nOutput: -1\nExplanation: 2 does not exist in nums so return -1.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "Binary Search"
+    ],
+    "topics": [
+      "Array",
+      "Binary Search"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #61"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def binarySearch(*args):\n    # TODO: Implement solution for Binary Search\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = binarySearch(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(binarySearch(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function binarySearch(...args) {\n    // TODO: Implement solution for Binary Search\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(binarySearch(...parsed)));\n    } catch (e) {\n        console.log(binarySearch(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Search\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Binary Search\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[-1,0,3,5,9,12]\n9",
+        "output": "4",
+        "explanation": "9 exists in nums and its index is 4."
+      },
+      {
+        "input": "[-1,0,3,5,9,12]\n2",
+        "output": "-1",
+        "explanation": "2 does not exist in nums so return -1."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[-1,0,3,5,9,12]\n9",
+        "output": "4",
+        "isHidden": true
+      },
+      {
+        "input": "[-1,0,3,5,9,12]\n2",
+        "output": "-1",
+        "isHidden": true
+      },
+      {
+        "input": "[5]\n5",
+        "output": "0",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Compare middle element with target. If equal return mid; if less search right half, else search left half."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Binary Search",
+      "solutionMarkdown": "### Optimal Solution\n\nMaintain low and high pointers. Compute mid = low + (high - low) // 2. Narrow search space logarithmically.\n\n### Complexity\n- Time: O(log N), Space: O(1)",
+      "timeComplexity": "O(log N)",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Binary Tree Inorder Traversal",
+    "slug": "binary-tree-inorder-traversal",
+    "description": "Given the `root` of a binary tree, return *the inorder traversal of its nodes' values* (Left -> Root -> Right).\n\n### Example 1:\n```\nInput: [1,null,2,3]\nOutput: [1,3,2]\nExplanation: Inorder traversal visits left subtree, root, then right subtree.\n```\n\n### Example 2:\n```\nInput: []\nOutput: []\nExplanation: Empty tree returns empty list.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Tree",
+      "Depth-First Search",
+      "Binary Tree",
+      "Stack"
+    ],
+    "topics": [
+      "Tree",
+      "Depth-First Search",
+      "Binary Tree",
+      "Stack"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #98"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def binaryTreeInorderTraversal(*args):\n    # TODO: Implement solution for Binary Tree Inorder Traversal\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = binaryTreeInorderTraversal(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(binaryTreeInorderTraversal(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function binaryTreeInorderTraversal(...args) {\n    // TODO: Implement solution for Binary Tree Inorder Traversal\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(binaryTreeInorderTraversal(...parsed)));\n    } catch (e) {\n        console.log(binaryTreeInorderTraversal(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Binary Tree Inorder Traversal\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Binary Tree Inorder Traversal\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1,null,2,3]",
+        "output": "[1,3,2]",
+        "explanation": "Inorder traversal visits left subtree, root, then right subtree."
+      },
+      {
+        "input": "[]",
+        "output": "[]",
+        "explanation": "Empty tree returns empty list."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1,null,2,3]",
+        "output": "[1,3,2]",
+        "isHidden": true
+      },
+      {
+        "input": "[]",
+        "output": "[]",
+        "isHidden": true
+      },
+      {
+        "input": "[1]",
+        "output": "[1]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Recursively traverse left subtree, process root, then recursively traverse right subtree, or use explicit stack."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Binary Tree Inorder Traversal",
+      "solutionMarkdown": "### Optimal Solution\n\nPerform recursive DFS or iterative stack traversal visiting node.left, appending node.val, then node.right.\n\n### Complexity\n- Time: O(N), Space: O(N)",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Binary Tree Level Order Traversal",
     "slug": "binary-tree-level-order-traversal",
     "description": "Given the `root` of a binary tree, return *the level order traversal of its nodes' values*. (i.e., from left to right, level by level).\n\n### Example 1:\n```\nInput: [3,9,20,null,null,15,7]\nOutput: [[3], [9, 20], [15, 7]]\nExplanation: Level 0: [3], Level 1: [9,20], Level 2: [15,7].\n```\n\n### Example 2:\n```\nInput: [1]\nOutput: [[1]]\nExplanation: Single node tree.\n```",
@@ -1612,6 +1909,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #100"
       }
     ],
     "supportedLanguages": [
@@ -2516,6 +2820,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 45,
         "sourceNote": "Reported in Apple 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #86"
       }
     ],
     "supportedLanguages": [
@@ -2906,6 +3217,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #88"
       }
     ],
     "supportedLanguages": [
@@ -3103,6 +3421,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 40,
         "sourceNote": "Reported in Meta 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #83"
       }
     ],
     "supportedLanguages": [
@@ -3627,6 +3952,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #39"
       }
     ],
     "supportedLanguages": [
@@ -3690,6 +4022,97 @@ export const faang1 = [
       "solutionMarkdown": "### Optimal Solution\n\nTwo pointer greedy inward search moving smaller bar.\n\n### Complexity\n- Time: O(N), Space: O(1)",
       "timeComplexity": "O(N)",
       "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Contains Duplicate",
+    "slug": "contains-duplicate",
+    "description": "Given an integer array `nums`, return `true` if any value appears **at least twice** in the array, and return `false` if every element is distinct.\n\n### Example 1:\n```\nInput: [1,2,3,1]\nOutput: true\nExplanation: 1 appears at index 0 and index 3.\n```\n\n### Example 2:\n```\nInput: [1,2,3,4]\nOutput: false\nExplanation: All elements are distinct.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "Hash Table",
+      "Sorting"
+    ],
+    "topics": [
+      "Array",
+      "Hash Table",
+      "Sorting"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #3"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def containsDuplicate(*args):\n    # TODO: Implement solution for Contains Duplicate\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = containsDuplicate(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(containsDuplicate(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function containsDuplicate(...args) {\n    // TODO: Implement solution for Contains Duplicate\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(containsDuplicate(...parsed)));\n    } catch (e) {\n        console.log(containsDuplicate(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Contains Duplicate\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Contains Duplicate\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1,2,3,1]",
+        "output": "true",
+        "explanation": "1 appears at index 0 and index 3."
+      },
+      {
+        "input": "[1,2,3,4]",
+        "output": "false",
+        "explanation": "All elements are distinct."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1,2,3,1]",
+        "output": "true",
+        "isHidden": true
+      },
+      {
+        "input": "[1,2,3,4]",
+        "output": "false",
+        "isHidden": true
+      },
+      {
+        "input": "[1,1,1,3,3,4,3,2,4,2]",
+        "output": "true",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Use a hash set to track seen elements in O(1) time."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Contains Duplicate",
+      "solutionMarkdown": "### Optimal Solution\n\nIterate through nums. For each x, if x is already in hash set, return true. Add x to set. Return false at end.\n\n### Complexity\n- Time: O(N), Space: O(N)",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
     },
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
@@ -4057,6 +4480,102 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Count Primes",
+    "slug": "count-primes",
+    "description": "Given an integer `n`, return *the number of prime numbers that are strictly less than* `n`.\n\n### Example 1:\n```\nInput: 10\nOutput: 4\nExplanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.\n```\n\n### Example 2:\n```\nInput: 0\nOutput: 0\nExplanation: No primes less than 0.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "Math",
+      "Number Theory"
+    ],
+    "topics": [
+      "Array",
+      "Math",
+      "Number Theory"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #76"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def countPrimes(*args):\n    # TODO: Implement solution for Count Primes\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = countPrimes(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(countPrimes(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function countPrimes(...args) {\n    // TODO: Implement solution for Count Primes\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(countPrimes(...parsed)));\n    } catch (e) {\n        console.log(countPrimes(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Count Primes\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Count Primes\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "10",
+        "output": "4",
+        "explanation": "There are 4 prime numbers less than 10, they are 2, 3, 5, 7."
+      },
+      {
+        "input": "0",
+        "output": "0",
+        "explanation": "No primes less than 0."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "10",
+        "output": "4",
+        "isHidden": true
+      },
+      {
+        "input": "0",
+        "output": "0",
+        "isHidden": true
+      },
+      {
+        "input": "1",
+        "output": "0",
+        "isHidden": true
+      },
+      {
+        "input": "100",
+        "output": "25",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Use the Sieve of Eratosthenes algorithm."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Count Primes",
+      "solutionMarkdown": "### Optimal Solution\n\nCreate boolean array of size n. Mark multiples of each prime starting from p*p up to n as composite.\n\n### Complexity\n- Time: O(N log log N), Space: O(N)",
+      "timeComplexity": "O(N log log N)",
+      "spaceComplexity": "O(N)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Count special paths in an N-ary tree (equal endpoint values; path values bounded by endpoint)",
     "slug": "count-special-paths-in-an-n-ary-tree",
     "description": "Given an N-ary tree where each node has a value, count the number of special simple paths between two nodes such that both endpoint nodes have the same value, and all intermediate nodes on the path have value <= endpoint value.\n\n### Example 1:\n```\nInput: [1,3,2,1,3]\n[[0,1],[0,2],[2,3],[2,4]]\nOutput: 2\nExplanation: Path 0-3 (endpoints value 1) and path 1-4 (endpoints value 3).\n```\n\n### Example 2:\n```\nInput: [1,1,1]\n[[0,1],[1,2]]\nOutput: 3\nExplanation: All pairs (0,1), (1,2), (0,2) valid.\n```",
@@ -4392,6 +4911,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #50"
       }
     ],
     "supportedLanguages": [
@@ -4586,6 +5112,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 40,
+        "sourceNote": "Accenture Interview Question #32 (R [S12; S13])"
       }
     ],
     "supportedLanguages": [
@@ -5205,6 +5738,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #51"
       }
     ],
     "supportedLanguages": [
@@ -5292,6 +5832,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #78"
       }
     ],
     "supportedLanguages": [
@@ -5484,6 +6031,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #33"
       }
     ],
     "supportedLanguages": [
@@ -5637,6 +6191,95 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Find All Numbers Disappeared in an Array",
+    "slug": "find-all-numbers-disappeared-in-an-array",
+    "description": "Given an array `nums` of `n` integers where `nums[i]` is in the range `[1, n]`, return *an array of all the integers in the range* `[1, n]` *that do not appear in* `nums`.\n\n### Example 1:\n```\nInput: [4,3,2,7,8,2,3,1]\nOutput: [5,6]\nExplanation: Numbers 5 and 6 are missing from range [1, 8].\n```\n\n### Example 2:\n```\nInput: [1,1]\nOutput: [2]\nExplanation: Number 2 is missing from range [1, 2].\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "Hash Table"
+    ],
+    "topics": [
+      "Array",
+      "Hash Table"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #14"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def findAllNumbersDisappearedInAnArray(*args):\n    # TODO: Implement solution for Find All Numbers Disappeared in an Array\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findAllNumbersDisappearedInAnArray(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findAllNumbersDisappearedInAnArray(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function findAllNumbersDisappearedInAnArray(...args) {\n    // TODO: Implement solution for Find All Numbers Disappeared in an Array\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findAllNumbersDisappearedInAnArray(...parsed)));\n    } catch (e) {\n        console.log(findAllNumbersDisappearedInAnArray(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find All Numbers Disappeared in an Array\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Find All Numbers Disappeared in an Array\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[4,3,2,7,8,2,3,1]",
+        "output": "[5,6]",
+        "explanation": "Numbers 5 and 6 are missing from range [1, 8]."
+      },
+      {
+        "input": "[1,1]",
+        "output": "[2]",
+        "explanation": "Number 2 is missing from range [1, 2]."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[4,3,2,7,8,2,3,1]",
+        "output": "[5,6]",
+        "isHidden": true
+      },
+      {
+        "input": "[1,1]",
+        "output": "[2]",
+        "isHidden": true
+      },
+      {
+        "input": "[1]",
+        "output": "[]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Use the array itself as a hash table by negating values at index abs(val) - 1."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Find All Numbers Disappeared in an Array",
+      "solutionMarkdown": "### Optimal Solution\n\nFor each val in nums, negate nums[abs(val) - 1]. Indices that remain positive correspond to missing numbers.\n\n### Complexity\n- Time: O(N), Space: O(1) auxiliary",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1) auxiliary"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Find First and Last Position of Element in Sorted Array",
     "slug": "find-first-and-last-position-of-element-in-sorted-array",
     "description": "Given an array of integers `nums` sorted in non-decreasing order, find the starting and ending position of a given `target` value. If target is not found in the array, return `[-1, -1]`.\n\nYou must write an algorithm with `O(log n)` runtime complexity.\n\n### Example 1:\n```\nInput: [5,7,7,8,8,10]\n8\nOutput: [3, 4]\nExplanation: 8 is found from index 3 to 4.\n```\n\n### Example 2:\n```\nInput: [5,7,7,8,8,10]\n6\nOutput: [-1, -1]\nExplanation: 6 is not in the array.\n```",
@@ -5657,6 +6300,13 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 45,
         "sourceNote": "Reported in Apple 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #63"
       }
     ],
     "supportedLanguages": [
@@ -5912,26 +6562,26 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
-    "title": "Find Minimum in Rotated Sorted Array II",
-    "slug": "find-minimum-in-rotated-sorted-array-ii",
-    "description": "Given the sorted rotated array `nums` that may contain **duplicates**, return the minimum element of this array.\n\n### Example 1:\n```\nInput: [1,3,5]\nOutput: 1\nExplanation: Minimum element is 1.\n```\n\n### Example 2:\n```\nInput: [2,2,2,0,1]\nOutput: 0\nExplanation: Minimum element is 0.\n```",
-    "difficulty": "HARD",
+    "title": "Find Minimum in Rotated Sorted Array",
+    "slug": "find-minimum-in-rotated-sorted-array",
+    "description": "Suppose an array of length `n` sorted in ascending order is rotated between `1` and `n` times. Given the sorted rotated array `nums` of **unique** elements, return *the minimum element of this array* in `O(log n)` time.\n\n### Example 1:\n```\nInput: [3,4,5,1,2]\nOutput: 1\nExplanation: The original array was [1,2,3,4,5] rotated 3 times.\n```\n\n### Example 2:\n```\nInput: [4,5,6,7,0,1,2]\nOutput: 0\nExplanation: The original array was [0,1,2,4,5,6,7] and it was rotated 4 times.\n```",
+    "difficulty": "MEDIUM",
     "category": "DSA",
     "patterns": [
-      "Binary Search",
-      "Array"
+      "Array",
+      "Binary Search"
     ],
     "topics": [
-      "Binary Search",
-      "Array"
+      "Array",
+      "Binary Search"
     ],
     "companyTags": [
       {
-        "company": "Google",
+        "company": "Accenture",
         "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 50,
-        "sourceNote": "Reported in Google 2021-2026 interview set"
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #72"
       }
     ],
     "supportedLanguages": [
@@ -5943,58 +6593,58 @@ export const faang1 = [
     "starterCode": [
       {
         "language": "python",
-        "boilerplate": "def findMinimumInRotatedSortedArrayIi(*args):\n    # TODO: Implement solution for Find Minimum in Rotated Sorted Array II\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findMinimumInRotatedSortedArrayIi(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findMinimumInRotatedSortedArrayIi(*input_data))\n"
+        "boilerplate": "def findMinimumInRotatedSortedArray(*args):\n    # TODO: Implement solution for Find Minimum in Rotated Sorted Array\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findMinimumInRotatedSortedArray(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findMinimumInRotatedSortedArray(*input_data))\n"
       },
       {
         "language": "javascript",
-        "boilerplate": "function findMinimumInRotatedSortedArrayIi(...args) {\n    // TODO: Implement solution for Find Minimum in Rotated Sorted Array II\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findMinimumInRotatedSortedArrayIi(...parsed)));\n    } catch (e) {\n        console.log(findMinimumInRotatedSortedArrayIi(...lines));\n    }\n}\n"
+        "boilerplate": "function findMinimumInRotatedSortedArray(...args) {\n    // TODO: Implement solution for Find Minimum in Rotated Sorted Array\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findMinimumInRotatedSortedArray(...parsed)));\n    } catch (e) {\n        console.log(findMinimumInRotatedSortedArray(...lines));\n    }\n}\n"
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find Minimum in Rotated Sorted Array II\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find Minimum in Rotated Sorted Array\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Find Minimum in Rotated Sorted Array II\n            System.out.println(line);\n        }\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Find Minimum in Rotated Sorted Array\n            System.out.println(line);\n        }\n    }\n}\n"
       }
     ],
     "sampleTestCases": [
       {
-        "input": "[1,3,5]",
+        "input": "[3,4,5,1,2]",
         "output": "1",
-        "explanation": "Minimum element is 1."
+        "explanation": "The original array was [1,2,3,4,5] rotated 3 times."
       },
       {
-        "input": "[2,2,2,0,1]",
+        "input": "[4,5,6,7,0,1,2]",
         "output": "0",
-        "explanation": "Minimum element is 0."
+        "explanation": "The original array was [0,1,2,4,5,6,7] and it was rotated 4 times."
       }
     ],
     "hiddenTestCases": [
       {
-        "input": "[1,3,5]",
+        "input": "[3,4,5,1,2]",
         "output": "1",
         "isHidden": true
       },
       {
-        "input": "[2,2,2,0,1]",
+        "input": "[4,5,6,7,0,1,2]",
         "output": "0",
         "isHidden": true
       },
       {
-        "input": "[3,3,1,3]",
-        "output": "1",
+        "input": "[11,13,15,17]",
+        "output": "11",
         "isHidden": true
       }
     ],
     "hints": [
-      "Binary search: if nums[mid] == nums[right], decrement right--."
+      "Compare nums[mid] with nums[right]. If nums[mid] > nums[right], the minimum is in the right half."
     ],
     "editorial": {
-      "approach": "Optimal Approach for Find Minimum in Rotated Sorted Array II",
-      "solutionMarkdown": "### Optimal Solution\n\nModified binary search: when nums[mid] == nums[right], cannot eliminate half, shrink right by 1.\n\n### Complexity\n- Time: O(log N) average, O(N) worst case, Space: O(1)",
-      "timeComplexity": "O(log N) average",
-      "spaceComplexity": "O(N) worst case"
+      "approach": "Optimal Approach for Find Minimum in Rotated Sorted Array",
+      "solutionMarkdown": "### Optimal Solution\n\nBinary search. If nums[mid] > nums[right], low = mid + 1; else high = mid. Stop when low == high.\n\n### Complexity\n- Time: O(log N), Space: O(1)",
+      "timeComplexity": "O(log N)",
+      "spaceComplexity": "O(1)"
     },
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,

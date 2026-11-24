@@ -532,5 +532,5 @@ public class Solution {
     await QuestionCoding.findOneAndUpdate({ slug: prob.slug }, prob, { upsert: true, new: true });
   }
 
-  console.log(`[SEED] Pre-seeded ${allProblems.length} algorithmic pattern questions (including complete FAANG catalog: Apple 100, Meta 100, Microsoft 100, Google 100).`);
+  console.log(`[SEED] Pre-seeded ${allProblems.length} algorithmic pattern questions (including complete company catalogs: Apple 100, Meta 100, Microsoft 100, Google 100, Accenture 100).`);
 };

@@ -38,6 +38,7 @@ const COMPANIES_LIST = [
   'Amazon',
   'Microsoft',
   'Meta',
+  'Accenture',
   'Adobe',
   'Flipkart',
   'TCS',

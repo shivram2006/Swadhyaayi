@@ -1,6 +1,95 @@
 /* eslint-disable */
-// Auto-generated FAANG (Apple, Meta, Microsoft, Google) - Chunk faang2
+// Auto-generated Coding Problem Catalog (Apple, Meta, Microsoft, Google, Accenture) - Chunk faang2
 export const faang2 = [
+  {
+    "title": "Find Minimum in Rotated Sorted Array II",
+    "slug": "find-minimum-in-rotated-sorted-array-ii",
+    "description": "Given the sorted rotated array `nums` that may contain **duplicates**, return the minimum element of this array.\n\n### Example 1:\n```\nInput: [1,3,5]\nOutput: 1\nExplanation: Minimum element is 1.\n```\n\n### Example 2:\n```\nInput: [2,2,2,0,1]\nOutput: 0\nExplanation: Minimum element is 0.\n```",
+    "difficulty": "HARD",
+    "category": "DSA",
+    "patterns": [
+      "Binary Search",
+      "Array"
+    ],
+    "topics": [
+      "Binary Search",
+      "Array"
+    ],
+    "companyTags": [
+      {
+        "company": "Google",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 50,
+        "sourceNote": "Reported in Google 2021-2026 interview set"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def findMinimumInRotatedSortedArrayIi(*args):\n    # TODO: Implement solution for Find Minimum in Rotated Sorted Array II\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findMinimumInRotatedSortedArrayIi(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findMinimumInRotatedSortedArrayIi(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function findMinimumInRotatedSortedArrayIi(...args) {\n    // TODO: Implement solution for Find Minimum in Rotated Sorted Array II\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findMinimumInRotatedSortedArrayIi(...parsed)));\n    } catch (e) {\n        console.log(findMinimumInRotatedSortedArrayIi(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find Minimum in Rotated Sorted Array II\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Find Minimum in Rotated Sorted Array II\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1,3,5]",
+        "output": "1",
+        "explanation": "Minimum element is 1."
+      },
+      {
+        "input": "[2,2,2,0,1]",
+        "output": "0",
+        "explanation": "Minimum element is 0."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1,3,5]",
+        "output": "1",
+        "isHidden": true
+      },
+      {
+        "input": "[2,2,2,0,1]",
+        "output": "0",
+        "isHidden": true
+      },
+      {
+        "input": "[3,3,1,3]",
+        "output": "1",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Binary search: if nums[mid] == nums[right], decrement right--."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Find Minimum in Rotated Sorted Array II",
+      "solutionMarkdown": "### Optimal Solution\n\nModified binary search: when nums[mid] == nums[right], cannot eliminate half, shrink right by 1.\n\n### Complexity\n- Time: O(log N) average, O(N) worst case, Space: O(1)",
+      "timeComplexity": "O(log N) average",
+      "spaceComplexity": "O(N) worst case"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
   {
     "title": "Find Peak Element",
     "slug": "find-peak-element",
@@ -22,6 +111,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 40,
         "sourceNote": "Reported in Meta 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #64"
       }
     ],
     "supportedLanguages": [
@@ -84,6 +180,95 @@ export const faang2 = [
       "approach": "Optimal Approach for Find Peak Element",
       "solutionMarkdown": "### Optimal Solution\n\nBinary search on slope: if nums[mid] < nums[mid+1] left = mid + 1 else right = mid.\n\n### Complexity\n- Time: O(log N), Space: O(1)",
       "timeComplexity": "O(log N)",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Find Pivot Index",
+    "slug": "find-pivot-index",
+    "description": "Given an array of integers `nums`, calculate the **pivot index** of this array. The pivot index is the index where the sum of all the numbers strictly to the left of the index is equal to the sum of all the numbers strictly to the index's right. Return the **leftmost pivot index**, or `-1` if none exists.\n\n### Example 1:\n```\nInput: [1,7,3,6,5,6]\nOutput: 3\nExplanation: Left sum = nums[0] + nums[1] + nums[2] = 1 + 7 + 3 = 11. Right sum = nums[4] + nums[5] = 5 + 6 = 11.\n```\n\n### Example 2:\n```\nInput: [1,2,3]\nOutput: -1\nExplanation: There is no index that satisfies the conditions in the problem statement.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "Prefix Sum"
+    ],
+    "topics": [
+      "Array",
+      "Prefix Sum"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #16"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def findPivotIndex(*args):\n    # TODO: Implement solution for Find Pivot Index\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findPivotIndex(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findPivotIndex(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function findPivotIndex(...args) {\n    // TODO: Implement solution for Find Pivot Index\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findPivotIndex(...parsed)));\n    } catch (e) {\n        console.log(findPivotIndex(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find Pivot Index\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Find Pivot Index\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1,7,3,6,5,6]",
+        "output": "3",
+        "explanation": "Left sum = nums[0] + nums[1] + nums[2] = 1 + 7 + 3 = 11. Right sum = nums[4] + nums[5] = 5 + 6 = 11."
+      },
+      {
+        "input": "[1,2,3]",
+        "output": "-1",
+        "explanation": "There is no index that satisfies the conditions in the problem statement."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1,7,3,6,5,6]",
+        "output": "3",
+        "isHidden": true
+      },
+      {
+        "input": "[1,2,3]",
+        "output": "-1",
+        "isHidden": true
+      },
+      {
+        "input": "[2,1,-1]",
+        "output": "0",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Compute total sum once. While traversing, right_sum = total_sum - left_sum - nums[i]."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Find Pivot Index",
+      "solutionMarkdown": "### Optimal Solution\n\nCalculate total sum. Maintain running left_sum. At index i, if left_sum == total_sum - left_sum - nums[i], return i.\n\n### Complexity\n- Time: O(N), Space: O(1)",
+      "timeComplexity": "O(N)",
       "spaceComplexity": "O(1)"
     },
     "totalSubmissions": 0,
@@ -463,6 +648,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #30"
       }
     ],
     "supportedLanguages": [
@@ -662,6 +854,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #24"
       }
     ],
     "supportedLanguages": [
@@ -1164,6 +1363,95 @@ export const faang2 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Fractional Knapsack",
+    "slug": "fractional-knapsack",
+    "description": "Given weights and values of `n` items, we need to put these items in a knapsack of capacity `W` to get the maximum total value in the knapsack. In Fractional Knapsack, we can break items for maximizing the total value of the knapsack. Return the maximum value as a number.\n\n### Example 1:\n```\nInput: [60,100,120]\n[10,20,30]\n50\nOutput: 240.0\nExplanation: Take item 1 (10kg, 60), item 2 (20kg, 100) and 2/3 of item 3 (20kg of 30kg, 80). Total = 240.0.\n```\n\n### Example 2:\n```\nInput: [500]\n[30]\n10\nOutput: 166.67\nExplanation: Take 10kg of 30kg item with value 500: 500 * (10/30) = 166.67.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Greedy",
+      "Sorting"
+    ],
+    "topics": [
+      "Greedy",
+      "Sorting"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 40,
+        "sourceNote": "Accenture Interview Question #79 (R [S1])"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def fractionalKnapsack(*args):\n    # TODO: Implement solution for Fractional Knapsack\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = fractionalKnapsack(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(fractionalKnapsack(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function fractionalKnapsack(...args) {\n    // TODO: Implement solution for Fractional Knapsack\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(fractionalKnapsack(...parsed)));\n    } catch (e) {\n        console.log(fractionalKnapsack(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Fractional Knapsack\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Fractional Knapsack\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[60,100,120]\n[10,20,30]\n50",
+        "output": "240.0",
+        "explanation": "Take item 1 (10kg, 60), item 2 (20kg, 100) and 2/3 of item 3 (20kg of 30kg, 80). Total = 240.0."
+      },
+      {
+        "input": "[500]\n[30]\n10",
+        "output": "166.67",
+        "explanation": "Take 10kg of 30kg item with value 500: 500 * (10/30) = 166.67."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[60,100,120]\n[10,20,30]\n50",
+        "output": "240.0",
+        "isHidden": true
+      },
+      {
+        "input": "[500]\n[30]\n10",
+        "output": "166.67",
+        "isHidden": true
+      },
+      {
+        "input": "[10,20,30]\n[5,10,15]\n100",
+        "output": "60.0",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Sort items in descending order of value-to-weight ratio (value / weight)."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Fractional Knapsack",
+      "solutionMarkdown": "### Optimal Solution\n\nGreedy strategy: pick items with highest value/weight ratio first. Take completely if capacity permits, otherwise take fractional part.\n\n### Complexity\n- Time: O(N log N), Space: O(1)",
+      "timeComplexity": "O(N log N)",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Game of Life",
     "slug": "game-of-life",
     "description": "According to Conway's Game of Life, the board is made up of an `m x n` grid of cells, where each cell is either 0 (dead) or 1 (live). Return the next state of the board.\n\n### Example 1:\n```\nInput: [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]\nOutput: [[0,0,0],[1,0,1],[0,1,1],[0,1,0]]\nExplanation: Each cell transitions based on the 8 neighbor rules.\n```\n\n### Example 2:\n```\nInput: [[1,1],[1,0]]\nOutput: [[1,1],[1,1]]\nExplanation: All live cells have 2 or 3 live neighbors.\n```",
@@ -1344,6 +1632,95 @@ export const faang2 = [
     "acceptanceRate": 0
   },
   {
+    "title": "GCD and LCM",
+    "slug": "gcd-and-lcm",
+    "description": "Given two positive integers `a` and `b`, calculate their **Greatest Common Divisor (GCD)** and **Least Common Multiple (LCM)**. Return an array `[gcd, lcm]`.\n\n### Example 1:\n```\nInput: 5\n10\nOutput: [5,10]\nExplanation: GCD of 5 and 10 is 5, LCM is 10.\n```\n\n### Example 2:\n```\nInput: 14\n8\nOutput: [2,56]\nExplanation: GCD of 14 and 8 is 2, LCM is 56.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Math",
+      "Number Theory"
+    ],
+    "topics": [
+      "Math",
+      "Number Theory"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #75"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def gcdAndLcm(*args):\n    # TODO: Implement solution for GCD and LCM\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = gcdAndLcm(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(gcdAndLcm(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function gcdAndLcm(...args) {\n    // TODO: Implement solution for GCD and LCM\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(gcdAndLcm(...parsed)));\n    } catch (e) {\n        console.log(gcdAndLcm(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for GCD and LCM\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for GCD and LCM\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "5\n10",
+        "output": "[5,10]",
+        "explanation": "GCD of 5 and 10 is 5, LCM is 10."
+      },
+      {
+        "input": "14\n8",
+        "output": "[2,56]",
+        "explanation": "GCD of 14 and 8 is 2, LCM is 56."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "5\n10",
+        "output": "[5,10]",
+        "isHidden": true
+      },
+      {
+        "input": "14\n8",
+        "output": "[2,56]",
+        "isHidden": true
+      },
+      {
+        "input": "1\n1",
+        "output": "[1,1]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Use Euclidean algorithm: gcd(a, b) = gcd(b, a % b). Then lcm = (a * b) // gcd."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for GCD and LCM",
+      "solutionMarkdown": "### Optimal Solution\n\nEuclidean GCD algorithm runs in logarithmic steps. LCM is derived via identity a * b = gcd * lcm.\n\n### Complexity\n- Time: O(log(min(a, b))), Space: O(1)",
+      "timeComplexity": "O(log(min(a",
+      "spaceComplexity": "b)))"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Generate Parentheses",
     "slug": "generate-parentheses",
     "description": "Given `n` pairs of parentheses, write a function to *generate all combinations of well-formed parentheses*.\n\n### Example 1:\n```\nInput: 3\nOutput: [\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]\nExplanation: All 5 valid combinations for n=3.\n```\n\n### Example 2:\n```\nInput: 1\nOutput: [\"()\"]\nExplanation: Only one pair.\n```",
@@ -1373,6 +1750,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #84"
       }
     ],
     "supportedLanguages": [
@@ -1767,6 +2151,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #10"
       }
     ],
     "supportedLanguages": [
@@ -1966,6 +2357,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #87"
       }
     ],
     "supportedLanguages": [
@@ -2220,6 +2618,92 @@ export const faang2 = [
       "approach": "Optimal Approach for Implement a Queue",
       "solutionMarkdown": "### Optimal Solution\n\nMaintain head and tail index pointers on an underlying array or linked list.\n\n### Complexity\n- Time: O(1) per operation, Space: O(N)",
       "timeComplexity": "O(1) per operation",
+      "spaceComplexity": "O(N)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Implement Queue using Stacks",
+    "slug": "implement-queue-using-stacks",
+    "description": "Implement a first in first out (FIFO) queue using only two stacks. The implemented queue should support all the functions of a normal queue (`push`, `pop`, `peek`, and `empty`).\n\n### Example 1:\n```\nInput: [\"MyQueue\",\"push\",\"push\",\"peek\",\"pop\",\"empty\"]\n[[],[1],[2],[],[],[]]\nOutput: [null,null,null,1,1,false]\nExplanation: Push 1, push 2. Peek returns 1. Pop returns 1. Queue is not empty.\n```\n\n### Example 2:\n```\nInput: [\"MyQueue\",\"push\",\"pop\",\"empty\"]\n[[],[5],[],[]]\nOutput: [null,null,5,true]\nExplanation: Queue becomes empty after pop.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Stack",
+      "Queue",
+      "Design"
+    ],
+    "topics": [
+      "Stack",
+      "Queue",
+      "Design"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #52"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def implementQueueUsingStacks(*args):\n    # TODO: Implement solution for Implement Queue using Stacks\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = implementQueueUsingStacks(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(implementQueueUsingStacks(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function implementQueueUsingStacks(...args) {\n    // TODO: Implement solution for Implement Queue using Stacks\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(implementQueueUsingStacks(...parsed)));\n    } catch (e) {\n        console.log(implementQueueUsingStacks(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Implement Queue using Stacks\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Implement Queue using Stacks\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[\"MyQueue\",\"push\",\"push\",\"peek\",\"pop\",\"empty\"]\n[[],[1],[2],[],[],[]]",
+        "output": "[null,null,null,1,1,false]",
+        "explanation": "Push 1, push 2. Peek returns 1. Pop returns 1. Queue is not empty."
+      },
+      {
+        "input": "[\"MyQueue\",\"push\",\"pop\",\"empty\"]\n[[],[5],[],[]]",
+        "output": "[null,null,5,true]",
+        "explanation": "Queue becomes empty after pop."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[\"MyQueue\",\"push\",\"push\",\"peek\",\"pop\",\"empty\"]\n[[],[1],[2],[],[],[]]",
+        "output": "[null,null,null,1,1,false]",
+        "isHidden": true
+      },
+      {
+        "input": "[\"MyQueue\",\"push\",\"pop\",\"empty\"]\n[[],[5],[],[]]",
+        "output": "[null,null,5,true]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Use stack_in for push operations and stack_out for pop/peek operations. Transfer elements when stack_out is empty."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Implement Queue using Stacks",
+      "solutionMarkdown": "### Optimal Solution\n\nTwo stacks: in_stack and out_stack. On pop/peek, if out_stack is empty, pour all elements from in_stack to out_stack.\n\n### Complexity\n- Time: Amortized O(1) per operation, Space: O(N)",
+      "timeComplexity": "Amortized O(1) per operation",
       "spaceComplexity": "O(N)"
     },
     "totalSubmissions": 0,
@@ -2621,6 +3105,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #68"
       }
     ],
     "supportedLanguages": [
@@ -2959,6 +3450,192 @@ export const faang2 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Intersection of Two Arrays",
+    "slug": "intersection-of-two-arrays",
+    "description": "Given two integer arrays `nums1` and `nums2`, return *an array of their intersection*. Each element in the result must be **unique** and you may return the result in **any order**.\n\n### Example 1:\n```\nInput: [1,2,2,1]\n[2,2]\nOutput: [2]\nExplanation: 2 is the only unique common element.\n```\n\n### Example 2:\n```\nInput: [4,9,5]\n[9,4,9,8,4]\nOutput: [4,9]\nExplanation: Both 4 and 9 appear in both arrays.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "Hash Table",
+      "Two Pointers",
+      "Binary Search",
+      "Sorting"
+    ],
+    "topics": [
+      "Array",
+      "Hash Table",
+      "Two Pointers",
+      "Binary Search",
+      "Sorting"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #12"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def intersectionOfTwoArrays(*args):\n    # TODO: Implement solution for Intersection of Two Arrays\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = intersectionOfTwoArrays(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(intersectionOfTwoArrays(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function intersectionOfTwoArrays(...args) {\n    // TODO: Implement solution for Intersection of Two Arrays\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(intersectionOfTwoArrays(...parsed)));\n    } catch (e) {\n        console.log(intersectionOfTwoArrays(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Intersection of Two Arrays\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Intersection of Two Arrays\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1,2,2,1]\n[2,2]",
+        "output": "[2]",
+        "explanation": "2 is the only unique common element."
+      },
+      {
+        "input": "[4,9,5]\n[9,4,9,8,4]",
+        "output": "[4,9]",
+        "explanation": "Both 4 and 9 appear in both arrays."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1,2,2,1]\n[2,2]",
+        "output": "[2]",
+        "isHidden": true
+      },
+      {
+        "input": "[4,9,5]\n[9,4,9,8,4]",
+        "output": "[4,9]",
+        "isHidden": true
+      },
+      {
+        "input": "[1,2,3]\n[4,5,6]",
+        "output": "[]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Convert nums1 to a HashSet, then check each element of nums2 against the set."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Intersection of Two Arrays",
+      "solutionMarkdown": "### Optimal Solution\n\nSet intersection: insert nums1 into set s1. For each x in nums2, if x in s1, add to result set.\n\n### Complexity\n- Time: O(N + M), Space: O(N + M)",
+      "timeComplexity": "O(N + M)",
+      "spaceComplexity": "O(N + M)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Intersection of Two Linked Lists",
+    "slug": "intersection-of-two-linked-lists",
+    "description": "Given the heads of two singly linked-lists `headA` and `headB`, return *the node at which the two lists intersect*. If the two linked lists have no intersection at all, return `null`.\n\n### Example 1:\n```\nInput: [4,1,8,4,5]\n[5,6,1,8,4,5]\nOutput: 8\nExplanation: Intersected node value is 8.\n```\n\n### Example 2:\n```\nInput: [2,6,4]\n[1,5]\nOutput: null\nExplanation: No intersection.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Linked List",
+      "Two Pointers",
+      "Hash Table"
+    ],
+    "topics": [
+      "Linked List",
+      "Two Pointers",
+      "Hash Table"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #59"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def intersectionOfTwoLinkedLists(*args):\n    # TODO: Implement solution for Intersection of Two Linked Lists\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = intersectionOfTwoLinkedLists(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(intersectionOfTwoLinkedLists(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function intersectionOfTwoLinkedLists(...args) {\n    // TODO: Implement solution for Intersection of Two Linked Lists\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(intersectionOfTwoLinkedLists(...parsed)));\n    } catch (e) {\n        console.log(intersectionOfTwoLinkedLists(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Intersection of Two Linked Lists\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Intersection of Two Linked Lists\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[4,1,8,4,5]\n[5,6,1,8,4,5]",
+        "output": "8",
+        "explanation": "Intersected node value is 8."
+      },
+      {
+        "input": "[2,6,4]\n[1,5]",
+        "output": "null",
+        "explanation": "No intersection."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[4,1,8,4,5]\n[5,6,1,8,4,5]",
+        "output": "8",
+        "isHidden": true
+      },
+      {
+        "input": "[2,6,4]\n[1,5]",
+        "output": "null",
+        "isHidden": true
+      },
+      {
+        "input": "[1]\n[1]",
+        "output": "1",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Traverse both lists with two pointers. When pointer A hits end, switch to headB; when pointer B hits end, switch to headA."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Intersection of Two Linked Lists",
+      "solutionMarkdown": "### Optimal Solution\n\nTwo pointer traversal. Both pointers travel lengthA + lengthB and meet at intersection node or null.\n\n### Complexity\n- Time: O(M + N), Space: O(1)",
+      "timeComplexity": "O(M + N)",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Invert Binary Tree",
     "slug": "invert-binary-tree",
     "description": "Given the `root` of a binary tree, invert the tree, and return *its root*.\n\n### Example 1:\n```\nInput: [4,2,7,1,3,6,9]\nOutput: [4, 7, 2, 9, 6, 3, 1]\nExplanation: Binary tree mirrored horizontally.\n```\n\n### Example 2:\n```\nInput: [2,1,3]\nOutput: [2, 3, 1]\nExplanation: Inverted tree.\n```",
@@ -3163,6 +3840,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #25"
       }
     ],
     "supportedLanguages": [
@@ -3261,6 +3945,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #94"
       }
     ],
     "supportedLanguages": [
@@ -3521,6 +4212,95 @@ export const faang2 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Koko Eating Bananas",
+    "slug": "koko-eating-bananas",
+    "description": "Koko loves to eat bananas. There are `n` piles of bananas, the `i-th` pile has `piles[i]` bananas. The guards will come back in `h` hours. Return *the minimum integer* `k` *such that she can eat all the bananas within* `h` *hours*.\n\n### Example 1:\n```\nInput: [3,6,7,11]\n8\nOutput: 4\nExplanation: Eating speed 4 allows Koko to finish in 3/4 + 6/4 + 7/4 + 11/4 = 1 + 2 + 2 + 3 = 8 hours.\n```\n\n### Example 2:\n```\nInput: [30,11,23,4,20]\n5\nOutput: 30\nExplanation: Must eat at max speed 30 to finish in 5 hours.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "Binary Search"
+    ],
+    "topics": [
+      "Array",
+      "Binary Search"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #69"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def kokoEatingBananas(*args):\n    # TODO: Implement solution for Koko Eating Bananas\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = kokoEatingBananas(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(kokoEatingBananas(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function kokoEatingBananas(...args) {\n    // TODO: Implement solution for Koko Eating Bananas\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(kokoEatingBananas(...parsed)));\n    } catch (e) {\n        console.log(kokoEatingBananas(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Koko Eating Bananas\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Koko Eating Bananas\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[3,6,7,11]\n8",
+        "output": "4",
+        "explanation": "Eating speed 4 allows Koko to finish in 3/4 + 6/4 + 7/4 + 11/4 = 1 + 2 + 2 + 3 = 8 hours."
+      },
+      {
+        "input": "[30,11,23,4,20]\n5",
+        "output": "30",
+        "explanation": "Must eat at max speed 30 to finish in 5 hours."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[3,6,7,11]\n8",
+        "output": "4",
+        "isHidden": true
+      },
+      {
+        "input": "[30,11,23,4,20]\n5",
+        "output": "30",
+        "isHidden": true
+      },
+      {
+        "input": "[30,11,23,4,20]\n6",
+        "output": "23",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Binary search on eating speed k in range [1, max(piles)]. Check if total hours <= h."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Koko Eating Bananas",
+      "solutionMarkdown": "### Optimal Solution\n\nBinary search on answer. For candidate speed k, total hours = sum(ceil(pile / k)). If total <= h, try smaller k.\n\n### Complexity\n- Time: O(N log(max(piles))), Space: O(1)",
+      "timeComplexity": "O(N log(max(piles)))",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Kth Largest Element in an Array",
     "slug": "kth-largest-element-in-an-array",
     "description": "Given an integer array `nums` and an integer `k`, return the `k-th` largest element in the array.\n\nNote that it is the `k-th` largest element in the sorted order, not the `k-th` distinct element.\n\n### Example 1:\n```\nInput: [3,2,1,5,6,4]\n2\nOutput: 5\nExplanation: 2nd largest element is 5.\n```\n\n### Example 2:\n```\nInput: [3,2,3,1,2,4,5,5,6]\n4\nOutput: 4\nExplanation: 4th largest element is 4.\n```",
@@ -3550,6 +4330,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 40,
         "sourceNote": "Reported in Meta 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #66"
       }
     ],
     "supportedLanguages": [
@@ -3822,6 +4609,189 @@ export const faang2 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Last Digit of a^b for Large Exponents",
+    "slug": "last-digit-of-a-pow-b",
+    "description": "Given two numbers `a` and `b` as strings where `b` can be very large, find the **last digit** of `a^b`.\n\n### Example 1:\n```\nInput: \"3\"\n\"10\"\nOutput: 9\nExplanation: 3^10 = 59049, last digit is 9.\n```\n\n### Example 2:\n```\nInput: \"6\"\n\"2\"\nOutput: 6\nExplanation: 6^2 = 36, last digit is 6.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Math",
+      "Number Theory",
+      "String"
+    ],
+    "topics": [
+      "Math",
+      "Number Theory",
+      "String"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #85"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def lastDigitOfAPowB(*args):\n    # TODO: Implement solution for Last Digit of a^b for Large Exponents\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = lastDigitOfAPowB(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(lastDigitOfAPowB(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function lastDigitOfAPowB(...args) {\n    // TODO: Implement solution for Last Digit of a^b for Large Exponents\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(lastDigitOfAPowB(...parsed)));\n    } catch (e) {\n        console.log(lastDigitOfAPowB(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Last Digit of a^b for Large Exponents\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Last Digit of a^b for Large Exponents\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "\"3\"\n\"10\"",
+        "output": "9",
+        "explanation": "3^10 = 59049, last digit is 9."
+      },
+      {
+        "input": "\"6\"\n\"2\"",
+        "output": "6",
+        "explanation": "6^2 = 36, last digit is 6."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "\"3\"\n\"10\"",
+        "output": "9",
+        "isHidden": true
+      },
+      {
+        "input": "\"6\"\n\"2\"",
+        "output": "6",
+        "isHidden": true
+      },
+      {
+        "input": "\"2\"\n\"4\"",
+        "output": "6",
+        "isHidden": true
+      },
+      {
+        "input": "\"7\"\n\"3\"",
+        "output": "3",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Last digits of powers repeat with cycle length dividing 4. Reduce exponent b modulo 4."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Last Digit of a^b for Large Exponents",
+      "solutionMarkdown": "### Optimal Solution\n\nBase last digit a = int(a[-1]). Compute exp = b % 4. If exp == 0 and b > 0, use exp = 4. Return (a^exp) % 10.\n\n### Complexity\n- Time: O(len(b)), Space: O(1)",
+      "timeComplexity": "O(len(b))",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Leaders in an Array",
+    "slug": "leaders-in-an-array",
+    "description": "Given an array `arr` of positive integers, find all the **leaders** in the array. An element is a leader if it is strictly greater than or equal to all the elements to its right side. The rightmost element is always a leader. Return leaders in their original left-to-right order.\n\n### Example 1:\n```\nInput: [16,17,4,3,5,2]\nOutput: [17,5,2]\nExplanation: 17 is greater than [4,3,5,2]. 5 is greater than [2]. 2 is the rightmost element.\n```\n\n### Example 2:\n```\nInput: [1,2,3,4,0]\nOutput: [4,0]\nExplanation: 4 is greater than 0, 0 is rightmost.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Array"
+    ],
+    "topics": [
+      "Array"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 40,
+        "sourceNote": "Accenture Interview Question #18 (R [S13])"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def leadersInAnArray(*args):\n    # TODO: Implement solution for Leaders in an Array\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = leadersInAnArray(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(leadersInAnArray(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function leadersInAnArray(...args) {\n    // TODO: Implement solution for Leaders in an Array\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(leadersInAnArray(...parsed)));\n    } catch (e) {\n        console.log(leadersInAnArray(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Leaders in an Array\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Leaders in an Array\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[16,17,4,3,5,2]",
+        "output": "[17,5,2]",
+        "explanation": "17 is greater than [4,3,5,2]. 5 is greater than [2]. 2 is the rightmost element."
+      },
+      {
+        "input": "[1,2,3,4,0]",
+        "output": "[4,0]",
+        "explanation": "4 is greater than 0, 0 is rightmost."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[16,17,4,3,5,2]",
+        "output": "[17,5,2]",
+        "isHidden": true
+      },
+      {
+        "input": "[1,2,3,4,0]",
+        "output": "[4,0]",
+        "isHidden": true
+      },
+      {
+        "input": "[5]",
+        "output": "[5]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Traverse from right to left keeping track of the maximum element seen so far."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Leaders in an Array",
+      "solutionMarkdown": "### Optimal Solution\n\nScan from right to left. If current element >= max_from_right, prepend/append to leaders list and update max.\n\n### Complexity\n- Time: O(N), Space: O(1) auxiliary",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1) auxiliary"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Letter Combinations of a Phone Number",
     "slug": "letter-combinations-of-a-phone-number",
     "description": "Given a string containing digits from `2-9` inclusive, return all possible letter combinations that the number could represent. Return the answer in **any order**.\n\n### Example 1:\n```\nInput: \"23\"\nOutput: [\"ad\",\"ae\",\"af\",\"bd\",\"be\",\"bf\",\"cd\",\"ce\",\"cf\"]\nExplanation: All mappings for '2' (abc) and '3' (def).\n```\n\n### Example 2:\n```\nInput: \"\"\nOutput: []\nExplanation: Empty digits return empty list.\n```",
@@ -3844,6 +4814,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 40,
         "sourceNote": "Reported in Meta 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #82"
       }
     ],
     "supportedLanguages": [
@@ -3935,6 +4912,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 45,
         "sourceNote": "Reported in Apple 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #56"
       }
     ],
     "supportedLanguages": [
@@ -4031,6 +5015,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #23"
       }
     ],
     "supportedLanguages": [
@@ -4132,6 +5123,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #90"
       }
     ],
     "supportedLanguages": [
@@ -4438,6 +5436,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #89"
       }
     ],
     "supportedLanguages": [
@@ -4536,6 +5541,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #31"
       }
     ],
     "supportedLanguages": [
@@ -4935,6 +5947,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #21"
       }
     ],
     "supportedLanguages": [
@@ -5341,6 +6360,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #60"
       }
     ],
     "supportedLanguages": [
@@ -5424,6 +6450,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #6"
       }
     ],
     "supportedLanguages": [
@@ -5707,6 +6740,13 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 40,
         "sourceNote": "Reported in Meta 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #38"
       }
     ],
     "supportedLanguages": [
@@ -5770,385 +6810,6 @@ export const faang2 = [
       "solutionMarkdown": "### Optimal Solution\n\nExpand right pointer. Count zeros. If zeros > k, shrink from left until zeros <= k.\n\n### Complexity\n- Time: O(N), Space: O(1)",
       "timeComplexity": "O(N)",
       "spaceComplexity": "O(1)"
-    },
-    "totalSubmissions": 0,
-    "acceptedSubmissions": 0,
-    "acceptanceRate": 0
-  },
-  {
-    "title": "Maximal Rectangle",
-    "slug": "maximal-rectangle",
-    "description": "Given a `rows x cols` binary `matrix` filled with `0`'s and `1`'s, find the largest rectangle containing only `1`'s and return *its area*.\n\n### Example 1:\n```\nInput: [[\"1\",\"0\",\"1\",\"0\",\"0\"],[\"1\",\"0\",\"1\",\"1\",\"1\"],[\"1\",\"1\",\"1\",\"1\",\"1\"],[\"1\",\"0\",\"0\",\"1\",\"0\"]]\nOutput: 6\nExplanation: The maximal rectangle is 2x3 area = 6.\n```\n\n### Example 2:\n```\nInput: [[\"0\"]]\nOutput: 0\nExplanation: Empty rectangle.\n```",
-    "difficulty": "HARD",
-    "category": "DSA",
-    "patterns": [
-      "Array",
-      "Dynamic Programming",
-      "Stack",
-      "Matrix",
-      "Monotonic Stack"
-    ],
-    "topics": [
-      "Array",
-      "Dynamic Programming",
-      "Stack",
-      "Matrix",
-      "Monotonic Stack"
-    ],
-    "companyTags": [
-      {
-        "company": "Google",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 50,
-        "sourceNote": "Reported in Google 2021-2026 interview set"
-      }
-    ],
-    "supportedLanguages": [
-      "python",
-      "javascript",
-      "cpp",
-      "java"
-    ],
-    "starterCode": [
-      {
-        "language": "python",
-        "boilerplate": "def maximalRectangle(*args):\n    # TODO: Implement solution for Maximal Rectangle\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = maximalRectangle(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(maximalRectangle(*input_data))\n"
-      },
-      {
-        "language": "javascript",
-        "boilerplate": "function maximalRectangle(...args) {\n    // TODO: Implement solution for Maximal Rectangle\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(maximalRectangle(...parsed)));\n    } catch (e) {\n        console.log(maximalRectangle(...lines));\n    }\n}\n"
-      },
-      {
-        "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Maximal Rectangle\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
-      },
-      {
-        "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Maximal Rectangle\n            System.out.println(line);\n        }\n    }\n}\n"
-      }
-    ],
-    "sampleTestCases": [
-      {
-        "input": "[[\"1\",\"0\",\"1\",\"0\",\"0\"],[\"1\",\"0\",\"1\",\"1\",\"1\"],[\"1\",\"1\",\"1\",\"1\",\"1\"],[\"1\",\"0\",\"0\",\"1\",\"0\"]]",
-        "output": "6",
-        "explanation": "The maximal rectangle is 2x3 area = 6."
-      },
-      {
-        "input": "[[\"0\"]]",
-        "output": "0",
-        "explanation": "Empty rectangle."
-      }
-    ],
-    "hiddenTestCases": [
-      {
-        "input": "[[\"1\",\"0\",\"1\",\"0\",\"0\"],[\"1\",\"0\",\"1\",\"1\",\"1\"],[\"1\",\"1\",\"1\",\"1\",\"1\"],[\"1\",\"0\",\"0\",\"1\",\"0\"]]",
-        "output": "6",
-        "isHidden": true
-      },
-      {
-        "input": "[[\"0\"]]",
-        "output": "0",
-        "isHidden": true
-      },
-      {
-        "input": "[[\"1\"]]",
-        "output": "1",
-        "isHidden": true
-      }
-    ],
-    "hints": [
-      "Convert each row into a histogram of consecutive 1s and apply Largest Rectangle in Histogram."
-    ],
-    "editorial": {
-      "approach": "Optimal Approach for Maximal Rectangle",
-      "solutionMarkdown": "### Optimal Solution\n\nMaintain running height array for each column. On each row, compute max area with monotonic stack.\n\n### Complexity\n- Time: O(R * C), Space: O(C)",
-      "timeComplexity": "O(R * C)",
-      "spaceComplexity": "O(C)"
-    },
-    "totalSubmissions": 0,
-    "acceptedSubmissions": 0,
-    "acceptanceRate": 0
-  },
-  {
-    "title": "Maximum Depth of Binary Tree",
-    "slug": "maximum-depth-of-binary-tree",
-    "description": "Given the `root` of a binary tree, return *its maximum depth*.\n\n### Example 1:\n```\nInput: [3,9,20,null,null,15,7]\nOutput: 3\nExplanation: Longest root-to-leaf path depth is 3.\n```\n\n### Example 2:\n```\nInput: [1,null,2]\nOutput: 2\nExplanation: Depth is 2.\n```",
-    "difficulty": "EASY",
-    "category": "DSA",
-    "patterns": [
-      "Tree",
-      "BFS / DFS",
-      "Recursion"
-    ],
-    "topics": [
-      "Tree",
-      "BFS / DFS",
-      "Recursion"
-    ],
-    "companyTags": [
-      {
-        "company": "Apple",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 45,
-        "sourceNote": "Reported in Apple 2021-2026 interview set"
-      },
-      {
-        "company": "Microsoft",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 35,
-        "sourceNote": "Reported in Microsoft 2021-2026 interview set"
-      }
-    ],
-    "supportedLanguages": [
-      "python",
-      "javascript",
-      "cpp",
-      "java"
-    ],
-    "starterCode": [
-      {
-        "language": "python",
-        "boilerplate": "def maximumDepthOfBinaryTree(*args):\n    # TODO: Implement solution for Maximum Depth of Binary Tree\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = maximumDepthOfBinaryTree(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(maximumDepthOfBinaryTree(*input_data))\n"
-      },
-      {
-        "language": "javascript",
-        "boilerplate": "function maximumDepthOfBinaryTree(...args) {\n    // TODO: Implement solution for Maximum Depth of Binary Tree\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(maximumDepthOfBinaryTree(...parsed)));\n    } catch (e) {\n        console.log(maximumDepthOfBinaryTree(...lines));\n    }\n}\n"
-      },
-      {
-        "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Maximum Depth of Binary Tree\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
-      },
-      {
-        "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Maximum Depth of Binary Tree\n            System.out.println(line);\n        }\n    }\n}\n"
-      }
-    ],
-    "sampleTestCases": [
-      {
-        "input": "[3,9,20,null,null,15,7]",
-        "output": "3",
-        "explanation": "Longest root-to-leaf path depth is 3."
-      },
-      {
-        "input": "[1,null,2]",
-        "output": "2",
-        "explanation": "Depth is 2."
-      }
-    ],
-    "hiddenTestCases": [
-      {
-        "input": "[3,9,20,null,null,15,7]",
-        "output": "3",
-        "isHidden": true
-      },
-      {
-        "input": "[1,null,2]",
-        "output": "2",
-        "isHidden": true
-      },
-      {
-        "input": "[]",
-        "output": "0",
-        "isHidden": true
-      }
-    ],
-    "hints": [
-      "maxDepth(root) = 1 + max(maxDepth(root.left), maxDepth(root.right))."
-    ],
-    "editorial": {
-      "approach": "Optimal Approach for Maximum Depth of Binary Tree",
-      "solutionMarkdown": "### Optimal Solution\n\nRecursive post-order DFS: return 0 if null else 1 + max(left, right).\n\n### Complexity\n- Time: O(N), Space: O(H)",
-      "timeComplexity": "O(N)",
-      "spaceComplexity": "O(H)"
-    },
-    "totalSubmissions": 0,
-    "acceptedSubmissions": 0,
-    "acceptanceRate": 0
-  },
-  {
-    "title": "Maximum Level Sum of a Binary Tree",
-    "slug": "maximum-level-sum-of-a-binary-tree",
-    "description": "Given the `root` of a binary tree, the level of its root is `1`, the level of its children is `2`, and so on. Return the **smallest** level `x` such that the sum of all the values of nodes at level `x` is **maximal**.\n\n### Example 1:\n```\nInput: [1,7,0,7,-8,null,null]\nOutput: 2\nExplanation: Level 1 sum = 1, Level 2 sum = 7 + 0 = 7, Level 3 sum = 7 + -8 = -1. Max sum is at level 2.\n```\n\n### Example 2:\n```\nInput: [989,null,10250,98693,-89388,null,null,null,-32127]\nOutput: 2\nExplanation: Level 2 has maximum sum.\n```",
-    "difficulty": "MEDIUM",
-    "category": "DSA",
-    "patterns": [
-      "Tree",
-      "Depth-First Search",
-      "Breadth-First Search",
-      "Binary Tree"
-    ],
-    "topics": [
-      "Tree",
-      "Depth-First Search",
-      "Breadth-First Search",
-      "Binary Tree"
-    ],
-    "companyTags": [
-      {
-        "company": "Meta",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 40,
-        "sourceNote": "Reported in Meta 2021-2026 interview set"
-      }
-    ],
-    "supportedLanguages": [
-      "python",
-      "javascript",
-      "cpp",
-      "java"
-    ],
-    "starterCode": [
-      {
-        "language": "python",
-        "boilerplate": "def maximumLevelSumOfABinaryTree(*args):\n    # TODO: Implement solution for Maximum Level Sum of a Binary Tree\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = maximumLevelSumOfABinaryTree(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(maximumLevelSumOfABinaryTree(*input_data))\n"
-      },
-      {
-        "language": "javascript",
-        "boilerplate": "function maximumLevelSumOfABinaryTree(...args) {\n    // TODO: Implement solution for Maximum Level Sum of a Binary Tree\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(maximumLevelSumOfABinaryTree(...parsed)));\n    } catch (e) {\n        console.log(maximumLevelSumOfABinaryTree(...lines));\n    }\n}\n"
-      },
-      {
-        "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Maximum Level Sum of a Binary Tree\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
-      },
-      {
-        "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Maximum Level Sum of a Binary Tree\n            System.out.println(line);\n        }\n    }\n}\n"
-      }
-    ],
-    "sampleTestCases": [
-      {
-        "input": "[1,7,0,7,-8,null,null]",
-        "output": "2",
-        "explanation": "Level 1 sum = 1, Level 2 sum = 7 + 0 = 7, Level 3 sum = 7 + -8 = -1. Max sum is at level 2."
-      },
-      {
-        "input": "[989,null,10250,98693,-89388,null,null,null,-32127]",
-        "output": "2",
-        "explanation": "Level 2 has maximum sum."
-      }
-    ],
-    "hiddenTestCases": [
-      {
-        "input": "[1,7,0,7,-8,null,null]",
-        "output": "2",
-        "isHidden": true
-      },
-      {
-        "input": "[989,null,10250,98693,-89388,null,null,null,-32127]",
-        "output": "2",
-        "isHidden": true
-      },
-      {
-        "input": "[-100]",
-        "output": "1",
-        "isHidden": true
-      }
-    ],
-    "hints": [
-      "Perform level-order traversal (BFS) with a queue, computing sum at each depth."
-    ],
-    "editorial": {
-      "approach": "Optimal Approach for Maximum Level Sum of a Binary Tree",
-      "solutionMarkdown": "### Optimal Solution\n\nStandard BFS level by level. Sum nodes at each level; track maximum sum and lowest level index.\n\n### Complexity\n- Time: O(N), Space: O(W) where W is max width",
-      "timeComplexity": "O(N)",
-      "spaceComplexity": "O(W) where W is max width"
-    },
-    "totalSubmissions": 0,
-    "acceptedSubmissions": 0,
-    "acceptanceRate": 0
-  },
-  {
-    "title": "Maximum Points Coverage with a Rectangle",
-    "slug": "maximum-points-coverage-with-a-rectangle",
-    "description": "Given `n` points on a 2D plane and dimensions `(w, h)` of a movable rectangle, find the maximum number of points that can be covered by the rectangle simultaneously.\n\n### Example 1:\n```\nInput: [[1,1],[2,2],[3,3],[4,4]]\n2\n2\nOutput: 3\nExplanation: Points [1,1], [2,2], [3,3] fit in a 2x2 box.\n```\n\n### Example 2:\n```\nInput: [[0,0],[10,10]]\n1\n1\nOutput: 1\nExplanation: Points are too far apart to both fit.\n```",
-    "difficulty": "HARD",
-    "category": "DSA",
-    "patterns": [
-      "Two Pointers",
-      "Sorting",
-      "Sliding Window",
-      "Binary Search"
-    ],
-    "topics": [
-      "Two Pointers",
-      "Sorting",
-      "Sliding Window",
-      "Binary Search"
-    ],
-    "companyTags": [
-      {
-        "company": "Microsoft",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 35,
-        "sourceNote": "Reported in Microsoft 2021-2026 interview set"
-      }
-    ],
-    "supportedLanguages": [
-      "python",
-      "javascript",
-      "cpp",
-      "java"
-    ],
-    "starterCode": [
-      {
-        "language": "python",
-        "boilerplate": "def maximumPointsCoverageWithARectangle(*args):\n    # TODO: Implement solution for Maximum Points Coverage with a Rectangle\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = maximumPointsCoverageWithARectangle(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(maximumPointsCoverageWithARectangle(*input_data))\n"
-      },
-      {
-        "language": "javascript",
-        "boilerplate": "function maximumPointsCoverageWithARectangle(...args) {\n    // TODO: Implement solution for Maximum Points Coverage with a Rectangle\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(maximumPointsCoverageWithARectangle(...parsed)));\n    } catch (e) {\n        console.log(maximumPointsCoverageWithARectangle(...lines));\n    }\n}\n"
-      },
-      {
-        "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Maximum Points Coverage with a Rectangle\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
-      },
-      {
-        "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Maximum Points Coverage with a Rectangle\n            System.out.println(line);\n        }\n    }\n}\n"
-      }
-    ],
-    "sampleTestCases": [
-      {
-        "input": "[[1,1],[2,2],[3,3],[4,4]]\n2\n2",
-        "output": "3",
-        "explanation": "Points [1,1], [2,2], [3,3] fit in a 2x2 box."
-      },
-      {
-        "input": "[[0,0],[10,10]]\n1\n1",
-        "output": "1",
-        "explanation": "Points are too far apart to both fit."
-      }
-    ],
-    "hiddenTestCases": [
-      {
-        "input": "[[1,1],[2,2],[3,3],[4,4]]\n2\n2",
-        "output": "3",
-        "isHidden": true
-      },
-      {
-        "input": "[[0,0],[10,10]]\n1\n1",
-        "output": "1",
-        "isHidden": true
-      },
-      {
-        "input": "[[0,0],[0,1],[0,2]]\n0\n2",
-        "output": "3",
-        "isHidden": true
-      }
-    ],
-    "hints": [
-      "Sort points by x-coordinate and use sliding window or 2D range trees."
-    ],
-    "editorial": {
-      "approach": "Optimal Approach for Maximum Points Coverage with a Rectangle",
-      "solutionMarkdown": "### Optimal Solution\n\nSort by X coordinate. Use sliding window on X where window width <= w, and query max points within height h along Y.\n\n### Complexity\n- Time: O(N log N), Space: O(N)",
-      "timeComplexity": "O(N log N)",
-      "spaceComplexity": "O(N)"
     },
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,

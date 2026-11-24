@@ -73,10 +73,10 @@ int main() {
     return 0;
 }
 `;
-    const result = await SandboxRunner.executeSingle('cpp', code, '', 10000);
+    const result = await SandboxRunner.executeSingle('cpp', code, '', 15000);
     expect(result.status).toBe('ACCEPTED');
     expect(result.stdout).toBe('true');
-  }, 20000);
+  }, 25000);
 
   it('should pass stdin input to compiled C++ executable', async () => {
     const code = `

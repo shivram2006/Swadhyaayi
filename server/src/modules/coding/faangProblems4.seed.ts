@@ -1,6 +1,1039 @@
 /* eslint-disable */
-// Auto-generated FAANG (Apple, Meta, Microsoft, Google) - Chunk faang4
+// Auto-generated Coding Problem Catalog (Apple, Meta, Microsoft, Google, Accenture) - Chunk faang4
 export const faang4 = [
+  {
+    "title": "Reverse Words in a String",
+    "slug": "reverse-words-in-a-string",
+    "description": "Given an input string `s`, reverse the order of the **words**. Return a string of the words in reverse order concatenated by a single space.\n\n### Example 1:\n```\nInput: the sky is blue\nOutput: \"blue is sky the\"\nExplanation: Words reversed with single space.\n```\n\n### Example 2:\n```\nInput:   hello world  \nOutput: \"world hello\"\nExplanation: Leading and trailing spaces stripped.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Two Pointers",
+      "String"
+    ],
+    "topics": [
+      "Two Pointers",
+      "String"
+    ],
+    "companyTags": [
+      {
+        "company": "Apple",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 45,
+        "sourceNote": "Reported in Apple 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #22"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def reverseWordsInAString(*args):\n    # TODO: Implement solution for Reverse Words in a String\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = reverseWordsInAString(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(reverseWordsInAString(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function reverseWordsInAString(...args) {\n    // TODO: Implement solution for Reverse Words in a String\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(reverseWordsInAString(...parsed)));\n    } catch (e) {\n        console.log(reverseWordsInAString(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Reverse Words in a String\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Reverse Words in a String\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "the sky is blue",
+        "output": "\"blue is sky the\"",
+        "explanation": "Words reversed with single space."
+      },
+      {
+        "input": "  hello world  ",
+        "output": "\"world hello\"",
+        "explanation": "Leading and trailing spaces stripped."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "the sky is blue",
+        "output": "\"blue is sky the\"",
+        "isHidden": true
+      },
+      {
+        "input": "  hello world  ",
+        "output": "\"world hello\"",
+        "isHidden": true
+      },
+      {
+        "input": "a good   example",
+        "output": "\"example good a\"",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Split by whitespace, filter empty, reverse and join with space."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Reverse Words in a String",
+      "solutionMarkdown": "### Optimal Solution\n\nSplit tokens or reverse whole string then reverse individual words in-place.\n\n### Complexity\n- Time: O(N), Space: O(N)",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Rod Cutting",
+    "slug": "rod-cutting",
+    "description": "Given a rod of length `n` inches and an array of `prices` that contains prices of all pieces of size smaller than `n`, determine the maximum value obtainable by cutting up the rod and selling the pieces.\n\n### Example 1:\n```\nInput: [1,5,8,9,10,17,17,20]\n8\nOutput: 22\nExplanation: Cut into two pieces of lengths 2 and 6 (prices 5 + 17 = 22).\n```\n\n### Example 2:\n```\nInput: [3,5,8,9,10,17,17,20]\n8\nOutput: 24\nExplanation: Cut into 8 pieces of length 1 (8 * 3 = 24).\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Dynamic Programming"
+    ],
+    "topics": [
+      "Dynamic Programming"
+    ],
+    "companyTags": [
+      {
+        "company": "Microsoft",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 35,
+        "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def rodCutting(*args):\n    # TODO: Implement solution for Rod Cutting\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = rodCutting(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(rodCutting(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function rodCutting(...args) {\n    // TODO: Implement solution for Rod Cutting\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(rodCutting(...parsed)));\n    } catch (e) {\n        console.log(rodCutting(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Rod Cutting\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Rod Cutting\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1,5,8,9,10,17,17,20]\n8",
+        "output": "22",
+        "explanation": "Cut into two pieces of lengths 2 and 6 (prices 5 + 17 = 22)."
+      },
+      {
+        "input": "[3,5,8,9,10,17,17,20]\n8",
+        "output": "24",
+        "explanation": "Cut into 8 pieces of length 1 (8 * 3 = 24)."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1,5,8,9,10,17,17,20]\n8",
+        "output": "22",
+        "isHidden": true
+      },
+      {
+        "input": "[3,5,8,9,10,17,17,20]\n8",
+        "output": "24",
+        "isHidden": true
+      },
+      {
+        "input": "[1]\n1",
+        "output": "1",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Unbounded knapsack: dp[i] = max(prices[j] + dp[i - j - 1]) for 0 <= j < i."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Rod Cutting",
+      "solutionMarkdown": "### Optimal Solution\n\nBottom-up 1D DP. For length i from 1 to n: dp[i] = max(prices[j] + dp[i - j - 1]) over all cuts j.\n\n### Complexity\n- Time: O(N^2), Space: O(N)",
+      "timeComplexity": "O(N^2)",
+      "spaceComplexity": "O(N)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Roman to Integer",
+    "slug": "roman-to-integer",
+    "description": "Roman numerals are represented by seven different symbols: `I`, `V`, `X`, `L`, `C`, `D` and `M`. Given a Roman numeral, convert it to an integer.\n\n### Example 1:\n```\nInput: \"III\"\nOutput: 3\nExplanation: III = 3.\n```\n\n### Example 2:\n```\nInput: \"LVIII\"\nOutput: 58\nExplanation: L = 50, V = 5, III = 3.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Hash Table",
+      "Math",
+      "String"
+    ],
+    "topics": [
+      "Hash Table",
+      "Math",
+      "String"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #27"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def romanToInteger(*args):\n    # TODO: Implement solution for Roman to Integer\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = romanToInteger(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(romanToInteger(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function romanToInteger(...args) {\n    // TODO: Implement solution for Roman to Integer\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(romanToInteger(...parsed)));\n    } catch (e) {\n        console.log(romanToInteger(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Roman to Integer\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Roman to Integer\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "\"III\"",
+        "output": "3",
+        "explanation": "III = 3."
+      },
+      {
+        "input": "\"LVIII\"",
+        "output": "58",
+        "explanation": "L = 50, V = 5, III = 3."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "\"III\"",
+        "output": "3",
+        "isHidden": true
+      },
+      {
+        "input": "\"LVIII\"",
+        "output": "58",
+        "isHidden": true
+      },
+      {
+        "input": "\"MCMXCIV\"",
+        "output": "1994",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "If current Roman symbol has smaller value than next symbol, subtract it; otherwise add it."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Roman to Integer",
+      "solutionMarkdown": "### Optimal Solution\n\nScan from left to right. If val(s[i]) < val(s[i + 1]), subtract val(s[i]), otherwise add it.\n\n### Complexity\n- Time: O(N), Space: O(1)",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Rotate Array",
+    "slug": "rotate-array",
+    "description": "Given an integer array `nums`, rotate the array to the right by `k` steps, where `k` is non-negative.\n\n### Example 1:\n```\nInput: [1,2,3,4,5,6,7]\n3\nOutput: [5, 6, 7, 1, 2, 3, 4]\nExplanation: Rotate 3 steps right.\n```\n\n### Example 2:\n```\nInput: [-1,-100,3,99]\n2\nOutput: [3, 99, -1, -100]\nExplanation: Rotate 2 steps right.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "Two Pointers"
+    ],
+    "topics": [
+      "Array",
+      "Two Pointers"
+    ],
+    "companyTags": [
+      {
+        "company": "Apple",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 45,
+        "sourceNote": "Reported in Apple 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 40,
+        "sourceNote": "Accenture Interview Question #8 (R [S7])"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def rotateArray(*args):\n    # TODO: Implement solution for Rotate Array\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = rotateArray(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(rotateArray(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function rotateArray(...args) {\n    // TODO: Implement solution for Rotate Array\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(rotateArray(...parsed)));\n    } catch (e) {\n        console.log(rotateArray(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Rotate Array\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Rotate Array\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1,2,3,4,5,6,7]\n3",
+        "output": "[5, 6, 7, 1, 2, 3, 4]",
+        "explanation": "Rotate 3 steps right."
+      },
+      {
+        "input": "[-1,-100,3,99]\n2",
+        "output": "[3, 99, -1, -100]",
+        "explanation": "Rotate 2 steps right."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1,2,3,4,5,6,7]\n3",
+        "output": "[5, 6, 7, 1, 2, 3, 4]",
+        "isHidden": true
+      },
+      {
+        "input": "[-1,-100,3,99]\n2",
+        "output": "[3, 99, -1, -100]",
+        "isHidden": true
+      },
+      {
+        "input": "[1,2]\n3",
+        "output": "[2, 1]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Reverse entire array, then reverse first k, then reverse remaining n-k."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Rotate Array",
+      "solutionMarkdown": "### Optimal Solution\n\nThree in-place reversals: reverse(0, n-1), reverse(0, k-1), reverse(k, n-1).\n\n### Complexity\n- Time: O(N), Space: O(1)",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Rotate Image",
+    "slug": "rotate-image",
+    "description": "You are given an `n x n` 2D matrix representing an image, rotate the image by **90 degrees (clockwise)** in-place.\n\n### Example 1:\n```\nInput: [[1,2,3],[4,5,6],[7,8,9]]\nOutput: [[7, 4, 1], [8, 5, 2], [9, 6, 3]]\nExplanation: Rotated 90 degrees clockwise.\n```\n\n### Example 2:\n```\nInput: [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]\nOutput: [[15, 13, 2, 5], [14, 3, 4, 1], [12, 6, 8, 9], [16, 7, 10, 11]]\nExplanation: 4x4 matrix rotated.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Matrix",
+      "Math"
+    ],
+    "topics": [
+      "Matrix",
+      "Math"
+    ],
+    "companyTags": [
+      {
+        "company": "Apple",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 45,
+        "sourceNote": "Reported in Apple 2021-2026 interview set"
+      },
+      {
+        "company": "Microsoft",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 35,
+        "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Google",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 50,
+        "sourceNote": "Reported in Google 2021-2026 interview set"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def rotateImage(*args):\n    # TODO: Implement solution for Rotate Image\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = rotateImage(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(rotateImage(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function rotateImage(...args) {\n    // TODO: Implement solution for Rotate Image\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(rotateImage(...parsed)));\n    } catch (e) {\n        console.log(rotateImage(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Rotate Image\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Rotate Image\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[[1,2,3],[4,5,6],[7,8,9]]",
+        "output": "[[7, 4, 1], [8, 5, 2], [9, 6, 3]]",
+        "explanation": "Rotated 90 degrees clockwise."
+      },
+      {
+        "input": "[[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]",
+        "output": "[[15, 13, 2, 5], [14, 3, 4, 1], [12, 6, 8, 9], [16, 7, 10, 11]]",
+        "explanation": "4x4 matrix rotated."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[[1,2,3],[4,5,6],[7,8,9]]",
+        "output": "[[7, 4, 1], [8, 5, 2], [9, 6, 3]]",
+        "isHidden": true
+      },
+      {
+        "input": "[[1]]",
+        "output": "[[1]]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Transpose matrix along main diagonal, then reverse each row horizontally."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Rotate Image",
+      "solutionMarkdown": "### Optimal Solution\n\nTwo-step in-place transformation: matrix.transpose() followed by matrix.reverse_rows().\n\n### Complexity\n- Time: O(N^2), Space: O(1)",
+      "timeComplexity": "O(N^2)",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Rotting Oranges",
+    "slug": "rotting-oranges",
+    "description": "You are given an `m x n` `grid` where each cell can have one of three values: `0` empty, `1` fresh orange, or `2` rotten orange. Every minute, any fresh orange that is 4-directionally adjacent to a rotten orange becomes rotten.\n\nReturn the minimum number of minutes that must elapse until no cell has a fresh orange. If this is impossible, return `-1`.\n\n### Example 1:\n```\nInput: [[2,1,1],[1,1,0],[0,1,1]]\nOutput: 4\nExplanation: All oranges rotten in 4 minutes.\n```\n\n### Example 2:\n```\nInput: [[2,1,1],[0,1,1],[1,0,1]]\nOutput: -1\nExplanation: Orange in bottom left corner can never rot.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "BFS / DFS",
+      "Matrix"
+    ],
+    "topics": [
+      "BFS / DFS",
+      "Matrix"
+    ],
+    "companyTags": [
+      {
+        "company": "Apple",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 45,
+        "sourceNote": "Reported in Apple 2021-2026 interview set"
+      },
+      {
+        "company": "Meta",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 40,
+        "sourceNote": "Reported in Meta 2021-2026 interview set"
+      },
+      {
+        "company": "Microsoft",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 35,
+        "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def rottingOranges(*args):\n    # TODO: Implement solution for Rotting Oranges\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = rottingOranges(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(rottingOranges(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function rottingOranges(...args) {\n    // TODO: Implement solution for Rotting Oranges\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(rottingOranges(...parsed)));\n    } catch (e) {\n        console.log(rottingOranges(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Rotting Oranges\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Rotting Oranges\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[[2,1,1],[1,1,0],[0,1,1]]",
+        "output": "4",
+        "explanation": "All oranges rotten in 4 minutes."
+      },
+      {
+        "input": "[[2,1,1],[0,1,1],[1,0,1]]",
+        "output": "-1",
+        "explanation": "Orange in bottom left corner can never rot."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[[2,1,1],[1,1,0],[0,1,1]]",
+        "output": "4",
+        "isHidden": true
+      },
+      {
+        "input": "[[2,1,1],[0,1,1],[1,0,1]]",
+        "output": "-1",
+        "isHidden": true
+      },
+      {
+        "input": "[[0,2]]",
+        "output": "0",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Multi-source BFS: add all rotten oranges (2) into queue initially and track fresh orange count."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Rotting Oranges",
+      "solutionMarkdown": "### Optimal Solution\n\nMulti-source BFS expands level by level (minutes). If fresh count > 0 at end, return -1.\n\n### Complexity\n- Time: O(M * N), Space: O(M * N)",
+      "timeComplexity": "O(M * N)",
+      "spaceComplexity": "O(M * N)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Round Number (Happy Number variant)",
+    "slug": "round-number",
+    "description": "Write an algorithm to determine if a number `n` is a **Round Number** (also known as Happy Number). Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat until the number equals 1, or it loops endlessly in a cycle which does not include 1. Return `true` if it reaches 1.\n\n### Example 1:\n```\nInput: 19\nOutput: true\nExplanation: 1^2 + 9^2 = 82 -> 8^2 + 2^2 = 68 -> 6^2 + 8^2 = 100 -> 1^2 + 0 + 0 = 1.\n```\n\n### Example 2:\n```\nInput: 2\nOutput: false\nExplanation: Enters endless cycle: 4 -> 16 -> 37 -> 58 -> 89 -> 145 -> 42 -> 20 -> 4.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Hash Table",
+      "Math",
+      "Two Pointers"
+    ],
+    "topics": [
+      "Hash Table",
+      "Math",
+      "Two Pointers"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 40,
+        "sourceNote": "Accenture Interview Question #74 (R [S3])"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def roundNumber(*args):\n    # TODO: Implement solution for Round Number (Happy Number variant)\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = roundNumber(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(roundNumber(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function roundNumber(...args) {\n    // TODO: Implement solution for Round Number (Happy Number variant)\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(roundNumber(...parsed)));\n    } catch (e) {\n        console.log(roundNumber(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Round Number (Happy Number variant)\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Round Number (Happy Number variant)\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "19",
+        "output": "true",
+        "explanation": "1^2 + 9^2 = 82 -> 8^2 + 2^2 = 68 -> 6^2 + 8^2 = 100 -> 1^2 + 0 + 0 = 1."
+      },
+      {
+        "input": "2",
+        "output": "false",
+        "explanation": "Enters endless cycle: 4 -> 16 -> 37 -> 58 -> 89 -> 145 -> 42 -> 20 -> 4."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "19",
+        "output": "true",
+        "isHidden": true
+      },
+      {
+        "input": "2",
+        "output": "false",
+        "isHidden": true
+      },
+      {
+        "input": "1",
+        "output": "true",
+        "isHidden": true
+      },
+      {
+        "input": "7",
+        "output": "true",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Use Floyd's Cycle-Finding Algorithm (slow and fast pointers) or a HashSet of seen numbers."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Round Number (Happy Number variant)",
+      "solutionMarkdown": "### Optimal Solution\n\nCycle detection on digit-square sums. Slow moves 1 transformation, fast moves 2. If fast reaches 1 return true; if slow == fast return false.\n\n### Complexity\n- Time: O(log N), Space: O(1)",
+      "timeComplexity": "O(log N)",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Running First Unique Character Prefix Output",
+    "slug": "running-first-unique-character-prefix-output",
+    "description": "Given a stream of characters, for each character read, output the **first non-repeating character** among the prefix read so far, or '#' if none exists.\n\n### Example 1:\n```\nInput: \"aabc\"\nOutput: \"a#bb\"\nExplanation: Prefixes: 'a'->'a', 'aa'->'#', 'aab'->'b', 'aabc'->'b'.\n```\n\n### Example 2:\n```\nInput: \"zz\"\nOutput: \"z#\"\nExplanation: 'z' followed by repeated 'z'.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Queue",
+      "Hash Table",
+      "String"
+    ],
+    "topics": [
+      "Queue",
+      "Hash Table",
+      "String"
+    ],
+    "companyTags": [
+      {
+        "company": "Microsoft",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 35,
+        "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def runningFirstUniqueCharacterPrefixOutput(*args):\n    # TODO: Implement solution for Running First Unique Character Prefix Output\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = runningFirstUniqueCharacterPrefixOutput(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(runningFirstUniqueCharacterPrefixOutput(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function runningFirstUniqueCharacterPrefixOutput(...args) {\n    // TODO: Implement solution for Running First Unique Character Prefix Output\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(runningFirstUniqueCharacterPrefixOutput(...parsed)));\n    } catch (e) {\n        console.log(runningFirstUniqueCharacterPrefixOutput(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Running First Unique Character Prefix Output\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Running First Unique Character Prefix Output\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "\"aabc\"",
+        "output": "\"a#bb\"",
+        "explanation": "Prefixes: 'a'->'a', 'aa'->'#', 'aab'->'b', 'aabc'->'b'."
+      },
+      {
+        "input": "\"zz\"",
+        "output": "\"z#\"",
+        "explanation": "'z' followed by repeated 'z'."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "\"aabc\"",
+        "output": "\"a#bb\"",
+        "isHidden": true
+      },
+      {
+        "input": "\"zz\"",
+        "output": "\"z#\"",
+        "isHidden": true
+      },
+      {
+        "input": "\"abc\"",
+        "output": "\"aaa\"",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Use a queue and frequency map. Pop front elements with count > 1."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Running First Unique Character Prefix Output",
+      "solutionMarkdown": "### Optimal Solution\n\nEnqueue each character. When reading, pop from queue while count[front] > 1. Front is first unique.\n\n### Complexity\n- Time: O(N), Space: O(1) (26 chars)",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1) (26 chars)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Running Sum of 1D Array",
+    "slug": "running-sum-of-1d-array",
+    "description": "Given an array `nums`. We define a running sum of an array as `runningSum[i] = sum(nums[0]\u2026nums[i])`. Return the running sum of `nums`.\n\n### Example 1:\n```\nInput: [1,2,3,4]\nOutput: [1,3,6,10]\nExplanation: Running sum is obtained as [1, 1+2, 1+2+3, 1+2+3+4].\n```\n\n### Example 2:\n```\nInput: [1,1,1,1,1]\nOutput: [1,2,3,4,5]\nExplanation: Running sum: [1, 2, 3, 4, 5].\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "Prefix Sum"
+    ],
+    "topics": [
+      "Array",
+      "Prefix Sum"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #17"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def runningSumOf1dArray(*args):\n    # TODO: Implement solution for Running Sum of 1D Array\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = runningSumOf1dArray(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(runningSumOf1dArray(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function runningSumOf1dArray(...args) {\n    // TODO: Implement solution for Running Sum of 1D Array\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(runningSumOf1dArray(...parsed)));\n    } catch (e) {\n        console.log(runningSumOf1dArray(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Running Sum of 1D Array\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Running Sum of 1D Array\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1,2,3,4]",
+        "output": "[1,3,6,10]",
+        "explanation": "Running sum is obtained as [1, 1+2, 1+2+3, 1+2+3+4]."
+      },
+      {
+        "input": "[1,1,1,1,1]",
+        "output": "[1,2,3,4,5]",
+        "explanation": "Running sum: [1, 2, 3, 4, 5]."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1,2,3,4]",
+        "output": "[1,3,6,10]",
+        "isHidden": true
+      },
+      {
+        "input": "[1,1,1,1,1]",
+        "output": "[1,2,3,4,5]",
+        "isHidden": true
+      },
+      {
+        "input": "[3,1,2,10,1]",
+        "output": "[3,4,6,16,17]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "In-place addition: nums[i] += nums[i - 1] for i from 1 to n - 1."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Running Sum of 1D Array",
+      "solutionMarkdown": "### Optimal Solution\n\nIterate from index 1 to n - 1. Add previous running sum nums[i - 1] to current element nums[i].\n\n### Complexity\n- Time: O(N), Space: O(1) in-place",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1) in-place"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Same Tree",
+    "slug": "same-tree",
+    "description": "Given the roots of two binary trees `p` and `q`, write a function to check if they are the same or not.\n\n### Example 1:\n```\nInput: [1,2,3]\n[1,2,3]\nOutput: true\nExplanation: Identical structure and values.\n```\n\n### Example 2:\n```\nInput: [1,2]\n[1,null,2]\nOutput: false\nExplanation: Different structures.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Tree",
+      "BFS / DFS",
+      "Recursion"
+    ],
+    "topics": [
+      "Tree",
+      "BFS / DFS",
+      "Recursion"
+    ],
+    "companyTags": [
+      {
+        "company": "Apple",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 45,
+        "sourceNote": "Reported in Apple 2021-2026 interview set"
+      },
+      {
+        "company": "Google",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 50,
+        "sourceNote": "Reported in Google 2021-2026 interview set"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def sameTree(*args):\n    # TODO: Implement solution for Same Tree\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = sameTree(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(sameTree(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function sameTree(...args) {\n    // TODO: Implement solution for Same Tree\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(sameTree(...parsed)));\n    } catch (e) {\n        console.log(sameTree(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Same Tree\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Same Tree\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1,2,3]\n[1,2,3]",
+        "output": "true",
+        "explanation": "Identical structure and values."
+      },
+      {
+        "input": "[1,2]\n[1,null,2]",
+        "output": "false",
+        "explanation": "Different structures."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1,2,3]\n[1,2,3]",
+        "output": "true",
+        "isHidden": true
+      },
+      {
+        "input": "[1,2]\n[1,null,2]",
+        "output": "false",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Base cases: if both null return true; if one null or values differ return false."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Same Tree",
+      "solutionMarkdown": "### Optimal Solution\n\nRecursive traversal: p.val == q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right).\n\n### Complexity\n- Time: O(N), Space: O(H)",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(H)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Scramble String",
+    "slug": "scramble-string",
+    "description": "We can scramble a string `s` to get a string `t` using recursive binary splits and swaps. Given two strings `s1` and `s2` of the same length, return `true` if `s2` is a scrambled string of `s1`, and `false` otherwise.\n\n### Example 1:\n```\nInput: \"great\"\n\"rgeat\"\nOutput: true\nExplanation: Split \"great\" -> \"gr\" + \"eat\" -> swap \"g\" and \"r\".\n```\n\n### Example 2:\n```\nInput: \"abcde\"\n\"caebd\"\nOutput: false\nExplanation: Cannot be scrambled.\n```",
+    "difficulty": "HARD",
+    "category": "DSA",
+    "patterns": [
+      "String",
+      "Dynamic Programming",
+      "Recursion",
+      "Memoization"
+    ],
+    "topics": [
+      "String",
+      "Dynamic Programming",
+      "Recursion",
+      "Memoization"
+    ],
+    "companyTags": [
+      {
+        "company": "Google",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 50,
+        "sourceNote": "Reported in Google 2021-2026 interview set"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def scrambleString(*args):\n    # TODO: Implement solution for Scramble String\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = scrambleString(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(scrambleString(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function scrambleString(...args) {\n    // TODO: Implement solution for Scramble String\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(scrambleString(...parsed)));\n    } catch (e) {\n        console.log(scrambleString(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Scramble String\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Scramble String\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "\"great\"\n\"rgeat\"",
+        "output": "true",
+        "explanation": "Split \"great\" -> \"gr\" + \"eat\" -> swap \"g\" and \"r\"."
+      },
+      {
+        "input": "\"abcde\"\n\"caebd\"",
+        "output": "false",
+        "explanation": "Cannot be scrambled."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "\"great\"\n\"rgeat\"",
+        "output": "true",
+        "isHidden": true
+      },
+      {
+        "input": "\"abcde\"\n\"caebd\"",
+        "output": "false",
+        "isHidden": true
+      },
+      {
+        "input": "\"a\"\n\"a\"",
+        "output": "true",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Memoized recursion with pruning: compare sorted character frequencies before splitting."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Scramble String",
+      "solutionMarkdown": "### Optimal Solution\n\nCheck all split points i in 1..n-1: test unswapped (s1[:i], s2[:i]) and swapped (s1[:i], s2[n-i:]).\n\n### Complexity\n- Time: O(N^4), Space: O(N^3)",
+      "timeComplexity": "O(N^4)",
+      "spaceComplexity": "O(N^3)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
   {
     "title": "Search a 2D Matrix",
     "slug": "search-a-2d-matrix",
@@ -24,6 +1057,13 @@ export const faang4 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #65"
       }
     ],
     "supportedLanguages": [
@@ -213,6 +1253,13 @@ export const faang4 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #62"
       }
     ],
     "supportedLanguages": [
@@ -969,6 +2016,13 @@ export const faang4 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #46"
       }
     ],
     "supportedLanguages": [
@@ -1067,6 +2121,13 @@ export const faang4 = [
         "verified": true,
         "frequencyCount": 40,
         "sourceNote": "Reported in Meta 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #42"
       }
     ],
     "supportedLanguages": [
@@ -1312,6 +2373,189 @@ export const faang4 = [
       "solutionMarkdown": "### Optimal Solution\n\nSimulate spiral traversal updating top, bottom, left, right bounds, filling values from 1 to n^2.\n\n### Complexity\n- Time: O(N^2), Space: O(1) auxiliary",
       "timeComplexity": "O(N^2)",
       "spaceComplexity": "O(1) auxiliary"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Sqrt(x)",
+    "slug": "sqrt",
+    "description": "Given a non-negative integer `x`, return *the square root of* `x` *rounded down to the nearest integer*. The returned integer should be **non-negative** as well.\n\n### Example 1:\n```\nInput: 4\nOutput: 2\nExplanation: The square root of 4 is 2, so we return 2.\n```\n\n### Example 2:\n```\nInput: 8\nOutput: 2\nExplanation: The square root of 8 is 2.82842..., and since we round down to the nearest integer, 2 is returned.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Math",
+      "Binary Search"
+    ],
+    "topics": [
+      "Math",
+      "Binary Search"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #70"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def sqrt(*args):\n    # TODO: Implement solution for Sqrt(x)\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = sqrt(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(sqrt(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function sqrt(...args) {\n    // TODO: Implement solution for Sqrt(x)\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(sqrt(...parsed)));\n    } catch (e) {\n        console.log(sqrt(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Sqrt(x)\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Sqrt(x)\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "4",
+        "output": "2",
+        "explanation": "The square root of 4 is 2, so we return 2."
+      },
+      {
+        "input": "8",
+        "output": "2",
+        "explanation": "The square root of 8 is 2.82842..., and since we round down to the nearest integer, 2 is returned."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "4",
+        "output": "2",
+        "isHidden": true
+      },
+      {
+        "input": "8",
+        "output": "2",
+        "isHidden": true
+      },
+      {
+        "input": "0",
+        "output": "0",
+        "isHidden": true
+      },
+      {
+        "input": "1",
+        "output": "1",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Binary search on range [0, x]. Check if mid * mid <= x."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Sqrt(x)",
+      "solutionMarkdown": "### Optimal Solution\n\nBinary search on integer domain [0, x // 2 + 1]. If mid * mid <= x, ans = mid and low = mid + 1; else high = mid - 1.\n\n### Complexity\n- Time: O(log x), Space: O(1)",
+      "timeComplexity": "O(log x)",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "String Compression",
+    "slug": "string-compression",
+    "description": "Given an array of characters `chars`, compress it in-place using the following algorithm: For each group of consecutive repeating characters in `chars`, if group length is 1 append char; if > 1 append char followed by group's length. Return the new length of the array.\n\n### Example 1:\n```\nInput: [\"a\",\"a\",\"b\",\"b\",\"c\",\"c\",\"c\"]\nOutput: 6\nExplanation: The groups are \"aa\", \"bb\", and \"ccc\". This compresses to \"a2b2c3\" with length 6.\n```\n\n### Example 2:\n```\nInput: [\"a\"]\nOutput: 1\nExplanation: Single character remains \"a\" length 1.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Two Pointers",
+      "String"
+    ],
+    "topics": [
+      "Two Pointers",
+      "String"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #29"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def stringCompression(*args):\n    # TODO: Implement solution for String Compression\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = stringCompression(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(stringCompression(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function stringCompression(...args) {\n    // TODO: Implement solution for String Compression\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(stringCompression(...parsed)));\n    } catch (e) {\n        console.log(stringCompression(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for String Compression\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for String Compression\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[\"a\",\"a\",\"b\",\"b\",\"c\",\"c\",\"c\"]",
+        "output": "6",
+        "explanation": "The groups are \"aa\", \"bb\", and \"ccc\". This compresses to \"a2b2c3\" with length 6."
+      },
+      {
+        "input": "[\"a\"]",
+        "output": "1",
+        "explanation": "Single character remains \"a\" length 1."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[\"a\",\"a\",\"b\",\"b\",\"c\",\"c\",\"c\"]",
+        "output": "6",
+        "isHidden": true
+      },
+      {
+        "input": "[\"a\"]",
+        "output": "1",
+        "isHidden": true
+      },
+      {
+        "input": "[\"a\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\",\"b\"]",
+        "output": "4",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Use two pointers: write_ptr for writing compressed output, read_ptr for counting identical consecutive characters."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for String Compression",
+      "solutionMarkdown": "### Optimal Solution\n\nWhile read < n, count group length. Write chars[read], and if count > 1, write each digit of count string.\n\n### Complexity\n- Time: O(N), Space: O(1) in-place",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1) in-place"
     },
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
@@ -1630,6 +2874,13 @@ export const faang4 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #36"
       }
     ],
     "supportedLanguages": [
@@ -1735,6 +2986,13 @@ export const faang4 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #80"
       }
     ],
     "supportedLanguages": [
@@ -1977,6 +3235,95 @@ export const faang4 = [
       "solutionMarkdown": "### Optimal Solution\n\nTree matching recursion with isSameTree verification.\n\n### Complexity\n- Time: O(M * N), Space: O(H)",
       "timeComplexity": "O(M * N)",
       "spaceComplexity": "O(H)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Sum of All Array Elements",
+    "slug": "sum-of-all-array-elements",
+    "description": "Given an array of integers `nums`, compute and return the total sum of all elements in the array.\n\n### Example 1:\n```\nInput: [1,2,3,4,5]\nOutput: 15\nExplanation: 1 + 2 + 3 + 4 + 5 = 15.\n```\n\n### Example 2:\n```\nInput: [-1,-2,3]\nOutput: 0\nExplanation: -1 + -2 + 3 = 0.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "Math"
+    ],
+    "topics": [
+      "Array",
+      "Math"
+    ],
+    "companyTags": [
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #19"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def sumOfAllArrayElements(*args):\n    # TODO: Implement solution for Sum of All Array Elements\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = sumOfAllArrayElements(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(sumOfAllArrayElements(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function sumOfAllArrayElements(...args) {\n    // TODO: Implement solution for Sum of All Array Elements\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(sumOfAllArrayElements(...parsed)));\n    } catch (e) {\n        console.log(sumOfAllArrayElements(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Sum of All Array Elements\n        string line;\n        while (getline(cin, line)) {\n            cout << line << endl;\n        }\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String line;\n        while ((line = br.readLine()) != null) {\n            // TODO: Implement solution for Sum of All Array Elements\n            System.out.println(line);\n        }\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1,2,3,4,5]",
+        "output": "15",
+        "explanation": "1 + 2 + 3 + 4 + 5 = 15."
+      },
+      {
+        "input": "[-1,-2,3]",
+        "output": "0",
+        "explanation": "-1 + -2 + 3 = 0."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1,2,3,4,5]",
+        "output": "15",
+        "isHidden": true
+      },
+      {
+        "input": "[-1,-2,3]",
+        "output": "0",
+        "isHidden": true
+      },
+      {
+        "input": "[100]",
+        "output": "100",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Linear scan accumulating running total in a 64-bit integer."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Sum of All Array Elements",
+      "solutionMarkdown": "### Optimal Solution\n\nIterate through elements adding each to an accumulator variable. Return total sum.\n\n### Complexity\n- Time: O(N), Space: O(1)",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1)"
     },
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
@@ -2759,6 +4106,13 @@ export const faang4 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #11"
       }
     ],
     "supportedLanguages": [
@@ -2968,6 +4322,13 @@ export const faang4 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #43"
       }
     ],
     "supportedLanguages": [
@@ -3171,6 +4532,13 @@ export const faang4 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #1"
       }
     ],
     "supportedLanguages": [
@@ -3370,6 +4738,13 @@ export const faang4 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #95"
       }
     ],
     "supportedLanguages": [
@@ -3568,6 +4943,13 @@ export const faang4 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 40,
+        "sourceNote": "Accenture Interview Question #9 (R [S7])"
       }
     ],
     "supportedLanguages": [
@@ -3744,6 +5126,13 @@ export const faang4 = [
         "verified": true,
         "frequencyCount": 45,
         "sourceNote": "Reported in Apple 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #28"
       }
     ],
     "supportedLanguages": [
@@ -3948,6 +5337,13 @@ export const faang4 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #47"
       }
     ],
     "supportedLanguages": [
@@ -4408,6 +5804,13 @@ export const faang4 = [
         "verified": true,
         "frequencyCount": 40,
         "sourceNote": "Reported in Meta 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #99"
       }
     ],
     "supportedLanguages": [
@@ -4781,6 +6184,13 @@ export const faang4 = [
         "verified": true,
         "frequencyCount": 40,
         "sourceNote": "Reported in Meta 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #91"
       }
     ],
     "supportedLanguages": [

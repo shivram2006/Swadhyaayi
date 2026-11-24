@@ -121,7 +121,7 @@ export class SandboxRunner {
 
         const compileProc = spawnSync(gppPath, ['-O2', '-std=c++17', srcFile, '-o', exeFile], {
           cwd: tempDir,
-          timeout: 10000,
+          timeout: 15000,
           stdio: 'pipe',
           env: {
             ...process.env,
