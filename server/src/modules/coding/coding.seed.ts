@@ -532,5 +532,5 @@ public class Solution {
     await QuestionCoding.findOneAndUpdate({ slug: prob.slug }, prob, { upsert: true, new: true });
   }
 
-  console.log(`[SEED] Pre-seeded ${allProblems.length} algorithmic pattern questions (including complete company catalogs: Apple 100, Meta 100, Microsoft 100, Google 100, Accenture 100, Infosys 100, TCS 100).`);
+  console.log(`[SEED] Pre-seeded ${allProblems.length} algorithmic pattern questions (including complete company catalogs: Apple 100, Meta 100, Microsoft 100, Google 100, Accenture 100, Infosys 100, TCS 100, Capgemini 100, Wipro 100, Flipkart 100, Oracle 100, Adobe 100).`);
 };

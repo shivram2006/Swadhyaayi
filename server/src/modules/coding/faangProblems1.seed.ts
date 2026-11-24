@@ -1,6 +1,4 @@
-/* eslint-disable */
-// Auto-generated Coding Problem Catalog (Apple, Meta, Microsoft, Google, Accenture, Infosys, TCS) - Chunk faang1
-export const faang1 = [
+export const faang1: any[] = [
   {
     "title": "0/1 Knapsack",
     "slug": "0-1-knapsack",
@@ -20,6 +18,31 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 28,
         "sourceNote": "Infosys Practice Bank #92"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -230,6 +253,21 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 42,
         "sourceNote": "Infosys Interview Question #25"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -617,6 +655,16 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 42,
         "sourceNote": "Infosys Interview Question #77"
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -671,6 +719,87 @@ export const faang1 = [
       "timeComplexity": "O(N * K log(N * K))",
       "spaceComplexity": "O(N * K)"
     },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Activity Selection Problem",
+    "slug": "activity-selection-problem",
+    "description": "Given $N$ activities with their start and finish times, select the maximum number of activities that can be performed by a single person, assuming that a person can only work on a single activity at a time.\\n\\n### Example 1:\\n```\\nInput: 6\\n1 2\\n3 4\\n0 6\\n5 7\\n8 9\\n5 9\\nOutput: 4\\nExplanation: A person can perform a maximum of 4 activities: (1, 2), (3, 4), (5, 7), and (8, 9).\\n```\\n\\n### Example 2:\\n```\\nInput: 3\\n10 20\\n12 25\\n20 30\\nOutput: 2\\nExplanation: The person can perform activities (10, 20) and (20, 30).\\n```\\n\\n### Constraints:\\n- $1 \\le N \\le 10^5$\\n- $0 \\le \\text{start}[i] < \\text{finish}[i] \\le 10^9$",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Greedy",
+      "Sorting",
+      "Intervals"
+    ],
+    "topics": [
+      "Greedy",
+      "Intervals",
+      "Sorting"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 6,
+        "yearReported": 2024
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "6\n1 2\n3 4\n0 6\n5 7\n8 9\n5 9",
+        "output": "4",
+        "explanation": "Greedy choice by earliest finish time."
+      },
+      {
+        "input": "3\n10 20\n12 25\n20 30",
+        "output": "2",
+        "explanation": "Two non-overlapping activities."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "1\n1 5",
+        "output": "1"
+      },
+      {
+        "input": "4\n1 3\n2 4\n3 5\n4 6",
+        "output": "2"
+      },
+      {
+        "input": "5\n1 2\n2 3\n3 4\n4 5\n5 6",
+        "output": "5"
+      }
+    ],
+    "hints": [
+      "Sort all activities according to their finish times.",
+      "Always pick the first activity, then iteratively pick the next activity whose start time is greater than or equal to the finish time of the previous activity."
+    ],
+    "editorial": {
+      "approach": "Greedy Interval Scheduling by Finish Time",
+      "solutionMarkdown": "### Greedy Approach\nSort intervals by ending time in ascending order. Always select the interval that frees up the processor earliest.",
+      "timeComplexity": "O(N log N)",
+      "spaceComplexity": "O(1) extra space"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def activitySelectionProblem(*args):\n    # TODO: Implement solution for Activity Selection Problem\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = activitySelectionProblem(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(activitySelectionProblem(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function activitySelectionProblem(...args) {\n    // TODO: Implement solution for Activity Selection Problem\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(activitySelectionProblem(...parsed)));\n    } catch (e) {\n        console.log(activitySelectionProblem(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Activity Selection Problem\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Activity Selection Problem\n    }\n}\n"
+      }
+    ],
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
@@ -899,6 +1028,26 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #56"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -1052,6 +1201,92 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Alien Dictionary",
+    "slug": "alien-dictionary",
+    "description": "There is a new alien language that uses the English alphabet. However, the order of the letters is unknown to you.\\n\\nYou are given a list of strings `words` from the alien language's dictionary, where the strings are sorted lexicographically by the rules of this new language.\\n\\nReturn a string of the unique letters in the new alien language sorted in lexicographically increasing order by the new language's rules. If there is no solution, return `\"\"`. If there are multiple solutions, return any of them.\\n\\n### Example 1:\\n```\\nInput: [\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"]\\nOutput: wertf\\nExplanation: The dictionary order implies 'w' < 'e' < 'r' < 't' < 'f'.\\n```\\n\\n### Example 2:\\n```\\nInput: [\"z\",\"x\"]\\nOutput: zx\\nExplanation: 'z' appears before 'x'.\\n```\\n\\n### Constraints:\\n- $1 \\le |words| \\le 100$\\n- $1 \\le |words[i]| \\le 100$",
+    "difficulty": "HARD",
+    "patterns": [
+      "Graph",
+      "Topological Sort",
+      "DFS"
+    ],
+    "topics": [
+      "Graph",
+      "Topological Sort",
+      "String"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"]",
+        "output": "wertf",
+        "explanation": "Lexicographical order derived from adjacent word differences."
+      },
+      {
+        "input": "[\"z\",\"x\"]",
+        "output": "zx",
+        "explanation": "'z' comes before 'x'."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[\"z\",\"x\",\"z\"]",
+        "output": ""
+      },
+      {
+        "input": "[\"abc\",\"ab\"]",
+        "output": ""
+      },
+      {
+        "input": "[\"a\"]",
+        "output": "a"
+      }
+    ],
+    "hints": [
+      "Compare adjacent pairs of words to find the first differing characters, forming directed edges.",
+      "Apply Kahn's algorithm or DFS to find a topological ordering. If a cycle exists, return empty string."
+    ],
+    "editorial": {
+      "approach": "Topological Sort on Character Dependency Graph",
+      "solutionMarkdown": "Build graph by comparing adjacent words. Return topological ordering.",
+      "timeComplexity": "O(C) where C is total length of all words",
+      "spaceComplexity": "O(U + min(U^2, N)) where U is unique characters"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def alienDictionary(*args):\n    # TODO: Implement solution for Alien Dictionary\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = alienDictionary(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(alienDictionary(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function alienDictionary(...args) {\n    // TODO: Implement solution for Alien Dictionary\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(alienDictionary(...parsed)));\n    } catch (e) {\n        console.log(alienDictionary(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Alien Dictionary\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Alien Dictionary\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
+  },
+  {
     "title": "All Nodes Distance K in Binary Tree",
     "slug": "all-nodes-distance-k-in-binary-tree",
     "description": "Given the `root` of a binary tree, the value of a target node `target`, and an integer `k`, return an array of the values of all nodes that have a distance `k` from the target node.\n\n### Example 1:\n```\nInput: [3,5,1,6,2,0,8,null,null,7,4]\n5\n2\nOutput: [7, 4, 1]\nExplanation: Nodes at distance 2 from node 5 are 7, 4, and 1.\n```\n\n### Example 2:\n```\nInput: [1]\n1\n3\nOutput: []\nExplanation: No node at distance 3.\n```",
@@ -1136,6 +1371,88 @@ export const faang1 = [
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
+  },
+  {
+    "title": "Amount of Time for Binary Tree to Be Infected",
+    "slug": "amount-of-time-for-binary-tree-to-be-infected",
+    "description": "You are given the `root` of a binary tree with unique values, and an integer `start`. At minute 0, an infection starts from the node with value `start`. Each minute, a node infects its parent, left child, and right child. Return the number of minutes needed for the entire tree to be infected.\\n\\n### Example 1:\\n```\\nInput: root = [1,5,3,null,4,10,6,9,2], start = 3\\nOutput: 4\\nExplanation: Minutes to infect the entire tree is 4.\\n```\\n\\n### Example 2:\\n```\\nInput: root = [1], start = 1\\nOutput: 0\\nExplanation: At minute 0, the single node is already infected.\\n```\\n\\n### Constraints:\\n- The number of nodes in the tree is in the range $[1, 10^5]$.\\n- $1 \\le \\text{Node.val} \\le 10^5$",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Tree",
+      "BFS",
+      "Graph"
+    ],
+    "topics": [
+      "Tree",
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Binary Tree"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "root = [1,5,3,null,4,10,6,9,2]\nstart = 3",
+        "output": "4",
+        "explanation": "Max distance in the graph from start node is 4."
+      },
+      {
+        "input": "root = [1]\nstart = 1",
+        "output": "0",
+        "explanation": "Tree consists of only the infected node."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "root = [1,2]\nstart = 2",
+        "output": "1"
+      },
+      {
+        "input": "root = [1,2,null,3,null,4]\nstart = 4",
+        "output": "3"
+      },
+      {
+        "input": "root = [1,2,3]\nstart = 2",
+        "output": "2"
+      }
+    ],
+    "hints": [
+      "Convert the binary tree to an undirected adjacency list graph.",
+      "Run BFS from start node to find maximum distance to any reachable node."
+    ],
+    "editorial": {
+      "approach": "Graph Conversion + BFS Distance",
+      "solutionMarkdown": "Map parent pointers or build adjacency list, then run BFS from `start`.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def amountOfTimeForBinaryTreeToBeInfected(*args):\n    # TODO: Implement solution for Amount of Time for Binary Tree to Be Infected\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = amountOfTimeForBinaryTreeToBeInfected(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(amountOfTimeForBinaryTreeToBeInfected(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function amountOfTimeForBinaryTreeToBeInfected(...args) {\n    // TODO: Implement solution for Amount of Time for Binary Tree to Be Infected\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(amountOfTimeForBinaryTreeToBeInfected(...parsed)));\n    } catch (e) {\n        console.log(amountOfTimeForBinaryTreeToBeInfected(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Amount of Time for Binary Tree to Be Infected\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Amount of Time for Binary Tree to Be Infected\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
   },
   {
     "title": "Arithmetic Expression Validation",
@@ -1256,6 +1573,11 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #3"
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -1512,6 +1834,85 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Asteroid Collision",
+    "slug": "asteroid-collision",
+    "description": "We are given an array `asteroids` of integers representing asteroids in a row. For each asteroid, the absolute value represents its size, and the sign represents its direction (positive meaning right, negative meaning left). Each asteroid moves at the same speed.\\n\\nFind out the state of the asteroids after all collisions. If two asteroids meet, the smaller one explodes. If both are the same size, both explode. Two asteroids moving in the same direction will never meet.\\n\\n### Example 1:\\n```\\nInput: [5, 10, -5]\\nOutput: [5, 10]\\nExplanation: 10 and -5 collide resulting in 10. 5 and 10 never collide.\\n```\\n\\n### Example 2:\\n```\\nInput: [8, -8]\\nOutput: []\\nExplanation: 8 and -8 collide exploding each other.\\n```\\n\\n### Constraints:\\n- $2 \\le |asteroids| \\le 10^4$\\n- $-1000 \\le asteroids[i] \\le 1000, asteroids[i] \\ne 0$",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Stack",
+      "Simulation"
+    ],
+    "topics": [
+      "Array",
+      "Stack",
+      "Simulation"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[5, 10, -5]",
+        "output": "[5, 10]",
+        "explanation": "10 destroys -5."
+      },
+      {
+        "input": "[8, -8]",
+        "output": "[]",
+        "explanation": "Both asteroids destroy each other."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[10, 2, -5]",
+        "output": "[10]"
+      },
+      {
+        "input": "[-2, -1, 1, 2]",
+        "output": "[-2, -1, 1, 2]"
+      },
+      {
+        "input": "[1, -2, -2, -2]",
+        "output": "[-2, -2, -2]"
+      }
+    ],
+    "hints": [
+      "Use a stack. A collision can only occur when stack top is positive and incoming asteroid is negative."
+    ],
+    "editorial": {
+      "approach": "Stack Simulation of Collisions",
+      "solutionMarkdown": "Push right-moving asteroids. When a left-moving asteroid appears, simulate collisions against positive stack tops.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def asteroidCollision(*args):\n    # TODO: Implement solution for Asteroid Collision\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = asteroidCollision(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(asteroidCollision(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function asteroidCollision(...args) {\n    // TODO: Implement solution for Asteroid Collision\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(asteroidCollision(...parsed)));\n    } catch (e) {\n        console.log(asteroidCollision(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Asteroid Collision\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Asteroid Collision\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
     "title": "Balanced Binary Tree",
     "slug": "balanced-binary-tree",
     "description": "Given a binary tree, determine if it is **height-balanced** (a binary tree in which the depth of the two subtrees of every node never differs by more than one).\n\n### Example 1:\n```\nInput: [3,9,20,null,null,15,7]\nOutput: true\nExplanation: Balanced binary tree.\n```\n\n### Example 2:\n```\nInput: [1,2,2,3,3,null,null,4,4]\nOutput: false\nExplanation: Left subtree height is 4, right subtree height is 2, diff > 1.\n```",
@@ -1625,6 +2026,11 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -1835,6 +2241,26 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #15"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -2027,6 +2453,11 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 42,
         "sourceNote": "Infosys Interview Question #96"
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -2091,6 +2522,173 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "BFS and DFS Traversal of a Graph",
+    "slug": "bfs-and-dfs-traversal-of-a-graph",
+    "description": "Given an undirected graph with $V$ vertices numbered from $0$ to $V-1$ and $E$ edges, output the BFS traversal followed by DFS traversal starting from vertex $0$. When visiting neighbors, process them in ascending order of vertex index.\\n\\n### Example 1:\\n```\\nInput:\\n5 4\\n0 1\\n0 2\\n0 3\\n2 4\\nOutput:\\nBFS: 0 1 2 3 4\\nDFS: 0 1 2 4 3\\nExplanation: Level-order BFS visits neighbors 1, 2, 3 before moving deeper. DFS explores branch 2 -> 4 before returning to 3.\\n```\\n\\n### Example 2:\\n```\\nInput:\\n4 3\\n0 1\\n1 2\\n2 3\\nOutput:\\nBFS: 0 1 2 3\\nDFS: 0 1 2 3\\nExplanation: The graph is a simple linear path.\\n```\\n\\n### Constraints:\\n- $1 \\le V \\le 10^4$\\n- $0 \\le E \\le 2 \\times 10^4$",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Graph",
+      "BFS",
+      "DFS"
+    ],
+    "topics": [
+      "Graph",
+      "Breadth-First Search",
+      "Depth-First Search"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 5,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "5 4\n0 1\n0 2\n0 3\n2 4",
+        "output": "BFS: 0 1 2 3 4\nDFS: 0 1 2 4 3",
+        "explanation": "BFS and DFS from vertex 0 with sorted neighbors."
+      },
+      {
+        "input": "4 3\n0 1\n1 2\n2 3",
+        "output": "BFS: 0 1 2 3\nDFS: 0 1 2 3",
+        "explanation": "Linear path graph."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "1 0",
+        "output": "BFS: 0\nDFS: 0"
+      },
+      {
+        "input": "3 3\n0 1\n1 2\n2 0",
+        "output": "BFS: 0 1 2\nDFS: 0 1 2"
+      },
+      {
+        "input": "4 4\n0 1\n0 2\n1 3\n2 3",
+        "output": "BFS: 0 1 2 3\nDFS: 0 1 3 2"
+      }
+    ],
+    "hints": [
+      "Maintain an adjacency list with neighbors sorted.",
+      "Use a queue and visited set for BFS. Use recursion or an explicit stack for DFS."
+    ],
+    "editorial": {
+      "approach": "Standard Queue BFS and Recursive DFS",
+      "solutionMarkdown": "### Approach\nTraverse the graph with a FIFO queue for BFS and recursion for DFS, marking visited vertices.",
+      "timeComplexity": "O(V + E)",
+      "spaceComplexity": "O(V + E)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def bfsAndDfsTraversalOfAGraph(*args):\n    # TODO: Implement solution for BFS and DFS Traversal of a Graph\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = bfsAndDfsTraversalOfAGraph(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(bfsAndDfsTraversalOfAGraph(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function bfsAndDfsTraversalOfAGraph(...args) {\n    // TODO: Implement solution for BFS and DFS Traversal of a Graph\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(bfsAndDfsTraversalOfAGraph(...parsed)));\n    } catch (e) {\n        console.log(bfsAndDfsTraversalOfAGraph(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for BFS and DFS Traversal of a Graph\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for BFS and DFS Traversal of a Graph\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Big Integer Arithmetic with Linked Lists",
+    "slug": "big-integer-arithmetic-with-linked-lists",
+    "description": "Given two non-negative integers represented as singly linked lists of digits, where each node contains a single digit and digits are stored in forward order (most significant digit first), return the sum as a new linked list with digits in the same forward order.\\n\\n### Example 1:\\n```\\nInput: [7, 2, 4, 3] + [5, 6, 4]\\nOutput: [7, 8, 0, 7]\\nExplanation: 7243 + 564 = 7807.\\n```\\n\\n### Example 2:\\n```\\nInput: [2, 4, 3] + [5, 6, 4]\\nOutput: [8, 0, 7]\\nExplanation: 243 + 564 = 807.\\n```\\n\\n### Constraints:\\n- The number of nodes in each list is in range $[1, 100]$.\\n- $0 \\le \\text{Node.val} \\le 9$",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Linked List",
+      "Stack",
+      "Math"
+    ],
+    "topics": [
+      "Linked List",
+      "Math",
+      "Stack"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[7, 2, 4, 3] + [5, 6, 4]",
+        "output": "[7, 8, 0, 7]",
+        "explanation": "7243 + 564 = 7807."
+      },
+      {
+        "input": "[2, 4, 3] + [5, 6, 4]",
+        "output": "[8, 0, 7]",
+        "explanation": "243 + 564 = 807."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[0] + [0]",
+        "output": "[0]"
+      },
+      {
+        "input": "[9, 9] + [1]",
+        "output": "[1, 0, 0]"
+      },
+      {
+        "input": "[5] + [5]",
+        "output": "[1, 0]"
+      }
+    ],
+    "hints": [
+      "Use two stacks to store digit values from both lists.",
+      "Pop digits to add from least significant to most significant with carry."
+    ],
+    "editorial": {
+      "approach": "Two Stacks Digit Addition",
+      "solutionMarkdown": "Push digits into stacks, pop and add with carry, inserting new nodes at head.",
+      "timeComplexity": "O(N + M)",
+      "spaceComplexity": "O(N + M)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def bigIntegerArithmeticWithLinkedLists(*args):\n    # TODO: Implement solution for Big Integer Arithmetic with Linked Lists\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = bigIntegerArithmeticWithLinkedLists(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(bigIntegerArithmeticWithLinkedLists(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function bigIntegerArithmeticWithLinkedLists(...args) {\n    // TODO: Implement solution for Big Integer Arithmetic with Linked Lists\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(bigIntegerArithmeticWithLinkedLists(...parsed)));\n    } catch (e) {\n        console.log(bigIntegerArithmeticWithLinkedLists(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Big Integer Arithmetic with Linked Lists\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Big Integer Arithmetic with Linked Lists\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
+  },
+  {
     "title": "Binary Search",
     "slug": "binary-search",
     "description": "Given an array of integers `nums` which is sorted in ascending order, and an integer `target`, write a function to search `target` in `nums`. If `target` exists, then return its index. Otherwise, return `-1`.\n\n### Example 1:\n```\nInput: [-1,0,3,5,9,12]\n9\nOutput: 4\nExplanation: 9 exists in nums and its index is 4.\n```\n\n### Example 2:\n```\nInput: [-1,0,3,5,9,12]\n2\nOutput: -1\nExplanation: 2 does not exist in nums so return -1.\n```",
@@ -2125,6 +2723,11 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #31"
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -2192,6 +2795,166 @@ export const faang1 = [
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
+  },
+  {
+    "title": "Binary Search on Answer",
+    "slug": "binary-search-on-answer",
+    "description": "Given an array of positive integers `weights` representing package weights and an integer `days`, find the least weight capacity of a ship that will result in all packages on the conveyor belt being shipped within `days` days.\\n\\nA ship cannot be loaded with more weight than its maximum capacity, and cargo must be loaded in the exact given sequential order.\\n\\n### Example 1:\\n```\\nInput: weights = [1,2,3,4,5,6,7,8,9,10], days = 5\\nOutput: 15\\nExplanation: A cargo capacity of 15 is the minimum: [1,2,3,4,5], [6,7], [8], [9], [10].\\n```\\n\\n### Example 2:\\n```\\nInput: weights = [3,2,2,4,1,4], days = 3\\nOutput: 6\\nExplanation: Minimum capacity is 6.\\n```\\n\\n### Constraints:\\n- $1 \\le days \\le |weights| \\le 5 \\times 10^4$\\n- $1 \\le weights[i] \\le 500$",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Binary Search",
+      "Greedy"
+    ],
+    "topics": [
+      "Array",
+      "Binary Search"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "weights = [1,2,3,4,5,6,7,8,9,10]\ndays = 5",
+        "output": "15",
+        "explanation": "Optimal capacity 15."
+      },
+      {
+        "input": "weights = [3,2,2,4,1,4]\ndays = 3",
+        "output": "6",
+        "explanation": "Optimal capacity 6."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "weights = [1,2,3,1,1]\ndays = 4",
+        "output": "3"
+      },
+      {
+        "input": "weights = [10]\ndays = 1",
+        "output": "10"
+      },
+      {
+        "input": "weights = [5,5,5,5]\ndays = 2",
+        "output": "10"
+      }
+    ],
+    "hints": [
+      "Search space is [max(weights), sum(weights)].",
+      "Use binary search on answer with a greedy feasibility check."
+    ],
+    "editorial": {
+      "approach": "Binary Search on Feasibility Function",
+      "solutionMarkdown": "Binary search between `max(weights)` and `sum(weights)`. Check if a capacity `C` can ship within `days`.",
+      "timeComplexity": "O(N log(sum - max))",
+      "spaceComplexity": "O(1)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def binarySearchOnAnswer(*args):\n    # TODO: Implement solution for Binary Search on Answer\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = binarySearchOnAnswer(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(binarySearchOnAnswer(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function binarySearchOnAnswer(...args) {\n    // TODO: Implement solution for Binary Search on Answer\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(binarySearchOnAnswer(...parsed)));\n    } catch (e) {\n        console.log(binarySearchOnAnswer(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Binary Search on Answer\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Binary Search on Answer\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
+    "title": "Binary Subarrays With Sum",
+    "slug": "binary-subarrays-with-sum",
+    "description": "Given a binary array `nums` and an integer `goal`, return the number of non-empty subarrays with a sum equal to `goal`.\\n\\n### Example 1:\\n```\\nInput: nums = [1,0,1,0,1], goal = 2\\nOutput: 4\\nExplanation: The 4 subarrays are [1,0,1], [1,0,1,0], [0,1,0,1], [1,0,1].\\n```\\n\\n### Example 2:\\n```\\nInput: nums = [0,0,0,0,0], goal = 0\\nOutput: 15\\nExplanation: 5*6/2 = 15 zero subarrays.\\n```\\n\\n### Constraints:\\n- $1 \\le |nums| \\le 3 \\times 10^4$\\n- `nums[i]` is either 0 or 1.\\n- $0 \\le goal \\le |nums|$",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Prefix Sum",
+      "Hash Table",
+      "Sliding Window"
+    ],
+    "topics": [
+      "Array",
+      "Hash Table",
+      "Sliding Window",
+      "Prefix Sum"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "nums = [1,0,1,0,1]\ngoal = 2",
+        "output": "4",
+        "explanation": "Subarrays summing to 2."
+      },
+      {
+        "input": "nums = [0,0,0,0,0]\ngoal = 0",
+        "output": "15",
+        "explanation": "All subarrays sum to 0."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "nums = [1]\ngoal = 1",
+        "output": "1"
+      },
+      {
+        "input": "nums = [1,1,1]\ngoal = 2",
+        "output": "2"
+      },
+      {
+        "input": "nums = [0,1,0]\ngoal = 1",
+        "output": "4"
+      }
+    ],
+    "hints": [
+      "Use a prefix sum hash map, or compute `atMost(goal) - atMost(goal - 1)` with two sliding windows."
+    ],
+    "editorial": {
+      "approach": "Prefix Sum Frequency Counting",
+      "solutionMarkdown": "Maintain counts of prefix sums. For each element, add `count[prefixSum - goal]` to answer.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def binarySubarraysWithSum(*args):\n    # TODO: Implement solution for Binary Subarrays With Sum\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = binarySubarraysWithSum(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(binarySubarraysWithSum(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function binarySubarraysWithSum(...args) {\n    // TODO: Implement solution for Binary Subarrays With Sum\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(binarySubarraysWithSum(...parsed)));\n    } catch (e) {\n        console.log(binarySubarraysWithSum(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Binary Subarrays With Sum\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Binary Subarrays With Sum\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
   },
   {
     "title": "Binary Tree Inorder Traversal",
@@ -2344,6 +3107,31 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #64"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -2544,6 +3332,26 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 45,
         "sourceNote": "TCS Interview Question #68"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -2721,6 +3529,11 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -3003,6 +3816,11 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 40,
         "sourceNote": "Reported in Meta 2021-2026 interview set"
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -3156,6 +3974,253 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Boats to Save People",
+    "slug": "boats-to-save-people",
+    "description": "You are given an array `people` where `people[i]` is the weight of the $i$-th person, and an infinite number of boats where each boat can carry a maximum weight of `limit`. Each boat carries at most two people at the same time, provided the sum of the weights of those people is at most `limit`.\\n\\nReturn the minimum number of boats to carry every given person.\\n\\n### Example 1:\\n```\\nInput: people = [1,2], limit = 3\\nOutput: 1\\nExplanation: 1 boat (1, 2).\\n```\\n\\n### Example 2:\\n```\\nInput: people = [3,2,2,1], limit = 3\\nOutput: 3\\nExplanation: 3 boats (1, 2), (2) and (3).\\n```\\n\\n### Constraints:\\n- $1 \\le |people| \\le 5 \\times 10^4$\\n- $1 \\le people[i] \\le limit \\le 3 \\times 10^4$",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Two Pointers",
+      "Greedy",
+      "Sorting"
+    ],
+    "topics": [
+      "Array",
+      "Two Pointers",
+      "Greedy",
+      "Sorting"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "people = [1,2]\nlimit = 3",
+        "output": "1",
+        "explanation": "1 boat can carry both."
+      },
+      {
+        "input": "people = [3,2,2,1]\nlimit = 3",
+        "output": "3",
+        "explanation": "3 boats needed."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "people = [3,5,3,4]\nlimit = 5",
+        "output": "4"
+      },
+      {
+        "input": "people = [2,2,2]\nlimit = 3",
+        "output": "3"
+      },
+      {
+        "input": "people = [1,1,1,1]\nlimit = 2",
+        "output": "2"
+      }
+    ],
+    "hints": [
+      "Sort `people` array in ascending order.",
+      "Pair the heaviest person with the lightest person if their sum <= limit. Otherwise the heaviest person rides alone."
+    ],
+    "editorial": {
+      "approach": "Greedy Two Pointers with Sorted Array",
+      "solutionMarkdown": "Sort array. Maintain `left = 0, right = n - 1`. If `people[left] + people[right] <= limit`, pair them and `left++`. Always decrement `right` and increment boat count.",
+      "timeComplexity": "O(N log N)",
+      "spaceComplexity": "O(1)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def boatsToSavePeople(*args):\n    # TODO: Implement solution for Boats to Save People\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = boatsToSavePeople(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(boatsToSavePeople(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function boatsToSavePeople(...args) {\n    // TODO: Implement solution for Boats to Save People\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(boatsToSavePeople(...parsed)));\n    } catch (e) {\n        console.log(boatsToSavePeople(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Boats to Save People\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Boats to Save People\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
+    "title": "Burn a Binary Tree from a Target Node",
+    "slug": "burn-a-binary-tree-from-a-target-node",
+    "description": "Given a binary tree and a target node value `target`, find the minimum time required to burn the complete binary tree if the target node is set on fire at time 0. In each unit of time, fire spreads from burning nodes to all adjacent connected nodes (left child, right child, and parent).\\n\\n### Example 1:\\n```\\nInput: root = [1,2,3,4,5,null,6,null,null,7,8,null,9,10,11], target = 8\\nOutput: 7\\nExplanation: The fire spreads to all nodes in 7 units of time.\\n```\\n\\n### Example 2:\\n```\\nInput: root = [1,2,3], target = 2\\nOutput: 2\\nExplanation: Fire spreads to 1 at t=1, and 3 at t=2.\\n```\\n\\n### Constraints:\\n- The number of nodes in the tree is in range $[1, 10^4]$.\\n- All node values are unique.",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Tree",
+      "BFS",
+      "Graph"
+    ],
+    "topics": [
+      "Tree",
+      "Binary Tree",
+      "Breadth-First Search"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "root = [1,2,3,4,5,null,6,null,null,7,8,null,9,10,11]\ntarget = 8",
+        "output": "7",
+        "explanation": "Full burn completes in 7 time steps."
+      },
+      {
+        "input": "root = [1,2,3]\ntarget = 2",
+        "output": "2",
+        "explanation": "2 time units to burn tree."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "root = [1]\ntarget = 1",
+        "output": "0"
+      },
+      {
+        "input": "root = [1,2,null,3]\ntarget = 3",
+        "output": "2"
+      },
+      {
+        "input": "root = [1,2,3,4]\ntarget = 4",
+        "output": "3"
+      }
+    ],
+    "hints": [
+      "Build parent pointers map via DFS.",
+      "Use multi-source BFS starting from the target node, spreading through parent, left, and right pointers."
+    ],
+    "editorial": {
+      "approach": "Parent Mapping + Radial BFS",
+      "solutionMarkdown": "Map each child to its parent node. Perform BFS level-by-level starting from the target node.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def burnABinaryTreeFromATargetNode(*args):\n    # TODO: Implement solution for Burn a Binary Tree from a Target Node\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = burnABinaryTreeFromATargetNode(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(burnABinaryTreeFromATargetNode(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function burnABinaryTreeFromATargetNode(...args) {\n    // TODO: Implement solution for Burn a Binary Tree from a Target Node\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(burnABinaryTreeFromATargetNode(...parsed)));\n    } catch (e) {\n        console.log(burnABinaryTreeFromATargetNode(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Burn a Binary Tree from a Target Node\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Burn a Binary Tree from a Target Node\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
+    "title": "Burst Balloons",
+    "slug": "burst-balloons",
+    "description": "You are given `n` balloons, indexed from `0` to `n - 1`. Each balloon is painted with a number on it represented by an array `nums`. You are asked to burst all the balloons.\\n\\nIf you burst the $i$-th balloon, you will get `nums[i - 1] * nums[i] * nums[i + 1]` coins. If `i - 1` or `i + 1` goes out of bounds of the array, then treat it as if there is a balloon with a `1` painted on it.\\n\\nReturn the maximum coins you can collect by bursting the balloons wisely.\\n\\n### Example 1:\\n```\\nInput: [3, 1, 5, 8]\\nOutput: 167\\nExplanation:\\nnums = [3,1,5,8] --> [3,5,8] --> [3,8] --> [8] --> []\\ncoins =  3*1*5    +   3*5*8   +  1*3*8  + 1*8*1 = 167.\\n```\\n\\n### Example 2:\\n```\\nInput: [1, 5]\\nOutput: 10\\nExplanation: 1*5*1 + 1*1*1 = 6 or 1*1*5 + 1*5*1 = 10.\\n```\\n\\n### Constraints:\\n- $n == nums.length$\\n- $1 \\le n \\le 300$\\n- $0 \\le nums[i] \\le 100$",
+    "difficulty": "HARD",
+    "patterns": [
+      "Dynamic Programming",
+      "Interval DP"
+    ],
+    "topics": [
+      "Array",
+      "Dynamic Programming"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[3, 1, 5, 8]",
+        "output": "167",
+        "explanation": "Maximum coins is 167."
+      },
+      {
+        "input": "[1, 5]",
+        "output": "10",
+        "explanation": "Burst 1 first then 5: 10."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[7]",
+        "output": "7"
+      },
+      {
+        "input": "[0, 0, 0]",
+        "output": "0"
+      },
+      {
+        "input": "[9, 76, 64]",
+        "output": "44296"
+      }
+    ],
+    "hints": [
+      "Think backward: instead of which balloon to burst first, think which balloon is burst LAST in range (left, right).",
+      "dp[left][right] = max_{k} (dp[left][k] + dp[k][right] + nums[left] * nums[k] * nums[right])."
+    ],
+    "editorial": {
+      "approach": "Interval DP (Last Balloon to Burst)",
+      "solutionMarkdown": "Pad array with 1 at both ends. Compute optimal score for sub-interval (left, right) considering balloon `k` as the last one burst in that range.",
+      "timeComplexity": "O(N^3)",
+      "spaceComplexity": "O(N^2)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def burstBalloons(*args):\n    # TODO: Implement solution for Burst Balloons\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = burstBalloons(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(burstBalloons(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function burstBalloons(...args) {\n    // TODO: Implement solution for Burst Balloons\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(burstBalloons(...parsed)));\n    } catch (e) {\n        console.log(burstBalloons(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Burst Balloons\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Burst Balloons\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
+  },
+  {
     "title": "Candies",
     "slug": "candies",
     "description": "There are `n` children standing in a line. Each child is assigned a rating value given in the integer array `ratings`. You must give each child at least one candy, and children with a higher rating than their immediate neighbours must get more candies than their neighbour. Return *the minimum number of candies you need to have to distribute*.\n\n### Example 1:\n```\nInput: [1,0,2]\nOutput: 5\nExplanation: Candies distributed: [2, 1, 2]. Total = 5.\n```\n\n### Example 2:\n```\nInput: [1,2,2]\nOutput: 4\nExplanation: Candies distributed: [1, 2, 1]. The third child gets 1 candy because rating equal to second child.\n```",
@@ -3265,6 +4330,16 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 42,
         "sourceNote": "Infosys Interview Question #35"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -3370,6 +4445,11 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #77"
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -3454,6 +4534,16 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 45,
         "sourceNote": "TCS Interview Question #2"
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -3528,6 +4618,85 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Check Whether a Number Is a Perfect Square",
+    "slug": "check-whether-a-number-is-a-perfect-square",
+    "description": "Given a positive integer `num`, return `true` if `num` is a perfect square or `false` otherwise. Do not use any built-in library function such as `sqrt`.\\n\\n### Example 1:\\n```\\nInput: 16\\nOutput: true\\nExplanation: 4 * 4 = 16, so 16 is a perfect square.\\n```\\n\\n### Example 2:\\n```\\nInput: 14\\nOutput: false\\nExplanation: 14 is not a perfect square.\\n```\\n\\n### Constraints:\\n- $1 \\le num \\le 2^{31} - 1$",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Binary Search",
+      "Math"
+    ],
+    "topics": [
+      "Binary Search",
+      "Math"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "16",
+        "output": "true",
+        "explanation": "4^2 = 16"
+      },
+      {
+        "input": "14",
+        "output": "false",
+        "explanation": "14 has no integer square root"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "1",
+        "output": "true"
+      },
+      {
+        "input": "2147395600",
+        "output": "true"
+      },
+      {
+        "input": "2147483647",
+        "output": "false"
+      }
+    ],
+    "hints": [
+      "Use binary search between 1 and num.",
+      "Check mid * mid against num using 64-bit integers to prevent overflow."
+    ],
+    "editorial": {
+      "approach": "Binary Search on Answer Space [1, num]",
+      "solutionMarkdown": "### Binary Search\nSearch in range `[1, num]`. If `mid * mid == num`, return true.",
+      "timeComplexity": "O(log num)",
+      "spaceComplexity": "O(1)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def checkWhetherANumberIsAPerfectSquare(*args):\n    # TODO: Implement solution for Check Whether a Number Is a Perfect Square\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = checkWhetherANumberIsAPerfectSquare(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(checkWhetherANumberIsAPerfectSquare(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function checkWhetherANumberIsAPerfectSquare(...args) {\n    // TODO: Implement solution for Check Whether a Number Is a Perfect Square\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(checkWhetherANumberIsAPerfectSquare(...parsed)));\n    } catch (e) {\n        console.log(checkWhetherANumberIsAPerfectSquare(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Check Whether a Number Is a Perfect Square\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Check Whether a Number Is a Perfect Square\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Climbing Stairs",
     "slug": "climbing-stairs",
     "description": "You are climbing a staircase. It takes `n` steps to reach the top. Each time you can either climb `1` or `2` steps. In how many distinct ways can you climb to the top?\n\n### Example 1:\n```\nInput: 2\nOutput: 2\nExplanation: 1 step + 1 step, or 2 steps.\n```\n\n### Example 2:\n```\nInput: 3\nOutput: 3\nExplanation: 1+1+1, 1+2, or 2+1.\n```",
@@ -3569,6 +4738,26 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #79"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -3691,6 +4880,26 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 45,
         "sourceNote": "TCS Interview Question #69"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -3987,6 +5196,31 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #80"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -4526,6 +5760,162 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Compare Version Numbers",
+    "slug": "compare-version-numbers",
+    "description": "Given two version numbers, `version1` and `version2`, compare them.\\n\\nVersion numbers consist of one or more revisions joined by a dot '.'. Each revision consists of digits and may contain leading zeros. Every revision contains at least one character.\\n\\nTo compare version numbers, compare their revisions in left-to-right order. Revisions are compared using their integer value, ignoring any leading zeros.\\n- If `version1 < version2`, return `-1`.\\n- If `version1 > version2`, return `1`.\\n- Otherwise, return `0`.\\n\\n### Example 1:\\n```\\nInput: version1 = \"1.2\", version2 = \"1.10\"\\nOutput: -1\\nExplanation: version1's second revision is 2, while version2's second revision is 10: 2 < 10.\\n```\\n\\n### Example 2:\\n```\\nInput: version1 = \"1.01\", version2 = \"1.001\"\\nOutput: 0\\nExplanation: Ignoring leading zeroes, both \"01\" and \"001\" represent integer 1.\\n```\\n\\n### Constraints:\\n- $1 \\le |version1|, |version2| \\le 500$\\n- `version1` and `version2` contain only digits and '.'.",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Two Pointers",
+      "String"
+    ],
+    "topics": [
+      "Two Pointers",
+      "String"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "version1 = \"1.2\"\nversion2 = \"1.10\"",
+        "output": "-1",
+        "explanation": "2 < 10."
+      },
+      {
+        "input": "version1 = \"1.01\"\nversion2 = \"1.001\"",
+        "output": "0",
+        "explanation": "Both represent 1.1."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "version1 = \"1.0\"\nversion2 = \"1.0.0.0\"",
+        "output": "0"
+      },
+      {
+        "input": "version1 = \"0.1\"\nversion2 = \"1.1\"",
+        "output": "-1"
+      },
+      {
+        "input": "version1 = \"1.0.1\"\nversion2 = \"1\"",
+        "output": "1"
+      }
+    ],
+    "hints": [
+      "Split by '.' and parse each revision as an integer (defaulting missing trailing revisions to 0).",
+      "Compare corresponding revision numbers."
+    ],
+    "editorial": {
+      "approach": "Two Pointers Revision Tokenization",
+      "solutionMarkdown": "Parse revisions chunk by chunk converting to integers. Compare sequentially.",
+      "timeComplexity": "O(N + M)",
+      "spaceComplexity": "O(N + M)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def compareVersionNumbers(*args):\n    # TODO: Implement solution for Compare Version Numbers\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = compareVersionNumbers(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(compareVersionNumbers(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function compareVersionNumbers(...args) {\n    // TODO: Implement solution for Compare Version Numbers\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(compareVersionNumbers(...parsed)));\n    } catch (e) {\n        console.log(compareVersionNumbers(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Compare Version Numbers\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Compare Version Numbers\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
+  },
+  {
+    "title": "Concatenate Two Strings",
+    "slug": "concatenate-two-strings",
+    "description": "Given two strings `s1` and `s2`, concatenate them into a single string `s1 + s2` without extra padding and return the result.\\n\\n### Example 1:\\n```\\nInput:\\nhello\\nworld\\nOutput: helloworld\\nExplanation: Concatenating 'hello' and 'world' yields 'helloworld'.\\n```\\n\\n### Example 2:\\n```\\nInput:\\napple\\npie\\nOutput: applepie\\nExplanation: Concatenating 'apple' and 'pie' yields 'applepie'.\\n```\\n\\n### Constraints:\\n- $0 \\le |s1|, |s2| \\le 10^5$",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "String",
+      "Simulation"
+    ],
+    "topics": [
+      "String"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 4,
+        "yearReported": 2024
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "hello\nworld",
+        "output": "helloworld",
+        "explanation": "Simple string concatenation."
+      },
+      {
+        "input": "apple\npie",
+        "output": "applepie",
+        "explanation": "Concatenation of two words."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "a\nb",
+        "output": "ab"
+      },
+      {
+        "input": "test\n",
+        "output": "test"
+      },
+      {
+        "input": "xyz\n123",
+        "output": "xyz123"
+      }
+    ],
+    "hints": [
+      "Read both lines and join them."
+    ],
+    "editorial": {
+      "approach": "Direct String Buffer Concatenation",
+      "solutionMarkdown": "### Solution\nCombine both strings directly.",
+      "timeComplexity": "O(N + M)",
+      "spaceComplexity": "O(N + M)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def concatenateTwoStrings(*args):\n    # TODO: Implement solution for Concatenate Two Strings\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = concatenateTwoStrings(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(concatenateTwoStrings(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function concatenateTwoStrings(...args) {\n    // TODO: Implement solution for Concatenate Two Strings\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(concatenateTwoStrings(...parsed)));\n    } catch (e) {\n        console.log(concatenateTwoStrings(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Concatenate Two Strings\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Concatenate Two Strings\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Concatenated Words",
     "slug": "concatenated-words",
     "description": "Given an array of strings `words` (**without duplicates**), return *all the **concatenated words** in the given list of words*. A concatenated word is defined as a string that is comprised entirely of at least two shorter words in the given array.\n\n### Example 1:\n```\nInput: [\"cat\",\"cats\",\"catsdogcats\",\"dog\",\"dogcatsdog\",\"hippopotamuses\",\"rat\",\"ratcatdogcat\"]\nOutput: [\"catsdogcats\", \"dogcatsdog\", \"ratcatdogcat\"]\nExplanation: Concatenated words formed from other words.\n```\n\n### Example 2:\n```\nInput: [\"cat\",\"dog\",\"catdog\"]\nOutput: [\"catdog\"]\nExplanation: 'catdog' = 'cat' + 'dog'.\n```",
@@ -4636,6 +6026,16 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 40,
         "sourceNote": "Reported in Meta 2021-2026 interview set"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -4743,6 +6143,26 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 42,
         "sourceNote": "Infosys Interview Question #26"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -4848,6 +6268,16 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #13"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -5099,6 +6529,244 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Convert Binary to Decimal",
+    "slug": "convert-binary-to-decimal",
+    "description": "Given a binary string `s`, convert it into its equivalent decimal (base 10) integer.\\n\\n### Example 1:\\n```\\nInput: 1010\\nOutput: 10\\nExplanation: (1*8) + (0*4) + (1*2) + (0*1) = 10.\\n```\\n\\n### Example 2:\\n```\\nInput: 1111\\nOutput: 15\\nExplanation: 8 + 4 + 2 + 1 = 15.\\n```\\n\\n### Constraints:\\n- $1 \\le |s| \\le 62$\\n- `s` consists only of '0' and '1'.",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Math",
+      "Bit Manipulation"
+    ],
+    "topics": [
+      "Math",
+      "Bit Manipulation"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 8,
+        "yearReported": 2026
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "1010",
+        "output": "10",
+        "explanation": "Binary 1010 = decimal 10."
+      },
+      {
+        "input": "1111",
+        "output": "15",
+        "explanation": "Binary 1111 = decimal 15."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "0",
+        "output": "0"
+      },
+      {
+        "input": "1",
+        "output": "1"
+      },
+      {
+        "input": "1100100",
+        "output": "100"
+      }
+    ],
+    "hints": [
+      "Iterate from left to right, computing result = result * 2 + bit."
+    ],
+    "editorial": {
+      "approach": "Horner's Method for Base Conversion",
+      "solutionMarkdown": "### Method\nInitialize `ans = 0`. For each bit `b`, do `ans = ans * 2 + (b - '0')`.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def convertBinaryToDecimal(*args):\n    # TODO: Implement solution for Convert Binary to Decimal\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = convertBinaryToDecimal(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(convertBinaryToDecimal(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function convertBinaryToDecimal(...args) {\n    // TODO: Implement solution for Convert Binary to Decimal\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(convertBinaryToDecimal(...parsed)));\n    } catch (e) {\n        console.log(convertBinaryToDecimal(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Convert Binary to Decimal\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Convert Binary to Decimal\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Convert Binary Tree to Doubly Linked List",
+    "slug": "convert-binary-tree-to-doubly-linked-list",
+    "description": "Given the root of a binary tree, convert it in-place to a doubly linked list according to its in-order traversal. The `left` pointer should act as `prev` and the `right` pointer should act as `next`. Return the head of the DLL.\\n\\nInput is given as a level-order serialized array of node values.\\nOutput is the space-separated values of the converted DLL from head to tail.\\n\\n### Example 1:\\n```\\nInput: [10, 12, 15, 25, 30, 36]\\nOutput: 25 12 30 10 36 15\\nExplanation: In-order traversal visits nodes in order: 25, 12, 30, 10, 36, 15.\\n```\\n\\n### Example 2:\\n```\\nInput: [1, 2, 3]\\nOutput: 2 1 3\\nExplanation: In-order traversal of [1, 2, 3] is 2, 1, 3.\\n```\\n\\n### Constraints:\\n- The number of nodes in the tree is in the range $[1, 10^4]$.\\n- $-10^5 \\le \\text{Node.val} \\le 10^5$",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Tree",
+      "Linked List",
+      "DFS"
+    ],
+    "topics": [
+      "Tree",
+      "Binary Tree",
+      "Doubly-Linked List",
+      "Depth-First Search"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 5,
+        "yearReported": 2025
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[10, 12, 15, 25, 30, 36]",
+        "output": "25 12 30 10 36 15",
+        "explanation": "In-order traversal converted to DLL."
+      },
+      {
+        "input": "[1, 2, 3]",
+        "output": "2 1 3",
+        "explanation": "Simple 3-node tree in-order DLL."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[5]",
+        "output": "5"
+      },
+      {
+        "input": "[4, 2, 5, 1, 3]",
+        "output": "1 2 3 4 5"
+      },
+      {
+        "input": "[2, 1]",
+        "output": "1 2"
+      }
+    ],
+    "hints": [
+      "Perform an in-order traversal keeping a reference to the previous visited node.",
+      "Set prev.right = curr and curr.left = prev."
+    ],
+    "editorial": {
+      "approach": "In-Order Traversal with Previous Pointer",
+      "solutionMarkdown": "### Approach\nTraverse left subtree, link previous node with current node, then traverse right subtree.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(H) recursion stack"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def convertBinaryTreeToDoublyLinkedList(*args):\n    # TODO: Implement solution for Convert Binary Tree to Doubly Linked List\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = convertBinaryTreeToDoublyLinkedList(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(convertBinaryTreeToDoublyLinkedList(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function convertBinaryTreeToDoublyLinkedList(...args) {\n    // TODO: Implement solution for Convert Binary Tree to Doubly Linked List\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(convertBinaryTreeToDoublyLinkedList(...parsed)));\n    } catch (e) {\n        console.log(convertBinaryTreeToDoublyLinkedList(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Convert Binary Tree to Doubly Linked List\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Convert Binary Tree to Doubly Linked List\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Convert Decimal to Binary",
+    "slug": "convert-decimal-to-binary",
+    "description": "Given a non-negative integer `n`, return its binary representation as a string without leading zeroes (except for the number 0 itself).\\n\\n### Example 1:\\n```\\nInput: 10\\nOutput: 1010\\nExplanation: 10 in binary is 1010.\\n```\\n\\n### Example 2:\\n```\\nInput: 7\\nOutput: 111\\nExplanation: 7 in binary is 111.\\n```\\n\\n### Constraints:\\n- $0 \\le n \\le 10^9$",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Math",
+      "Bit Manipulation"
+    ],
+    "topics": [
+      "Math",
+      "Bit Manipulation"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2026
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "10",
+        "output": "1010",
+        "explanation": "10 base 10 = 1010 base 2."
+      },
+      {
+        "input": "7",
+        "output": "111",
+        "explanation": "7 base 10 = 111 base 2."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "0",
+        "output": "0"
+      },
+      {
+        "input": "1",
+        "output": "1"
+      },
+      {
+        "input": "1048576",
+        "output": "100000000000000000000"
+      }
+    ],
+    "hints": [
+      "Repeatedly divide by 2 and collect the remainders, then reverse the string."
+    ],
+    "editorial": {
+      "approach": "Repeated Division by 2",
+      "solutionMarkdown": "### Division by 2\nContinuously take `n % 2` and integer divide `n //= 2` until `n == 0`.",
+      "timeComplexity": "O(log n)",
+      "spaceComplexity": "O(log n)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def convertDecimalToBinary(*args):\n    # TODO: Implement solution for Convert Decimal to Binary\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = convertDecimalToBinary(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(convertDecimalToBinary(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function convertDecimalToBinary(...args) {\n    // TODO: Implement solution for Convert Decimal to Binary\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(convertDecimalToBinary(...parsed)));\n    } catch (e) {\n        console.log(convertDecimalToBinary(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Convert Decimal to Binary\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Convert Decimal to Binary\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Convert Number to Words (up to 999 crores)",
     "slug": "convert-number-to-words",
     "description": "Given an integer `num`, convert it to English words representation. Support Indian / Western numbering format place-values (Crore / Lakh or Billion / Million / Thousand).\n\n### Example 1:\n```\nInput: 123\nOutput: \"One Hundred Twenty Three\"\nExplanation: 123 in words.\n```\n\n### Example 2:\n```\nInput: 12345\nOutput: \"Twelve Thousand Three Hundred Forty Five\"\nExplanation: 12,345 in words.\n```",
@@ -5224,6 +6892,26 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -5381,6 +7069,84 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Count Digits and Sum of Digits",
+    "slug": "count-digits-and-sum-of-digits",
+    "description": "Given a non-negative integer `n`, compute both the total number of digits and the sum of all digits in `n`. Output the count and sum separated by a space.\\n\\n### Example 1:\\n```\\nInput: 12345\\nOutput: 5 15\\nExplanation: Number of digits is 5. Sum of digits is 1 + 2 + 3 + 4 + 5 = 15.\\n```\\n\\n### Example 2:\\n```\\nInput: 7\\nOutput: 1 7\\nExplanation: 1 digit with sum 7.\\n```\\n\\n### Constraints:\\n- $0 \\le n \\le 10^{18}$",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Math",
+      "Simulation"
+    ],
+    "topics": [
+      "Math"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 8,
+        "yearReported": 2025
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "12345",
+        "output": "5 15",
+        "explanation": "Count=5, sum=15."
+      },
+      {
+        "input": "7",
+        "output": "1 7",
+        "explanation": "Count=1, sum=7."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "0",
+        "output": "1 0"
+      },
+      {
+        "input": "999",
+        "output": "3 27"
+      },
+      {
+        "input": "1000000000",
+        "output": "10 1"
+      }
+    ],
+    "hints": [
+      "Handle 0 as a special case where count=1 and sum=0.",
+      "Use modulo 10 to extract each digit."
+    ],
+    "editorial": {
+      "approach": "Digit Extraction via Modulo 10",
+      "solutionMarkdown": "### Method\nRepeatedly add `n % 10` to sum and increment count while dividing `n //= 10`.",
+      "timeComplexity": "O(log10 n)",
+      "spaceComplexity": "O(1)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def countDigitsAndSumOfDigits(*args):\n    # TODO: Implement solution for Count Digits and Sum of Digits\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = countDigitsAndSumOfDigits(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(countDigitsAndSumOfDigits(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function countDigitsAndSumOfDigits(...args) {\n    // TODO: Implement solution for Count Digits and Sum of Digits\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(countDigitsAndSumOfDigits(...parsed)));\n    } catch (e) {\n        console.log(countDigitsAndSumOfDigits(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Count Digits and Sum of Digits\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Count Digits and Sum of Digits\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Count Equal-Value Pairs with Distance at Most K",
     "slug": "count-equal-pairs-within-k-distance",
     "description": "Given an integer array `nums` and an integer `k`, count the number of pairs `(i, j)` such that `i < j`, `nums[i] == nums[j]`, and `j - i <= k`.\n\n### Example 1:\n```\nInput: [1,2,3,1,1,3]\n3\nOutput: 3\nExplanation: Valid pairs: (0, 3) dist 3, (3, 4) dist 1, (2, 5) dist 3. Total = 3.\n```\n\n### Example 2:\n```\nInput: [1,0,1,1]\n1\nOutput: 1\nExplanation: Pair (2, 3) has distance 1 <= 1.\n```",
@@ -5472,6 +7238,85 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Count Frequency of Each Character",
+    "slug": "count-frequency-of-each-character",
+    "description": "Given a string `s`, count the frequency of each distinct character in the order they first appear in `s`. Print each character and its count separated by a colon, on separate lines.\\n\\n### Example 1:\\n```\\nInput: swadhyay\\nOutput:\\ns:1\\nw:1\\na:2\\nd:1\\nh:1\\ny:2\\nExplanation: 'a' appears twice and 'y' appears twice; all other characters appear once.\\n```\\n\\n### Example 2:\\n```\\nInput: mississippi\\nOutput:\\nm:1\\ni:4\\ns:4\\np:2\\nExplanation: Frequencies in order of first appearance.\\n```\\n\\n### Constraints:\\n- $1 \\le |s| \\le 10^5$\\n- `s` consists of printable characters.",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Hash Table",
+      "String"
+    ],
+    "topics": [
+      "Hash Table",
+      "String",
+      "Counting"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 6,
+        "yearReported": 2026
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "swadhyay",
+        "output": "s:1\nw:1\na:2\nd:1\nh:1\ny:2",
+        "explanation": "Ordered character frequencies."
+      },
+      {
+        "input": "mississippi",
+        "output": "m:1\ni:4\ns:4\np:2",
+        "explanation": "Frequencies in appearance order."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "a",
+        "output": "a:1"
+      },
+      {
+        "input": "aaaaa",
+        "output": "a:5"
+      },
+      {
+        "input": "hello world",
+        "output": "h:1\ne:1\nl:3\no:2\n :1\nw:1\nr:1\nd:1"
+      }
+    ],
+    "hints": [
+      "Use an insertion-ordered hash map or dictionary to preserve order of first appearance."
+    ],
+    "editorial": {
+      "approach": "Hash Map with Insertion Order",
+      "solutionMarkdown": "### Approach\nUse an OrderedDict or LinkedHashMap to maintain first appearance order.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(K) where K is alphabet size"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def countFrequencyOfEachCharacter(*args):\n    # TODO: Implement solution for Count Frequency of Each Character\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = countFrequencyOfEachCharacter(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(countFrequencyOfEachCharacter(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function countFrequencyOfEachCharacter(...args) {\n    // TODO: Implement solution for Count Frequency of Each Character\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(countFrequencyOfEachCharacter(...parsed)));\n    } catch (e) {\n        console.log(countFrequencyOfEachCharacter(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Count Frequency of Each Character\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Count Frequency of Each Character\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Count Integers in Intervals",
     "slug": "count-integers-in-intervals",
     "description": "Given an empty set of intervals, implement a data structure that can add new intervals and count the number of unique integers present in at least one interval.\n\n### Example 1:\n```\nInput: [\"CountIntervals\",\"add\",\"add\",\"count\",\"add\",\"count\"]\n[[],[2,3],[7,10],[],[5,8],[]]\nOutput: [null, null, null, 6, null, 8]\nExplanation: 2-3 (2), 7-10 (4) = 6. 5-8 merges into 5-10, total 2 + 6 = 8.\n```\n\n### Example 2:\n```\nInput: [\"CountIntervals\",\"add\",\"count\"]\n[[],[1,5],[]]\nOutput: [null, null, 5]\nExplanation: 5 integers.\n```",
@@ -5551,6 +7396,191 @@ export const faang1 = [
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
+  },
+  {
+    "title": "Count Inversions in an Array",
+    "slug": "count-inversions-in-an-array",
+    "description": "Given an integer array `arr`, return the number of inversions in the array. Two elements `arr[i]` and `arr[j]` form an inversion if `arr[i] > arr[j]` and `i < j`.\\n\\n### Example 1:\\n```\\nInput: [2, 4, 1, 3, 5]\\nOutput: 3\\nExplanation: The 3 inversions are (2, 1), (4, 1), and (4, 3).\\n```\\n\\n### Example 2:\\n```\\nInput: [5, 4, 3, 2, 1]\\nOutput: 10\\nExplanation: In a reverse-sorted array of size 5, every pair forms an inversion: 5*4/2 = 10.\\n```\\n\\n### Constraints:\\n- $1 \\le |arr| \\le 10^5$\\n- $-10^9 \\le arr[i] \\le 10^9$",
+    "difficulty": "HARD",
+    "category": "DSA",
+    "patterns": [
+      "Divide and Conquer",
+      "Merge Sort",
+      "Binary Indexed Tree"
+    ],
+    "topics": [
+      "Divide and Conquer",
+      "Binary Indexed Tree",
+      "Segment Tree"
+    ],
+    "companyTags": [
+      {
+        "company": "Capgemini",
+        "frequencyCount": 6,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[2, 4, 1, 3, 5]",
+        "output": "3",
+        "explanation": "Inversions (2,1), (4,1), (4,3)."
+      },
+      {
+        "input": "[5, 4, 3, 2, 1]",
+        "output": "10",
+        "explanation": "Completely reversed array."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1, 2, 3, 4, 5]",
+        "output": "0"
+      },
+      {
+        "input": "[1]",
+        "output": "0"
+      },
+      {
+        "input": "[10, 10, 10]",
+        "output": "0"
+      }
+    ],
+    "hints": [
+      "A modified Merge Sort counts inversions during the merge step in O(N log N).",
+      "When an element from the right subarray is picked before an element in the left subarray, all remaining elements in the left subarray form inversions."
+    ],
+    "editorial": {
+      "approach": "Enhanced Merge Sort Inversion Counting",
+      "solutionMarkdown": "### Merge Sort Counting\nDuring merge, when `right[j] < left[i]`, add `(mid - i + 1)` to the inversion count.",
+      "timeComplexity": "O(N log N)",
+      "spaceComplexity": "O(N)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def countInversionsInAnArray(*args):\n    # TODO: Implement solution for Count Inversions in an Array\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = countInversionsInAnArray(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(countInversionsInAnArray(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function countInversionsInAnArray(...args) {\n    // TODO: Implement solution for Count Inversions in an Array\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(countInversionsInAnArray(...parsed)));\n    } catch (e) {\n        console.log(countInversionsInAnArray(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Count Inversions in an Array\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Count Inversions in an Array\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Count of Smaller Numbers After Self",
+    "slug": "count-of-smaller-numbers-after-self",
+    "description": "Given an integer array `nums`, return an integer array `counts` where `counts[i]` is the number of smaller elements to the right of `nums[i]`.\\n\\n### Example 1:\\n```\\nInput: [5, 2, 6, 1]\\nOutput: [2, 1, 1, 0]\\nExplanation: To the right of 5 are 2 smaller elements (2 and 1). To right of 2 is 1 (1). To right of 6 is 1 (1). To right of 1 is 0.\\n```\\n\\n### Example 2:\\n```\\nInput: [-1, -1]\\nOutput: [0, 0]\\nExplanation: No smaller elements to the right.\\n```\\n\\n### Constraints:\\n- $1 \\le |nums| \\le 10^5$\\n- $-10^4 \\le nums[i] \\le 10^4$",
+    "difficulty": "HARD",
+    "patterns": [
+      "Binary Indexed Tree",
+      "Merge Sort",
+      "Segment Tree"
+    ],
+    "topics": [
+      "Array",
+      "Binary Search",
+      "Divide and Conquer",
+      "Binary Indexed Tree",
+      "Segment Tree",
+      "Merge Sort"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[5, 2, 6, 1]",
+        "output": "[2, 1, 1, 0]",
+        "explanation": "Count smaller elements to right."
+      },
+      {
+        "input": "[-1, -1]",
+        "output": "[0, 0]",
+        "explanation": "Identical values."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1]",
+        "output": "[0]"
+      },
+      {
+        "input": "[1, 2, 3, 4]",
+        "output": "[0, 0, 0, 0]"
+      },
+      {
+        "input": "[4, 3, 2, 1]",
+        "output": "[3, 2, 1, 0]"
+      }
+    ],
+    "hints": [
+      "Use a Fenwick tree (BIT) over coordinate-compressed values traversing from right to left.",
+      "Or use merge sort tracking indices and accumulating counts when right elements are merged before left elements."
+    ],
+    "editorial": {
+      "approach": "Fenwick Tree with Coordinate Compression",
+      "solutionMarkdown": "Traverse from right to left. Query prefix count of values smaller than current, then insert current value into BIT.",
+      "timeComplexity": "O(N log N)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def countOfSmallerNumbersAfterSelf(*args):\n    # TODO: Implement solution for Count of Smaller Numbers After Self\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = countOfSmallerNumbersAfterSelf(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(countOfSmallerNumbersAfterSelf(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function countOfSmallerNumbersAfterSelf(...args) {\n    // TODO: Implement solution for Count of Smaller Numbers After Self\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(countOfSmallerNumbersAfterSelf(...parsed)));\n    } catch (e) {\n        console.log(countOfSmallerNumbersAfterSelf(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Count of Smaller Numbers After Self\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Count of Smaller Numbers After Self\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
   },
   {
     "title": "Count Primes",
@@ -5735,6 +7765,89 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Count Valid Triangle Triplets",
+    "slug": "count-valid-triangle-triplets",
+    "description": "Given an integer array `nums`, return the number of triplets chosen from the array that can make triangles if we take them as side lengths of a triangle ($a + b > c$).\\n\\n### Example 1:\\n```\\nInput: [2, 2, 3, 4]\\nOutput: 3\\nExplanation: Valid combinations are:\\n2, 3, 4 (using the first 2)\\n2, 3, 4 (using the second 2)\\n2, 2, 3\\n```\\n\\n### Example 2:\\n```\\nInput: [4, 2, 3, 4]\\nOutput: 4\\nExplanation: 4 triplets satisfy the triangle inequality.\\n```\\n\\n### Constraints:\\n- $1 \\le |nums| \\le 1000$\\n- $0 \\le nums[i] \\le 1000$",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Two Pointers",
+      "Sorting",
+      "Greedy"
+    ],
+    "topics": [
+      "Array",
+      "Two Pointers",
+      "Binary Search",
+      "Greedy",
+      "Sorting"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 5,
+        "yearReported": 2025
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[2, 2, 3, 4]",
+        "output": "3",
+        "explanation": "Three valid triangle triplets."
+      },
+      {
+        "input": "[4, 2, 3, 4]",
+        "output": "4",
+        "explanation": "Four valid combinations."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[0, 0, 0]",
+        "output": "0"
+      },
+      {
+        "input": "[1, 2, 3]",
+        "output": "0"
+      },
+      {
+        "input": "[3, 4, 5]",
+        "output": "1"
+      }
+    ],
+    "hints": [
+      "Sort the array first.",
+      "Fix the largest side `k` from `n-1` down to `2`, and use two pointers `i = 0, j = k - 1`. If `nums[i] + nums[j] > nums[k]`, then all pairs from `i` to `j-1` with `j` are also valid."
+    ],
+    "editorial": {
+      "approach": "Sort + Reverse Two Pointers",
+      "solutionMarkdown": "### Two Pointer Technique\nSort array in ascending order. For each `k` from `n - 1` down to 2, maintain two pointers `i = 0` and `j = k - 1`. If `nums[i] + nums[j] > nums[k]`, add `j - i` to count and decrement `j`; otherwise increment `i`.",
+      "timeComplexity": "O(N^2)",
+      "spaceComplexity": "O(1)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def countValidTriangleTriplets(*args):\n    # TODO: Implement solution for Count Valid Triangle Triplets\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = countValidTriangleTriplets(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(countValidTriangleTriplets(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function countValidTriangleTriplets(...args) {\n    // TODO: Implement solution for Count Valid Triangle Triplets\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(countValidTriangleTriplets(...parsed)));\n    } catch (e) {\n        console.log(countValidTriangleTriplets(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Count Valid Triangle Triplets\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Count Valid Triangle Triplets\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Course Schedule",
     "slug": "course-schedule",
     "description": "There are a total of `numCourses` courses you have to take, labeled from `0` to `numCourses - 1`. You are given an array `prerequisites` where `prerequisites[i] = [ai, bi]`.\n\nReturn `true` if you can finish all courses. Otherwise, return `false`.\n\n### Example 1:\n```\nInput: 2\n[[1,0]]\nOutput: true\nExplanation: You can finish courses in order [0, 1].\n```\n\n### Example 2:\n```\nInput: 2\n[[1,0],[0,1]]\nOutput: false\nExplanation: Cyclic prerequisite dependency.\n```",
@@ -5785,6 +7898,26 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #73"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -5897,6 +8030,11 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 42,
         "sourceNote": "Infosys Interview Question #70"
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -5971,6 +8109,249 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Course Schedule IV (Railway Route Query Variant)",
+    "slug": "course-schedule-iv-railway-route-query-variant",
+    "description": "There are a total of `numCourses` stations/courses labeled from `0` to `numCourses - 1`. You are given an array `prerequisites` where `prerequisites[i] = [a, b]` indicates a direct route/dependency from station `a` to station `b`. You are also given an array `queries` where `queries[j] = [u, v]`.\\n\\nFor each query, return `true` if station `u` can reach station `v` (directly or indirectly), otherwise `false`.\\n\\n### Example 1:\\n```\\nInput:\\nnumCourses = 2\\nprerequisites = [[1, 0]]\\nqueries = [[0, 1], [1, 0]]\\nOutput: [false, true]\\nExplanation: 1 can reach 0, but 0 cannot reach 1.\\n```\\n\\n### Example 2:\\n```\\nInput:\\nnumCourses = 3\\nprerequisites = [[1, 2], [1, 0], [2, 0]]\\nqueries = [[1, 0], [1, 2]]\\nOutput: [true, true]\\nExplanation: 1 reaches 0 and 2.\\n```\\n\\n### Constraints:\\n- $2 \\le numCourses \\le 100$\\n- $0 \\le |prerequisites| \\le numCourses \\times (numCourses - 1) / 2$\\n- $1 \\le |queries| \\le 10^4$",
+    "difficulty": "HARD",
+    "patterns": [
+      "Graph",
+      "Floyd-Warshall",
+      "BFS"
+    ],
+    "topics": [
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Graph",
+      "Topological Sort"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "numCourses = 2\nprerequisites = [[1, 0]]\nqueries = [[0, 1], [1, 0]]",
+        "output": "[false, true]",
+        "explanation": "Direct and transitive reachability."
+      },
+      {
+        "input": "numCourses = 3\nprerequisites = [[1, 2], [1, 0], [2, 0]]\nqueries = [[1, 0], [1, 2]]",
+        "output": "[true, true]",
+        "explanation": "Multiple valid paths."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "numCourses = 3\nprerequisites = []\nqueries = [[1, 0]]",
+        "output": "[false]"
+      },
+      {
+        "input": "numCourses = 3\nprerequisites = [[0,1],[1,2]]\nqueries = [[0,2],[2,0]]",
+        "output": "[true, false]"
+      },
+      {
+        "input": "numCourses = 4\nprerequisites = [[2,3],[2,1],[0,3],[0,1]]\nqueries = [[0,1],[0,3],[2,3],[3,0],[2,0],[0,2]]",
+        "output": "[true, true, true, false, false, false]"
+      }
+    ],
+    "hints": [
+      "Compute transitive closure using Floyd-Warshall reachability or BFS from each node."
+    ],
+    "editorial": {
+      "approach": "Transitive Closure via Floyd-Warshall",
+      "solutionMarkdown": "Initialize boolean reachability matrix `reach[i][j]`. Update `reach[i][j] = reach[i][j] || (reach[i][k] && reach[k][j])`.",
+      "timeComplexity": "O(V^3 + Q)",
+      "spaceComplexity": "O(V^2)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def courseScheduleIvRailwayRouteQueryVariant(*args):\n    # TODO: Implement solution for Course Schedule IV (Railway Route Query Variant)\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = courseScheduleIvRailwayRouteQueryVariant(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(courseScheduleIvRailwayRouteQueryVariant(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function courseScheduleIvRailwayRouteQueryVariant(...args) {\n    // TODO: Implement solution for Course Schedule IV (Railway Route Query Variant)\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(courseScheduleIvRailwayRouteQueryVariant(...parsed)));\n    } catch (e) {\n        console.log(courseScheduleIvRailwayRouteQueryVariant(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Course Schedule IV (Railway Route Query Variant)\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Course Schedule IV (Railway Route Query Variant)\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
+  },
+  {
+    "title": "Cousins in an N-ary Tree",
+    "slug": "cousins-in-an-n-ary-tree",
+    "description": "Given the root of an N-ary tree with unique values and two node values `x` and `y`, return `true` if and only if the nodes corresponding to `x` and `y` are cousins. Two nodes are cousins if they have the same depth with different parents.\\n\\n### Example 1:\\n```\\nInput:\\nTree: 1 -> [2, 3, 4], 2 -> [5, 6], 3 -> [7], 4 -> [8]\\nx = 5, y = 7\\nOutput: true\\nExplanation: 5 and 7 are both at depth 2 with different parents (2 and 3).\\n```\\n\\n### Example 2:\\n```\\nInput:\\nTree: 1 -> [2, 3], 2 -> [4, 5]\\nx = 4, y = 5\\nOutput: false\\nExplanation: 4 and 5 share the same parent 2, so they are siblings, not cousins.\\n```\\n\\n### Constraints:\\n- The number of nodes in the tree is in range $[2, 10^4]$.\\n- Node values are unique integers.",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Tree",
+      "BFS"
+    ],
+    "topics": [
+      "Tree",
+      "Depth-First Search",
+      "Breadth-First Search"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "Tree: 1 -> [2, 3, 4], 2 -> [5, 6], 3 -> [7], 4 -> [8]\nx = 5, y = 7",
+        "output": "true",
+        "explanation": "Same depth, different parents."
+      },
+      {
+        "input": "Tree: 1 -> [2, 3], 2 -> [4, 5]\nx = 4, y = 5",
+        "output": "false",
+        "explanation": "Siblings are not cousins."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "Tree: 1 -> [2, 3]\nx = 2, y = 3",
+        "output": "false"
+      },
+      {
+        "input": "Tree: 1 -> [2], 2 -> [3], 3 -> [4]\nx = 3, y = 4",
+        "output": "false"
+      },
+      {
+        "input": "Tree: 1 -> [2, 3], 2 -> [4], 3 -> [5]\nx = 4, y = 5",
+        "output": "true"
+      }
+    ],
+    "hints": [
+      "Run BFS storing pairs `(node, parent, depth)`.",
+      "Return true if depth[x] == depth[y] and parent[x] != parent[y]."
+    ],
+    "editorial": {
+      "approach": "Level-Order BFS with Parent Tracking",
+      "solutionMarkdown": "Record `(depth, parent)` for every node using BFS and compare for `x` and `y`.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def cousinsInAnNAryTree(*args):\n    # TODO: Implement solution for Cousins in an N-ary Tree\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = cousinsInAnNAryTree(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(cousinsInAnNAryTree(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function cousinsInAnNAryTree(...args) {\n    // TODO: Implement solution for Cousins in an N-ary Tree\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(cousinsInAnNAryTree(...parsed)));\n    } catch (e) {\n        console.log(cousinsInAnNAryTree(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Cousins in an N-ary Tree\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Cousins in an N-ary Tree\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
+  },
+  {
+    "title": "Create Maximum Number",
+    "slug": "create-maximum-number",
+    "description": "You are given two integer arrays `nums1` and `nums2` of lengths `m` and `n` respectively. Create the maximum number of length `k <= m + n` from digits of the two numbers. The relative order of the digits from the same array must be preserved.\\n\\nReturn an array of the `k` digits representing the answer.\\n\\n### Example 1:\\n```\\nInput:\\nnums1 = [3, 4, 6, 5]\\nnums2 = [9, 1, 2, 5, 8, 3]\\nk = 5\\nOutput: [9, 8, 6, 5, 3]\\nExplanation: Choose [6, 5] from nums1 and [9, 8, 3] from nums2.\\n```\\n\\n### Example 2:\\n```\\nInput:\\nnums1 = [6, 7]\\nnums2 = [6, 0, 4]\\nk = 5\\nOutput: [6, 7, 6, 0, 4]\\nExplanation: Merge all digits preserving order.\\n```\\n\\n### Constraints:\\n- $m == nums1.length, n == nums2.length$\\n- $1 \\le m, n \\le 500$\\n- $0 \\le nums1[i], nums2[i] \\le 9$\\n- $1 \\le k \\le m + n$",
+    "difficulty": "HARD",
+    "patterns": [
+      "Monotonic Stack",
+      "Greedy"
+    ],
+    "topics": [
+      "Array",
+      "Two Pointers",
+      "Stack",
+      "Greedy",
+      "Monotonic Stack"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "nums1 = [3, 4, 6, 5]\nnums2 = [9, 1, 2, 5, 8, 3]\nk = 5",
+        "output": "[9, 8, 6, 5, 3]",
+        "explanation": "Lexicographically largest merge."
+      },
+      {
+        "input": "nums1 = [6, 7]\nnums2 = [6, 0, 4]\nk = 5",
+        "output": "[6, 7, 6, 0, 4]",
+        "explanation": "Merged 5 digits."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "nums1 = [3, 9]\nnums2 = [8, 9]\nk = 3",
+        "output": "[9, 8, 9]"
+      },
+      {
+        "input": "nums1 = [1]\nnums2 = [2]\nk = 1",
+        "output": "[2]"
+      },
+      {
+        "input": "nums1 = [2, 5, 6, 4, 4, 0]\nnums2 = [7, 3, 8, 0, 6, 5, 7, 6, 2]\nk = 15",
+        "output": "[7, 3, 8, 2, 5, 6, 4, 4, 0, 6, 5, 7, 6, 2, 0]"
+      }
+    ],
+    "hints": [
+      "For each `i` from 0 to k, pick the largest subsequence of size `i` from nums1 and `k - i` from nums2 using a monotonic decreasing stack.",
+      "Merge the two subsequences lexicographically."
+    ],
+    "editorial": {
+      "approach": "Monotonic Stack Subsequence Extraction + Greedy Merge",
+      "solutionMarkdown": "Enumerate all split sizes `i + j = k`. Extract maximum sub-arrays with monotonic stack and merge greedily.",
+      "timeComplexity": "O(k * (m + n)^2)",
+      "spaceComplexity": "O(k)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def createMaximumNumber(*args):\n    # TODO: Implement solution for Create Maximum Number\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = createMaximumNumber(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(createMaximumNumber(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function createMaximumNumber(...args) {\n    // TODO: Implement solution for Create Maximum Number\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(createMaximumNumber(...parsed)));\n    } catch (e) {\n        console.log(createMaximumNumber(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Create Maximum Number\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Create Maximum Number\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
     "title": "Daily Temperatures",
     "slug": "daily-temperatures",
     "description": "Given an array of integers `temperatures` represents the daily temperatures, return *an array `answer` such that `answer[i]` is the number of days you have to wait after the `i-th` day to get a warmer temperature*.\n\n### Example 1:\n```\nInput: [73,74,75,71,69,72,76,73]\nOutput: [1, 1, 4, 2, 1, 1, 0, 0]\nExplanation: Days until next warmer temperature.\n```\n\n### Example 2:\n```\nInput: [30,40,50,60]\nOutput: [1, 1, 1, 0]\nExplanation: Monotonically increasing temperatures.\n```",
@@ -6026,6 +8407,21 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #44"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -6124,6 +8520,21 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #41"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -6248,6 +8659,26 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #85"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -6406,6 +8837,241 @@ export const faang1 = [
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
+  },
+  {
+    "title": "Delete Operation for Two Strings",
+    "slug": "delete-operation-for-two-strings",
+    "description": "Given two strings `word1` and `word2`, return the minimum number of steps required to make `word1` and `word2` the same.\\n\\nIn one step, you can delete exactly one character in either string.\\n\\n### Example 1:\\n```\\nInput: word1 = \"sea\", word2 = \"eat\"\\nOutput: 2\\nExplanation: Delete 's' from \"sea\" to get \"ea\", delete 't' from \"eat\" to get \"ea\".\\n```\\n\\n### Example 2:\\n```\\nInput: word1 = \"leetcode\", word2 = \"etco\"\\nOutput: 4\\nExplanation: Delete 'l', 'e', 'd', 'e' from \"leetcode\".\\n```\\n\\n### Constraints:\\n- $1 \\le |word1|, |word2| \\le 500$\\n- `word1` and `word2` consist of only lowercase English letters.",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Dynamic Programming",
+      "Longest Common Subsequence"
+    ],
+    "topics": [
+      "String",
+      "Dynamic Programming"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "word1 = \"sea\"\nword2 = \"eat\"",
+        "output": "2",
+        "explanation": "2 deletions via LCS."
+      },
+      {
+        "input": "word1 = \"leetcode\"\nword2 = \"etco\"",
+        "output": "4",
+        "explanation": "Delete 4 characters."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "word1 = \"a\"\nword2 = \"b\"",
+        "output": "2"
+      },
+      {
+        "input": "word1 = \"abc\"\nword2 = \"abc\"",
+        "output": "0"
+      },
+      {
+        "input": "word1 = \"ab\"\nword2 = \"ba\"",
+        "output": "2"
+      }
+    ],
+    "hints": [
+      "The remaining common string after optimal deletions is the Longest Common Subsequence (LCS).",
+      "Answer is `len(word1) + len(word2) - 2 * LCS`."
+    ],
+    "editorial": {
+      "approach": "LCS Reduction",
+      "solutionMarkdown": "Compute `LCS(word1, word2)` using standard 2D DP. Return `len(w1) + len(w2) - 2 * LCS`.",
+      "timeComplexity": "O(N * M)",
+      "spaceComplexity": "O(min(N, M))"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def deleteOperationForTwoStrings(*args):\n    # TODO: Implement solution for Delete Operation for Two Strings\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = deleteOperationForTwoStrings(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(deleteOperationForTwoStrings(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function deleteOperationForTwoStrings(...args) {\n    // TODO: Implement solution for Delete Operation for Two Strings\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(deleteOperationForTwoStrings(...parsed)));\n    } catch (e) {\n        console.log(deleteOperationForTwoStrings(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Delete Operation for Two Strings\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Delete Operation for Two Strings\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
+  },
+  {
+    "title": "Design Add and Search Words Data Structure",
+    "slug": "design-add-and-search-words-data-structure",
+    "description": "Design a data structure that supports adding new words and finding if a string matches any previously added string.\\n\\nImplement the `WordDictionary` class:\\n- `WordDictionary()`: Initializes the object.\\n- `void addWord(word)`: Adds word to the data structure.\\n- `bool search(word)`: Returns `true` if there is any string in the data structure that matches word or `false` otherwise. Word may contain dots '.' where dots can be matched with any letter.\\n\\n### Example 1:\\n```\\nInput:\\naddWord(\"bad\")\\naddWord(\"dad\")\\naddWord(\"mad\")\\nsearch(\"pad\") -> false\\nsearch(\"bad\") -> true\\nsearch(\".ad\") -> true\\nsearch(\"b..\") -> true\\n```\\n\\n### Constraints:\\n- $1 \\le |word| \\le 25$\\n- At most $10^4$ calls to `addWord` and `search`.",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Trie",
+      "DFS",
+      "Design"
+    ],
+    "topics": [
+      "String",
+      "Depth-First Search",
+      "Design",
+      "Trie"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "addWord bad\naddWord dad\naddWord mad\nsearch pad\nsearch bad\nsearch .ad\nsearch b..",
+        "output": "false\ntrue\ntrue\ntrue",
+        "explanation": "Wildcard searching with dot '.'."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "addWord a\nsearch .",
+        "output": "true"
+      },
+      {
+        "input": "addWord a\naddWord a\nsearch .",
+        "output": "true"
+      },
+      {
+        "input": "search a",
+        "output": "false"
+      }
+    ],
+    "hints": [
+      "Use a Trie where each node has 26 children.",
+      "When character is '.', branch recursively to all non-null children."
+    ],
+    "editorial": {
+      "approach": "Trie with Recursive Backtracking",
+      "solutionMarkdown": "Insert words into Trie. For '.' characters, branch over all 26 possible children.",
+      "timeComplexity": "O(M) add, O(26^M) worst-case search with multiple dots",
+      "spaceComplexity": "O(total characters)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def designAddAndSearchWordsDataStructure(*args):\n    # TODO: Implement solution for Design Add and Search Words Data Structure\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = designAddAndSearchWordsDataStructure(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(designAddAndSearchWordsDataStructure(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function designAddAndSearchWordsDataStructure(...args) {\n    // TODO: Implement solution for Design Add and Search Words Data Structure\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(designAddAndSearchWordsDataStructure(...parsed)));\n    } catch (e) {\n        console.log(designAddAndSearchWordsDataStructure(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Design Add and Search Words Data Structure\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Design Add and Search Words Data Structure\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
+    "title": "Design Browser History",
+    "slug": "design-browser-history",
+    "description": "You have a browser of one tab where you start on the `homepage` and you can visit another `url`, get back in the history number of `steps` or forward in the history number of `steps`.\\n\\nImplement the `BrowserHistory` class:\\n- `BrowserHistory(string homepage)`: Initializes the object with the homepage of the browser.\\n- `void visit(string url)`: Visits `url` from the current page. Clears up all forward history.\\n- `string back(int steps)`: Move `steps` back in history. Return the current `url`.\\n- `string forward(int steps)`: Move `steps` forward in history. Return the current `url`.\\n\\n### Example 1:\\n```\\nInput:\\nBrowserHistory(\"leetcode.com\")\\nvisit(\"google.com\")\\nvisit(\"facebook.com\")\\nvisit(\"youtube.com\")\\nback(1) -> \"facebook.com\"\\nback(1) -> \"google.com\"\\nforward(1) -> \"facebook.com\"\\nvisit(\"linkedin.com\")\\nforward(2) -> \"linkedin.com\"\\nback(2) -> \"google.com\"\\nback(7) -> \"leetcode.com\"\\n```\\n\\n### Constraints:\\n- $1 \\le |homepage|, |url| \\le 20$\\n- At most $5000$ calls in total.",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Design",
+      "Doubly Linked List",
+      "Stack"
+    ],
+    "topics": [
+      "Array",
+      "Linked List",
+      "Stack",
+      "Design",
+      "Doubly-Linked List",
+      "Data Stream"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "BrowserHistory leetcode.com\nvisit google.com\nvisit facebook.com\nback 1\nforward 1",
+        "output": "facebook.com\nfacebook.com",
+        "explanation": "Forward and back history navigation."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "BrowserHistory a.com\nback 5\nforward 5",
+        "output": "a.com\na.com"
+      },
+      {
+        "input": "BrowserHistory home\nvisit page1\nvisit page2\nback 2",
+        "output": "home"
+      },
+      {
+        "input": "BrowserHistory x\nvisit y\nback 1\nvisit z\nforward 1",
+        "output": "x\nz"
+      }
+    ],
+    "hints": [
+      "Use a dynamic array and an integer pointer `curr`.",
+      "When visiting a new URL, truncate the array at `curr + 1`."
+    ],
+    "editorial": {
+      "approach": "Dynamic Array with Cursor Pointer",
+      "solutionMarkdown": "Maintain history in a list with pointer `idx` and valid length `max_idx`.",
+      "timeComplexity": "O(1) per operation",
+      "spaceComplexity": "O(total visits)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def designBrowserHistory(*args):\n    # TODO: Implement solution for Design Browser History\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = designBrowserHistory(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(designBrowserHistory(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function designBrowserHistory(...args) {\n    // TODO: Implement solution for Design Browser History\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(designBrowserHistory(...parsed)));\n    } catch (e) {\n        console.log(designBrowserHistory(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Design Browser History\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Design Browser History\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
   },
   {
     "title": "Implement a Circular Queue",
@@ -6656,6 +9322,87 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Detect Cycle in a Directed Graph",
+    "slug": "detect-cycle-in-directed-graph",
+    "description": "Given a directed graph with $V$ vertices and $E$ edges, determine if it contains any directed cycle. Return `true` if a cycle exists, otherwise `false`.\\n\\n### Example 1:\\n```\\nInput:\\n4 4\\n0 1\\n1 2\\n2 3\\n3 1\\nOutput: true\\nExplanation: The vertices 1 -> 2 -> 3 -> 1 form a directed cycle.\\n```\\n\\n### Example 2:\\n```\\nInput:\\n4 3\\n0 1\\n1 2\\n2 3\\nOutput: false\\nExplanation: The graph is a directed acyclic path.\\n```\\n\\n### Constraints:\\n- $1 \\le V \\le 10^5$\\n- $0 \\le E \\le 2 \\times 10^5$",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Graph",
+      "DFS",
+      "Topological Sort"
+    ],
+    "topics": [
+      "Graph",
+      "Depth-First Search",
+      "Topological Sort"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 6,
+        "yearReported": 2025
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "4 4\n0 1\n1 2\n2 3\n3 1",
+        "output": "true",
+        "explanation": "Cycle 1->2->3->1."
+      },
+      {
+        "input": "4 3\n0 1\n1 2\n2 3",
+        "output": "false",
+        "explanation": "DAG without cycles."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "1 0",
+        "output": "false"
+      },
+      {
+        "input": "2 2\n0 1\n1 0",
+        "output": "true"
+      },
+      {
+        "input": "3 2\n0 1\n0 2",
+        "output": "false"
+      }
+    ],
+    "hints": [
+      "Use 3-color DFS (0 = unvisited, 1 = visiting/in recursion stack, 2 = visited).",
+      "Or use Kahn's Algorithm (in-degree BFS): if processed vertices count < V, a cycle exists."
+    ],
+    "editorial": {
+      "approach": "DFS with Recursion Call Stack Tracking",
+      "solutionMarkdown": "### 3-Color DFS\nMark nodes entering DFS as visiting. If an adjacent node is currently visiting, a back-edge (cycle) is detected.",
+      "timeComplexity": "O(V + E)",
+      "spaceComplexity": "O(V)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def detectCycleInDirectedGraph(*args):\n    # TODO: Implement solution for Detect Cycle in a Directed Graph\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = detectCycleInDirectedGraph(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(detectCycleInDirectedGraph(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function detectCycleInDirectedGraph(...args) {\n    // TODO: Implement solution for Detect Cycle in a Directed Graph\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(detectCycleInDirectedGraph(...parsed)));\n    } catch (e) {\n        console.log(detectCycleInDirectedGraph(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Detect Cycle in a Directed Graph\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Detect Cycle in a Directed Graph\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Determine the Colour of a Chessboard Square",
     "slug": "determine-color-of-a-chessboard-square",
     "description": "You are given `coordinates`, a string that represents the coordinates of a square of the chessboard (e.g. `'a1'`, `'h8'`). Return `true` if the square is **white**, and `false` if the square is **black**.\n\n### Example 1:\n```\nInput: \"a1\"\nOutput: false\nExplanation: Square 'a1' is black.\n```\n\n### Example 2:\n```\nInput: \"h3\"\nOutput: true\nExplanation: Square 'h3' is white.\n```",
@@ -6788,6 +9535,16 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 45,
         "sourceNote": "TCS Interview Question #62"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -7044,6 +9801,21 @@ export const faang1 = [
         "verified": true,
         "frequencyCount": 42,
         "sourceNote": "Infosys Interview Question #81"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -7113,6 +9885,170 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Disjoint Set Union (Components and Connectivity)",
+    "slug": "disjoint-set-union-components",
+    "description": "Implement a Disjoint Set Union (Union-Find) data structure with path compression and union by rank. Given $N$ elements (indexed $0$ to $N-1$) and $Q$ operations of two types:\\n1. `UNION u v`: connect element $u$ and element $v$.\\n2. `FIND u v`: return `true` if $u$ and $v$ belong to the same connected component, otherwise `false`.\\n\\nOutput the boolean result of each `FIND` operation on a new line.\\n\\n### Example 1:\\n```\\nInput:\\n5 5\\nUNION 0 2\\nUNION 4 2\\nFIND 0 4\\nFIND 1 4\\nUNION 1 3\\nOutput:\\ntrue\\nfalse\\nExplanation: 0 and 4 are connected via 2. 1 and 4 belong to different components.\\n```\\n\\n### Example 2:\\n```\\nInput:\\n3 3\\nUNION 0 1\\nUNION 1 2\\nFIND 0 2\\nOutput:\\ntrue\\nExplanation: 0, 1, 2 all merge into a single component.\\n```\\n\\n### Constraints:\\n- $1 \\le N \\le 10^5$\\n- $1 \\le Q \\le 2 \\times 10^5$",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Union-Find",
+      "Graph",
+      "Disjoint Set"
+    ],
+    "topics": [
+      "Union Find",
+      "Graph"
+    ],
+    "companyTags": [
+      {
+        "company": "Capgemini",
+        "frequencyCount": 5,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 6,
+        "yearReported": 2025
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "5 5\nUNION 0 2\nUNION 4 2\nFIND 0 4\nFIND 1 4\nUNION 1 3",
+        "output": "true\nfalse",
+        "explanation": "Path compression and union by rank."
+      },
+      {
+        "input": "3 3\nUNION 0 1\nUNION 1 2\nFIND 0 2",
+        "output": "true",
+        "explanation": "All elements connected."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "2 1\nFIND 0 1",
+        "output": "false"
+      },
+      {
+        "input": "4 4\nUNION 0 1\nUNION 2 3\nFIND 0 2\nUNION 1 2",
+        "output": "false"
+      },
+      {
+        "input": "1 1\nFIND 0 0",
+        "output": "true"
+      }
+    ],
+    "hints": [
+      "Use parent array initialized to `parent[i] = i` and rank array initialized to 0.",
+      "In `find(x)`, implement path compression: `parent[x] = find(parent[x])`."
+    ],
+    "editorial": {
+      "approach": "DSU with Path Compression and Union by Rank",
+      "solutionMarkdown": "### DSU Operations\nPath compression flattens the tree so `find` runs in nearly O(1) amortized time (inverse Ackermann function $\\alpha(N)$).",
+      "timeComplexity": "O(Q \\alpha(N))",
+      "spaceComplexity": "O(N)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def disjointSetUnionComponents(*args):\n    # TODO: Implement solution for Disjoint Set Union (Components and Connectivity)\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = disjointSetUnionComponents(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(disjointSetUnionComponents(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function disjointSetUnionComponents(...args) {\n    // TODO: Implement solution for Disjoint Set Union (Components and Connectivity)\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(disjointSetUnionComponents(...parsed)));\n    } catch (e) {\n        console.log(disjointSetUnionComponents(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Disjoint Set Union (Components and Connectivity)\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Disjoint Set Union (Components and Connectivity)\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Distinct Subsequences",
+    "slug": "distinct-subsequences",
+    "description": "Given two strings `s` and `t`, return the number of distinct subsequences of `s` which equals `t`.\\n\\nThe test cases are generated so that the answer fits on a 32-bit signed integer.\\n\\n### Example 1:\\n```\\nInput: s = \"rabbbit\", t = \"rabbit\"\\nOutput: 3\\nExplanation: There are 3 ways you can generate \"rabbit\" from s.\\n```\\n\\n### Example 2:\\n```\\nInput: s = \"babgbag\", t = \"bag\"\\nOutput: 5\\nExplanation: There are 5 ways you can generate \"bag\" from s.\\n```\\n\\n### Constraints:\\n- $1 \\le |s|, |t| \\le 1000$\\n- `s` and `t` consist of English letters.",
+    "difficulty": "HARD",
+    "patterns": [
+      "Dynamic Programming",
+      "String"
+    ],
+    "topics": [
+      "String",
+      "Dynamic Programming"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "s = \"rabbbit\"\nt = \"rabbit\"",
+        "output": "3",
+        "explanation": "3 distinct ways to form \"rabbit\"."
+      },
+      {
+        "input": "s = \"babgbag\"\nt = \"bag\"",
+        "output": "5",
+        "explanation": "5 distinct subsequences."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "s = \"a\"\nt = \"b\"",
+        "output": "0"
+      },
+      {
+        "input": "s = \"aaa\"\nt = \"a\"",
+        "output": "3"
+      },
+      {
+        "input": "s = \"ddd\"\nt = \"dd\"",
+        "output": "3"
+      }
+    ],
+    "hints": [
+      "Let dp[i][j] be the number of distinct subsequences of s[:i] that equal t[:j].",
+      "If s[i-1] == t[j-1], dp[i][j] = dp[i-1][j-1] + dp[i-1][j]; else dp[i][j] = dp[i-1][j]."
+    ],
+    "editorial": {
+      "approach": "2D String DP Counting",
+      "solutionMarkdown": "Transition: include `s[i-1]` in matching or skip it.",
+      "timeComplexity": "O(N * M)",
+      "spaceComplexity": "O(M)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def distinctSubsequences(*args):\n    # TODO: Implement solution for Distinct Subsequences\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = distinctSubsequences(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(distinctSubsequences(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function distinctSubsequences(...args) {\n    // TODO: Implement solution for Distinct Subsequences\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(distinctSubsequences(...parsed)));\n    } catch (e) {\n        console.log(distinctSubsequences(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Distinct Subsequences\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Distinct Subsequences\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
+  },
+  {
     "title": "Edit Distance",
     "slug": "edit-distance",
     "description": "Given two strings `word1` and `word2`, return *the minimum number of operations required to convert `word1` to `word2`* (insert, delete, or replace a character).\n\n### Example 1:\n```\nInput: horse\nros\nOutput: 3\nExplanation: horse -> rorse -> rose -> ros.\n```\n\n### Example 2:\n```\nInput: intention\nexecution\nOutput: 5\nExplanation: 5 operations needed.\n```",
@@ -7161,6 +10097,26 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #84"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -7230,6 +10186,85 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Evaluate Division",
+    "slug": "evaluate-division",
+    "description": "You are given an array of variable pairs `equations` and an array of real numbers `values`, where `equations[i] = [Ai, Bi]` and `values[i]` represent the equation $A_i / B_i = values[i]$. Each $A_i$ or $B_i$ is a string representing a single variable.\\n\\nYou are also given some `queries`, where `queries[j] = [Cj, Dj]` represents the $j$-th query where you must find the answer for $C_j / D_j = ?$.\\n\\nReturn the answers to all queries. If a single answer cannot be determined, return `-1.0`.\\n\\n### Example 1:\\n```\\nInput:\\nequations = [[\"a\",\"b\"],[\"b\",\"c\"]], values = [2.0,3.0]\\nqueries = [[\"a\",\"c\"],[\"b\",\"a\"],[\"a\",\"e\"],[\"a\",\"a\"],[\"x\",\"x\"] blur]\\nOutput: [6.00000,0.50000,-1.00000,1.00000,-1.00000]\\nExplanation: a/c = (a/b)*(b/c) = 6.0; b/a = 1/2 = 0.5.\\n```\\n\\n### Constraints:\\n- $1 \\le |equations| \\le 20$\\n- $values[i] > 0$\\n- $1 \\le |queries| \\le 20$",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Graph",
+      "DFS",
+      "Union-Find"
+    ],
+    "topics": [
+      "Array",
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Union Find",
+      "Graph",
+      "Shortest Path"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "equations = [[\"a\",\"b\"],[\"b\",\"c\"]]\nvalues = [2.0,3.0]\nqueries = [[\"a\",\"c\"],[\"b\",\"a\"],[\"a\",\"e\"]]",
+        "output": "[6.0, 0.5, -1.0]",
+        "explanation": "Path multiplication in weighted directed graph."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "equations = [[\"a\",\"b\"]]\nvalues = [0.5]\nqueries = [[\"a\",\"b\"],[\"b\",\"a\"]]",
+        "output": "[0.5, 2.0]"
+      },
+      {
+        "input": "equations = [[\"x1\",\"x2\"],[\"x2\",\"x3\"]]\nvalues = [3.0, 4.0]\nqueries = [[\"x1\",\"x3\"]]",
+        "output": "[12.0]"
+      },
+      {
+        "input": "equations = [[\"a\",\"b\"]]\nvalues = [2.0]\nqueries = [[\"c\",\"c\"]]",
+        "output": "[-1.0]"
+      }
+    ],
+    "hints": [
+      "Model variables as nodes and ratios as weighted directed edges.",
+      "Use DFS or BFS to find path from start to end multiplying weights along the way."
+    ],
+    "editorial": {
+      "approach": "Weighted Directed Graph Path Product",
+      "solutionMarkdown": "Add edge `u -> v` with weight `val` and `v -> u` with `1.0 / val`. Run DFS/BFS per query.",
+      "timeComplexity": "O(Q * (V + E))",
+      "spaceComplexity": "O(V + E)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def evaluateDivision(*args):\n    # TODO: Implement solution for Evaluate Division\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = evaluateDivision(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(evaluateDivision(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function evaluateDivision(...args) {\n    // TODO: Implement solution for Evaluate Division\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(evaluateDivision(...parsed)));\n    } catch (e) {\n        console.log(evaluateDivision(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Evaluate Division\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Evaluate Division\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
     "title": "Evaluate Reverse Polish Notation",
     "slug": "evaluate-reverse-polish-notation",
     "description": "You are given an array of strings `tokens` that represents an arithmetic expression in a Reverse Polish Notation. Evaluate the expression and return an integer.\n\n### Example 1:\n```\nInput: [\"2\",\"1\",\"+\",\"3\",\"*\"]\nOutput: 9\nExplanation: ((2 + 1) * 3) = 9.\n```\n\n### Example 2:\n```\nInput: [\"4\",\"13\",\"5\",\"/\",\"+\"]\nOutput: 6\nExplanation: (4 + (13 / 5)) = 6.\n```",
@@ -7259,6 +10294,16 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #51"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -7328,6 +10373,84 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Factorial of a Number",
+    "slug": "factorial-of-a-number",
+    "description": "Given a non-negative integer $N$, calculate its factorial $N! = 1 \\times 2 \\times \\dots \\times N$. Since the answer can be very large, return the result as a string or large integer.\\n\\n### Example 1:\\n```\\nInput: 5\\nOutput: 120\\nExplanation: 5! = 5 * 4 * 3 * 2 * 1 = 120.\\n```\\n\\n### Example 2:\\n```\\nInput: 0\\nOutput: 1\\nExplanation: By definition, 0! = 1.\\n```\\n\\n### Constraints:\\n- $0 \\le N \\le 100$",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Math",
+      "Recursion"
+    ],
+    "topics": [
+      "Math",
+      "Recursion"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 9,
+        "yearReported": 2026
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "5",
+        "output": "120",
+        "explanation": "5! = 120"
+      },
+      {
+        "input": "0",
+        "output": "1",
+        "explanation": "0! = 1"
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "1",
+        "output": "1"
+      },
+      {
+        "input": "10",
+        "output": "3628800"
+      },
+      {
+        "input": "20",
+        "output": "2432902008176640000"
+      }
+    ],
+    "hints": [
+      "For large N up to 100, use BigInteger or array multiplication to handle large numbers."
+    ],
+    "editorial": {
+      "approach": "Arbitrary Precision Multiplication",
+      "solutionMarkdown": "### Factorial Computation\nMultiply sequentially from 1 to N using BigInt.",
+      "timeComplexity": "O(N^2)",
+      "spaceComplexity": "O(N)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def factorialOfANumber(*args):\n    # TODO: Implement solution for Factorial of a Number\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = factorialOfANumber(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(factorialOfANumber(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function factorialOfANumber(...args) {\n    // TODO: Implement solution for Factorial of a Number\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(factorialOfANumber(...parsed)));\n    } catch (e) {\n        console.log(factorialOfANumber(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Factorial of a Number\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Factorial of a Number\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Factorial Trailing Zeroes",
     "slug": "factorial-trailing-zeroes",
     "description": "Given an integer `n`, return *the number of trailing zeroes in `n!`*.\n\n### Example 1:\n```\nInput: 3\nOutput: 0\nExplanation: 3! = 6, no trailing zero.\n```\n\n### Example 2:\n```\nInput: 5\nOutput: 1\nExplanation: 5! = 120, one trailing zero.\n```",
@@ -7353,6 +10476,11 @@ export const faang1 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #78"
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -7427,479 +10555,82 @@ export const faang1 = [
     "acceptanceRate": 0
   },
   {
-    "title": "Fenwick Tree - Prefix Sum and Point Update",
-    "slug": "fenwick-tree-prefix-sum-and-point-update",
-    "description": "Implement a **Binary Indexed Tree (Fenwick Tree)** supporting `update(index, delta)` to add `delta` to an element, and `query(index)` to compute the prefix sum from `1` to `index` in `O(log N)` time.\n\n### Example 1:\n```\nInput: [\"FenwickTree\",\"update\",\"query\",\"update\",\"query\"]\n[[5],[1,3],[1],[3,2],[4]]\nOutput: [null,null,3,null,5]\nExplanation: update(1, 3) makes prefix sum at 1 = 3. update(3, 2) makes prefix sum at 4 = 3 + 2 = 5.\n```\n\n### Example 2:\n```\nInput: [\"FenwickTree\",\"query\"]\n[[10],[5]]\nOutput: [null,0]\nExplanation: Empty tree returns 0 prefix sum.\n```",
-    "difficulty": "HARD",
-    "category": "DSA",
-    "patterns": [
-      "Binary Indexed Tree",
-      "Design",
-      "Array"
-    ],
-    "topics": [
-      "Binary Indexed Tree",
-      "Design",
-      "Array"
-    ],
-    "companyTags": [
-      {
-        "company": "Infosys",
-        "yearReported": 2025,
-        "verified": false,
-        "frequencyCount": 28,
-        "sourceNote": "Infosys Practice Bank #80"
-      },
-      {
-        "company": "TCS",
-        "yearReported": 2025,
-        "verified": false,
-        "frequencyCount": 30,
-        "sourceNote": "TCS Practice Bank #100"
-      }
-    ],
-    "supportedLanguages": [
-      "python",
-      "javascript",
-      "cpp",
-      "java"
-    ],
-    "starterCode": [
-      {
-        "language": "python",
-        "boilerplate": "def fenwickTreePrefixSumAndPointUpdate(*args):\n    # TODO: Implement solution for Fenwick Tree - Prefix Sum and Point Update\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = fenwickTreePrefixSumAndPointUpdate(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(fenwickTreePrefixSumAndPointUpdate(*input_data))\n"
-      },
-      {
-        "language": "javascript",
-        "boilerplate": "function fenwickTreePrefixSumAndPointUpdate(...args) {\n    // TODO: Implement solution for Fenwick Tree - Prefix Sum and Point Update\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(fenwickTreePrefixSumAndPointUpdate(...parsed)));\n    } catch (e) {\n        console.log(fenwickTreePrefixSumAndPointUpdate(...lines));\n    }\n}\n"
-      },
-      {
-        "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Fenwick Tree - Prefix Sum and Point Update\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
-      },
-      {
-        "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
-      }
-    ],
-    "sampleTestCases": [
-      {
-        "input": "[\"FenwickTree\",\"update\",\"query\",\"update\",\"query\"]\n[[5],[1,3],[1],[3,2],[4]]",
-        "output": "[null,null,3,null,5]",
-        "explanation": "update(1, 3) makes prefix sum at 1 = 3. update(3, 2) makes prefix sum at 4 = 3 + 2 = 5."
-      },
-      {
-        "input": "[\"FenwickTree\",\"query\"]\n[[10],[5]]",
-        "output": "[null,0]",
-        "explanation": "Empty tree returns 0 prefix sum."
-      }
-    ],
-    "hiddenTestCases": [
-      {
-        "input": "[\"FenwickTree\",\"update\",\"query\",\"update\",\"query\"]\n[[5],[1,3],[1],[3,2],[4]]",
-        "output": "[null,null,3,null,5]",
-        "isHidden": true
-      },
-      {
-        "input": "[\"FenwickTree\",\"query\"]\n[[10],[5]]",
-        "output": "[null,0]",
-        "isHidden": true
-      }
-    ],
-    "hints": [
-      "Use index & (-index) for bitwise traversal of tree nodes."
-    ],
-    "editorial": {
-      "approach": "Optimal Approach for Fenwick Tree - Prefix Sum and Point Update",
-      "solutionMarkdown": "### Optimal Solution\n\nUpdate: add delta and advance i += i & (-i). Query: sum value and backtrack i -= i & (-i).\n\n### Complexity\n- Time: O(log N) per query/update, Space: O(N)",
-      "timeComplexity": "O(log N) per query/update",
-      "spaceComplexity": "O(N)"
-    },
-    "totalSubmissions": 0,
-    "acceptedSubmissions": 0,
-    "acceptanceRate": 0
-  },
-  {
-    "title": "Fibonacci Number",
-    "slug": "fibonacci-number",
-    "description": "The **Fibonacci numbers** commonly denoted `F(n)` form a sequence such that each number is the sum of the two preceding ones, starting from `0` and `1`. Given `n`, calculate `F(n)`.\n\n### Example 1:\n```\nInput: 2\nOutput: 1\nExplanation: F(2) = F(1) + F(0) = 1 + 0 = 1.\n```\n\n### Example 2:\n```\nInput: 4\nOutput: 3\nExplanation: F(4) = F(3) + F(2) = 2 + 1 = 3.\n```",
-    "difficulty": "EASY",
-    "category": "DSA",
+    "title": "Fast Modular Exponentiation",
+    "slug": "fast-modular-exponentiation",
+    "description": "Given three positive integers $A$, $B$, and $C$, compute $(A^B) \\pmod C$ efficiently without integer overflow.\\n\\n### Example 1:\\n```\\nInput: A = 2, B = 10, C = 1000\\nOutput: 24\\nExplanation: 2^10 = 1024. 1024 % 1000 = 24.\\n```\\n\\n### Example 2:\\n```\\nInput: A = 3, B = 5, C = 7\\nOutput: 5\\nExplanation: 3^5 = 243. 243 % 7 = 5.\\n```\\n\\n### Constraints:\\n- $1 \\le A, B \\le 10^{18}$\\n- $1 \\le C \\le 10^9$",
+    "difficulty": "MEDIUM",
     "patterns": [
       "Math",
-      "Dynamic Programming",
-      "Recursion",
-      "Memoization"
+      "Binary Exponentiation"
     ],
     "topics": [
       "Math",
-      "Dynamic Programming",
-      "Recursion",
-      "Memoization"
-    ],
-    "companyTags": [
-      {
-        "company": "TCS",
-        "yearReported": 2025,
-        "verified": false,
-        "frequencyCount": 30,
-        "sourceNote": "TCS Practice Bank #4"
-      }
-    ],
-    "supportedLanguages": [
-      "python",
-      "javascript",
-      "cpp",
-      "java"
-    ],
-    "starterCode": [
-      {
-        "language": "python",
-        "boilerplate": "def fibonacciNumber(*args):\n    # TODO: Implement solution for Fibonacci Number\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = fibonacciNumber(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(fibonacciNumber(*input_data))\n"
-      },
-      {
-        "language": "javascript",
-        "boilerplate": "function fibonacciNumber(...args) {\n    // TODO: Implement solution for Fibonacci Number\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(fibonacciNumber(...parsed)));\n    } catch (e) {\n        console.log(fibonacciNumber(...lines));\n    }\n}\n"
-      },
-      {
-        "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Fibonacci Number\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
-      },
-      {
-        "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
-      }
+      "Recursion"
     ],
     "sampleTestCases": [
       {
-        "input": "2",
-        "output": "1",
-        "explanation": "F(2) = F(1) + F(0) = 1 + 0 = 1."
+        "input": "A = 2, B = 10, C = 1000",
+        "output": "24",
+        "explanation": "1024 % 1000 = 24."
       },
       {
-        "input": "4",
-        "output": "3",
-        "explanation": "F(4) = F(3) + F(2) = 2 + 1 = 3."
+        "input": "A = 3, B = 5, C = 7",
+        "output": "5",
+        "explanation": "243 % 7 = 5."
       }
     ],
     "hiddenTestCases": [
       {
-        "input": "2",
-        "output": "1",
-        "isHidden": true
+        "input": "A = 5, B = 0, C = 10",
+        "output": "1"
       },
       {
-        "input": "4",
-        "output": "3",
-        "isHidden": true
+        "input": "A = 7, B = 1, C = 5",
+        "output": "2"
       },
       {
-        "input": "0",
-        "output": "0",
-        "isHidden": true
-      },
-      {
-        "input": "10",
-        "output": "55",
-        "isHidden": true
+        "input": "A = 123456789, B = 987654321, C = 1000000007",
+        "output": "972233827"
       }
     ],
     "hints": [
-      "Maintain two variables a and b iteratively to use O(1) space."
+      "Use binary exponentiation: if B is odd, ans = (ans * A) % C; then A = (A * A) % C and B //= 2."
     ],
     "editorial": {
-      "approach": "Optimal Approach for Fibonacci Number",
-      "solutionMarkdown": "### Optimal Solution\n\nIterative rolling calculation: a, b = 0, 1. For _ in range(n): a, b = b, a + b. Return a.\n\n### Complexity\n- Time: O(N), Space: O(1)",
-      "timeComplexity": "O(N)",
+      "approach": "Binary Exponentiation in O(log B)",
+      "solutionMarkdown": "Divide exponent by 2 repeatedly squaring base modulo C.",
+      "timeComplexity": "O(log B)",
       "spaceComplexity": "O(1)"
     },
-    "totalSubmissions": 0,
-    "acceptedSubmissions": 0,
-    "acceptanceRate": 0
-  },
-  {
-    "title": "Find a Path in Grid to Bottom-Right",
-    "slug": "find-a-path-in-grid-to-bottom-right",
-    "description": "Given an `m x n` binary grid where `0` represents an empty cell and `1` represents an obstacle, return *the path from top-left `(0, 0)` to bottom-right `(m-1, n-1)` as a list of coordinates*. If no path exists, return an empty list.\n\n### Example 1:\n```\nInput: [[0,0,0],[0,1,0],[0,0,0]]\nOutput: [[0, 0], [0, 1], [0, 2], [1, 2], [2, 2]]\nExplanation: Valid path avoiding obstacle.\n```\n\n### Example 2:\n```\nInput: [[0,1],[1,0]]\nOutput: []\nExplanation: Path blocked.\n```",
-    "difficulty": "MEDIUM",
     "category": "DSA",
-    "patterns": [
-      "Grid",
-      "BFS / DFS"
-    ],
-    "topics": [
-      "Grid",
-      "BFS / DFS"
-    ],
-    "companyTags": [
-      {
-        "company": "Meta",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 40,
-        "sourceNote": "Reported in Meta 2021-2026 interview set"
-      }
-    ],
-    "supportedLanguages": [
-      "python",
-      "javascript",
-      "cpp",
-      "java"
-    ],
     "starterCode": [
       {
         "language": "python",
-        "boilerplate": "def findAPathInGridToBottomRight(*args):\n    # TODO: Implement solution for Find a Path in Grid to Bottom-Right\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findAPathInGridToBottomRight(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findAPathInGridToBottomRight(*input_data))\n"
+        "boilerplate": "def fastModularExponentiation(*args):\n    # TODO: Implement solution for Fast Modular Exponentiation\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = fastModularExponentiation(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(fastModularExponentiation(*input_data))\n"
       },
       {
         "language": "javascript",
-        "boilerplate": "function findAPathInGridToBottomRight(...args) {\n    // TODO: Implement solution for Find a Path in Grid to Bottom-Right\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findAPathInGridToBottomRight(...parsed)));\n    } catch (e) {\n        console.log(findAPathInGridToBottomRight(...lines));\n    }\n}\n"
+        "boilerplate": "function fastModularExponentiation(...args) {\n    // TODO: Implement solution for Fast Modular Exponentiation\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(fastModularExponentiation(...parsed)));\n    } catch (e) {\n        console.log(fastModularExponentiation(...lines));\n    }\n}\n"
       },
       {
         "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find a Path in Grid to Bottom-Right\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Fast Modular Exponentiation\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
       },
       {
         "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Fast Modular Exponentiation\n    }\n}\n"
       }
     ],
-    "sampleTestCases": [
-      {
-        "input": "[[0,0,0],[0,1,0],[0,0,0]]",
-        "output": "[[0, 0], [0, 1], [0, 2], [1, 2], [2, 2]]",
-        "explanation": "Valid path avoiding obstacle."
-      },
-      {
-        "input": "[[0,1],[1,0]]",
-        "output": "[]",
-        "explanation": "Path blocked."
-      }
-    ],
-    "hiddenTestCases": [
-      {
-        "input": "[[0,0,0],[0,1,0],[0,0,0]]",
-        "output": "[[0, 0], [0, 1], [0, 2], [1, 2], [2, 2]]",
-        "isHidden": true
-      },
-      {
-        "input": "[[0,1],[1,0]]",
-        "output": "[]",
-        "isHidden": true
-      }
-    ],
-    "hints": [
-      "Run BFS/DFS with parent tracking to reconstruct the path from destination back to start."
-    ],
-    "editorial": {
-      "approach": "Optimal Approach for Find a Path in Grid to Bottom-Right",
-      "solutionMarkdown": "### Optimal Solution\n\nBFS with parent dictionary mapping each visited cell to its predecessor.\n\n### Complexity\n- Time: O(M * N), Space: O(M * N)",
-      "timeComplexity": "O(M * N)",
-      "spaceComplexity": "O(M * N)"
-    },
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
-    "acceptanceRate": 0
-  },
-  {
-    "title": "Find All Anagrams in a String",
-    "slug": "find-all-anagrams-in-a-string",
-    "description": "Given two strings `s` and `p`, return *an array of all the start indices of `p`'s **anagrams** in `s`*.\n\n### Example 1:\n```\nInput: cbaebabacd\nabc\nOutput: [0, 6]\nExplanation: The substrings with start index = 0 is 'cba', and at index = 6 is 'bac'.\n```\n\n### Example 2:\n```\nInput: abab\nab\nOutput: [0, 1, 2]\nExplanation: Substrings at 0, 1, 2 are anagrams.\n```",
-    "difficulty": "MEDIUM",
-    "category": "DSA",
-    "patterns": [
-      "Sliding Window",
-      "Hash Table"
-    ],
-    "topics": [
-      "Sliding Window",
-      "Hash Table"
-    ],
+    "acceptanceRate": 0,
     "companyTags": [
       {
-        "company": "Apple",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 45,
-        "sourceNote": "Reported in Apple 2021-2026 interview set"
-      },
-      {
-        "company": "Meta",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 40,
-        "sourceNote": "Reported in Meta 2021-2026 interview set"
-      },
-      {
-        "company": "Microsoft",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 35,
-        "sourceNote": "Reported in Microsoft 2021-2026 interview set"
-      },
-      {
-        "company": "Accenture",
-        "yearReported": 2025,
-        "verified": false,
-        "frequencyCount": 25,
-        "sourceNote": "Accenture Practice Bank #33"
-      },
-      {
-        "company": "Infosys",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 42,
-        "sourceNote": "Infosys Interview Question #28"
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
-    ],
-    "supportedLanguages": [
-      "python",
-      "javascript",
-      "cpp",
-      "java"
-    ],
-    "starterCode": [
-      {
-        "language": "python",
-        "boilerplate": "def findAllAnagramsInAString(*args):\n    # TODO: Implement solution for Find All Anagrams in a String\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findAllAnagramsInAString(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findAllAnagramsInAString(*input_data))\n"
-      },
-      {
-        "language": "javascript",
-        "boilerplate": "function findAllAnagramsInAString(...args) {\n    // TODO: Implement solution for Find All Anagrams in a String\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findAllAnagramsInAString(...parsed)));\n    } catch (e) {\n        console.log(findAllAnagramsInAString(...lines));\n    }\n}\n"
-      },
-      {
-        "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find All Anagrams in a String\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
-      },
-      {
-        "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
-      }
-    ],
-    "sampleTestCases": [
-      {
-        "input": "cbaebabacd\nabc",
-        "output": "[0, 6]",
-        "explanation": "The substrings with start index = 0 is 'cba', and at index = 6 is 'bac'."
-      },
-      {
-        "input": "abab\nab",
-        "output": "[0, 1, 2]",
-        "explanation": "Substrings at 0, 1, 2 are anagrams."
-      }
-    ],
-    "hiddenTestCases": [
-      {
-        "input": "cbaebabacd\nabc",
-        "output": "[0, 6]",
-        "isHidden": true
-      },
-      {
-        "input": "abab\nab",
-        "output": "[0, 1, 2]",
-        "isHidden": true
-      }
-    ],
-    "hints": [
-      "Sliding window of length len(p) tracking character matches."
-    ],
-    "editorial": {
-      "approach": "Optimal Approach for Find All Anagrams in a String",
-      "solutionMarkdown": "### Optimal Solution\n\nMaintain frequency map comparison over fixed window of size len(p).\n\n### Complexity\n- Time: O(N), Space: O(1)",
-      "timeComplexity": "O(N)",
-      "spaceComplexity": "O(1)"
-    },
-    "totalSubmissions": 0,
-    "acceptedSubmissions": 0,
-    "acceptanceRate": 0
-  },
-  {
-    "title": "Find All Duplicates in an Array",
-    "slug": "find-all-duplicates-in-an-array",
-    "description": "Given an integer array `nums` of length `n` where all integers are in the range `[1, n]` and each integer appears **once** or **twice**, return an array of all integers that appear **twice** in `O(n)` time and `O(1)` auxiliary space.\n\n### Example 1:\n```\nInput: [4,3,2,7,8,2,3,1]\nOutput: [2, 3]\nExplanation: 2 and 3 appear twice.\n```\n\n### Example 2:\n```\nInput: [1,1,2]\nOutput: [1]\nExplanation: 1 appears twice.\n```",
-    "difficulty": "MEDIUM",
-    "category": "DSA",
-    "patterns": [
-      "Array",
-      "Hash Table"
-    ],
-    "topics": [
-      "Array",
-      "Hash Table"
-    ],
-    "companyTags": [
-      {
-        "company": "Meta",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 40,
-        "sourceNote": "Reported in Meta 2021-2026 interview set"
-      }
-    ],
-    "supportedLanguages": [
-      "python",
-      "javascript",
-      "cpp",
-      "java"
-    ],
-    "starterCode": [
-      {
-        "language": "python",
-        "boilerplate": "def findAllDuplicatesInAnArray(*args):\n    # TODO: Implement solution for Find All Duplicates in an Array\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findAllDuplicatesInAnArray(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findAllDuplicatesInAnArray(*input_data))\n"
-      },
-      {
-        "language": "javascript",
-        "boilerplate": "function findAllDuplicatesInAnArray(...args) {\n    // TODO: Implement solution for Find All Duplicates in an Array\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findAllDuplicatesInAnArray(...parsed)));\n    } catch (e) {\n        console.log(findAllDuplicatesInAnArray(...lines));\n    }\n}\n"
-      },
-      {
-        "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find All Duplicates in an Array\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
-      },
-      {
-        "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
-      }
-    ],
-    "sampleTestCases": [
-      {
-        "input": "[4,3,2,7,8,2,3,1]",
-        "output": "[2, 3]",
-        "explanation": "2 and 3 appear twice."
-      },
-      {
-        "input": "[1,1,2]",
-        "output": "[1]",
-        "explanation": "1 appears twice."
-      }
-    ],
-    "hiddenTestCases": [
-      {
-        "input": "[4,3,2,7,8,2,3,1]",
-        "output": "[2, 3]",
-        "isHidden": true
-      },
-      {
-        "input": "[1,1,2]",
-        "output": "[1]",
-        "isHidden": true
-      },
-      {
-        "input": "[1]",
-        "output": "[]",
-        "isHidden": true
-      }
-    ],
-    "hints": [
-      "Use the array itself as a hash table: negate nums[abs(x) - 1]. If already negative, x is duplicate."
-    ],
-    "editorial": {
-      "approach": "Optimal Approach for Find All Duplicates in an Array",
-      "solutionMarkdown": "### Optimal Solution\n\nIndex sign negation in-place: for x in nums, idx = abs(x) - 1; if nums[idx] < 0 duplicate else nums[idx] *= -1.\n\n### Complexity\n- Time: O(N), Space: O(1)",
-      "timeComplexity": "O(N)",
-      "spaceComplexity": "O(1)"
-    },
-    "totalSubmissions": 0,
-    "acceptedSubmissions": 0,
-    "acceptanceRate": 0
+    ]
   }
 ];
+export const faangProblems1 = faang1;

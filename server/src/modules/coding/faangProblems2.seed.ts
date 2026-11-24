@@ -1,6 +1,578 @@
-/* eslint-disable */
-// Auto-generated Coding Problem Catalog (Apple, Meta, Microsoft, Google, Accenture, Infosys, TCS) - Chunk faang2
-export const faang2 = [
+export const faang2: any[] = [
+  {
+    "title": "Fenwick Tree - Prefix Sum and Point Update",
+    "slug": "fenwick-tree-prefix-sum-and-point-update",
+    "description": "Implement a **Binary Indexed Tree (Fenwick Tree)** supporting `update(index, delta)` to add `delta` to an element, and `query(index)` to compute the prefix sum from `1` to `index` in `O(log N)` time.\n\n### Example 1:\n```\nInput: [\"FenwickTree\",\"update\",\"query\",\"update\",\"query\"]\n[[5],[1,3],[1],[3,2],[4]]\nOutput: [null,null,3,null,5]\nExplanation: update(1, 3) makes prefix sum at 1 = 3. update(3, 2) makes prefix sum at 4 = 3 + 2 = 5.\n```\n\n### Example 2:\n```\nInput: [\"FenwickTree\",\"query\"]\n[[10],[5]]\nOutput: [null,0]\nExplanation: Empty tree returns 0 prefix sum.\n```",
+    "difficulty": "HARD",
+    "category": "DSA",
+    "patterns": [
+      "Binary Indexed Tree",
+      "Design",
+      "Array"
+    ],
+    "topics": [
+      "Binary Indexed Tree",
+      "Design",
+      "Array"
+    ],
+    "companyTags": [
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 28,
+        "sourceNote": "Infosys Practice Bank #80"
+      },
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #100"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def fenwickTreePrefixSumAndPointUpdate(*args):\n    # TODO: Implement solution for Fenwick Tree - Prefix Sum and Point Update\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = fenwickTreePrefixSumAndPointUpdate(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(fenwickTreePrefixSumAndPointUpdate(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function fenwickTreePrefixSumAndPointUpdate(...args) {\n    // TODO: Implement solution for Fenwick Tree - Prefix Sum and Point Update\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(fenwickTreePrefixSumAndPointUpdate(...parsed)));\n    } catch (e) {\n        console.log(fenwickTreePrefixSumAndPointUpdate(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Fenwick Tree - Prefix Sum and Point Update\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[\"FenwickTree\",\"update\",\"query\",\"update\",\"query\"]\n[[5],[1,3],[1],[3,2],[4]]",
+        "output": "[null,null,3,null,5]",
+        "explanation": "update(1, 3) makes prefix sum at 1 = 3. update(3, 2) makes prefix sum at 4 = 3 + 2 = 5."
+      },
+      {
+        "input": "[\"FenwickTree\",\"query\"]\n[[10],[5]]",
+        "output": "[null,0]",
+        "explanation": "Empty tree returns 0 prefix sum."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[\"FenwickTree\",\"update\",\"query\",\"update\",\"query\"]\n[[5],[1,3],[1],[3,2],[4]]",
+        "output": "[null,null,3,null,5]",
+        "isHidden": true
+      },
+      {
+        "input": "[\"FenwickTree\",\"query\"]\n[[10],[5]]",
+        "output": "[null,0]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Use index & (-index) for bitwise traversal of tree nodes."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Fenwick Tree - Prefix Sum and Point Update",
+      "solutionMarkdown": "### Optimal Solution\n\nUpdate: add delta and advance i += i & (-i). Query: sum value and backtrack i -= i & (-i).\n\n### Complexity\n- Time: O(log N) per query/update, Space: O(N)",
+      "timeComplexity": "O(log N) per query/update",
+      "spaceComplexity": "O(N)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Fibonacci Number",
+    "slug": "fibonacci-number",
+    "description": "The **Fibonacci numbers** commonly denoted `F(n)` form a sequence such that each number is the sum of the two preceding ones, starting from `0` and `1`. Given `n`, calculate `F(n)`.\n\n### Example 1:\n```\nInput: 2\nOutput: 1\nExplanation: F(2) = F(1) + F(0) = 1 + 0 = 1.\n```\n\n### Example 2:\n```\nInput: 4\nOutput: 3\nExplanation: F(4) = F(3) + F(2) = 2 + 1 = 3.\n```",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Math",
+      "Dynamic Programming",
+      "Recursion",
+      "Memoization"
+    ],
+    "topics": [
+      "Math",
+      "Dynamic Programming",
+      "Recursion",
+      "Memoization"
+    ],
+    "companyTags": [
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 30,
+        "sourceNote": "TCS Practice Bank #4"
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def fibonacciNumber(*args):\n    # TODO: Implement solution for Fibonacci Number\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = fibonacciNumber(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(fibonacciNumber(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function fibonacciNumber(...args) {\n    // TODO: Implement solution for Fibonacci Number\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(fibonacciNumber(...parsed)));\n    } catch (e) {\n        console.log(fibonacciNumber(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Fibonacci Number\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "2",
+        "output": "1",
+        "explanation": "F(2) = F(1) + F(0) = 1 + 0 = 1."
+      },
+      {
+        "input": "4",
+        "output": "3",
+        "explanation": "F(4) = F(3) + F(2) = 2 + 1 = 3."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "2",
+        "output": "1",
+        "isHidden": true
+      },
+      {
+        "input": "4",
+        "output": "3",
+        "isHidden": true
+      },
+      {
+        "input": "0",
+        "output": "0",
+        "isHidden": true
+      },
+      {
+        "input": "10",
+        "output": "55",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Maintain two variables a and b iteratively to use O(1) space."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Fibonacci Number",
+      "solutionMarkdown": "### Optimal Solution\n\nIterative rolling calculation: a, b = 0, 1. For _ in range(n): a, b = b, a + b. Return a.\n\n### Complexity\n- Time: O(N), Space: O(1)",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Find a Path in Grid to Bottom-Right",
+    "slug": "find-a-path-in-grid-to-bottom-right",
+    "description": "Given an `m x n` binary grid where `0` represents an empty cell and `1` represents an obstacle, return *the path from top-left `(0, 0)` to bottom-right `(m-1, n-1)` as a list of coordinates*. If no path exists, return an empty list.\n\n### Example 1:\n```\nInput: [[0,0,0],[0,1,0],[0,0,0]]\nOutput: [[0, 0], [0, 1], [0, 2], [1, 2], [2, 2]]\nExplanation: Valid path avoiding obstacle.\n```\n\n### Example 2:\n```\nInput: [[0,1],[1,0]]\nOutput: []\nExplanation: Path blocked.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Grid",
+      "BFS / DFS"
+    ],
+    "topics": [
+      "Grid",
+      "BFS / DFS"
+    ],
+    "companyTags": [
+      {
+        "company": "Meta",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 40,
+        "sourceNote": "Reported in Meta 2021-2026 interview set"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def findAPathInGridToBottomRight(*args):\n    # TODO: Implement solution for Find a Path in Grid to Bottom-Right\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findAPathInGridToBottomRight(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findAPathInGridToBottomRight(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function findAPathInGridToBottomRight(...args) {\n    // TODO: Implement solution for Find a Path in Grid to Bottom-Right\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findAPathInGridToBottomRight(...parsed)));\n    } catch (e) {\n        console.log(findAPathInGridToBottomRight(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find a Path in Grid to Bottom-Right\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[[0,0,0],[0,1,0],[0,0,0]]",
+        "output": "[[0, 0], [0, 1], [0, 2], [1, 2], [2, 2]]",
+        "explanation": "Valid path avoiding obstacle."
+      },
+      {
+        "input": "[[0,1],[1,0]]",
+        "output": "[]",
+        "explanation": "Path blocked."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[[0,0,0],[0,1,0],[0,0,0]]",
+        "output": "[[0, 0], [0, 1], [0, 2], [1, 2], [2, 2]]",
+        "isHidden": true
+      },
+      {
+        "input": "[[0,1],[1,0]]",
+        "output": "[]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Run BFS/DFS with parent tracking to reconstruct the path from destination back to start."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Find a Path in Grid to Bottom-Right",
+      "solutionMarkdown": "### Optimal Solution\n\nBFS with parent dictionary mapping each visited cell to its predecessor.\n\n### Complexity\n- Time: O(M * N), Space: O(M * N)",
+      "timeComplexity": "O(M * N)",
+      "spaceComplexity": "O(M * N)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Find All Anagrams in a String",
+    "slug": "find-all-anagrams-in-a-string",
+    "description": "Given two strings `s` and `p`, return *an array of all the start indices of `p`'s **anagrams** in `s`*.\n\n### Example 1:\n```\nInput: cbaebabacd\nabc\nOutput: [0, 6]\nExplanation: The substrings with start index = 0 is 'cba', and at index = 6 is 'bac'.\n```\n\n### Example 2:\n```\nInput: abab\nab\nOutput: [0, 1, 2]\nExplanation: Substrings at 0, 1, 2 are anagrams.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Sliding Window",
+      "Hash Table"
+    ],
+    "topics": [
+      "Sliding Window",
+      "Hash Table"
+    ],
+    "companyTags": [
+      {
+        "company": "Apple",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 45,
+        "sourceNote": "Reported in Apple 2021-2026 interview set"
+      },
+      {
+        "company": "Meta",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 40,
+        "sourceNote": "Reported in Meta 2021-2026 interview set"
+      },
+      {
+        "company": "Microsoft",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 35,
+        "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Accenture",
+        "yearReported": 2025,
+        "verified": false,
+        "frequencyCount": 25,
+        "sourceNote": "Accenture Practice Bank #33"
+      },
+      {
+        "company": "Infosys",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 42,
+        "sourceNote": "Infosys Interview Question #28"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def findAllAnagramsInAString(*args):\n    # TODO: Implement solution for Find All Anagrams in a String\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findAllAnagramsInAString(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findAllAnagramsInAString(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function findAllAnagramsInAString(...args) {\n    // TODO: Implement solution for Find All Anagrams in a String\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findAllAnagramsInAString(...parsed)));\n    } catch (e) {\n        console.log(findAllAnagramsInAString(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find All Anagrams in a String\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "cbaebabacd\nabc",
+        "output": "[0, 6]",
+        "explanation": "The substrings with start index = 0 is 'cba', and at index = 6 is 'bac'."
+      },
+      {
+        "input": "abab\nab",
+        "output": "[0, 1, 2]",
+        "explanation": "Substrings at 0, 1, 2 are anagrams."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "cbaebabacd\nabc",
+        "output": "[0, 6]",
+        "isHidden": true
+      },
+      {
+        "input": "abab\nab",
+        "output": "[0, 1, 2]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Sliding window of length len(p) tracking character matches."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Find All Anagrams in a String",
+      "solutionMarkdown": "### Optimal Solution\n\nMaintain frequency map comparison over fixed window of size len(p).\n\n### Complexity\n- Time: O(N), Space: O(1)",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Find All Duplicates in an Array",
+    "slug": "find-all-duplicates-in-an-array",
+    "description": "Given an integer array `nums` of length `n` where all integers are in the range `[1, n]` and each integer appears **once** or **twice**, return an array of all integers that appear **twice** in `O(n)` time and `O(1)` auxiliary space.\n\n### Example 1:\n```\nInput: [4,3,2,7,8,2,3,1]\nOutput: [2, 3]\nExplanation: 2 and 3 appear twice.\n```\n\n### Example 2:\n```\nInput: [1,1,2]\nOutput: [1]\nExplanation: 1 appears twice.\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "Hash Table"
+    ],
+    "topics": [
+      "Array",
+      "Hash Table"
+    ],
+    "companyTags": [
+      {
+        "company": "Meta",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 40,
+        "sourceNote": "Reported in Meta 2021-2026 interview set"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def findAllDuplicatesInAnArray(*args):\n    # TODO: Implement solution for Find All Duplicates in an Array\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findAllDuplicatesInAnArray(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findAllDuplicatesInAnArray(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function findAllDuplicatesInAnArray(...args) {\n    // TODO: Implement solution for Find All Duplicates in an Array\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findAllDuplicatesInAnArray(...parsed)));\n    } catch (e) {\n        console.log(findAllDuplicatesInAnArray(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Find All Duplicates in an Array\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[4,3,2,7,8,2,3,1]",
+        "output": "[2, 3]",
+        "explanation": "2 and 3 appear twice."
+      },
+      {
+        "input": "[1,1,2]",
+        "output": "[1]",
+        "explanation": "1 appears twice."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[4,3,2,7,8,2,3,1]",
+        "output": "[2, 3]",
+        "isHidden": true
+      },
+      {
+        "input": "[1,1,2]",
+        "output": "[1]",
+        "isHidden": true
+      },
+      {
+        "input": "[1]",
+        "output": "[]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Use the array itself as a hash table: negate nums[abs(x) - 1]. If already negative, x is duplicate."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Find All Duplicates in an Array",
+      "solutionMarkdown": "### Optimal Solution\n\nIndex sign negation in-place: for x in nums, idx = abs(x) - 1; if nums[idx] < 0 duplicate else nums[idx] *= -1.\n\n### Complexity\n- Time: O(N), Space: O(1)",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Find All Factors of a Number",
+    "slug": "find-all-factors-of-a-number",
+    "description": "Given a positive integer $N$, find all its positive divisors/factors in sorted ascending order. Output the factors separated by spaces.\\n\\n### Example 1:\\n```\\nInput: 12\\nOutput: 1 2 3 4 6 12\\nExplanation: Divisors of 12 are 1, 2, 3, 4, 6, 12.\\n```\\n\\n### Example 2:\\n```\\nInput: 25\\nOutput: 1 5 25\\nExplanation: Divisors of 25 are 1, 5, 25.\\n```\\n\\n### Constraints:\\n- $1 \\le N \\le 10^9$",
+    "difficulty": "EASY",
+    "patterns": [
+      "Number Theory",
+      "Math"
+    ],
+    "topics": [
+      "Math",
+      "Number Theory"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "12",
+        "output": "1 2 3 4 6 12",
+        "explanation": "All factors of 12."
+      },
+      {
+        "input": "25",
+        "output": "1 5 25",
+        "explanation": "All factors of 25."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "1",
+        "output": "1"
+      },
+      {
+        "input": "7",
+        "output": "1 7"
+      },
+      {
+        "input": "36",
+        "output": "1 2 3 4 6 9 12 18 36"
+      }
+    ],
+    "hints": [
+      "Iterate $i$ from 1 to $\\sqrt{N}$. If $i$ divides $N$, collect both $i$ and $N / i$."
+    ],
+    "editorial": {
+      "approach": "Square Root Divisor Enumeration",
+      "solutionMarkdown": "Enumerate pairs up to $\\sqrt{N}$, then sort the collected list.",
+      "timeComplexity": "O(sqrt(N) log(sqrt(N)))",
+      "spaceComplexity": "O(d(N))"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def findAllFactorsOfANumber(*args):\n    # TODO: Implement solution for Find All Factors of a Number\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findAllFactorsOfANumber(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findAllFactorsOfANumber(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function findAllFactorsOfANumber(...args) {\n    // TODO: Implement solution for Find All Factors of a Number\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findAllFactorsOfANumber(...parsed)));\n    } catch (e) {\n        console.log(findAllFactorsOfANumber(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Find All Factors of a Number\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Find All Factors of a Number\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
+  },
   {
     "title": "Find All Numbers Disappeared in an Array",
     "slug": "find-all-numbers-disappeared-in-an-array",
@@ -125,6 +697,16 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #63"
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -412,6 +994,26 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -498,6 +1100,16 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #34"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -690,6 +1302,21 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #35"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -870,6 +1497,11 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -1045,6 +1677,21 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -1296,6 +1943,162 @@ export const faang2 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Find the Row with Maximum Sum",
+    "slug": "find-the-row-with-maximum-sum",
+    "description": "Given an $M \\times N$ integer matrix, find the 0-based index of the row that has the maximum sum of elements. If multiple rows have the same maximum sum, return the smallest row index.\\n\\n### Example 1:\\n```\\nInput:\\n3 3\\n1 2 3\\n4 5 6\\n7 0 1\\nOutput: 1\\nExplanation: Row 0 sum = 6, Row 1 sum = 15, Row 2 sum = 8. Maximum sum is 15 at row index 1.\\n```\\n\\n### Example 2:\\n```\\nInput:\\n2 2\\n10 20\\n30 5\\nOutput: 1\\nExplanation: Row 0 sum = 30, Row 1 sum = 35. Row 1 has maximum sum.\\n```\\n\\n### Constraints:\\n- $1 \\le M, N \\le 1000$\\n- $-10^6 \\le \\text{matrix}[i][j] \\le 10^6$",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Matrix",
+      "Simulation"
+    ],
+    "topics": [
+      "Array",
+      "Matrix"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 5,
+        "yearReported": 2025
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "3 3\n1 2 3\n4 5 6\n7 0 1",
+        "output": "1",
+        "explanation": "Row 1 has highest sum 15."
+      },
+      {
+        "input": "2 2\n10 20\n30 5",
+        "output": "1",
+        "explanation": "Row 1 sum 35 > Row 0 sum 30."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "1 1\n42",
+        "output": "0"
+      },
+      {
+        "input": "2 2\n-5 -10\n-2 -3",
+        "output": "1"
+      },
+      {
+        "input": "3 2\n1 1\n1 1\n1 1",
+        "output": "0"
+      }
+    ],
+    "hints": [
+      "Iterate over each row, sum the elements, and track the maximum sum and row index."
+    ],
+    "editorial": {
+      "approach": "Linear Matrix Scan by Row",
+      "solutionMarkdown": "### Method\nCompute sum of each row and maintain the maximum seen so far.",
+      "timeComplexity": "O(M * N)",
+      "spaceComplexity": "O(1)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def findTheRowWithMaximumSum(*args):\n    # TODO: Implement solution for Find the Row with Maximum Sum\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findTheRowWithMaximumSum(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findTheRowWithMaximumSum(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function findTheRowWithMaximumSum(...args) {\n    // TODO: Implement solution for Find the Row with Maximum Sum\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findTheRowWithMaximumSum(...parsed)));\n    } catch (e) {\n        console.log(findTheRowWithMaximumSum(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Find the Row with Maximum Sum\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Find the Row with Maximum Sum\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Find the Second Largest Element",
+    "slug": "find-the-second-largest-element",
+    "description": "Given an array of integers `arr`, find the second largest distinct element. If no second largest distinct element exists, return `-1`.\\n\\n### Example 1:\\n```\\nInput: [12, 35, 1, 10, 34, 1]\\nOutput: 34\\nExplanation: The largest element is 35 and the second largest is 34.\\n```\\n\\n### Example 2:\\n```\\nInput: [10, 10, 10]\\nOutput: -1\\nExplanation: All elements are equal, so no second largest element exists.\\n```\\n\\n### Constraints:\\n- $1 \\le |arr| \\le 10^5$\\n- $-10^9 \\le arr[i] \\le 10^9$",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "One Pass"
+    ],
+    "topics": [
+      "Array"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 9,
+        "yearReported": 2026
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[12, 35, 1, 10, 34, 1]",
+        "output": "34",
+        "explanation": "Second distinct largest is 34."
+      },
+      {
+        "input": "[10, 10, 10]",
+        "output": "-1",
+        "explanation": "No second largest distinct value."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[5]",
+        "output": "-1"
+      },
+      {
+        "input": "[-5, -2, -1, -3]",
+        "output": "-2"
+      },
+      {
+        "input": "[100, 200]",
+        "output": "100"
+      }
+    ],
+    "hints": [
+      "Maintain two variables `first` and `second` initialized to negative infinity.",
+      "Update them in a single pass over the array."
+    ],
+    "editorial": {
+      "approach": "Single Pass Tracking Two Maxima",
+      "solutionMarkdown": "### One-Pass Algorithm\nTrack `first` and `second`. When `x > first`, set `second = first, first = x`. When `first > x > second`, set `second = x`.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def findTheSecondLargestElement(*args):\n    # TODO: Implement solution for Find the Second Largest Element\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = findTheSecondLargestElement(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(findTheSecondLargestElement(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function findTheSecondLargestElement(...args) {\n    // TODO: Implement solution for Find the Second Largest Element\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(findTheSecondLargestElement(...parsed)));\n    } catch (e) {\n        console.log(findTheSecondLargestElement(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Find the Second Largest Element\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Find the Second Largest Element\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "First Missing Positive",
     "slug": "first-missing-positive",
     "description": "Given an unsorted integer array `nums`, return the smallest missing positive integer.\n\nYou must implement an algorithm that runs in `O(n)` time and uses `O(1)` auxiliary space.\n\n### Example 1:\n```\nInput: [1,2,0]\nOutput: 3\nExplanation: Numbers 1 and 2 are present, 3 is the smallest missing.\n```\n\n### Example 2:\n```\nInput: [3,4,-1,1]\nOutput: 2\nExplanation: 1 is in array, 2 is missing.\n```",
@@ -1337,6 +2140,11 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 42,
         "sourceNote": "Infosys Interview Question #11"
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -1406,6 +2214,87 @@ export const faang2 = [
       "timeComplexity": "O(N)",
       "spaceComplexity": "O(1)"
     },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "First Non-Repeating Character",
+    "slug": "first-non-repeating-character",
+    "description": "Given a string `s`, find the first non-repeating character in it and return its index. If it does not exist, return `-1`.\\n\\n### Example 1:\\n```\\nInput: leetcode\\nOutput: 0\\nExplanation: The character 'l' at index 0 does not occur at any other index.\\n```\\n\\n### Example 2:\\n```\\nInput: loveleetcode\\nOutput: 2\\nExplanation: 'v' at index 2 is the first unique character.\\n```\\n\\n### Constraints:\\n- $1 \\le |s| \\le 10^5$\\n- `s` consists of only lowercase English letters.",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Hash Table",
+      "String"
+    ],
+    "topics": [
+      "Hash Table",
+      "String",
+      "Queue",
+      "Counting"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 8,
+        "yearReported": 2026
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "leetcode",
+        "output": "0",
+        "explanation": "'l' is unique at index 0."
+      },
+      {
+        "input": "loveleetcode",
+        "output": "2",
+        "explanation": "'v' is unique at index 2."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "aabb",
+        "output": "-1"
+      },
+      {
+        "input": "z",
+        "output": "0"
+      },
+      {
+        "input": "dddccdbba",
+        "output": "8"
+      }
+    ],
+    "hints": [
+      "Count frequencies of all 26 lowercase English letters in a first pass.",
+      "In a second pass, return the index of the first character with frequency 1."
+    ],
+    "editorial": {
+      "approach": "Two-Pass Frequency Array",
+      "solutionMarkdown": "### Frequency Array\nCount character occurrences with an array of size 26. Then scan the string again to find the first character with count 1.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1) (fixed 26-element array)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def firstNonRepeatingCharacter(*args):\n    # TODO: Implement solution for First Non-Repeating Character\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = firstNonRepeatingCharacter(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(firstNonRepeatingCharacter(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function firstNonRepeatingCharacter(...args) {\n    // TODO: Implement solution for First Non-Repeating Character\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(firstNonRepeatingCharacter(...parsed)));\n    } catch (e) {\n        console.log(firstNonRepeatingCharacter(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for First Non-Repeating Character\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for First Non-Repeating Character\n    }\n}\n"
+      }
+    ],
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
@@ -1619,6 +2508,11 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -1949,6 +2843,85 @@ export const faang2 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Floyd-Warshall All-Pairs Shortest Paths",
+    "slug": "floyd-warshall-all-pairs-shortest-paths",
+    "description": "Given an $N \\times N$ distance matrix representing a directed weighted graph where `matrix[i][j] = -1` indicates no direct edge, compute the shortest path between every pair of vertices using the Floyd-Warshall algorithm. Modify the matrix in-place so that `matrix[i][j]` contains the shortest distance from $i$ to $j$ (or `-1` if unreachable).\\n\\n### Example 1:\\n```\\nInput:\\n2\\n0 3\\n-1 0\\nOutput:\\n0 3\\n-1 0\\nExplanation: Distance from 0 to 1 is 3; 1 cannot reach 0.\\n```\\n\\n### Example 2:\\n```\\nInput:\\n3\\n0 1 43\\n1 0 6\\n-1 -1 0\\nOutput:\\n0 1 7\\n1 0 6\\n-1 -1 0\\nExplanation: 0 reaches 2 via 1 with cost 1 + 6 = 7.\\n```\\n\\n### Constraints:\\n- $1 \\le N \\le 100$\\n- $-1 \\le matrix[i][j] \\le 1000$",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Graph",
+      "Floyd-Warshall",
+      "Dynamic Programming"
+    ],
+    "topics": [
+      "Graph",
+      "Dynamic Programming"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "2\n0 3\n-1 0",
+        "output": "0 3\n-1 0",
+        "explanation": "Direct reachability."
+      },
+      {
+        "input": "3\n0 1 43\n1 0 6\n-1 -1 0",
+        "output": "0 1 7\n1 0 6\n-1 -1 0",
+        "explanation": "Intermediate vertex 1 shortens path 0->2 to 7."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "1\n0",
+        "output": "0"
+      },
+      {
+        "input": "2\n0 -1\n-1 0",
+        "output": "0 -1\n-1 0"
+      },
+      {
+        "input": "3\n0 2 9\n1 0 4\n-1 -1 0",
+        "output": "0 2 6\n1 0 4\n-1 -1 0"
+      }
+    ],
+    "hints": [
+      "Three nested loops with k as the outer loop representing intermediate nodes."
+    ],
+    "editorial": {
+      "approach": "Dynamic Programming over Intermediate Vertices",
+      "solutionMarkdown": "`dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])` for all $k, i, j$.",
+      "timeComplexity": "O(N^3)",
+      "spaceComplexity": "O(1) in-place"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def floydWarshallAllPairsShortestPaths(*args):\n    # TODO: Implement solution for Floyd-Warshall All-Pairs Shortest Paths\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = floydWarshallAllPairsShortestPaths(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(floydWarshallAllPairsShortestPaths(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function floydWarshallAllPairsShortestPaths(...args) {\n    // TODO: Implement solution for Floyd-Warshall All-Pairs Shortest Paths\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(floydWarshallAllPairsShortestPaths(...parsed)));\n    } catch (e) {\n        console.log(floydWarshallAllPairsShortestPaths(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Floyd-Warshall All-Pairs Shortest Paths\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Floyd-Warshall All-Pairs Shortest Paths\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
     "title": "Fraction to Recurring Decimal",
     "slug": "fraction-to-recurring-decimal",
     "description": "Given two integers representing the `numerator` and `denominator` of a fraction, return *the fraction in string format*. If the fractional part is repeating, enclose the repeating part in parentheses.\n\n### Example 1:\n```\nInput: 1\n2\nOutput: \"0.5\"\nExplanation: 1 / 2 = 0.5 with no repeating part.\n```\n\n### Example 2:\n```\nInput: 2\n3\nOutput: \"0.(6)\"\nExplanation: 2 / 3 = 0.6666... with 6 repeating.\n```",
@@ -2067,6 +3040,11 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 42,
         "sourceNote": "Infosys Interview Question #42"
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -2134,6 +3112,168 @@ export const faang2 = [
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
+  },
+  {
+    "title": "Frog Jump",
+    "slug": "frog-jump",
+    "description": "A frog is crossing a river. The river is divided into some number of units, and at each unit, there may or may not exist a stone. The frog can jump on a stone, but it must not jump into the water.\\n\\nGiven a list of `stones` positions (in units) in sorted ascending order, determine if the frog can cross the river by landing on the last stone. Initially, the frog is on the first stone and assumes the first jump must be 1 unit.\\n\\nIf the frog's last jump was $k$ units, its next jump must be either $k - 1$, $k$, or $k + 1$ units.\\n\\n### Example 1:\\n```\\nInput: [0,1,3,5,6,8,12,17]\\nOutput: true\\nExplanation: The frog can jump: 0 -> 1 (k=1) -> 3 (k=2) -> 5 (k=2) -> 8 (k=3) -> 12 (k=4) -> 17 (k=5).\\n```\\n\\n### Example 2:\\n```\\nInput: [0,1,2,3,4,8,9,11]\\nOutput: false\\nExplanation: Frog cannot reach the last stone.\\n```\\n\\n### Constraints:\\n- $2 \\le |stones| \\le 2000$\\n- $0 \\le stones[i] \\le 2^{31} - 1$",
+    "difficulty": "HARD",
+    "patterns": [
+      "Dynamic Programming",
+      "Memoization",
+      "Hash Table"
+    ],
+    "topics": [
+      "Array",
+      "Dynamic Programming"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[0,1,3,5,6,8,12,17]",
+        "output": "true",
+        "explanation": "Valid sequence of jumps reaches last stone."
+      },
+      {
+        "input": "[0,1,2,3,4,8,9,11]",
+        "output": "false",
+        "explanation": "Gap to 8 is too large."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[0, 1]",
+        "output": "true"
+      },
+      {
+        "input": "[0, 2]",
+        "output": "false"
+      },
+      {
+        "input": "[0, 1, 3, 6, 10, 15, 21]",
+        "output": "true"
+      }
+    ],
+    "hints": [
+      "Use a hash map mapping each stone position to the set of jump sizes that can reach it.",
+      "For each stone and each jump $k$, check if `stone + k - 1`, `stone + k`, or `stone + k + 1` is in stones."
+    ],
+    "editorial": {
+      "approach": "DP with Map of Sets",
+      "solutionMarkdown": "Map each stone position to reachable jump sizes. Propagate forward.",
+      "timeComplexity": "O(N^2)",
+      "spaceComplexity": "O(N^2)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def frogJump(*args):\n    # TODO: Implement solution for Frog Jump\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = frogJump(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(frogJump(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function frogJump(...args) {\n    // TODO: Implement solution for Frog Jump\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(frogJump(...parsed)));\n    } catch (e) {\n        console.log(frogJump(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Frog Jump\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Frog Jump\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
+  },
+  {
+    "title": "Frog Position After T Seconds (Random Walk in a Tree)",
+    "slug": "frog-position-random-walk-in-a-tree",
+    "description": "Given an undirected tree consisting of `n` vertices numbered from `1` to `n`, a frog starts at vertex `1`. At each second, the frog jumps from its current vertex to another unvisited vertex chosen uniformly at random among its unvisited neighbors. If the frog has no unvisited neighbors, it stays on the same vertex forever.\\n\\nReturn the probability that after `t` seconds the frog is on vertex `target`.\\n\\n### Example 1:\\n```\\nInput: n = 7, edges = [[1,2],[1,3],[1,7],[2,4],[2,6],[3,5]], t = 2, target = 4\\nOutput: 0.16666666666666666\\nExplanation: Probability is (1/3) * (1/2) = 1/6.\\n```\\n\\n### Example 2:\\n```\\nInput: n = 7, edges = [[1,2],[1,3],[1,7],[2,4],[2,6],[3,5]], t = 1, target = 7\\nOutput: 0.3333333333333333\\nExplanation: Direct jump from 1 to 7 with prob 1/3.\\n```\\n\\n### Constraints:\\n- $1 \\le n \\le 100$\\n- $0 \\le t \\le 50$\\n- $1 \\le target \\le n$",
+    "difficulty": "HARD",
+    "patterns": [
+      "Tree",
+      "DFS",
+      "Probability"
+    ],
+    "topics": [
+      "Tree",
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Graph"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "n = 7\nedges = [[1,2],[1,3],[1,7],[2,4],[2,6],[3,5]]\nt = 2\ntarget = 4",
+        "output": "0.16666666666666666",
+        "explanation": "Probability path (1/3)*(1/2) = 1/6."
+      },
+      {
+        "input": "n = 7\nedges = [[1,2],[1,3],[1,7],[2,4],[2,6],[3,5]]\nt = 1\ntarget = 7",
+        "output": "0.3333333333333333",
+        "explanation": "Direct probability 1/3."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "n = 1\nedges = []\nt = 1\ntarget = 1",
+        "output": "1.0"
+      },
+      {
+        "input": "n = 3\nedges = [[1,2],[1,3]]\nt = 2\ntarget = 2",
+        "output": "0.5"
+      },
+      {
+        "input": "n = 3\nedges = [[1,2],[2,3]]\nt = 1\ntarget = 3",
+        "output": "0.0"
+      }
+    ],
+    "hints": [
+      "Run DFS tracking (node, time_left, probability).",
+      "If you reach target, check if time_left == 0 or node is a leaf with no unvisited neighbors."
+    ],
+    "editorial": {
+      "approach": "DFS Probability Propagation",
+      "solutionMarkdown": "Traverse tree from root. When at node with $k$ unvisited neighbors, each branch has probability $p / k$.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def frogPositionRandomWalkInATree(*args):\n    # TODO: Implement solution for Frog Position After T Seconds (Random Walk in a Tree)\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = frogPositionRandomWalkInATree(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(frogPositionRandomWalkInATree(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function frogPositionRandomWalkInATree(...args) {\n    // TODO: Implement solution for Frog Position After T Seconds (Random Walk in a Tree)\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(frogPositionRandomWalkInATree(...parsed)));\n    } catch (e) {\n        console.log(frogPositionRandomWalkInATree(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Frog Position After T Seconds (Random Walk in a Tree)\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Frog Position After T Seconds (Random Walk in a Tree)\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
   },
   {
     "title": "Game of Life",
@@ -2247,6 +3387,11 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -2336,6 +3481,11 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #75"
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -2441,6 +3591,11 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #84"
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -2510,6 +3665,86 @@ export const faang2 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Good Subsequence",
+    "slug": "good-subsequence",
+    "description": "Given an integer array `nums`, a subsequence is called good if the absolute difference between every pair of adjacent elements in the subsequence is at most $1$. Find the length of the longest good subsequence.\\n\\n### Example 1:\\n```\\nInput: [1, 2, 3, 2, 3, 4]\\nOutput: 6\\nExplanation: The entire array is a good subsequence since |2-1|<=1, |3-2|<=1, etc.\\n```\\n\\n### Example 2:\\n```\\nInput: [1, 5, 2, 6, 3, 7]\\nOutput: 3\\nExplanation: Subsequence [1, 2, 3] has length 3.\\n```\\n\\n### Constraints:\\n- $1 \\le |nums| \\le 10^5$\\n- $1 \\le nums[i] \\le 10^9$",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Dynamic Programming",
+      "Hash Table"
+    ],
+    "topics": [
+      "Array",
+      "Hash Table",
+      "Dynamic Programming"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1, 2, 3, 2, 3, 4]",
+        "output": "6",
+        "explanation": "Length 6 good subsequence."
+      },
+      {
+        "input": "[1, 5, 2, 6, 3, 7]",
+        "output": "3",
+        "explanation": "Subsequence [1, 2, 3] has length 3."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[10]",
+        "output": "1"
+      },
+      {
+        "input": "[1, 3, 5, 7]",
+        "output": "1"
+      },
+      {
+        "input": "[2, 2, 2, 2]",
+        "output": "4"
+      }
+    ],
+    "hints": [
+      "Let dp[x] be the length of the longest good subsequence ending with value x.",
+      "dp[x] = 1 + max(dp[x-1], dp[x], dp[x+1])."
+    ],
+    "editorial": {
+      "approach": "Hash Map DP on Adjacent Values",
+      "solutionMarkdown": "Maintain `dp` dictionary. For each element `x`, `dp[x] = 1 + max(dp.get(x-1, 0), dp.get(x, 0), dp.get(x+1, 0))`.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def goodSubsequence(*args):\n    # TODO: Implement solution for Good Subsequence\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = goodSubsequence(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(goodSubsequence(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function goodSubsequence(...args) {\n    // TODO: Implement solution for Good Subsequence\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(goodSubsequence(...parsed)));\n    } catch (e) {\n        console.log(goodSubsequence(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Good Subsequence\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Good Subsequence\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
     "title": "Graph Valid Tree",
     "slug": "graph-valid-tree",
     "description": "You have a graph of `n` nodes labeled from `0` to `n - 1`. Given an integer `n` and a list of `edges` where `edges[i] = [ai, bi]`, return `true` if the edges of the given graph make up a valid tree, and `false` otherwise.\n\n### Example 1:\n```\nInput: 5\n[[0,1],[0,2],[0,3],[1,4]]\nOutput: true\nExplanation: Graph has 5 nodes, 4 edges, connected with no cycles.\n```\n\n### Example 2:\n```\nInput: 5\n[[0,1],[1,2],[2,3],[1,3],[1,4]]\nOutput: false\nExplanation: Cycle exists between 1, 2, and 3.\n```",
@@ -2541,6 +3776,16 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -2856,6 +4101,26 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #39"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -3167,6 +4432,31 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 45,
         "sourceNote": "TCS Interview Question #78"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -3275,6 +4565,11 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #91"
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -3550,6 +4845,16 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 42,
         "sourceNote": "Infosys Interview Question #49"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -3729,6 +5034,11 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -4036,6 +5346,11 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #49"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -4103,6 +5418,84 @@ export const faang2 = [
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
+  },
+  {
+    "title": "Insertion Sort",
+    "slug": "insertion-sort",
+    "description": "Given an array of integers `nums`, sort the array in ascending order using the Insertion Sort algorithm and return the sorted array.\\n\\n### Example 1:\\n```\\nInput: [12, 11, 13, 5, 6]\\nOutput: [5, 6, 11, 12, 13]\\nExplanation: Insertion sort builds sorted array one item at a time.\\n```\\n\\n### Example 2:\\n```\\nInput: [4, 3, 2, 10, 12, 1, 5, 6]\\nOutput: [1, 2, 3, 4, 5, 6, 10, 12]\\nExplanation: Array fully sorted.\\n```\\n\\n### Constraints:\\n- $1 \\le |nums| \\le 1000$\\n- $-10^4 \\le nums[i] \\le 10^4$",
+    "difficulty": "EASY",
+    "patterns": [
+      "Sorting",
+      "Simulation"
+    ],
+    "topics": [
+      "Array",
+      "Sorting"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[12, 11, 13, 5, 6]",
+        "output": "[5, 6, 11, 12, 13]",
+        "explanation": "Sorted via insertion sort."
+      },
+      {
+        "input": "[4, 3, 2, 10, 12, 1, 5, 6]",
+        "output": "[1, 2, 3, 4, 5, 6, 10, 12]",
+        "explanation": "Sorted array."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1]",
+        "output": "[1]"
+      },
+      {
+        "input": "[2, 1]",
+        "output": "[1, 2]"
+      },
+      {
+        "input": "[-5, -10, 0, 5]",
+        "output": "[-10, -5, 0, 5]"
+      }
+    ],
+    "hints": [
+      "Iterate from 1 to n-1. Shift elements greater than key to one position ahead."
+    ],
+    "editorial": {
+      "approach": "In-Place Insertion Sort",
+      "solutionMarkdown": "Maintain sorted prefix. Shift larger elements right to insert key.",
+      "timeComplexity": "O(N^2)",
+      "spaceComplexity": "O(1)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def insertionSort(*args):\n    # TODO: Implement solution for Insertion Sort\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = insertionSort(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(insertionSort(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function insertionSort(...args) {\n    // TODO: Implement solution for Insertion Sort\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(insertionSort(...parsed)));\n    } catch (e) {\n        console.log(insertionSort(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Insertion Sort\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Insertion Sort\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
   },
   {
     "title": "Insertion Sort List",
@@ -4401,6 +5794,11 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 45,
         "sourceNote": "Reported in Apple 2021-2026 interview set"
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -4587,6 +5985,11 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #59"
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -4685,6 +6088,16 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #63"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -4941,6 +6354,88 @@ export const faang2 = [
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
+  },
+  {
+    "title": "Job Sequencing with Deadlines",
+    "slug": "job-sequencing-with-deadlines",
+    "description": "Given a set of $N$ jobs where each job $i$ has a deadline and profit, find the maximum profit and the number of jobs completed assuming that each job takes 1 unit of time and only one job can be scheduled at a time. Each job must be completed on or before its deadline to earn profit.\\n\\nReturn the count of jobs done and the maximum profit separated by a space.\\n\\n### Example 1:\\n```\\nInput:\\n4\\n1 4 20\\n2 1 10\\n3 1 40\\n4 1 30\\nOutput: 2 60\\nExplanation: Job 3 (deadline 1, profit 40) and Job 1 (deadline 4, profit 20) can be scheduled for profit 40 + 20 = 60.\\n```\\n\\n### Example 2:\\n```\\nInput:\\n5\\n1 2 100\\n2 1 19\\n3 2 27\\n4 1 25\\n5 3 15\\nOutput: 3 142\\nExplanation: Jobs 1, 3, and 5 can be scheduled.\\n```\\n\\n### Constraints:\\n- $1 \\le N \\le 10^5$\\n- $1 \\le \\text{deadline} \\le 10^5$\\n- $1 \\le \\text{profit} \\le 10^5$",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Greedy",
+      "Disjoint Set",
+      "Sorting"
+    ],
+    "topics": [
+      "Array",
+      "Greedy",
+      "Sorting",
+      "Union Find"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "4\n1 4 20\n2 1 10\n3 1 40\n4 1 30",
+        "output": "2 60",
+        "explanation": "2 jobs completed with profit 60."
+      },
+      {
+        "input": "5\n1 2 100\n2 1 19\n3 2 27\n4 1 25\n5 3 15",
+        "output": "3 142",
+        "explanation": "3 jobs done with profit 142."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "1\n1 1 50",
+        "output": "1 50"
+      },
+      {
+        "input": "2\n1 1 10\n2 1 20",
+        "output": "1 20"
+      },
+      {
+        "input": "3\n1 2 50\n2 2 40\n3 2 30",
+        "output": "2 90"
+      }
+    ],
+    "hints": [
+      "Sort jobs by profit in descending order.",
+      "Use Disjoint Set Union (DSU) to find the latest available time slot <= deadline in nearly O(1) time."
+    ],
+    "editorial": {
+      "approach": "Greedy Scheduling with DSU Slot Allocation",
+      "solutionMarkdown": "Sort descending by profit. Use DSU parent pointers to find latest free time slot before deadline.",
+      "timeComplexity": "O(N log N)",
+      "spaceComplexity": "O(max_deadline)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def jobSequencingWithDeadlines(*args):\n    # TODO: Implement solution for Job Sequencing with Deadlines\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = jobSequencingWithDeadlines(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(jobSequencingWithDeadlines(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function jobSequencingWithDeadlines(...args) {\n    // TODO: Implement solution for Job Sequencing with Deadlines\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(jobSequencingWithDeadlines(...parsed)));\n    } catch (e) {\n        console.log(jobSequencingWithDeadlines(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Job Sequencing with Deadlines\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Job Sequencing with Deadlines\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
   },
   {
     "title": "Jump Game",
@@ -5260,6 +6755,83 @@ export const faang2 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Knapsack Problem - Slight Variation",
+    "slug": "knapsack-problem-slight-variation",
+    "description": "Given $N$ items with weights and values, and a maximum knapsack capacity $W$, you must choose a subset of items to maximize total value such that the total weight does not exceed $W$, with the extra constraint that you can select at most $K$ items in total.\\n\\nReturn the maximum value achievable.\\n\\n### Example 1:\\n```\\nInput:\\nN = 4, W = 10, K = 2\\nweights = [2, 3, 5, 7]\\nvalues = [10, 20, 40, 50]\\nOutput: 70\\nExplanation: Pick items 2 and 3 (weights 3 + 7 = 10 <= 10, count 2 <= 2, value 20 + 50 = 70).\\n```\\n\\n### Example 2:\\n```\\nInput:\\nN = 3, W = 5, K = 1\\nweights = [2, 3, 4]\\nvalues = [10, 20, 30]\\nOutput: 30\\nExplanation: Can pick at most 1 item; best is item 3 with value 30.\\n```\\n\\n### Constraints:\\n- $1 \\le N, K \\le 100$\\n- $1 \\le W \\le 1000$\\n- $1 \\le weights[i], values[i] \\le 1000$",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Dynamic Programming",
+      "Knapsack"
+    ],
+    "topics": [
+      "Dynamic Programming"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "N = 4, W = 10, K = 2\nweights = [2, 3, 5, 7]\nvalues = [10, 20, 40, 50]",
+        "output": "70",
+        "explanation": "Pick items 2 and 4."
+      },
+      {
+        "input": "N = 3, W = 5, K = 1\nweights = [2, 3, 4]\nvalues = [10, 20, 30]",
+        "output": "30",
+        "explanation": "Pick 1 item max."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "N = 1, W = 5, K = 1\nweights = [10]\nvalues = [100]",
+        "output": "0"
+      },
+      {
+        "input": "N = 2, W = 10, K = 2\nweights = [5, 5]\nvalues = [20, 30]",
+        "output": "50"
+      },
+      {
+        "input": "N = 3, W = 10, K = 3\nweights = [1, 2, 3]\nvalues = [10, 20, 30]",
+        "output": "60"
+      }
+    ],
+    "hints": [
+      "Use 2D DP `dp[w][c]` representing maximum value with weight $w$ and item count $c$."
+    ],
+    "editorial": {
+      "approach": "2D Knapsack DP with Count Dimension",
+      "solutionMarkdown": "For each item, update `dp[w][c] = max(dp[w][c], dp[w - weight][c - 1] + value)` backwards.",
+      "timeComplexity": "O(N * W * K)",
+      "spaceComplexity": "O(W * K)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def knapsackProblemSlightVariation(*args):\n    # TODO: Implement solution for Knapsack Problem - Slight Variation\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = knapsackProblemSlightVariation(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(knapsackProblemSlightVariation(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function knapsackProblemSlightVariation(...args) {\n    // TODO: Implement solution for Knapsack Problem - Slight Variation\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(knapsackProblemSlightVariation(...parsed)));\n    } catch (e) {\n        console.log(knapsackProblemSlightVariation(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Knapsack Problem - Slight Variation\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Knapsack Problem - Slight Variation\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
+  },
+  {
     "title": "Koko Eating Bananas",
     "slug": "koko-eating-bananas",
     "description": "Koko loves to eat bananas. There are `n` piles of bananas, the `i-th` pile has `piles[i]` bananas. The guards will come back in `h` hours. Return *the minimum integer* `k` *such that she can eat all the bananas within* `h` *hours*.\n\n### Example 1:\n```\nInput: [3,6,7,11]\n8\nOutput: 4\nExplanation: Eating speed 4 allows Koko to finish in 3/4 + 6/4 + 7/4 + 11/4 = 1 + 2 + 2 + 3 = 8 hours.\n```\n\n### Example 2:\n```\nInput: [30,11,23,4,20]\n5\nOutput: 30\nExplanation: Must eat at max speed 30 to finish in 5 hours.\n```",
@@ -5287,6 +6859,26 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 42,
         "sourceNote": "Infosys Interview Question #33"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -5356,6 +6948,83 @@ export const faang2 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Kth Largest Element in a Stream",
+    "slug": "kth-largest-element-in-a-stream",
+    "description": "Design a class to find the $k$-th largest element in a stream. Note that it is the $k$-th largest element in the sorted order, not the $k$-th distinct element.\\n\\nImplement `KthLargest` class:\\n- `KthLargest(int k, int[] nums)`: Initializes the object with the integer `k` and the stream of integers `nums`.\\n- `int add(int val)`: Appends the integer `val` to the stream and returns the element representing the $k$-th largest element in the stream.\\n\\n### Example 1:\\n```\\nInput:\\nKthLargest(3, [4, 5, 8, 2])\\nadd(3) -> 4\\nadd(5) -> 5\\nadd(10) -> 5\\nadd(9) -> 8\\nadd(4) -> 8\\n```\\n\\n### Constraints:\\n- $1 \\le k \\le 10^4$\\n- $0 \\le |nums| \\le 10^4$\\n- $-10^4 \\le val \\le 10^4$",
+    "difficulty": "EASY",
+    "patterns": [
+      "Heap",
+      "Design"
+    ],
+    "topics": [
+      "Tree",
+      "Design",
+      "Binary Search Tree",
+      "Heap (Priority Queue)",
+      "Binary Tree",
+      "Data Stream"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "k = 3, nums = [4, 5, 8, 2]\nadd 3\nadd 5\nadd 10\nadd 9\nadd 4",
+        "output": "4\n5\n5\n8\n8",
+        "explanation": "Min-heap of size 3 stores the top 3 largest elements."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "k = 1, nums = []\nadd -3\nadd -2\nadd -4",
+        "output": "-3\n-2\n-2"
+      },
+      {
+        "input": "k = 2, nums = [0]\nadd -1\nadd 1\nadd -2",
+        "output": "-1\n0\n0"
+      },
+      {
+        "input": "k = 1, nums = [5]\nadd 10",
+        "output": "10"
+      }
+    ],
+    "hints": [
+      "Maintain a min-heap of size $k$. The top of the min-heap is always the $k$-th largest element."
+    ],
+    "editorial": {
+      "approach": "Min-Heap of Size K",
+      "solutionMarkdown": "Keep min-heap with $k$ largest elements. Heap root is answer.",
+      "timeComplexity": "O(log k) per add",
+      "spaceComplexity": "O(k)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def kthLargestElementInAStream(*args):\n    # TODO: Implement solution for Kth Largest Element in a Stream\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = kthLargestElementInAStream(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(kthLargestElementInAStream(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function kthLargestElementInAStream(...args) {\n    // TODO: Implement solution for Kth Largest Element in a Stream\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(kthLargestElementInAStream(...parsed)));\n    } catch (e) {\n        console.log(kthLargestElementInAStream(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Kth Largest Element in a Stream\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Kth Largest Element in a Stream\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
     "title": "Kth Largest Element in an Array",
     "slug": "kth-largest-element-in-an-array",
     "description": "Given an integer array `nums` and an integer `k`, return the `k-th` largest element in the array.\n\nNote that it is the `k-th` largest element in the sorted order, not the `k-th` distinct element.\n\n### Example 1:\n```\nInput: [3,2,1,5,6,4]\n2\nOutput: 5\nExplanation: 2nd largest element is 5.\n```\n\n### Example 2:\n```\nInput: [3,2,3,1,2,4,5,5,6]\n4\nOutput: 4\nExplanation: 4th largest element is 4.\n```",
@@ -5399,6 +7068,31 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #50"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -5525,6 +7219,31 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 45,
         "sourceNote": "TCS Interview Question #66"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -5684,6 +7403,245 @@ export const faang2 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Kth Smallest Element in an Array",
+    "slug": "kth-smallest-element-in-an-array",
+    "description": "Given an integer array `nums` and an integer `k`, return the $k$-th smallest element in the array.\\n\\nNote that it is the $k$-th smallest element in the sorted order, not the $k$-th distinct element.\\n\\n### Example 1:\\n```\\nInput: [7, 10, 4, 3, 20, 15] 3\\nOutput: 7\\nExplanation: Sorted array is [3, 4, 7, 10, 15, 20]. The 3rd smallest is 7.\\n```\\n\\n### Example 2:\\n```\\nInput: [7, 10, 4, 20, 15] 4\\nOutput: 15\\nExplanation: 4th smallest is 15.\\n```\\n\\n### Constraints:\\n- $1 \\le k \\le |nums| \\le 10^5$\\n- $-10^4 \\le nums[i] \\le 10^4$",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Heap",
+      "Quickselect",
+      "Divide and Conquer"
+    ],
+    "topics": [
+      "Array",
+      "Divide and Conquer",
+      "Quickselect",
+      "Heap (Priority Queue)"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 6,
+        "yearReported": 2025
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[7, 10, 4, 3, 20, 15] 3",
+        "output": "7",
+        "explanation": "3rd smallest element is 7."
+      },
+      {
+        "input": "[7, 10, 4, 20, 15] 4",
+        "output": "15",
+        "explanation": "4th smallest element is 15."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1] 1",
+        "output": "1"
+      },
+      {
+        "input": "[3, 2, 1, 5, 6, 4] 2",
+        "output": "2"
+      },
+      {
+        "input": "[5, 5, 5, 5] 3",
+        "output": "5"
+      }
+    ],
+    "hints": [
+      "Use Quickselect for O(N) average time complexity.",
+      "Alternatively, maintain a max-heap of size k."
+    ],
+    "editorial": {
+      "approach": "Quickselect Algorithm",
+      "solutionMarkdown": "### Quickselect\nPartition around a random pivot similar to Quicksort, recursing only into the partition containing index `k - 1`.",
+      "timeComplexity": "O(N) average, O(N^2) worst case",
+      "spaceComplexity": "O(1)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def kthSmallestElementInAnArray(*args):\n    # TODO: Implement solution for Kth Smallest Element in an Array\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = kthSmallestElementInAnArray(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(kthSmallestElementInAnArray(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function kthSmallestElementInAnArray(...args) {\n    // TODO: Implement solution for Kth Smallest Element in an Array\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(kthSmallestElementInAnArray(...parsed)));\n    } catch (e) {\n        console.log(kthSmallestElementInAnArray(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Kth Smallest Element in an Array\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Kth Smallest Element in an Array\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Kth Smallest Number with Prime Factors from a Given Set",
+    "slug": "kth-smallest-number-with-prime-factors-from-a-given-set",
+    "description": "A super ugly number is a positive integer whose prime factors are in the array `primes`.\\n\\nGiven an integer `n` and an array of integers `primes`, return the $n$-th super ugly number.\\n\\nThe $n$-th super ugly number is guaranteed to fit in a 32-bit signed integer.\\n\\n### Example 1:\\n```\\nInput: n = 12, primes = [2,7,13,19]\\nOutput: 32\\nExplanation: [1,2,4,7,8,13,14,16,19,26,28,32] is the sequence of the first 12 super ugly numbers.\\n```\\n\\n### Example 2:\\n```\\nInput: n = 1, primes = [2,3,5]\\nOutput: 1\\nExplanation: 1 is the 1st super ugly number.\\n```\\n\\n### Constraints:\\n- $1 \\le n \\le 10^5$\\n- $1 \\le |primes| \\le 100$\\n- $2 \\le primes[i] \\le 1000$",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Dynamic Programming",
+      "Heap"
+    ],
+    "topics": [
+      "Array",
+      "Dynamic Programming",
+      "Math"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "n = 12\nprimes = [2,7,13,19]",
+        "output": "32",
+        "explanation": "12th number is 32."
+      },
+      {
+        "input": "n = 1\nprimes = [2,3,5]",
+        "output": "1",
+        "explanation": "1 is always first."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "n = 2\nprimes = [2]",
+        "output": "2"
+      },
+      {
+        "input": "n = 5\nprimes = [2, 3]",
+        "output": "6"
+      },
+      {
+        "input": "n = 10\nprimes = [2, 3, 5]",
+        "output": "12"
+      }
+    ],
+    "hints": [
+      "Use multi-pointer DP where each prime $p$ has an index pointer into the result array."
+    ],
+    "editorial": {
+      "approach": "Multi-Pointer Dynamic Programming",
+      "solutionMarkdown": "Maintain `pointers[i]` for each prime. Take minimum next candidate and increment corresponding pointers.",
+      "timeComplexity": "O(N * K)",
+      "spaceComplexity": "O(N + K)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def kthSmallestNumberWithPrimeFactorsFromAGivenSet(*args):\n    # TODO: Implement solution for Kth Smallest Number with Prime Factors from a Given Set\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = kthSmallestNumberWithPrimeFactorsFromAGivenSet(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(kthSmallestNumberWithPrimeFactorsFromAGivenSet(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function kthSmallestNumberWithPrimeFactorsFromAGivenSet(...args) {\n    // TODO: Implement solution for Kth Smallest Number with Prime Factors from a Given Set\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(kthSmallestNumberWithPrimeFactorsFromAGivenSet(...parsed)));\n    } catch (e) {\n        console.log(kthSmallestNumberWithPrimeFactorsFromAGivenSet(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Kth Smallest Number with Prime Factors from a Given Set\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Kth Smallest Number with Prime Factors from a Given Set\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
+    "title": "Largest Element in Each Matrix Row",
+    "slug": "largest-element-in-each-matrix-row",
+    "description": "Given an $M \\times N$ integer matrix, find the maximum element in each row and return them as a space-separated list.\\n\\n### Example 1:\\n```\\nInput:\\n3 3\\n1 2 3\\n9 5 6\\n7 8 4\\nOutput: 3 9 8\\nExplanation: Row 0 max is 3, Row 1 max is 9, Row 2 max is 8.\\n```\\n\\n### Example 2:\\n```\\nInput:\\n2 2\\n10 20\\n50 30\\nOutput: 20 50\\nExplanation: Maximum in row 0 is 20, maximum in row 1 is 50.\\n```\\n\\n### Constraints:\\n- $1 \\le M, N \\le 1000$\\n- $-10^6 \\le \\text{matrix}[i][j] \\le 10^6$",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Matrix",
+      "Simulation"
+    ],
+    "topics": [
+      "Array",
+      "Matrix"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 5,
+        "yearReported": 2025
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "3 3\n1 2 3\n9 5 6\n7 8 4",
+        "output": "3 9 8",
+        "explanation": "Row-wise maxima."
+      },
+      {
+        "input": "2 2\n10 20\n50 30",
+        "output": "20 50",
+        "explanation": "Row-wise maxima."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "1 1\n-99",
+        "output": "-99"
+      },
+      {
+        "input": "2 3\n-1 -2 -3\n-10 -4 -8",
+        "output": "-1 -4"
+      },
+      {
+        "input": "3 1\n5\n10\n15",
+        "output": "5 10 15"
+      }
+    ],
+    "hints": [
+      "Iterate over each row and compute the maximum element."
+    ],
+    "editorial": {
+      "approach": "Row-by-Row Maximum Search",
+      "solutionMarkdown": "### Method\nFor each row, find `max(row)` and print it.",
+      "timeComplexity": "O(M * N)",
+      "spaceComplexity": "O(1)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def largestElementInEachMatrixRow(*args):\n    # TODO: Implement solution for Largest Element in Each Matrix Row\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = largestElementInEachMatrixRow(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(largestElementInEachMatrixRow(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function largestElementInEachMatrixRow(...args) {\n    // TODO: Implement solution for Largest Element in Each Matrix Row\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(largestElementInEachMatrixRow(...parsed)));\n    } catch (e) {\n        console.log(largestElementInEachMatrixRow(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Largest Element in Each Matrix Row\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Largest Element in Each Matrix Row\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Largest Rectangle in Histogram",
     "slug": "largest-rectangle-in-histogram",
     "description": "Given an array of integers `heights` representing the histogram's bar height where the width of each bar is `1`, return *the area of the largest rectangle in the histogram*.\n\n### Example 1:\n```\nInput: [2,1,5,6,2,3]\nOutput: 10\nExplanation: The largest rectangle is formed by heights 5 and 6: area = 2 * 5 = 10.\n```\n\n### Example 2:\n```\nInput: [2,4]\nOutput: 4\nExplanation: Max area = 4.\n```",
@@ -5718,6 +7676,26 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 42,
         "sourceNote": "Infosys Interview Question #48"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -6104,6 +8082,31 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #54"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -6296,6 +8299,16 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #23"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -6418,6 +8431,26 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #83"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -6542,6 +8575,21 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #47"
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -6704,6 +8752,93 @@ export const faang2 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Longest Increasing Path in a Matrix",
+    "slug": "longest-increasing-path-in-a-matrix",
+    "description": "Given an $m \\times n$ integers matrix, return the length of the longest increasing path in matrix.\\n\\nFrom each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\\n\\n### Example 1:\\n```\\nInput: matrix = [[9,9,4],[6,6,8],[2,1,1]]\\nOutput: 4\\nExplanation: The longest increasing path is [1, 2, 6, 9].\\n```\\n\\n### Example 2:\\n```\\nInput: matrix = [[3,4,5],[3,2,6],[2,2,1]]\\nOutput: 4\\nExplanation: The longest increasing path is [3, 4, 5, 6]. Moving diagonally is not allowed.\\n```\\n\\n### Constraints:\\n- $m == matrix.length, n == matrix[i].length$\\n- $1 \\le m, n \\le 200$\\n- $0 \\le matrix[i][j] \\le 2^{31} - 1$",
+    "difficulty": "HARD",
+    "patterns": [
+      "Graph",
+      "DFS",
+      "Memoization",
+      "Topological Sort"
+    ],
+    "topics": [
+      "Array",
+      "Dynamic Programming",
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Graph",
+      "Topological Sort",
+      "Memoization",
+      "Matrix"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "matrix = [[9,9,4],[6,6,8],[2,1,1]]",
+        "output": "4",
+        "explanation": "Path [1, 2, 6, 9]."
+      },
+      {
+        "input": "matrix = [[3,4,5],[3,2,6],[2,2,1]]",
+        "output": "4",
+        "explanation": "Path [3, 4, 5, 6]."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "matrix = [[1]]",
+        "output": "1"
+      },
+      {
+        "input": "matrix = [[1, 2], [2, 3]]",
+        "output": "3"
+      },
+      {
+        "input": "matrix = [[7,8,9],[9,7,6],[7,2,3]]",
+        "output": "6"
+      }
+    ],
+    "hints": [
+      "The matrix forms a Directed Acyclic Graph (DAG) because edges strictly increase.",
+      "Use DFS with memoization `memo[r][c]`."
+    ],
+    "editorial": {
+      "approach": "Memoized DFS on DAG",
+      "solutionMarkdown": "Since cells must strictly increase, no cycles exist. Compute `dfs(r, c) = 1 + max(dfs(nr, nc))` with memoization.",
+      "timeComplexity": "O(M * N)",
+      "spaceComplexity": "O(M * N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def longestIncreasingPathInAMatrix(*args):\n    # TODO: Implement solution for Longest Increasing Path in a Matrix\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = longestIncreasingPathInAMatrix(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(longestIncreasingPathInAMatrix(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function longestIncreasingPathInAMatrix(...args) {\n    // TODO: Implement solution for Longest Increasing Path in a Matrix\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(longestIncreasingPathInAMatrix(...parsed)));\n    } catch (e) {\n        console.log(longestIncreasingPathInAMatrix(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Longest Increasing Path in a Matrix\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Longest Increasing Path in a Matrix\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
     "title": "Longest Increasing Subsequence",
     "slug": "longest-increasing-subsequence",
     "description": "Given an integer array `nums`, return the length of the longest strictly increasing subsequence.\n\n### Example 1:\n```\nInput: [10,9,2,5,3,7,101,18]\nOutput: 4\nExplanation: The longest increasing subsequence is [2,3,7,101], length 4.\n```\n\n### Example 2:\n```\nInput: [0,1,0,3,2,3]\nOutput: 4\nExplanation: [0,1,2,3] has length 4.\n```",
@@ -6759,6 +8894,31 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #82"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -6923,6 +9083,90 @@ export const faang2 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Longest Palindromic Subsequence",
+    "slug": "longest-palindromic-subsequence",
+    "description": "Given a string `s`, find the longest palindromic subsequence's length in `s`.\\n\\nA subsequence is a sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements.\\n\\n### Example 1:\\n```\\nInput: bbbab\\nOutput: 4\\nExplanation: One possible longest palindromic subsequence is \"bbbb\".\\n```\\n\\n### Example 2:\\n```\\nInput: cbbd\\nOutput: 2\\nExplanation: One possible longest palindromic subsequence is \"bb\".\\n```\\n\\n### Constraints:\\n- $1 \\le |s| \\le 1000$\\n- `s` consists only of lowercase English letters.",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Dynamic Programming",
+      "Interval DP"
+    ],
+    "topics": [
+      "String",
+      "Dynamic Programming"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "bbbab",
+        "output": "4",
+        "explanation": "\"bbbb\" has length 4."
+      },
+      {
+        "input": "cbbd",
+        "output": "2",
+        "explanation": "\"bb\" has length 2."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "a",
+        "output": "1"
+      },
+      {
+        "input": "racecar",
+        "output": "7"
+      },
+      {
+        "input": "agbdba",
+        "output": "5"
+      }
+    ],
+    "hints": [
+      "dp[i][j] is the length of LPS in s[i..j].",
+      "If s[i] == s[j], dp[i][j] = 2 + dp[i+1][j-1]; else dp[i][j] = max(dp[i+1][j], dp[i][j-1])."
+    ],
+    "editorial": {
+      "approach": "Interval Dynamic Programming",
+      "solutionMarkdown": "2D interval DP expanding from length 1 to $N$.",
+      "timeComplexity": "O(N^2)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def longestPalindromicSubsequence(*args):\n    # TODO: Implement solution for Longest Palindromic Subsequence\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = longestPalindromicSubsequence(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(longestPalindromicSubsequence(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function longestPalindromicSubsequence(...args) {\n    // TODO: Implement solution for Longest Palindromic Subsequence\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(longestPalindromicSubsequence(...parsed)));\n    } catch (e) {\n        console.log(longestPalindromicSubsequence(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Longest Palindromic Subsequence\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Longest Palindromic Subsequence\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
     "title": "Longest Palindromic Substring",
     "slug": "longest-palindromic-substring",
     "description": "Given a string `s`, return the *longest palindromic substring* in `s`.\n\n### Example 1:\n```\nInput: babad\nOutput: \"bab\"\nExplanation: 'aba' is also a valid answer.\n```\n\n### Example 2:\n```\nInput: cbbd\nOutput: \"bb\"\nExplanation: 'bb' is the longest palindromic substring.\n```",
@@ -6973,6 +9217,21 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #40"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -7183,6 +9442,16 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #37"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -7247,6 +9516,86 @@ export const faang2 = [
       "timeComplexity": "O(N)",
       "spaceComplexity": "O(1)"
     },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Longest Substring with At Most K Distinct Characters",
+    "slug": "longest-substring-with-at-most-k-distinct-characters",
+    "description": "Given a string `s` and an integer `k`, return the length of the longest substring of `s` that contains at most `k` distinct characters.\\n\\n### Example 1:\\n```\\nInput:\\neceba\\n2\\nOutput: 3\\nExplanation: The substring is 'ece' with length 3.\\n```\\n\\n### Example 2:\\n```\\nInput:\\naa\\n1\\nOutput: 2\\nExplanation: The substring is 'aa' with length 2.\\n```\\n\\n### Constraints:\\n- $1 \\le |s| \\le 5 \\times 10^4$\\n- $0 \\le k \\le 50$",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Sliding Window",
+      "Hash Table"
+    ],
+    "topics": [
+      "Hash Table",
+      "String",
+      "Sliding Window"
+    ],
+    "companyTags": [
+      {
+        "company": "Capgemini",
+        "frequencyCount": 6,
+        "yearReported": 2024
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "eceba\n2",
+        "output": "3",
+        "explanation": "'ece' has 2 distinct chars and length 3."
+      },
+      {
+        "input": "aa\n1",
+        "output": "2",
+        "explanation": "'aa' has 1 distinct char and length 2."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "a\n0",
+        "output": "0"
+      },
+      {
+        "input": "abaccc\n2",
+        "output": "4"
+      },
+      {
+        "input": "abcdef\n3",
+        "output": "3"
+      }
+    ],
+    "hints": [
+      "Use a sliding window with two pointers `left` and `right`.",
+      "Maintain a frequency map of characters in the current window. While map size > k, increment left and decrement counts."
+    ],
+    "editorial": {
+      "approach": "Variable-Sized Sliding Window with Frequency Map",
+      "solutionMarkdown": "### Sliding Window\nExpand `right` and maintain character frequencies. When distinct count exceeds `k`, shrink `left`.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(K)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def longestSubstringWithAtMostKDistinctCharacters(*args):\n    # TODO: Implement solution for Longest Substring with At Most K Distinct Characters\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = longestSubstringWithAtMostKDistinctCharacters(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(longestSubstringWithAtMostKDistinctCharacters(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function longestSubstringWithAtMostKDistinctCharacters(...args) {\n    // TODO: Implement solution for Longest Substring with At Most K Distinct Characters\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(longestSubstringWithAtMostKDistinctCharacters(...parsed)));\n    } catch (e) {\n        console.log(longestSubstringWithAtMostKDistinctCharacters(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Longest Substring with At Most K Distinct Characters\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Longest Substring with At Most K Distinct Characters\n    }\n}\n"
+      }
+    ],
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
@@ -7407,6 +9756,31 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #36"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -7484,6 +9858,163 @@ export const faang2 = [
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
+  },
+  {
+    "title": "Longest Valid Parentheses",
+    "slug": "longest-valid-parentheses",
+    "description": "Given a string containing just the characters '(' and ')', return the length of the longest valid (well-formed) parentheses substring.\\n\\n### Example 1:\\n```\\nInput: s = \"(()\"\\nOutput: 2\\nExplanation: The longest valid parentheses substring is \"()\".\\n```\\n\\n### Example 2:\\n```\\nInput: s = \")()())\"\\nOutput: 4\\nExplanation: The longest valid parentheses substring is \"()()\".\\n```\\n\\n### Constraints:\\n- $0 \\le |s| \\le 3 \\times 10^4$\\n- `s[i]` is '(' or ')'.",
+    "difficulty": "HARD",
+    "patterns": [
+      "Stack",
+      "Dynamic Programming"
+    ],
+    "topics": [
+      "String",
+      "Dynamic Programming",
+      "Stack"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "s = \"(()\"",
+        "output": "2",
+        "explanation": "\"()\" has length 2."
+      },
+      {
+        "input": "s = \")()())\"",
+        "output": "4",
+        "explanation": "\"()()\" has length 4."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "s = \"\"",
+        "output": "0"
+      },
+      {
+        "input": "s = \"()(())\"",
+        "output": "6"
+      },
+      {
+        "input": "s = \"(((\"",
+        "output": "0"
+      }
+    ],
+    "hints": [
+      "Use a stack initialized with -1 representing the base index.",
+      "When ')' is found, pop. If stack is empty, push current index; else update max length with `i - stack.top()`."
+    ],
+    "editorial": {
+      "approach": "Index Stack",
+      "solutionMarkdown": "Stack maintains boundary of last invalid split.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def longestValidParentheses(*args):\n    # TODO: Implement solution for Longest Valid Parentheses\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = longestValidParentheses(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(longestValidParentheses(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function longestValidParentheses(...args) {\n    // TODO: Implement solution for Longest Valid Parentheses\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(longestValidParentheses(...parsed)));\n    } catch (e) {\n        console.log(longestValidParentheses(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Longest Valid Parentheses\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Longest Valid Parentheses\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
+    "title": "Longest Word in a String",
+    "slug": "longest-word-in-a-string",
+    "description": "Given a sentence string `s` consisting of words separated by spaces, find the longest word in the sentence. If there are multiple words with the same maximum length, return the first one that appears in the string.\\n\\n### Example 1:\\n```\\nInput: \"The quick brown fox jumped over the lazy dog\"\\nOutput: \"jumped\"\\nExplanation: \"jumped\" has length 6, which is strictly greater than all other words.\\n```\\n\\n### Example 2:\\n```\\nInput: \"Hello world beautiful morning\"\\nOutput: \"beautiful\"\\nExplanation: \"beautiful\" has length 9.\\n```\\n\\n### Constraints:\\n- $1 \\le |s| \\le 10^5$\\n- `s` consists of English letters and spaces.",
+    "difficulty": "EASY",
+    "patterns": [
+      "String",
+      "Simulation"
+    ],
+    "topics": [
+      "String"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "The quick brown fox jumped over the lazy dog",
+        "output": "jumped",
+        "explanation": "Length 6 is maximum."
+      },
+      {
+        "input": "Hello world beautiful morning",
+        "output": "beautiful",
+        "explanation": "Length 9."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "a",
+        "output": "a"
+      },
+      {
+        "input": "one two three",
+        "output": "three"
+      },
+      {
+        "input": "equal size words",
+        "output": "equal"
+      }
+    ],
+    "hints": [
+      "Split string by whitespace and find maximum length string."
+    ],
+    "editorial": {
+      "approach": "Tokenization and Linear Scan",
+      "solutionMarkdown": "Iterate through words tracking longest word.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def longestWordInAString(*args):\n    # TODO: Implement solution for Longest Word in a String\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = longestWordInAString(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(longestWordInAString(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function longestWordInAString(...args) {\n    // TODO: Implement solution for Longest Word in a String\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(longestWordInAString(...parsed)));\n    } catch (e) {\n        console.log(longestWordInAString(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Longest Word in a String\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Longest Word in a String\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
   },
   {
     "title": "Convert a Matrix into a Lower-Triangular Matrix",
@@ -7575,6 +10106,86 @@ export const faang2 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Lowest Common Ancestor of a Binary Search Tree",
+    "slug": "lowest-common-ancestor-of-a-binary-search-tree",
+    "description": "Given a binary search tree (BST), find the lowest common ancestor (LCA) node of two given nodes in the BST.\\n\\nAccording to the definition of LCA on Wikipedia: The lowest common ancestor is defined between two nodes $p$ and $q$ as the lowest node in $T$ that has both $p$ and $q$ as descendants (where we allow a node to be a descendant of itself).\\n\\n### Example 1:\\n```\\nInput: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8\\nOutput: 6\\nExplanation: The LCA of nodes 2 and 8 is 6.\\n```\\n\\n### Example 2:\\n```\\nInput: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4\\nOutput: 2\\nExplanation: The LCA of nodes 2 and 4 is 2, since a node can be a descendant of itself.\\n```\\n\\n### Constraints:\\n- The number of nodes in the tree is in range $[2, 10^5]$.\\n- All `Node.val` are unique.",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Tree",
+      "BST",
+      "Recursion"
+    ],
+    "topics": [
+      "Tree",
+      "Binary Search Tree",
+      "Binary Tree"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "root = [6,2,8,0,4,7,9,null,null,3,5]\np = 2, q = 8",
+        "output": "6",
+        "explanation": "Root 6 splits 2 and 8."
+      },
+      {
+        "input": "root = [6,2,8,0,4,7,9,null,null,3,5]\np = 2, q = 4",
+        "output": "2",
+        "explanation": "Node 2 is ancestor of 4."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "root = [2,1]\np = 2, q = 1",
+        "output": "2"
+      },
+      {
+        "input": "root = [3,1,4,null,2]\np = 2, q = 4",
+        "output": "3"
+      },
+      {
+        "input": "root = [5,3,6,2,4,null,null,1]\np = 1, q = 4",
+        "output": "3"
+      }
+    ],
+    "hints": [
+      "Leverage BST property: if both p and q < curr, go left. If both > curr, go right. Otherwise curr is the split point (LCA)."
+    ],
+    "editorial": {
+      "approach": "BST Split Point Traversal",
+      "solutionMarkdown": "Walk down tree. The first node where $p$ and $q$ diverge to opposite sides is their LCA.",
+      "timeComplexity": "O(H)",
+      "spaceComplexity": "O(1)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def lowestCommonAncestorOfABinarySearchTree(*args):\n    # TODO: Implement solution for Lowest Common Ancestor of a Binary Search Tree\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = lowestCommonAncestorOfABinarySearchTree(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(lowestCommonAncestorOfABinarySearchTree(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function lowestCommonAncestorOfABinarySearchTree(...args) {\n    // TODO: Implement solution for Lowest Common Ancestor of a Binary Search Tree\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(lowestCommonAncestorOfABinarySearchTree(...parsed)));\n    } catch (e) {\n        console.log(lowestCommonAncestorOfABinarySearchTree(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Lowest Common Ancestor of a Binary Search Tree\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Lowest Common Ancestor of a Binary Search Tree\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
     "title": "Lowest Common Ancestor of a Binary Tree",
     "slug": "lowest-common-ancestor-of-a-binary-tree",
     "description": "Given a binary tree, find the lowest common ancestor (LCA) of two given nodes `p` and `q`.\n\n### Example 1:\n```\nInput: [3,5,1,6,2,0,8,null,null,7,4]\n5\n1\nOutput: 3\nExplanation: The LCA of nodes 5 and 1 is 3.\n```\n\n### Example 2:\n```\nInput: [3,5,1,6,2,0,8,null,null,7,4]\n5\n4\nOutput: 5\nExplanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself.\n```",
@@ -7618,6 +10229,26 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 42,
         "sourceNote": "Infosys Interview Question #59"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -7923,6 +10554,26 @@ export const faang2 = [
         "verified": true,
         "frequencyCount": 42,
         "sourceNote": "Infosys Interview Question #55"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -8027,6 +10678,26 @@ export const faang2 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #16"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -8094,5 +10765,283 @@ export const faang2 = [
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
+  },
+  {
+    "title": "Majority Element II (more than n/3 occurrences)",
+    "slug": "majority-element-ii",
+    "description": "Given an integer array of size `n`, find all elements that appear more than `\u230a n/3 \u230b` times in `O(n)` time and `O(1)` space.\n\n### Example 1:\n```\nInput: [3,2,3]\nOutput: [3]\nExplanation: 3 appears 2 times (> 3/3).\n```\n\n### Example 2:\n```\nInput: [1]\nOutput: [1]\nExplanation: 1 appears 1 time (> 1/3).\n```",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "Hash Table",
+      "Sorting",
+      "Counting"
+    ],
+    "topics": [
+      "Array",
+      "Hash Table",
+      "Sorting",
+      "Counting"
+    ],
+    "companyTags": [
+      {
+        "company": "TCS",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 45,
+        "sourceNote": "TCS Interview Question #17"
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def majorityElementIi(*args):\n    # TODO: Implement solution for Majority Element II (more than n/3 occurrences)\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = majorityElementIi(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(majorityElementIi(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function majorityElementIi(...args) {\n    // TODO: Implement solution for Majority Element II (more than n/3 occurrences)\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(majorityElementIi(...parsed)));\n    } catch (e) {\n        console.log(majorityElementIi(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Majority Element II (more than n/3 occurrences)\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[3,2,3]",
+        "output": "[3]",
+        "explanation": "3 appears 2 times (> 3/3)."
+      },
+      {
+        "input": "[1]",
+        "output": "[1]",
+        "explanation": "1 appears 1 time (> 1/3)."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[3,2,3]",
+        "output": "[3]",
+        "isHidden": true
+      },
+      {
+        "input": "[1]",
+        "output": "[1]",
+        "isHidden": true
+      },
+      {
+        "input": "[1,2]",
+        "output": "[1,2]",
+        "isHidden": true
+      },
+      {
+        "input": "[2,2,1,1,1,2,2]",
+        "output": "[1,2]",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "There can be at most two majority elements. Use Boyer-Moore Voting algorithm with 2 candidates and 2 counters."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Majority Element II (more than n/3 occurrences)",
+      "solutionMarkdown": "### Optimal Solution\n\nMaintain two candidates and two counts. Second pass confirms each candidate's actual frequency > n // 3.\n\n### Complexity\n- Time: O(N), Space: O(1)",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Making A Large Island",
+    "slug": "making-a-large-island",
+    "description": "You are given an `n x n` binary matrix `grid`. You are allowed to change **at most one** `0` to be `1`. Return *the size of the largest island in grid after applying this operation*.\n\n### Example 1:\n```\nInput: [[1,0],[0,1]]\nOutput: 3\nExplanation: Change one 0 to 1 to connect the two islands.\n```\n\n### Example 2:\n```\nInput: [[1,1],[1,0]]\nOutput: 4\nExplanation: Change the 0 to 1 to make the island cover the whole grid.\n```",
+    "difficulty": "HARD",
+    "category": "DSA",
+    "patterns": [
+      "Array",
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Union Find",
+      "Matrix"
+    ],
+    "topics": [
+      "Array",
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Union Find",
+      "Matrix"
+    ],
+    "companyTags": [
+      {
+        "company": "Meta",
+        "yearReported": 2025,
+        "verified": true,
+        "frequencyCount": 40,
+        "sourceNote": "Reported in Meta 2021-2026 interview set"
+      }
+    ],
+    "supportedLanguages": [
+      "python",
+      "javascript",
+      "cpp",
+      "java"
+    ],
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def makingALargeIsland(*args):\n    # TODO: Implement solution for Making A Large Island\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = makingALargeIsland(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(makingALargeIsland(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function makingALargeIsland(...args) {\n    // TODO: Implement solution for Making A Large Island\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(makingALargeIsland(...parsed)));\n    } catch (e) {\n        console.log(makingALargeIsland(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Making A Large Island\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[[1,0],[0,1]]",
+        "output": "3",
+        "explanation": "Change one 0 to 1 to connect the two islands."
+      },
+      {
+        "input": "[[1,1],[1,0]]",
+        "output": "4",
+        "explanation": "Change the 0 to 1 to make the island cover the whole grid."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[[1,0],[0,1]]",
+        "output": "3",
+        "isHidden": true
+      },
+      {
+        "input": "[[1,1],[1,0]]",
+        "output": "4",
+        "isHidden": true
+      },
+      {
+        "input": "[[1,1],[1,1]]",
+        "output": "4",
+        "isHidden": true
+      }
+    ],
+    "hints": [
+      "Label each connected component with a unique ID and store its area. For each 0, sum areas of distinct neighboring island IDs + 1."
+    ],
+    "editorial": {
+      "approach": "Optimal Approach for Making A Large Island",
+      "solutionMarkdown": "### Optimal Solution\n\nDFS to index islands (ID starting at 2) and record area in a map. Check each 0 cell to find maximum merged area.\n\n### Complexity\n- Time: O(N^2), Space: O(N^2)",
+      "timeComplexity": "O(N^2)",
+      "spaceComplexity": "O(N^2)"
+    },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Matrix Chain Multiplication",
+    "slug": "matrix-chain-multiplication",
+    "description": "Given a sequence of matrices, find the most efficient way to multiply these matrices together. The problem is not actually to perform the multiplications, but merely to decide in which order to perform the multiplications.\\n\\nGiven an array `p[]` of length $N$ representing the dimensions of $N-1$ matrices such that the $i$-th matrix has dimension $p[i-1] \\times p[i]$, find the minimum number of scalar multiplications needed to compute the product.\\n\\n### Example 1:\\n```\\nInput: [10, 20, 30, 40, 30]\\nOutput: 30000\\nExplanation: Matrices dimensions are 10x20, 20x30, 30x40, 40x30. Optimal parenthesization is ((A(BC))D) resulting in 30,000 operations.\\n```\\n\\n### Example 2:\\n```\\nInput: [10, 20, 30]\\nOutput: 6000\\nExplanation: 10 * 20 * 30 = 6000.\\n```\\n\\n### Constraints:\\n- $2 \\le N \\le 100$\\n- $1 \\le p[i] \\le 500$",
+    "difficulty": "HARD",
+    "category": "DSA",
+    "patterns": [
+      "Dynamic Programming",
+      "Interval DP"
+    ],
+    "topics": [
+      "Dynamic Programming",
+      "Intervals"
+    ],
+    "companyTags": [
+      {
+        "company": "Capgemini",
+        "frequencyCount": 5,
+        "yearReported": 2024
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[10, 20, 30, 40, 30]",
+        "output": "30000",
+        "explanation": "Optimal parenthesization cost."
+      },
+      {
+        "input": "[10, 20, 30]",
+        "output": "6000",
+        "explanation": "Single matrix multiplication."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[40, 20, 30, 10, 30]",
+        "output": "26000"
+      },
+      {
+        "input": "[10, 30, 5, 60]",
+        "output": "4500"
+      },
+      {
+        "input": "[5, 10]",
+        "output": "0"
+      }
+    ],
+    "hints": [
+      "Let dp[i][j] be the minimum multiplications needed to multiply chain from matrix i to matrix j.",
+      "dp[i][j] = min_{i <= k < j} (dp[i][k] + dp[k+1][j] + p[i-1]*p[k]*p[j])."
+    ],
+    "editorial": {
+      "approach": "Interval Dynamic Programming",
+      "solutionMarkdown": "### Interval DP\nIterate over chain length $L$ from 2 to $N-1$ and optimize the split point $k$.",
+      "timeComplexity": "O(N^3)",
+      "spaceComplexity": "O(N^2)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def matrixChainMultiplication(*args):\n    # TODO: Implement solution for Matrix Chain Multiplication\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = matrixChainMultiplication(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(matrixChainMultiplication(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function matrixChainMultiplication(...args) {\n    // TODO: Implement solution for Matrix Chain Multiplication\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(matrixChainMultiplication(...parsed)));\n    } catch (e) {\n        console.log(matrixChainMultiplication(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Matrix Chain Multiplication\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Matrix Chain Multiplication\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
   }
 ];
+export const faangProblems2 = faang2;

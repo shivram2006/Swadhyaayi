@@ -44,6 +44,7 @@ const COMPANIES_LIST = [
   'TCS',
   'Infosys',
   'Wipro',
+  'Capgemini',
   'Oracle',
 ];
 

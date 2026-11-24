@@ -1,199 +1,4 @@
-/* eslint-disable */
-// Auto-generated Coding Problem Catalog (Apple, Meta, Microsoft, Google, Accenture, Infosys, TCS) - Chunk faang3
-export const faang3 = [
-  {
-    "title": "Majority Element II (more than n/3 occurrences)",
-    "slug": "majority-element-ii",
-    "description": "Given an integer array of size `n`, find all elements that appear more than `\u230a n/3 \u230b` times in `O(n)` time and `O(1)` space.\n\n### Example 1:\n```\nInput: [3,2,3]\nOutput: [3]\nExplanation: 3 appears 2 times (> 3/3).\n```\n\n### Example 2:\n```\nInput: [1]\nOutput: [1]\nExplanation: 1 appears 1 time (> 1/3).\n```",
-    "difficulty": "MEDIUM",
-    "category": "DSA",
-    "patterns": [
-      "Array",
-      "Hash Table",
-      "Sorting",
-      "Counting"
-    ],
-    "topics": [
-      "Array",
-      "Hash Table",
-      "Sorting",
-      "Counting"
-    ],
-    "companyTags": [
-      {
-        "company": "TCS",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 45,
-        "sourceNote": "TCS Interview Question #17"
-      }
-    ],
-    "supportedLanguages": [
-      "python",
-      "javascript",
-      "cpp",
-      "java"
-    ],
-    "starterCode": [
-      {
-        "language": "python",
-        "boilerplate": "def majorityElementIi(*args):\n    # TODO: Implement solution for Majority Element II (more than n/3 occurrences)\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = majorityElementIi(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(majorityElementIi(*input_data))\n"
-      },
-      {
-        "language": "javascript",
-        "boilerplate": "function majorityElementIi(...args) {\n    // TODO: Implement solution for Majority Element II (more than n/3 occurrences)\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(majorityElementIi(...parsed)));\n    } catch (e) {\n        console.log(majorityElementIi(...lines));\n    }\n}\n"
-      },
-      {
-        "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Majority Element II (more than n/3 occurrences)\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
-      },
-      {
-        "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
-      }
-    ],
-    "sampleTestCases": [
-      {
-        "input": "[3,2,3]",
-        "output": "[3]",
-        "explanation": "3 appears 2 times (> 3/3)."
-      },
-      {
-        "input": "[1]",
-        "output": "[1]",
-        "explanation": "1 appears 1 time (> 1/3)."
-      }
-    ],
-    "hiddenTestCases": [
-      {
-        "input": "[3,2,3]",
-        "output": "[3]",
-        "isHidden": true
-      },
-      {
-        "input": "[1]",
-        "output": "[1]",
-        "isHidden": true
-      },
-      {
-        "input": "[1,2]",
-        "output": "[1,2]",
-        "isHidden": true
-      },
-      {
-        "input": "[2,2,1,1,1,2,2]",
-        "output": "[1,2]",
-        "isHidden": true
-      }
-    ],
-    "hints": [
-      "There can be at most two majority elements. Use Boyer-Moore Voting algorithm with 2 candidates and 2 counters."
-    ],
-    "editorial": {
-      "approach": "Optimal Approach for Majority Element II (more than n/3 occurrences)",
-      "solutionMarkdown": "### Optimal Solution\n\nMaintain two candidates and two counts. Second pass confirms each candidate's actual frequency > n // 3.\n\n### Complexity\n- Time: O(N), Space: O(1)",
-      "timeComplexity": "O(N)",
-      "spaceComplexity": "O(1)"
-    },
-    "totalSubmissions": 0,
-    "acceptedSubmissions": 0,
-    "acceptanceRate": 0
-  },
-  {
-    "title": "Making A Large Island",
-    "slug": "making-a-large-island",
-    "description": "You are given an `n x n` binary matrix `grid`. You are allowed to change **at most one** `0` to be `1`. Return *the size of the largest island in grid after applying this operation*.\n\n### Example 1:\n```\nInput: [[1,0],[0,1]]\nOutput: 3\nExplanation: Change one 0 to 1 to connect the two islands.\n```\n\n### Example 2:\n```\nInput: [[1,1],[1,0]]\nOutput: 4\nExplanation: Change the 0 to 1 to make the island cover the whole grid.\n```",
-    "difficulty": "HARD",
-    "category": "DSA",
-    "patterns": [
-      "Array",
-      "Depth-First Search",
-      "Breadth-First Search",
-      "Union Find",
-      "Matrix"
-    ],
-    "topics": [
-      "Array",
-      "Depth-First Search",
-      "Breadth-First Search",
-      "Union Find",
-      "Matrix"
-    ],
-    "companyTags": [
-      {
-        "company": "Meta",
-        "yearReported": 2025,
-        "verified": true,
-        "frequencyCount": 40,
-        "sourceNote": "Reported in Meta 2021-2026 interview set"
-      }
-    ],
-    "supportedLanguages": [
-      "python",
-      "javascript",
-      "cpp",
-      "java"
-    ],
-    "starterCode": [
-      {
-        "language": "python",
-        "boilerplate": "def makingALargeIsland(*args):\n    # TODO: Implement solution for Making A Large Island\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = makingALargeIsland(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(makingALargeIsland(*input_data))\n"
-      },
-      {
-        "language": "javascript",
-        "boilerplate": "function makingALargeIsland(...args) {\n    // TODO: Implement solution for Making A Large Island\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try:\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(makingALargeIsland(...parsed)));\n    } catch (e) {\n        console.log(makingALargeIsland(...lines));\n    }\n}\n"
-      },
-      {
-        "language": "cpp",
-        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Read stdin and implement solution for Making A Large Island\n        // TODO: Read input from cin and implement solution\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
-      },
-      {
-        "language": "java",
-        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution\n    }\n}\n"
-      }
-    ],
-    "sampleTestCases": [
-      {
-        "input": "[[1,0],[0,1]]",
-        "output": "3",
-        "explanation": "Change one 0 to 1 to connect the two islands."
-      },
-      {
-        "input": "[[1,1],[1,0]]",
-        "output": "4",
-        "explanation": "Change the 0 to 1 to make the island cover the whole grid."
-      }
-    ],
-    "hiddenTestCases": [
-      {
-        "input": "[[1,0],[0,1]]",
-        "output": "3",
-        "isHidden": true
-      },
-      {
-        "input": "[[1,1],[1,0]]",
-        "output": "4",
-        "isHidden": true
-      },
-      {
-        "input": "[[1,1],[1,1]]",
-        "output": "4",
-        "isHidden": true
-      }
-    ],
-    "hints": [
-      "Label each connected component with a unique ID and store its area. For each 0, sum areas of distinct neighboring island IDs + 1."
-    ],
-    "editorial": {
-      "approach": "Optimal Approach for Making A Large Island",
-      "solutionMarkdown": "### Optimal Solution\n\nDFS to index islands (ID starting at 2) and record area in a map. Check each 0 cell to find maximum merged area.\n\n### Complexity\n- Time: O(N^2), Space: O(N^2)",
-      "timeComplexity": "O(N^2)",
-      "spaceComplexity": "O(N^2)"
-    },
-    "totalSubmissions": 0,
-    "acceptedSubmissions": 0,
-    "acceptanceRate": 0
-  },
+export const faang3: any[] = [
   {
     "title": "Matrix Diagonal Sum",
     "slug": "matrix-diagonal-sum",
@@ -279,6 +84,86 @@ export const faang3 = [
       "timeComplexity": "O(N)",
       "spaceComplexity": "O(1)"
     },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Matrix Multiplication",
+    "slug": "matrix-multiplication",
+    "description": "Given two matrices $A$ of dimensions $R_1 \\times C_1$ and $B$ of dimensions $R_2 \\times C_2$, compute and return their matrix product $A \\times B$. If the matrices cannot be multiplied ($C_1 \\ne R_2$), output `INVALID`.\\n\\n### Example 1:\\n```\\nInput:\\n2 2\\n1 2\\n3 4\\n2 2\\n5 6\\n7 8\\nOutput:\\n19 22\\n43 50\\nExplanation: Standard 2x2 matrix multiplication.\\n```\\n\\n### Example 2:\\n```\\nInput:\\n2 3\\n1 2 3\\n4 5 6\\n2 2\\n1 2\\n3 4\\nOutput: INVALID\\nExplanation: Columns of A (3) != Rows of B (2).\\n```\\n\\n### Constraints:\\n- $1 \\le R_1, C_1, R_2, C_2 \\le 100$\\n- $-1000 \\le A_{ij}, B_{ij} \\le 1000$",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Matrix",
+      "Simulation"
+    ],
+    "topics": [
+      "Matrix",
+      "Simulation",
+      "Math"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 6,
+        "yearReported": 2025
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "2 2\n1 2\n3 4\n2 2\n5 6\n7 8",
+        "output": "19 22\n43 50",
+        "explanation": "2x2 multiplication result."
+      },
+      {
+        "input": "2 3\n1 2 3\n4 5 6\n2 2\n1 2\n3 4",
+        "output": "INVALID",
+        "explanation": "Dimension mismatch."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "1 2\n3 4\n2 1\n5\n6",
+        "output": "39"
+      },
+      {
+        "input": "1 1\n7\n1 1\n8",
+        "output": "56"
+      },
+      {
+        "input": "2 2\n1 0\n0 1\n2 2\n9 8\n7 6",
+        "output": "9 8\n7 6"
+      }
+    ],
+    "hints": [
+      "Check if C1 == R2 before proceeding.",
+      "Compute result[i][j] = sum(A[i][k] * B[k][j]) for k from 0 to C1-1."
+    ],
+    "editorial": {
+      "approach": "Three-Loop Matrix Product",
+      "solutionMarkdown": "### Method\nCheck condition $C_1 == R_2$. Then compute product with three nested loops.",
+      "timeComplexity": "O(R_1 * C_1 * C_2)",
+      "spaceComplexity": "O(R_1 * C_2)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def matrixMultiplication(*args):\n    # TODO: Implement solution for Matrix Multiplication\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = matrixMultiplication(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(matrixMultiplication(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function matrixMultiplication(...args) {\n    // TODO: Implement solution for Matrix Multiplication\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(matrixMultiplication(...parsed)));\n    } catch (e) {\n        console.log(matrixMultiplication(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Matrix Multiplication\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Matrix Multiplication\n    }\n}\n"
+      }
+    ],
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
@@ -845,6 +730,165 @@ export const faang3 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Maximal Square",
+    "slug": "maximal-square",
+    "description": "Given an $m \\times n$ binary `matrix` filled with 0's and 1's, find the largest square containing only 1's and return its area.\\n\\n### Example 1:\\n```\\nInput: matrix = [[\"1\",\"0\",\"1\",\"0\",\"0\"],[\"1\",\"0\",\"1\",\"1\",\"1\"],[\"1\",\"1\",\"1\",\"1\",\"1\"],[\"1\",\"0\",\"0\",\"1\",\"0\"]]\\nOutput: 4\\nExplanation: The maximal square has side length 2 and area 4.\\n```\\n\\n### Example 2:\\n```\\nInput: matrix = [[\"0\",\"1\"],[\"1\",\"0\"]]\\nOutput: 1\\nExplanation: Largest square has area 1.\\n```\\n\\n### Constraints:\\n- $m == matrix.length, n == matrix[i].length$\\n- $1 \\le m, n \\le 300$\\n- `matrix[i][j]` is '0' or '1'.",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Dynamic Programming",
+      "Matrix"
+    ],
+    "topics": [
+      "Array",
+      "Dynamic Programming",
+      "Matrix"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "matrix = [[\"1\",\"0\",\"1\",\"0\",\"0\"],[\"1\",\"0\",\"1\",\"1\",\"1\"],[\"1\",\"1\",\"1\",\"1\",\"1\"],[\"1\",\"0\",\"0\",\"1\",\"0\"]]",
+        "output": "4",
+        "explanation": "2x2 square area 4."
+      },
+      {
+        "input": "matrix = [[\"0\",\"1\"],[\"1\",\"0\"]]",
+        "output": "1",
+        "explanation": "Single cell square."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "matrix = [[\"0\"]]",
+        "output": "0"
+      },
+      {
+        "input": "matrix = [[\"1\"]]",
+        "output": "1"
+      },
+      {
+        "input": "matrix = [[\"1\",\"1\"],[\"1\",\"1\"]]",
+        "output": "4"
+      }
+    ],
+    "hints": [
+      "dp[i][j] represents max side length of square with bottom-right corner at (i, j).",
+      "dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1 if matrix[i][j] == '1'."
+    ],
+    "editorial": {
+      "approach": "2D Grid DP Min Corner",
+      "solutionMarkdown": "State represents side length of square ending at cell.",
+      "timeComplexity": "O(M * N)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def maximalSquare(*args):\n    # TODO: Implement solution for Maximal Square\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = maximalSquare(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(maximalSquare(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function maximalSquare(...args) {\n    // TODO: Implement solution for Maximal Square\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(maximalSquare(...parsed)));\n    } catch (e) {\n        console.log(maximalSquare(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Maximal Square\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Maximal Square\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
+  },
+  {
+    "title": "Maximum and Minimum Character Occurrences",
+    "slug": "maximum-and-minimum-character-occurrences",
+    "description": "Given a string `s`, find the character that appears with the maximum frequency and the character that appears with the minimum frequency (among characters that appear at least once). If there are ties, choose the lexicographically smaller character. Output both characters separated by a space.\\n\\n### Example 1:\\n```\\nInput: aabccc\\nOutput: c b\\nExplanation: 'c' appears 3 times (max), 'b' appears 1 time (min).\\n```\\n\\n### Example 2:\\n```\\nInput: abcd\\nOutput: a a\\nExplanation: All characters appear 1 time. Tied max is 'a' and tied min is 'a'.\\n```\\n\\n### Constraints:\\n- $1 \\le |s| \\le 10^5$\\n- `s` consists of lowercase English letters.",
+    "difficulty": "EASY",
+    "patterns": [
+      "Hash Table",
+      "Counting"
+    ],
+    "topics": [
+      "Hash Table",
+      "String",
+      "Counting"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "aabccc",
+        "output": "c b",
+        "explanation": "Max frequency 'c', min frequency 'b'."
+      },
+      {
+        "input": "abcd",
+        "output": "a a",
+        "explanation": "Ties broken lexicographically."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "z",
+        "output": "z z"
+      },
+      {
+        "input": "ba",
+        "output": "a a"
+      },
+      {
+        "input": "mississippi",
+        "output": "i m"
+      }
+    ],
+    "hints": [
+      "Count frequencies of all lowercase characters. Find max and min counts, breaking ties lexicographically."
+    ],
+    "editorial": {
+      "approach": "Frequency Map with Lexicographical Tie-Breaking",
+      "solutionMarkdown": "Count occurrences, scan characters 'a' through 'z' to find extremes.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def maximumAndMinimumCharacterOccurrences(*args):\n    # TODO: Implement solution for Maximum and Minimum Character Occurrences\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = maximumAndMinimumCharacterOccurrences(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(maximumAndMinimumCharacterOccurrences(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function maximumAndMinimumCharacterOccurrences(...args) {\n    // TODO: Implement solution for Maximum and Minimum Character Occurrences\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(maximumAndMinimumCharacterOccurrences(...parsed)));\n    } catch (e) {\n        console.log(maximumAndMinimumCharacterOccurrences(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Maximum and Minimum Character Occurrences\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Maximum and Minimum Character Occurrences\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
+  },
+  {
     "title": "Maximum Average Subarray I",
     "slug": "maximum-average-subarray-i",
     "description": "You are given an integer array `nums` consisting of `n` elements, and an integer `k`. Find a contiguous subarray whose **length is equal to** `k` that has the maximum average value and return *this value*.\n\n### Example 1:\n```\nInput: [1,12,-5,-6,50,3]\n4\nOutput: 12.75\nExplanation: Maximum average is (12 - 5 - 6 + 50) / 4 = 51 / 4 = 12.75.\n```\n\n### Example 2:\n```\nInput: [5]\n1\nOutput: 5.0\nExplanation: 5 / 1 = 5.0.\n```",
@@ -984,6 +1028,26 @@ export const faang3 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #61"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -1073,6 +1137,11 @@ export const faang3 = [
         "verified": true,
         "frequencyCount": 45,
         "sourceNote": "TCS Interview Question #9"
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -1140,6 +1209,87 @@ export const faang3 = [
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
+  },
+  {
+    "title": "Maximum Independent Set in a Tree",
+    "slug": "maximum-independent-set-in-a-tree",
+    "description": "Given a tree of $N$ nodes labeled $0$ to $N-1$, find the size of the Maximum Independent Set (MIS). A subset of nodes is an independent set if no two nodes in the subset are adjacent (connected by an edge).\\n\\n### Example 1:\\n```\\nInput:\\n5 4\\n0 1\\n0 2\\n1 3\\n1 4\\nOutput: 3\\nExplanation: The subset {0, 3, 4} or {2, 3, 4} has size 3 and no two nodes are adjacent.\\n```\\n\\n### Example 2:\\n```\\nInput:\\n3 2\\n0 1\\n1 2\\nOutput: 2\\nExplanation: Independent set {0, 2} has size 2.\\n```\\n\\n### Constraints:\\n- $1 \\le N \\le 10^5$\\n- Graph is a valid tree with $N-1$ edges.",
+    "difficulty": "HARD",
+    "patterns": [
+      "Tree DP",
+      "DFS",
+      "Dynamic Programming"
+    ],
+    "topics": [
+      "Tree",
+      "Dynamic Programming",
+      "Depth-First Search"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "5 4\n0 1\n0 2\n1 3\n1 4",
+        "output": "3",
+        "explanation": "MIS size is 3."
+      },
+      {
+        "input": "3 2\n0 1\n1 2",
+        "output": "2",
+        "explanation": "{0, 2} is maximum independent set."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "1 0",
+        "output": "1"
+      },
+      {
+        "input": "2 1\n0 1",
+        "output": "1"
+      },
+      {
+        "input": "4 3\n0 1\n0 2\n0 3",
+        "output": "3"
+      }
+    ],
+    "hints": [
+      "Use Tree DP: for each node, compute (inc, exc) where inc includes the node and exc excludes it.",
+      "If node is included, children cannot be included. If excluded, children may or may not be included."
+    ],
+    "editorial": {
+      "approach": "Tree Dynamic Programming (Include/Exclude State)",
+      "solutionMarkdown": "`inc[u] = 1 + sum(exc[v])`, `exc[u] = sum(max(inc[v], exc[v]))`.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def maximumIndependentSetInATree(*args):\n    # TODO: Implement solution for Maximum Independent Set in a Tree\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = maximumIndependentSetInATree(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(maximumIndependentSetInATree(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function maximumIndependentSetInATree(...args) {\n    // TODO: Implement solution for Maximum Independent Set in a Tree\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(maximumIndependentSetInATree(...parsed)));\n    } catch (e) {\n        console.log(maximumIndependentSetInATree(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Maximum Independent Set in a Tree\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Maximum Independent Set in a Tree\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
   },
   {
     "title": "Maximum Level Sum of a Binary Tree",
@@ -1233,6 +1383,85 @@ export const faang3 = [
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
+  },
+  {
+    "title": "Maximum of Two Numbers Without if-else",
+    "slug": "maximum-of-two-numbers-without-if-else",
+    "description": "Given two 32-bit signed integers $a$ and $b$, find the maximum of the two numbers without using any `if-else` statements, ternary operators, or comparison operators ($<, >, \\le, \\ge, ==, !=$).\\n\\n### Example 1:\\n```\\nInput: a = 5, b = 10\\nOutput: 10\\nExplanation: 10 is strictly greater than 5.\\n```\\n\\n### Example 2:\\n```\\nInput: a = -3, b = -8\\nOutput: -3\\nExplanation: -3 > -8.\\n```\\n\\n### Constraints:\\n- $-2^{31} \\le a, b \\le 2^{31} - 1$",
+    "difficulty": "EASY",
+    "patterns": [
+      "Bit Manipulation",
+      "Math"
+    ],
+    "topics": [
+      "Math",
+      "Bit Manipulation"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "a = 5, b = 10",
+        "output": "10",
+        "explanation": "Max without conditionals."
+      },
+      {
+        "input": "a = -3, b = -8",
+        "output": "-3",
+        "explanation": "Negative numbers."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "a = 0, b = 0",
+        "output": "0"
+      },
+      {
+        "input": "a = 2147483647, b = -2147483648",
+        "output": "2147483647"
+      },
+      {
+        "input": "a = -10, b = 0",
+        "output": "0"
+      }
+    ],
+    "hints": [
+      "Examine the sign bit of `a - b` (or use sign differences to prevent overflow).",
+      "max(a, b) = a * k + b * (1 - k) where k is 1 if a >= b and 0 otherwise."
+    ],
+    "editorial": {
+      "approach": "Sign Bit Extraction via Bit Shifts",
+      "solutionMarkdown": "Extract sign bit with arithmetic right shift `>> 31` and avoid overflow by handling opposite signs first.",
+      "timeComplexity": "O(1)",
+      "spaceComplexity": "O(1)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def maximumOfTwoNumbersWithoutIfElse(*args):\n    # TODO: Implement solution for Maximum of Two Numbers Without if-else\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = maximumOfTwoNumbersWithoutIfElse(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(maximumOfTwoNumbersWithoutIfElse(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function maximumOfTwoNumbersWithoutIfElse(...args) {\n    // TODO: Implement solution for Maximum of Two Numbers Without if-else\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(maximumOfTwoNumbersWithoutIfElse(...parsed)));\n    } catch (e) {\n        console.log(maximumOfTwoNumbersWithoutIfElse(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Maximum of Two Numbers Without if-else\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Maximum of Two Numbers Without if-else\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
   },
   {
     "title": "Maximum Points Coverage with a Rectangle",
@@ -1369,6 +1598,11 @@ export const faang3 = [
         "verified": true,
         "frequencyCount": 42,
         "sourceNote": "Infosys Interview Question #12"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -1438,6 +1672,176 @@ export const faang3 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Maximum Profit from Non-Overlapping Time Slots",
+    "slug": "maximum-profit-from-non-overlapping-time-slots",
+    "description": "Given $N$ time slots where each slot has a start time, end time, and profit, select a subset of non-overlapping time slots to maximize total profit. If a slot ends at time $t$, another slot can start at time $t$.\\n\\n### Example 1:\\n```\\nInput:\\n4\\n1 3 50\\n2 4 10\\n3 5 40\\n3 6 70\\nOutput: 120\\nExplanation: Select slots (1, 3) profit 50 and (3, 6) profit 70 for total 120.\\n```\\n\\n### Example 2:\\n```\\nInput:\\n3\\n1 2 20\\n2 3 30\\n3 4 40\\nOutput: 90\\nExplanation: All slots are mutually non-overlapping: 20 + 30 + 40 = 90.\\n```\\n\\n### Constraints:\\n- $1 \\le N \\le 5 \\times 10^4$\\n- $0 \\le start < end \\le 10^9$\\n- $1 \\le profit \\le 10^5$",
+    "difficulty": "HARD",
+    "patterns": [
+      "Dynamic Programming",
+      "Binary Search",
+      "Intervals"
+    ],
+    "topics": [
+      "Array",
+      "Binary Search",
+      "Dynamic Programming",
+      "Sorting"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "4\n1 3 50\n2 4 10\n3 5 40\n3 6 70",
+        "output": "120",
+        "explanation": "Optimal choice yields 120."
+      },
+      {
+        "input": "3\n1 2 20\n2 3 30\n3 4 40",
+        "output": "90",
+        "explanation": "Non-overlapping chain."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "1\n5 10 100",
+        "output": "100"
+      },
+      {
+        "input": "2\n1 5 10\n2 3 20",
+        "output": "20"
+      },
+      {
+        "input": "3\n1 4 30\n2 5 50\n4 6 40",
+        "output": "70"
+      }
+    ],
+    "hints": [
+      "Sort intervals by ending time.",
+      "Use DP with binary search for each interval's compatible predecessor."
+    ],
+    "editorial": {
+      "approach": "Weighted Interval Scheduling DP + Binary Search",
+      "solutionMarkdown": "Sort by end time. Binary search latest non-overlapping interval.",
+      "timeComplexity": "O(N log N)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def maximumProfitFromNonOverlappingTimeSlots(*args):\n    # TODO: Implement solution for Maximum Profit from Non-Overlapping Time Slots\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = maximumProfitFromNonOverlappingTimeSlots(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(maximumProfitFromNonOverlappingTimeSlots(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function maximumProfitFromNonOverlappingTimeSlots(...args) {\n    // TODO: Implement solution for Maximum Profit from Non-Overlapping Time Slots\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(maximumProfitFromNonOverlappingTimeSlots(...parsed)));\n    } catch (e) {\n        console.log(maximumProfitFromNonOverlappingTimeSlots(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Maximum Profit from Non-Overlapping Time Slots\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Maximum Profit from Non-Overlapping Time Slots\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
+    "title": "Maximum Profit in Job Scheduling",
+    "slug": "maximum-profit-in-job-scheduling",
+    "description": "We have $n$ jobs, where every job is scheduled to be done from `startTime[i]` to `endTime[i]`, obtaining a profit of `profit[i]`.\\n\\nYou're given the `startTime`, `endTime` and `profit` arrays, return the maximum profit you can take such that there are no two jobs in the subset with overlapping time range.\\n\\nIf you choose a job that ends at time $X$ you will be able to start another job that starts at time $X$.\\n\\n### Example 1:\\n```\\nInput:\\nstartTime = [1,2,3,3]\\nendTime = [3,4,5,6]\\nprofit = [50,10,40,70]\\nOutput: 120\\nExplanation: The subset chosen is the first and fourth job with profit 50 + 70 = 120.\\n```\\n\\n### Example 2:\\n```\\nInput:\\nstartTime = [1,2,3,4,6]\\nendTime = [3,5,10,6,9]\\nprofit = [20,20,100,70,60]\\nOutput: 150\\nExplanation: The subset chosen is jobs 1, 4, 5 with profit 20 + 70 + 60 = 150.\\n```\\n\\n### Constraints:\\n- $1 \\le n \\le 5 \\times 10^4$\\n- $1 \\le startTime[i] < endTime[i] \\le 10^9$\\n- $1 \\le profit[i] \\le 10^4$",
+    "difficulty": "HARD",
+    "category": "DSA",
+    "patterns": [
+      "Dynamic Programming",
+      "Binary Search",
+      "Intervals"
+    ],
+    "topics": [
+      "Array",
+      "Binary Search",
+      "Dynamic Programming",
+      "Sorting"
+    ],
+    "companyTags": [
+      {
+        "company": "Capgemini",
+        "frequencyCount": 5,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "startTime = [1,2,3,3]\nendTime = [3,4,5,6]\nprofit = [50,10,40,70]",
+        "output": "120",
+        "explanation": "Jobs 1 and 4 yield max profit 120."
+      },
+      {
+        "input": "startTime = [1,2,3,4,6]\nendTime = [3,5,10,6,9]\nprofit = [20,20,100,70,60]",
+        "output": "150",
+        "explanation": "Jobs 1, 4, 5 yield 150."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "startTime = [1,1,1]\nendTime = [2,3,4]\nprofit = [5,6,4]",
+        "output": "6"
+      },
+      {
+        "input": "startTime = [1]\nendTime = [2]\nprofit = [10]",
+        "output": "10"
+      },
+      {
+        "input": "startTime = [1,2,3]\nendTime = [2,3,4]\nprofit = [10,20,30]",
+        "output": "60"
+      }
+    ],
+    "hints": [
+      "Sort jobs by end time.",
+      "Use DP where dp[i] is the maximum profit considering first i jobs.",
+      "Use binary search to find the latest job that finishes before the current job starts."
+    ],
+    "editorial": {
+      "approach": "DP with Binary Search (Weighted Interval Scheduling)",
+      "solutionMarkdown": "### DP + Binary Search\nSort jobs by `endTime`. For each job $i$, use binary search on earlier end times to find the latest non-overlapping job, then transition `dp[i] = max(dp[i-1], job.profit + dp[prev])`.",
+      "timeComplexity": "O(N log N)",
+      "spaceComplexity": "O(N)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def maximumProfitInJobScheduling(*args):\n    # TODO: Implement solution for Maximum Profit in Job Scheduling\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = maximumProfitInJobScheduling(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(maximumProfitInJobScheduling(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function maximumProfitInJobScheduling(...args) {\n    // TODO: Implement solution for Maximum Profit in Job Scheduling\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(maximumProfitInJobScheduling(...parsed)));\n    } catch (e) {\n        console.log(maximumProfitInJobScheduling(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Maximum Profit in Job Scheduling\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Maximum Profit in Job Scheduling\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Maximum Subarray",
     "slug": "maximum-subarray",
     "description": "Given an integer array `nums`, find the subarray with the largest sum, and return *its sum*.\n\n### Example 1:\n```\nInput: [-2,1,-3,4,-1,2,1,-5,4]\nOutput: 6\nExplanation: The subarray [4,-1,2,1] has the largest sum 6.\n```\n\n### Example 2:\n```\nInput: [1]\nOutput: 1\nExplanation: Single element subarray.\n```",
@@ -1495,6 +1899,31 @@ export const faang3 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #20"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -1589,6 +2018,16 @@ export const faang3 = [
         "verified": true,
         "frequencyCount": 40,
         "sourceNote": "Accenture Interview Question #44 (R [S2])"
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -1701,6 +2140,16 @@ export const faang3 = [
         "verified": true,
         "frequencyCount": 42,
         "sourceNote": "Infosys Interview Question #36"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -1935,6 +2384,31 @@ export const faang3 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #48"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -2038,6 +2512,26 @@ export const faang3 = [
         "verified": true,
         "frequencyCount": 40,
         "sourceNote": "Reported in Meta 2021-2026 interview set"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -2107,6 +2601,90 @@ export const faang3 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Merge Sort",
+    "slug": "merge-sort-array",
+    "description": "Given an array of integers `nums`, sort the array in ascending order using the Merge Sort algorithm and return the sorted array.\\n\\n### Example 1:\\n```\\nInput: [5, 2, 3, 1]\\nOutput: [1, 2, 3, 5]\\nExplanation: Array sorted ascendingly.\\n```\\n\\n### Example 2:\\n```\\nInput: [5, 1, 1, 2, 0, 0]\\nOutput: [0, 0, 1, 1, 2, 5]\\nExplanation: Handles duplicates correctly.\\n```\\n\\n### Constraints:\\n- $1 \\le |nums| \\le 5 \\times 10^4$\\n- $-5 \\times 10^4 \\le nums[i] \\le 5 \\times 10^4$",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Divide and Conquer",
+      "Merge Sort"
+    ],
+    "topics": [
+      "Array",
+      "Divide and Conquer",
+      "Sorting"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[5, 2, 3, 1]",
+        "output": "[1, 2, 3, 5]",
+        "explanation": "Sorted ascending."
+      },
+      {
+        "input": "[5, 1, 1, 2, 0, 0]",
+        "output": "[0, 0, 1, 1, 2, 5]",
+        "explanation": "Sorted with duplicates."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1]",
+        "output": "[1]"
+      },
+      {
+        "input": "[-4, 0, 7, 4, 9, -5, -1, 0, -7, -1]",
+        "output": "[-7, -5, -4, -1, -1, 0, 0, 4, 7, 9]"
+      },
+      {
+        "input": "[2, 1]",
+        "output": "[1, 2]"
+      }
+    ],
+    "hints": [
+      "Divide the array into halves, recursively sort both halves, then merge the two sorted halves."
+    ],
+    "editorial": {
+      "approach": "Divide and Conquer Merge Sort",
+      "solutionMarkdown": "### Merge Sort Algorithm\nSplit array at `mid = (low + high) // 2`. Recursively sort left and right, then merge with two pointers.",
+      "timeComplexity": "O(N log N)",
+      "spaceComplexity": "O(N)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def mergeSortArray(*args):\n    # TODO: Implement solution for Merge Sort\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = mergeSortArray(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(mergeSortArray(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function mergeSortArray(...args) {\n    // TODO: Implement solution for Merge Sort\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(mergeSortArray(...parsed)));\n    } catch (e) {\n        console.log(mergeSortArray(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Merge Sort\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Merge Sort\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Merge Sorted Array",
     "slug": "merge-sorted-array",
     "description": "You are given two integer arrays `nums1` and `nums2`, sorted in non-decreasing order, and two integers `m` and `n`. Merge `nums2` into `nums1` as one sorted array in-place.\n\n### Example 1:\n```\nInput: [1,2,3,0,0,0]\n3\n[2,5,6]\n3\nOutput: [1, 2, 2, 3, 5, 6]\nExplanation: Arrays merged into nums1.\n```\n\n### Example 2:\n```\nInput: [1]\n1\n[]\n0\nOutput: [1]\nExplanation: nums2 is empty.\n```",
@@ -2143,6 +2721,11 @@ export const faang3 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #24"
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -2346,6 +2929,21 @@ export const faang3 = [
         "verified": true,
         "frequencyCount": 45,
         "sourceNote": "TCS Interview Question #53"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -2504,6 +3102,83 @@ export const faang3 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Middle Stack with O(1) Middle Operations",
+    "slug": "middle-stack-with-o-middle-operations",
+    "description": "Design a stack that supports `push`, `pop`, `getMiddle`, and `deleteMiddle` operations, all in $O(1)$ time complexity.\\n\\nImplement the `MiddleStack` operations:\\n- `push(x)`: pushes $x$ onto the stack.\\n- `pop()`: removes and returns the top element of the stack.\\n- `getMiddle()`: returns the middle element of the stack (for $2k$ elements, return the $k$-th element from bottom).\\n- `deleteMiddle()`: removes the middle element.\\n\\n### Example 1:\\n```\\nInput:\\npush 1\\npush 2\\npush 3\\ngetMiddle -> 2\\npush 4\\ngetMiddle -> 2\\ndeleteMiddle\\ngetMiddle -> 3\\npop -> 4\\n```\\n\\n### Constraints:\\n- Up to $10^5$ operations.\\n- $-10^9 \\le x \\le 10^9$",
+    "difficulty": "HARD",
+    "patterns": [
+      "Doubly Linked List",
+      "Design",
+      "Stack"
+    ],
+    "topics": [
+      "Linked List",
+      "Stack",
+      "Design",
+      "Doubly-Linked List"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "push 1\npush 2\npush 3\ngetMiddle\npush 4\ngetMiddle\ndeleteMiddle\ngetMiddle\npop",
+        "output": "2\n2\n3\n4",
+        "explanation": "O(1) middle tracking."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "push 10\ngetMiddle\npop",
+        "output": "10\n10"
+      },
+      {
+        "input": "push 1\npush 2\ndeleteMiddle\ngetMiddle",
+        "output": "2"
+      },
+      {
+        "input": "push 5\npush 6\npush 7\npop\ngetMiddle",
+        "output": "7\n5"
+      }
+    ],
+    "hints": [
+      "Use a Doubly Linked List with a `mid` pointer.",
+      "Update `mid` pointer on push, pop, and deleteMiddle based on whether count is odd or even."
+    ],
+    "editorial": {
+      "approach": "Doubly Linked List with Mid Pointer",
+      "solutionMarkdown": "Maintain `mid` pointer in DLL. Shift `mid` appropriately on size changes.",
+      "timeComplexity": "O(1) for all operations",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def middleStackWithOMiddleOperations(*args):\n    # TODO: Implement solution for Middle Stack with O(1) Middle Operations\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = middleStackWithOMiddleOperations(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(middleStackWithOMiddleOperations(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function middleStackWithOMiddleOperations(...args) {\n    // TODO: Implement solution for Middle Stack with O(1) Middle Operations\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(middleStackWithOMiddleOperations(...parsed)));\n    } catch (e) {\n        console.log(middleStackWithOMiddleOperations(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Middle Stack with O(1) Middle Operations\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Middle Stack with O(1) Middle Operations\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
+  },
+  {
     "title": "Min Cost to Connect All Points",
     "slug": "min-cost-to-connect-all-points",
     "description": "You are given an array `points` representing integer coordinates of some points on a 2D-plane. The cost of connecting two points is the Manhattan distance between them. Return *the minimum cost to make all points connected*.\n\n### Example 1:\n```\nInput: [[0,0],[2,2],[3,10],[5,2],[7,0]]\nOutput: 20\nExplanation: Connect with total Manhattan distance 20.\n```\n\n### Example 2:\n```\nInput: [[3,12],[-2,5],[-4,1]]\nOutput: 18\nExplanation: Minimum cost spanning tree.\n```",
@@ -2645,6 +3320,21 @@ export const faang3 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #43"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -2702,6 +3392,86 @@ export const faang3 = [
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
+  },
+  {
+    "title": "Minimize Array Sum with K Ceil-Halving Operations",
+    "slug": "minimize-array-sum-with-k-ceil-halving-operations",
+    "description": "You are given an integer array `nums` and an integer `k`. You can perform the following operation at most `k` times:\\n- Choose any element `nums[i]` and replace it with `ceil(nums[i] / 2)`.\\n\\nReturn the minimum possible sum of `nums` after applying the operation at most `k` times.\\n\\n### Example 1:\\n```\\nInput: nums = [5, 19, 8, 1], k = 3\\nOutput: 17\\nExplanation:\\n1. Halve 19: [5, 10, 8, 1]\\n2. Halve 10: [5, 5, 8, 1]\\n3. Halve 8: [5, 5, 4, 1]\\nTotal sum = 5 + 5 + 4 + 1 = 17.\\n```\\n\\n### Example 2:\\n```\\nInput: nums = [4, 3, 6, 4], k = 4\\nOutput: 9\\nExplanation: Minimum sum after 4 operations is 9.\\n```\\n\\n### Constraints:\\n- $1 \\le |nums| \\le 10^5$\\n- $1 \\le nums[i] \\le 10^4$\\n- $1 \\le k \\le 10^5$",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Heap",
+      "Greedy"
+    ],
+    "topics": [
+      "Array",
+      "Greedy",
+      "Heap (Priority Queue)"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "nums = [5, 19, 8, 1]\nk = 3",
+        "output": "17",
+        "explanation": "Greedy reduction via Max Heap."
+      },
+      {
+        "input": "nums = [4, 3, 6, 4]\nk = 4",
+        "output": "9",
+        "explanation": "Minimum sum 9."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "nums = [1]\nk = 5",
+        "output": "1"
+      },
+      {
+        "input": "nums = [10]\nk = 1",
+        "output": "5"
+      },
+      {
+        "input": "nums = [100, 100]\nk = 2",
+        "output": "100"
+      }
+    ],
+    "hints": [
+      "Always halve the current maximum element in the array to maximize the reduction.",
+      "Use a Max-Heap."
+    ],
+    "editorial": {
+      "approach": "Max-Heap Greedy Reduction",
+      "solutionMarkdown": "Push all numbers into a max-heap. Pop largest, replace with `ceil(val / 2)`, and push back $k$ times.",
+      "timeComplexity": "O(N + k log N)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def minimizeArraySumWithKCeilHalvingOperations(*args):\n    # TODO: Implement solution for Minimize Array Sum with K Ceil-Halving Operations\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = minimizeArraySumWithKCeilHalvingOperations(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(minimizeArraySumWithKCeilHalvingOperations(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function minimizeArraySumWithKCeilHalvingOperations(...args) {\n    // TODO: Implement solution for Minimize Array Sum with K Ceil-Halving Operations\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(minimizeArraySumWithKCeilHalvingOperations(...parsed)));\n    } catch (e) {\n        console.log(minimizeArraySumWithKCeilHalvingOperations(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Minimize Array Sum with K Ceil-Halving Operations\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Minimize Array Sum with K Ceil-Halving Operations\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
   },
   {
     "title": "Minimum Cost Climbing Stairs",
@@ -2882,6 +3652,240 @@ export const faang3 = [
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
+  },
+  {
+    "title": "Minimum Cost to Connect Ropes",
+    "slug": "minimum-cost-to-connect-ropes",
+    "description": "Given $N$ ropes of different lengths, connect them into a single rope with minimum total cost. The cost to connect two ropes is equal to the sum of their lengths.\\n\\n### Example 1:\\n```\\nInput: [4, 3, 2, 6]\\nOutput: 29\\nExplanation:\\n1. Connect ropes of lengths 2 and 3: cost = 5, new ropes = [4, 6, 5]\\n2. Connect ropes of lengths 4 and 5: cost = 9, new ropes = [6, 9]\\n3. Connect ropes of lengths 6 and 9: cost = 15, single rope left.\\nTotal cost = 5 + 9 + 15 = 29.\\n```\\n\\n### Example 2:\\n```\\nInput: [1, 2, 3, 4, 5]\\nOutput: 33\\nExplanation: Connecting two smallest ropes greedily yields total cost 33.\\n```\\n\\n### Constraints:\\n- $1 \\le N \\le 10^5$\\n- $1 \\le \\text{ropes}[i] \\le 10^6$",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Greedy",
+      "Heap"
+    ],
+    "topics": [
+      "Heap (Priority Queue)",
+      "Greedy"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 6,
+        "yearReported": 2025
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[4, 3, 2, 6]",
+        "output": "29",
+        "explanation": "Optimal greedy rope connection."
+      },
+      {
+        "input": "[1, 2, 3, 4, 5]",
+        "output": "33",
+        "explanation": "Sum of merge steps is 33."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[5]",
+        "output": "0"
+      },
+      {
+        "input": "[2, 3]",
+        "output": "5"
+      },
+      {
+        "input": "[1, 1, 1, 1]",
+        "output": "8"
+      }
+    ],
+    "hints": [
+      "Always pick the two shortest ropes and merge them.",
+      "Use a Min-Heap (priority queue) to efficiently extract the two smallest elements."
+    ],
+    "editorial": {
+      "approach": "Greedy Huffman / Min-Heap Simulation",
+      "solutionMarkdown": "### Min-Heap\nPush all ropes into a min-heap. While size > 1, pop two smallest, add their sum to total cost, and push their sum back.",
+      "timeComplexity": "O(N log N)",
+      "spaceComplexity": "O(N)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def minimumCostToConnectRopes(*args):\n    # TODO: Implement solution for Minimum Cost to Connect Ropes\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = minimumCostToConnectRopes(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(minimumCostToConnectRopes(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function minimumCostToConnectRopes(...args) {\n    // TODO: Implement solution for Minimum Cost to Connect Ropes\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(minimumCostToConnectRopes(...parsed)));\n    } catch (e) {\n        console.log(minimumCostToConnectRopes(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Minimum Cost to Connect Ropes\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Minimum Cost to Connect Ropes\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Minimum Cost to Merge Stones",
+    "slug": "minimum-cost-to-merge-stones",
+    "description": "There are `n` piles of stones arranged in a row. The $i$-th pile has `stones[i]` stones.\\n\\nA move consists of merging exactly `k` consecutive piles into one pile, and the cost of this move is equal to the total number of stones in these `k` piles.\\n\\nReturn the minimum cost to merge all piles of stones into one pile. If it is impossible, return `-1`.\\n\\n### Example 1:\\n```\\nInput: stones = [3,2,4,1], k = 2\\nOutput: 20\\nExplanation:\\nMerge [3, 2] -> cost 5; piles = [5, 4, 1]\\nMerge [4, 1] -> cost 5; piles = [5, 5]\\nMerge [5, 5] -> cost 10; piles = [10]\\nTotal cost = 5 + 5 + 10 = 20.\\n```\\n\\n### Example 2:\\n```\\nInput: stones = [3,2,4,1], k = 3\\nOutput: -1\\nExplanation: We cannot merge 4 piles into 1 using 3 at a time.\\n```\\n\\n### Constraints:\\n- $n == stones.length$\\n- $1 \\le n \\le 30$\\n- $1 \\le stones[i] \\le 100$\\n- $2 \\le k \\le 30$",
+    "difficulty": "HARD",
+    "patterns": [
+      "Dynamic Programming",
+      "Interval DP"
+    ],
+    "topics": [
+      "Array",
+      "Dynamic Programming",
+      "Prefix Sum"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "stones = [3,2,4,1]\nk = 2",
+        "output": "20",
+        "explanation": "Optimal merge cost 20."
+      },
+      {
+        "input": "stones = [3,2,4,1]\nk = 3",
+        "output": "-1",
+        "explanation": "Impossible parity: (4 - 1) % (3 - 1) != 0."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "stones = [3,5,1,2,6]\nk = 3",
+        "output": "25"
+      },
+      {
+        "input": "stones = [1]\nk = 2",
+        "output": "0"
+      },
+      {
+        "input": "stones = [1,2,3]\nk = 3",
+        "output": "6"
+      }
+    ],
+    "hints": [
+      "Check feasibility: `(n - 1) % (k - 1) == 0` must hold.",
+      "3D DP or 2D DP `dp[i][j]` representing minimum cost to merge range `[i, j]` as much as possible."
+    ],
+    "editorial": {
+      "approach": "Interval Dynamic Programming with Prefix Sums",
+      "solutionMarkdown": "Interval DP with step size $k-1$. Add sum of range when interval compresses to 1 pile.",
+      "timeComplexity": "O(N^3 / k)",
+      "spaceComplexity": "O(N^2)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def minimumCostToMergeStones(*args):\n    # TODO: Implement solution for Minimum Cost to Merge Stones\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = minimumCostToMergeStones(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(minimumCostToMergeStones(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function minimumCostToMergeStones(...args) {\n    // TODO: Implement solution for Minimum Cost to Merge Stones\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(minimumCostToMergeStones(...parsed)));\n    } catch (e) {\n        console.log(minimumCostToMergeStones(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Minimum Cost to Merge Stones\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Minimum Cost to Merge Stones\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
+    "title": "Minimum Cost to Reach a City with Fuel Constraints",
+    "slug": "minimum-cost-to-reach-a-city-with-fuel-constraints",
+    "description": "There are $N$ cities numbered $0$ to $N-1$ connected by bidirectional roads. Each road has a length in kilometers. A car has a maximum fuel tank capacity of $C$ liters and consumes 1 liter of fuel per kilometer. Each city has a fuel station with price $price[i]$ per liter. You can buy any amount of fuel at a city as long as the tank capacity $C$ is not exceeded.\\n\\nFind the minimum cost in dollars to travel from city $start$ to city $dest$ starting with an empty tank. If unreachable, return `-1`.\\n\\n### Example 1:\\n```\\nInput:\\nN = 4, C = 10, start = 0, dest = 3\\nprices = [10, 20, 30, 40]\\nroads = [[0, 1, 5], [1, 3, 5]]\\nOutput: 100\\nExplanation: Buy 10L at city 0 for $100. Reach city 3 with 0L remaining.\\n```\\n\\n### Constraints:\\n- $1 \\le N \\le 1000$\\n- $1 \\le C \\le 100$\\n- $1 \\le \\text{length} \\le C$",
+    "difficulty": "HARD",
+    "patterns": [
+      "Graph",
+      "Dijkstra",
+      "Shortest Path"
+    ],
+    "topics": [
+      "Graph",
+      "Shortest Path",
+      "Heap (Priority Queue)"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "N = 4, C = 10, start = 0, dest = 3\nprices = [10, 20, 30, 40]\nroads = [[0, 1, 5], [1, 3, 5]]",
+        "output": "100",
+        "explanation": "Buy 10 liters at city 0 for cost 100."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "N = 2, C = 5, start = 0, dest = 1\nprices = [5, 5]\nroads = [[0, 1, 10]]",
+        "output": "-1"
+      },
+      {
+        "input": "N = 1, C = 5, start = 0, dest = 0\nprices = [10]\nroads = []",
+        "output": "0"
+      },
+      {
+        "input": "N = 3, C = 5, start = 0, dest = 2\nprices = [2, 1, 5]\nroads = [[0, 1, 3], [1, 2, 2]]",
+        "output": "8"
+      }
+    ],
+    "hints": [
+      "State is `(city, fuel)`. Run Dijkstra's algorithm on graph with state space $N \\times C$."
+    ],
+    "editorial": {
+      "approach": "Dijkstra on Augmented State Graph (Node, Fuel)",
+      "solutionMarkdown": "Two transitions from `(u, f)`: buy 1L of fuel for `price[u]`, or drive to neighbor `v` using road length fuel.",
+      "timeComplexity": "O(N * C log(N * C) + E * C)",
+      "spaceComplexity": "O(N * C)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def minimumCostToReachACityWithFuelConstraints(*args):\n    # TODO: Implement solution for Minimum Cost to Reach a City with Fuel Constraints\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = minimumCostToReachACityWithFuelConstraints(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(minimumCostToReachACityWithFuelConstraints(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function minimumCostToReachACityWithFuelConstraints(...args) {\n    // TODO: Implement solution for Minimum Cost to Reach a City with Fuel Constraints\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(minimumCostToReachACityWithFuelConstraints(...parsed)));\n    } catch (e) {\n        console.log(minimumCostToReachACityWithFuelConstraints(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Minimum Cost to Reach a City with Fuel Constraints\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Minimum Cost to Reach a City with Fuel Constraints\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
   },
   {
     "title": "Minimum Depth of Binary Tree",
@@ -3288,6 +4292,16 @@ export const faang3 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -3465,6 +4479,21 @@ export const faang3 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #35"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -3534,6 +4563,173 @@ export const faang3 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Minimum Spanning Tree (Kruskal's Algorithm)",
+    "slug": "minimum-spanning-tree-kruskal",
+    "description": "Given a weighted, undirected and connected graph with $V$ vertices and $E$ edges, find the sum of the weights of the edges in the Minimum Spanning Tree (MST) using Kruskal's algorithm.\\n\\n### Example 1:\\n```\\nInput:\\n4 5\\n0 1 10\\n0 2 6\\n0 3 5\\n1 3 15\\n2 3 4\\nOutput: 19\\nExplanation: Edges in MST are (2, 3) weight 4, (0, 3) weight 5, and (0, 1) weight 10. Total weight = 4 + 5 + 10 = 19.\\n```\\n\\n### Example 2:\\n```\\nInput:\\n3 3\\n0 1 5\\n1 2 10\\n0 2 1\\nOutput: 6\\nExplanation: Edges (0, 2) weight 1 and (0, 1) weight 5 form MST with sum 6.\\n```\\n\\n### Constraints:\\n- $1 \\le V \\le 10^4$\\n- $1 \\le E \\le 5 \\times 10^4$\\n- $1 \\le \\text{weight} \\le 10^5$",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Greedy",
+      "Graph",
+      "Disjoint Set"
+    ],
+    "topics": [
+      "Graph",
+      "Minimum Spanning Tree",
+      "Union Find"
+    ],
+    "companyTags": [
+      {
+        "company": "Capgemini",
+        "frequencyCount": 6,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "4 5\n0 1 10\n0 2 6\n0 3 5\n1 3 15\n2 3 4",
+        "output": "19",
+        "explanation": "MST sum is 19."
+      },
+      {
+        "input": "3 3\n0 1 5\n1 2 10\n0 2 1",
+        "output": "6",
+        "explanation": "Edges 1 and 5 chosen."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "2 1\n0 1 7",
+        "output": "7"
+      },
+      {
+        "input": "3 2\n0 1 3\n1 2 4",
+        "output": "7"
+      },
+      {
+        "input": "4 3\n0 1 1\n1 2 2\n2 3 3",
+        "output": "6"
+      }
+    ],
+    "hints": [
+      "Sort all edges by weight in ascending order.",
+      "Iterate through sorted edges and use DSU to check if adding an edge forms a cycle. If not, include its weight."
+    ],
+    "editorial": {
+      "approach": "Kruskal's Algorithm with DSU",
+      "solutionMarkdown": "### Kruskal's Method\nSort edges by weight. Greedily add edges that connect disconnected components using DSU until $V-1$ edges are added.",
+      "timeComplexity": "O(E log E)",
+      "spaceComplexity": "O(V)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def minimumSpanningTreeKruskal(*args):\n    # TODO: Implement solution for Minimum Spanning Tree (Kruskal's Algorithm)\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = minimumSpanningTreeKruskal(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(minimumSpanningTreeKruskal(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function minimumSpanningTreeKruskal(...args) {\n    // TODO: Implement solution for Minimum Spanning Tree (Kruskal's Algorithm)\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(minimumSpanningTreeKruskal(...parsed)));\n    } catch (e) {\n        console.log(minimumSpanningTreeKruskal(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Minimum Spanning Tree (Kruskal's Algorithm)\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Minimum Spanning Tree (Kruskal's Algorithm)\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Minimum Swaps to Sort an Array",
+    "slug": "minimum-swaps-to-sort-an-array",
+    "description": "Given an array of $n$ distinct integers, find the minimum number of swaps required to sort the array in ascending order.\\n\\n### Example 1:\\n```\\nInput: [2, 8, 5, 4]\\nOutput: 1\\nExplanation: Swap 8 with 4 to get [2, 4, 5, 8]. Minimum swaps = 1.\\n```\\n\\n### Example 2:\\n```\\nInput: [10, 19, 6, 3, 5]\\nOutput: 2\\nExplanation: Swap 10 with 3, then 19 with 5.\\n```\\n\\n### Constraints:\\n- $1 \\le n \\le 10^5$\\n- $1 \\le arr[i] \\le 10^9$, all elements distinct.",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Array",
+      "Cycle Decomposition",
+      "Greedy"
+    ],
+    "topics": [
+      "Array",
+      "Sorting",
+      "Graph"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[2, 8, 5, 4]",
+        "output": "1",
+        "explanation": "1 swap required."
+      },
+      {
+        "input": "[10, 19, 6, 3, 5]",
+        "output": "2",
+        "explanation": "2 swaps required."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1, 2, 3]",
+        "output": "0"
+      },
+      {
+        "input": "[2, 1]",
+        "output": "1"
+      },
+      {
+        "input": "[4, 3, 2, 1]",
+        "output": "2"
+      }
+    ],
+    "hints": [
+      "Pair each element with its initial index and sort.",
+      "Find cycle decomposition: a cycle of length $L$ requires $L - 1$ swaps."
+    ],
+    "editorial": {
+      "approach": "Permutation Cycle Decomposition",
+      "solutionMarkdown": "Sum `(cycle_size - 1)` across all disjoint cycles in the permutation graph.",
+      "timeComplexity": "O(N log N)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def minimumSwapsToSortAnArray(*args):\n    # TODO: Implement solution for Minimum Swaps to Sort an Array\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = minimumSwapsToSortAnArray(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(minimumSwapsToSortAnArray(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function minimumSwapsToSortAnArray(...args) {\n    // TODO: Implement solution for Minimum Swaps to Sort an Array\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(minimumSwapsToSortAnArray(...parsed)));\n    } catch (e) {\n        console.log(minimumSwapsToSortAnArray(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Minimum Swaps to Sort an Array\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Minimum Swaps to Sort an Array\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
     "title": "Minimum Window Substring",
     "slug": "minimum-window-substring",
     "description": "Given two strings `s` and `t` of lengths `m` and `n` respectively, return the **minimum window substring** of `s` such that every character in `t` (including duplicates) is included in the window. If there is no such substring, return the empty string `\"\"`.\n\n### Example 1:\n```\nInput: ADOBECODEBANC\nABC\nOutput: \"BANC\"\nExplanation: Minimum window substring is 'BANC'.\n```\n\n### Example 2:\n```\nInput: a\na\nOutput: \"a\"\nExplanation: Single char match.\n```",
@@ -3584,6 +4780,26 @@ export const faang3 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #38"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -3688,6 +4904,11 @@ export const faang3 = [
         "verified": false,
         "frequencyCount": 25,
         "sourceNote": "Accenture Practice Bank #13"
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -3844,6 +5065,160 @@ export const faang3 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Modify String (Lexicographically Largest Subsequence with Distinct Characters)",
+    "slug": "modify-string-lexicographically-largest-subsequence-with-distinct-characters",
+    "description": "Given a string `s`, return the lexicographically largest subsequence of `s` that contains all the distinct characters of `s` exactly once.\\n\\n### Example 1:\\n```\\nInput: s = \"abacaba\"\\nOutput: \"cba\"\\nExplanation: Distinct characters are 'a', 'b', 'c'. The lexicographically largest subsequence containing each once is \"cba\".\\n```\\n\\n### Example 2:\\n```\\nInput: s = \"cbacdcbc\"\\nOutput: \"dcb\"\\nExplanation: Subsequence containing each unique character once.\\n```\\n\\n### Constraints:\\n- $1 \\le |s| \\le 10^4$\\n- `s` consists of lowercase English letters.",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Monotonic Stack",
+      "Greedy"
+    ],
+    "topics": [
+      "String",
+      "Stack",
+      "Greedy",
+      "Monotonic Stack"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "s = \"abacaba\"",
+        "output": "cba",
+        "explanation": "Lexicographically largest distinct character subsequence."
+      },
+      {
+        "input": "s = \"cbacdcbc\"",
+        "output": "dcb",
+        "explanation": "All unique characters kept once."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "s = \"a\"",
+        "output": "a"
+      },
+      {
+        "input": "s = \"xyz\"",
+        "output": "xyz"
+      },
+      {
+        "input": "s = \"bbcaac\"",
+        "output": "bac"
+      }
+    ],
+    "hints": [
+      "Track last occurrence index of each character.",
+      "Use a monotonic stack popping smaller characters if they appear again later in the string."
+    ],
+    "editorial": {
+      "approach": "Greedy Monotonic Decreasing Stack",
+      "solutionMarkdown": "Similar to Remove Duplicate Letters but maintaining a descending stack to maximize lexicographical rank.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def modifyStringLexicographicallyLargestSubsequenceWithDistinctCharacters(*args):\n    # TODO: Implement solution for Modify String (Lexicographically Largest Subsequence with Distinct Characters)\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = modifyStringLexicographicallyLargestSubsequenceWithDistinctCharacters(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(modifyStringLexicographicallyLargestSubsequenceWithDistinctCharacters(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function modifyStringLexicographicallyLargestSubsequenceWithDistinctCharacters(...args) {\n    // TODO: Implement solution for Modify String (Lexicographically Largest Subsequence with Distinct Characters)\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(modifyStringLexicographicallyLargestSubsequenceWithDistinctCharacters(...parsed)));\n    } catch (e) {\n        console.log(modifyStringLexicographicallyLargestSubsequenceWithDistinctCharacters(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Modify String (Lexicographically Largest Subsequence with Distinct Characters)\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Modify String (Lexicographically Largest Subsequence with Distinct Characters)\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
+    "title": "Move Negative Numbers to the Left",
+    "slug": "move-negative-numbers-to-the-left",
+    "description": "Given an array of integers `arr`, rearrange the array so that all negative numbers appear before all positive numbers and zeroes. Order among positive or negative numbers does not need to be preserved.\\n\\nOutput the rearranged array.\\n\\n### Example 1:\\n```\\nInput: [-12, 11, -13, -5, 6, -7, 5, -3, -6]\\nOutput: [-12, -13, -5, -7, -3, -6, 11, 6, 5]\\nExplanation: All negative numbers are on the left.\\n```\\n\\n### Constraints:\\n- $1 \\le |arr| \\le 10^5$\\n- $-10^9 \\le arr[i] \\le 10^9$",
+    "difficulty": "EASY",
+    "patterns": [
+      "Two Pointers",
+      "Partition"
+    ],
+    "topics": [
+      "Array",
+      "Two Pointers"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[-12, 11, -13, -5, 6, -7, 5, -3, -6]",
+        "output": "[-12, -13, -5, -7, -3, -6, 11, 6, 5]",
+        "explanation": "Negatives partitioned to left."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1, 2, 3]",
+        "output": "[1, 2, 3]"
+      },
+      {
+        "input": "[-1, -2, -3]",
+        "output": "[-1, -2, -3]"
+      },
+      {
+        "input": "[0, -1, 1]",
+        "output": "[-1, 0, 1]"
+      }
+    ],
+    "hints": [
+      "Use two pointers or Lomuto/Hoare partition scheme from Quicksort."
+    ],
+    "editorial": {
+      "approach": "Two-Pointer In-Place Partition",
+      "solutionMarkdown": "Swap negatives to left and positives to right.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def moveNegativeNumbersToTheLeft(*args):\n    # TODO: Implement solution for Move Negative Numbers to the Left\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = moveNegativeNumbersToTheLeft(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(moveNegativeNumbersToTheLeft(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function moveNegativeNumbersToTheLeft(...args) {\n    // TODO: Implement solution for Move Negative Numbers to the Left\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(moveNegativeNumbersToTheLeft(...parsed)));\n    } catch (e) {\n        console.log(moveNegativeNumbersToTheLeft(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Move Negative Numbers to the Left\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Move Negative Numbers to the Left\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
+  },
+  {
     "title": "Move Zeroes",
     "slug": "move-zeroes",
     "description": "Given an integer array `nums`, move all `0`'s to the end of it while maintaining the relative order of the non-zero elements.\n\n### Example 1:\n```\nInput: [0,1,0,3,12]\nOutput: [1,3,12,0,0]\nExplanation: All non-zeros placed in order, zeroes shifted to end.\n```\n\n### Example 2:\n```\nInput: [0]\nOutput: [0]\nExplanation: Single zero stays at index 0.\n```",
@@ -3878,6 +5253,21 @@ export const faang3 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #14"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -4271,6 +5661,26 @@ export const faang3 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #76"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -4378,6 +5788,16 @@ export const faang3 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #45"
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -4442,6 +5862,91 @@ export const faang3 = [
       "timeComplexity": "O(N1 + N2)",
       "spaceComplexity": "O(N2)"
     },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Next Greater Element II",
+    "slug": "next-greater-element-ii",
+    "description": "Given a circular integer array `nums` (i.e., the next element of `nums[nums.length - 1]` is `nums[0]`), return the next greater number for every element in `nums`.\\n\\nThe next greater number of a number $x$ is the first greater number to its traversing-order next in the array, which means you could search circularly to find its next greater number. If it doesn't exist, return `-1` for this number.\\n\\n### Example 1:\\n```\\nInput: [1, 2, 1]\\nOutput: [2, -1, 2]\\nExplanation: The first 1's next greater number is 2; The number 2 can't find next greater number; The second 1's next greater number needs to search circularly, which is also 2.\\n```\\n\\n### Example 2:\\n```\\nInput: [1, 2, 3, 4, 3]\\nOutput: [2, 3, 4, -1, 4]\\nExplanation: Next greater elements circular traversal.\\n```\\n\\n### Constraints:\\n- $1 \\le |nums| \\le 10^4$\\n- $-10^9 \\le nums[i] \\le 10^9$",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Monotonic Stack",
+      "Array"
+    ],
+    "topics": [
+      "Array",
+      "Stack",
+      "Monotonic Stack"
+    ],
+    "companyTags": [
+      {
+        "company": "Capgemini",
+        "frequencyCount": 6,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1, 2, 1]",
+        "output": "[2, -1, 2]",
+        "explanation": "Circular lookup on array."
+      },
+      {
+        "input": "[1, 2, 3, 4, 3]",
+        "output": "[2, 3, 4, -1, 4]",
+        "explanation": "Elements wrap around circular boundary."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1]",
+        "output": "[-1]"
+      },
+      {
+        "input": "[5, 4, 3, 2, 1]",
+        "output": "[-1, 5, 5, 5, 5]"
+      },
+      {
+        "input": "[1, 1, 1]",
+        "output": "[-1, -1, -1]"
+      }
+    ],
+    "hints": [
+      "Simulate circular array by iterating through the array twice (index from `2*n - 1` down to `0`), using `i % n`.",
+      "Use a decreasing monotonic stack storing indices or values."
+    ],
+    "editorial": {
+      "approach": "Monotonic Stack with 2N Modulo Traversal",
+      "solutionMarkdown": "### Monotonic Stack\nTraverse from `2*N - 1` down to 0. Pop elements less than or equal to `nums[i % n]`. The stack top is the next greater element.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def nextGreaterElementIi(*args):\n    # TODO: Implement solution for Next Greater Element II\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = nextGreaterElementIi(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(nextGreaterElementIi(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function nextGreaterElementIi(...args) {\n    // TODO: Implement solution for Next Greater Element II\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(nextGreaterElementIi(...parsed)));\n    } catch (e) {\n        console.log(nextGreaterElementIi(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Next Greater Element II\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Next Greater Element II\n    }\n}\n"
+      }
+    ],
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
@@ -4720,6 +6225,94 @@ export const faang3 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Number of Connected Components in an Undirected Graph",
+    "slug": "number-of-connected-components-in-an-undirected-graph",
+    "description": "You have a graph of `n` nodes labeled from `0` to `n - 1`. You are given an integer `n` and an array `edges` where `edges[i] = [ai, bi]` indicates an undirected edge between `ai` and `bi`.\\n\\nReturn the total number of connected components in the graph.\\n\\n### Example 1:\\n```\\nInput: n = 5, edges = [[0,1],[1,2],[3,4]]\\nOutput: 2\\nExplanation: Component 1: {0, 1, 2}, Component 2: {3, 4}.\\n```\\n\\n### Example 2:\\n```\\nInput: n = 5, edges = [[0,1],[1,2],[2,3],[3,4]]\\nOutput: 1\\nExplanation: The entire graph is connected.\\n```\\n\\n### Constraints:\\n- $1 \\le n \\le 2000$\\n- $0 \\le |edges| \\le 5000$",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Graph",
+      "BFS",
+      "DFS",
+      "Union-Find"
+    ],
+    "topics": [
+      "Depth-First Search",
+      "Breadth-First Search",
+      "Union Find",
+      "Graph"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "n = 5\nedges = [[0,1],[1,2],[3,4]]",
+        "output": "2",
+        "explanation": "2 connected components."
+      },
+      {
+        "input": "n = 5\nedges = [[0,1],[1,2],[2,3],[3,4]]",
+        "output": "1",
+        "explanation": "1 connected component."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "n = 1\nedges = []",
+        "output": "1"
+      },
+      {
+        "input": "n = 4\nedges = []",
+        "output": "4"
+      },
+      {
+        "input": "n = 4\nedges = [[0,1],[2,3]]",
+        "output": "2"
+      }
+    ],
+    "hints": [
+      "Use DSU initialized with `count = n`. Each successful union decrements count by 1.",
+      "Alternatively, run BFS/DFS counting unvisited components."
+    ],
+    "editorial": {
+      "approach": "Union-Find or BFS Component Counting",
+      "solutionMarkdown": "Initialize components count to N. Decrement whenever two disjoint sets merge.",
+      "timeComplexity": "O(N + E \\alpha(N))",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def numberOfConnectedComponentsInAnUndirectedGraph(*args):\n    # TODO: Implement solution for Number of Connected Components in an Undirected Graph\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = numberOfConnectedComponentsInAnUndirectedGraph(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(numberOfConnectedComponentsInAnUndirectedGraph(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function numberOfConnectedComponentsInAnUndirectedGraph(...args) {\n    // TODO: Implement solution for Number of Connected Components in an Undirected Graph\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(numberOfConnectedComponentsInAnUndirectedGraph(...parsed)));\n    } catch (e) {\n        console.log(numberOfConnectedComponentsInAnUndirectedGraph(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Number of Connected Components in an Undirected Graph\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Number of Connected Components in an Undirected Graph\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
     "title": "Number of Digit One",
     "slug": "number-of-digit-one",
     "description": "Given an integer `n`, count the total number of digit `1` appearing in all non-negative integers less than or equal to `n`.\n\n### Example 1:\n```\nInput: 13\nOutput: 6\nExplanation: Digit 1 occurs in: 1, 10, 11, 12, 13 (total 6 ones).\n```\n\n### Example 2:\n```\nInput: 0\nOutput: 0\nExplanation: No ones in 0.\n```",
@@ -4964,6 +6557,31 @@ export const faang3 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #70"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -5220,6 +6838,246 @@ export const faang3 = [
     "acceptanceRate": 0
   },
   {
+    "title": "One Edit Distance",
+    "slug": "one-edit-distance",
+    "description": "Given two strings `s` and `t`, return `true` if they are both one edit distance apart, otherwise return `false`.\\n\\nA string `s` is said to be one edit distance apart from a string `t` if you can:\\n- Insert exactly one character into `s` to get `t`\\n- Delete exactly one character from `s` to get `t`\\n- Replace exactly one character of `s` to get `t`\\n\\n### Example 1:\\n```\\nInput:\\ns = \"ab\"\nt = \"acb\"\\nOutput: true\\nExplanation: We can insert 'c' into s to get t.\\n```\\n\\n### Example 2:\\n```\\nInput:\\ns = \"\"\nt = \"\"\\nOutput: false\\nExplanation: We cannot get t from s with exactly one operation.\\n```\\n\\n### Constraints:\\n- $0 \\le |s|, |t| \\le 10^4$\\n- `s` and `t` consist of lowercase letters.",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Two Pointers",
+      "String"
+    ],
+    "topics": [
+      "Two Pointers",
+      "String"
+    ],
+    "companyTags": [
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2022
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "ab\nacb",
+        "output": "true",
+        "explanation": "Insert 'c' into s."
+      },
+      {
+        "input": "\n",
+        "output": "false",
+        "explanation": "Zero edits != one edit."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "a\nA",
+        "output": "false"
+      },
+      {
+        "input": "abc\nab",
+        "output": "true"
+      },
+      {
+        "input": "teacher\ndetacher",
+        "output": "false"
+      }
+    ],
+    "hints": [
+      "Ensure |s| <= |t| (swap if needed). If |t| - |s| > 1, return false.",
+      "Find the first difference character at index i. If lengths are equal, s[i+1:] must equal t[i+1:]. If |t| > |s|, s[i:] must equal t[i+1:]."
+    ],
+    "editorial": {
+      "approach": "Linear Scan and Suffix Comparison",
+      "solutionMarkdown": "### One Pass Suffix Check\nEnsure $|s| \\le |t|$. Upon finding the first mismatch index $i$:\\n- If $|s| == |t|$, compare $s[i+1:] == t[i+1:]$\\n- If $|t| == |s| + 1$, compare $s[i:] == t[i+1:]$",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def oneEditDistance(*args):\n    # TODO: Implement solution for One Edit Distance\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = oneEditDistance(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(oneEditDistance(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function oneEditDistance(...args) {\n    // TODO: Implement solution for One Edit Distance\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(oneEditDistance(...parsed)));\n    } catch (e) {\n        console.log(oneEditDistance(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for One Edit Distance\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for One Edit Distance\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Ones and Zeroes",
+    "slug": "ones-and-zeroes",
+    "description": "You are given an array of binary strings `strs` and two integers `m` and `n`.\\n\\nReturn the size of the largest subset of `strs` such that there are at most `m` 0's and `n` 1's in the subset.\\n\\nA set `x` is a subset of a set `y` if all elements of `x` are also elements of `y`.\\n\\n### Example 1:\\n```\\nInput: strs = [\"10\",\"0001\",\"111001\",\"1\",\"0\"], m = 5, n = 3\\nOutput: 4\\nExplanation: Largest subset is {\"10\", \"0001\", \"1\", \"0\"} with total 5 zeroes and 3 ones.\\n```\\n\\n### Example 2:\\n```\\nInput: strs = [\"10\",\"0\",\"1\"], m = 1, n = 1\\nOutput: 2\\nExplanation: Largest subset is {\"0\", \"1\"}.\\n```\\n\\n### Constraints:\\n- $1 \\le |strs| \\le 600$\\n- $1 \\le m, n \\le 100$",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Dynamic Programming",
+      "Knapsack"
+    ],
+    "topics": [
+      "Array",
+      "String",
+      "Dynamic Programming"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "strs = [\"10\",\"0001\",\"111001\",\"1\",\"0\"]\nm = 5, n = 3",
+        "output": "4",
+        "explanation": "4 strings satisfy limits."
+      },
+      {
+        "input": "strs = [\"10\",\"0\",\"1\"]\nm = 1, n = 1",
+        "output": "2",
+        "explanation": "2 strings fit."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "strs = [\"111\",\"10\",\"0\"]\nm = 1, n = 1",
+        "output": "1"
+      },
+      {
+        "input": "strs = [\"0\"]\nm = 1, n = 1",
+        "output": "1"
+      },
+      {
+        "input": "strs = [\"1\"]\nm = 0, n = 1",
+        "output": "1"
+      }
+    ],
+    "hints": [
+      "2D 0/1 Knapsack where the two capacities are maximum zeroes `m` and maximum ones `n`.",
+      "Iterate backwards: `dp[i][j] = max(dp[i][j], 1 + dp[i - zeros][j - ones])`."
+    ],
+    "editorial": {
+      "approach": "2D Knapsack Dynamic Programming",
+      "solutionMarkdown": "For each binary string, count (zeros, ones). Update 2D DP table backwards.",
+      "timeComplexity": "O(len(strs) * m * n)",
+      "spaceComplexity": "O(m * n)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def onesAndZeroes(*args):\n    # TODO: Implement solution for Ones and Zeroes\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = onesAndZeroes(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(onesAndZeroes(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function onesAndZeroes(...args) {\n    // TODO: Implement solution for Ones and Zeroes\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(onesAndZeroes(...parsed)));\n    } catch (e) {\n        console.log(onesAndZeroes(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Ones and Zeroes\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Ones and Zeroes\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
+    "title": "Stock Span Problem",
+    "slug": "online-stock-span",
+    "description": "Design an algorithm that collects daily price quotes for some stock and returns the span of that stock's price for the current day.\\n\\nThe span of the stock's price in one day is the maximum number of consecutive days (starting from that day and going backward) for which the stock price was less than or equal to the price of that day.\\n\\nInput is given as an array of daily stock prices. Output space-separated spans for each day.\\n\\n### Example 1:\\n```\\nInput: [100, 80, 60, 70, 60, 75, 85]\\nOutput: 1 1 1 2 1 4 6\\nExplanation: For 75, prices were 60, 70, 60, 75 <= 75 (span 4). For 85, prices were 80, 60, 70, 60, 75, 85 <= 85 (span 6).\\n```\\n\\n### Example 2:\\n```\\nInput: [10, 4, 5, 90, 120, 80]\\nOutput: 1 1 2 4 5 1\\nExplanation: Consecutive days going backward with price <= current day.\\n```\\n\\n### Constraints:\\n- $1 \\le |prices| \\le 10^5$\\n- $1 \\le prices[i] \\le 10^5$",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Monotonic Stack",
+      "Design"
+    ],
+    "topics": [
+      "Stack",
+      "Design",
+      "Monotonic Stack",
+      "Data Stream"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 6,
+        "yearReported": 2025
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[100, 80, 60, 70, 60, 75, 85]",
+        "output": "1 1 1 2 1 4 6",
+        "explanation": "Monotonic stack span calculation."
+      },
+      {
+        "input": "[10, 4, 5, 90, 120, 80]",
+        "output": "1 1 2 4 5 1",
+        "explanation": "Span for each day."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[10]",
+        "output": "1"
+      },
+      {
+        "input": "[10, 20, 30]",
+        "output": "1 2 3"
+      },
+      {
+        "input": "[30, 20, 10]",
+        "output": "1 1 1"
+      }
+    ],
+    "hints": [
+      "Use a monotonic stack storing pairs `(price, span)`.",
+      "When a new price comes, pop elements whose price <= current price and accumulate their spans."
+    ],
+    "editorial": {
+      "approach": "Monotonic Stack with Span Aggregation",
+      "solutionMarkdown": "### Monotonic Stack\nPop smaller or equal prices from the stack, adding their spans to the current day's span.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def onlineStockSpan(*args):\n    # TODO: Implement solution for Stock Span Problem\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = onlineStockSpan(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(onlineStockSpan(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function onlineStockSpan(...args) {\n    // TODO: Implement solution for Stock Span Problem\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(onlineStockSpan(...parsed)));\n    } catch (e) {\n        console.log(onlineStockSpan(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Stock Span Problem\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Stock Span Problem\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
     "title": "Pacific Atlantic Water Flow",
     "slug": "pacific-atlantic-water-flow",
     "description": "There is an `m x n` rectangular island that borders both the Pacific Ocean and Atlantic Ocean. Water can only flow from cells to height equal or lower.\n\nReturn a 2D list of grid coordinates `result` where `result[i] = [ri, ci]` denotes that rain water can flow from `(ri, ci)` to **both** oceans.\n\n### Example 1:\n```\nInput: [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]\nOutput: [[0, 4], [1, 3], [1, 4], [2, 2], [3, 0], [3, 1], [4, 0]]\nExplanation: Coordinates that can reach both Pacific and Atlantic oceans.\n```\n\n### Example 2:\n```\nInput: [[1]]\nOutput: [[0, 0]]\nExplanation: Single cell connects to both oceans.\n```",
@@ -5247,6 +7105,21 @@ export const faang3 = [
         "verified": true,
         "frequencyCount": 40,
         "sourceNote": "Reported in Meta 2021-2026 interview set"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -5580,6 +7453,84 @@ export const faang3 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Pair Sum with Duplicates",
+    "slug": "pair-sum-with-duplicates",
+    "description": "Given an array of integers `arr` and a target sum `target`, return the number of pairs $(i, j)$ with $i < j$ such that $arr[i] + arr[j] == target$.\\n\\n### Example 1:\\n```\\nInput: arr = [1, 5, 7, -1, 5], target = 6\\nOutput: 3\\nExplanation: Pairs are (arr[0], arr[1]), (arr[0], arr[4]), and (arr[2], arr[3]).\\n```\\n\\n### Example 2:\\n```\\nInput: arr = [1, 1, 1, 1], target = 2\\nOutput: 6\\nExplanation: 4 choose 2 = 6 pairs.\\n```\\n\\n### Constraints:\\n- $1 \\le |arr| \\le 10^5$\\n- $-10^9 \\le arr[i], target \\le 10^9$",
+    "difficulty": "EASY",
+    "patterns": [
+      "Hash Table",
+      "Counting"
+    ],
+    "topics": [
+      "Array",
+      "Hash Table"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "arr = [1, 5, 7, -1, 5]\ntarget = 6",
+        "output": "3",
+        "explanation": "3 valid pairs."
+      },
+      {
+        "input": "arr = [1, 1, 1, 1]\ntarget = 2",
+        "output": "6",
+        "explanation": "Combinations C(4, 2) = 6."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "arr = [1, 2, 3]\ntarget = 10",
+        "output": "0"
+      },
+      {
+        "input": "arr = [2]\ntarget = 4",
+        "output": "0"
+      },
+      {
+        "input": "arr = [0, 0, 0]\ntarget = 0",
+        "output": "3"
+      }
+    ],
+    "hints": [
+      "Maintain a frequency map. For each element `x`, add `freq[target - x]` to count, then increment `freq[x]`."
+    ],
+    "editorial": {
+      "approach": "One-Pass Frequency Hash Map",
+      "solutionMarkdown": "Add `freq[target - x]` to pair count and record `freq[x]++`.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def pairSumWithDuplicates(*args):\n    # TODO: Implement solution for Pair Sum with Duplicates\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = pairSumWithDuplicates(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(pairSumWithDuplicates(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function pairSumWithDuplicates(...args) {\n    // TODO: Implement solution for Pair Sum with Duplicates\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(pairSumWithDuplicates(...parsed)));\n    } catch (e) {\n        console.log(pairSumWithDuplicates(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Pair Sum with Duplicates\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Pair Sum with Duplicates\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
+  },
+  {
     "title": "Palindrome Linked List",
     "slug": "palindrome-linked-list",
     "description": "Given the `head` of a singly linked list, return `true` *if it is a **palindrome** or* `false` *otherwise*.\n\n### Example 1:\n```\nInput: [1,2,2,1]\nOutput: true\nExplanation: List reads identically forwards and backwards.\n```\n\n### Example 2:\n```\nInput: [1,2]\nOutput: false\nExplanation: 1 != 2, not a palindrome.\n```",
@@ -5668,6 +7619,83 @@ export const faang3 = [
       "timeComplexity": "O(N)",
       "spaceComplexity": "O(1)"
     },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Palindrome Number",
+    "slug": "palindrome-number",
+    "description": "Given an integer `x`, return `true` if `x` is a palindrome, and `false` otherwise.\\n\\nAn integer is a palindrome when it reads the same forward and backward. For example, `121` is a palindrome while `123` is not.\\n\\n### Example 1:\\n```\\nInput: 121\\nOutput: true\\nExplanation: 121 reads as 121 from left to right and from right to left.\\n```\\n\\n### Example 2:\\n```\\nInput: -121\\nOutput: false\\nExplanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.\\n```\\n\\n### Constraints:\\n- $-2^{31} \\le x \\le 2^{31} - 1$",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Math"
+    ],
+    "topics": [
+      "Math"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 9,
+        "yearReported": 2026
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "121",
+        "output": "true",
+        "explanation": "121 is symmetric."
+      },
+      {
+        "input": "-121",
+        "output": "false",
+        "explanation": "Negative numbers are not palindromes."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "10",
+        "output": "false"
+      },
+      {
+        "input": "0",
+        "output": "true"
+      },
+      {
+        "input": "12321",
+        "output": "true"
+      }
+    ],
+    "hints": [
+      "Negative numbers cannot be palindromes.",
+      "Revert half of the number to avoid 32-bit overflow."
+    ],
+    "editorial": {
+      "approach": "Revert Half of the Number",
+      "solutionMarkdown": "### Reverting Half\nReverse digits until `x <= revertedNumber`. Return `x == revertedNumber || x == revertedNumber / 10`.",
+      "timeComplexity": "O(log10 x)",
+      "spaceComplexity": "O(1)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def palindromeNumber(*args):\n    # TODO: Implement solution for Palindrome Number\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = palindromeNumber(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(palindromeNumber(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function palindromeNumber(...args) {\n    // TODO: Implement solution for Palindrome Number\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(palindromeNumber(...parsed)));\n    } catch (e) {\n        console.log(palindromeNumber(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Palindrome Number\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Palindrome Number\n    }\n}\n"
+      }
+    ],
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
@@ -5769,6 +7797,85 @@ export const faang3 = [
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
+  },
+  {
+    "title": "Palindrome Partitioning II",
+    "slug": "palindrome-partitioning-ii",
+    "description": "Given a string `s`, partition `s` such that every substring of the partition is a palindrome.\\n\\nReturn the minimum cuts needed for a palindrome partitioning of `s`.\\n\\n### Example 1:\\n```\\nInput: s = \"aab\"\\nOutput: 1\\nExplanation: The palindrome partitioning [\"aa\",\"b\"] could be produced using 1 cut.\\n```\\n\\n### Example 2:\\n```\\nInput: s = \"a\"\\nOutput: 0\\nExplanation: Single character is already a palindrome.\\n```\\n\\n### Constraints:\\n- $1 \\le |s| \\le 2000$\\n- `s` consists of lowercase English letters only.",
+    "difficulty": "HARD",
+    "patterns": [
+      "Dynamic Programming",
+      "String"
+    ],
+    "topics": [
+      "String",
+      "Dynamic Programming"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "s = \"aab\"",
+        "output": "1",
+        "explanation": "1 cut: \"aa\" | \"b\"."
+      },
+      {
+        "input": "s = \"a\"",
+        "output": "0",
+        "explanation": "0 cuts."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "s = \"ab\"",
+        "output": "1"
+      },
+      {
+        "input": "s = \"racecar\"",
+        "output": "0"
+      },
+      {
+        "input": "s = \"ababbbabbababa\"",
+        "output": "3"
+      }
+    ],
+    "hints": [
+      "Precompute palindrome matrix `isPal[i][j]` using center expansion or 2D DP.",
+      "Let dp[i] be the minimum cuts for prefix s[:i+1]. dp[i] = min_{j <= i, isPal[j][i]} (dp[j-1] + 1)."
+    ],
+    "editorial": {
+      "approach": "1D DP with Palindrome Table",
+      "solutionMarkdown": "Expand around centers to update `min_cuts[i] = min(min_cuts[i], min_cuts[j - 1] + 1)`.",
+      "timeComplexity": "O(N^2)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def palindromePartitioningIi(*args):\n    # TODO: Implement solution for Palindrome Partitioning II\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = palindromePartitioningIi(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(palindromePartitioningIi(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function palindromePartitioningIi(...args) {\n    // TODO: Implement solution for Palindrome Partitioning II\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(palindromePartitioningIi(...parsed)));\n    } catch (e) {\n        console.log(palindromePartitioningIi(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Palindrome Partitioning II\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Palindrome Partitioning II\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
   },
   {
     "title": "Palindrome Permutation",
@@ -5884,6 +7991,11 @@ export const faang3 = [
         "verified": true,
         "frequencyCount": 35,
         "sourceNote": "Reported in Microsoft 2021-2026 interview set"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -6008,6 +8120,26 @@ export const faang3 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #86"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -6097,6 +8229,11 @@ export const faang3 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -6754,6 +8891,159 @@ export const faang3 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Print Number and Character Patterns",
+    "slug": "print-number-and-character-patterns",
+    "description": "Given an integer $N$ and a pattern type `T` (either `NUM` or `CHAR`), print a right-angled triangle pattern of $N$ rows:\\n- If $T = \\text{NUM}$, row $i$ (1-indexed) contains numbers from $1$ to $i$ separated by spaces.\\n- If $T = \\text{CHAR}$, row $i$ contains characters starting from 'A' up to the $i$-th letter, separated by spaces.\\n\\n### Example 1:\\n```\\nInput:\\n4 NUM\\nOutput:\\n1\\n1 2\\n1 2 3\\n1 2 3 4\\nExplanation: Right-angled triangle of numbers.\\n```\\n\\n### Example 2:\\n```\\nInput:\\n3 CHAR\\nOutput:\\nA\\nA B\\nA B C\\nExplanation: Right-angled triangle of characters.\\n```\\n\\n### Constraints:\\n- $1 \\le N \\le 26$\\n- $T \\in \\{\\text{NUM}, \\text{CHAR}\\}$",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Simulation",
+      "Nested Loops"
+    ],
+    "topics": [
+      "Simulation"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 6,
+        "yearReported": 2025
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "4 NUM",
+        "output": "1\n1 2\n1 2 3\n1 2 3 4",
+        "explanation": "Numeric triangle."
+      },
+      {
+        "input": "3 CHAR",
+        "output": "A\nA B\nA B C",
+        "explanation": "Alphabetic triangle."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "1 NUM",
+        "output": "1"
+      },
+      {
+        "input": "1 CHAR",
+        "output": "A"
+      },
+      {
+        "input": "5 NUM",
+        "output": "1\n1 2\n1 2 3\n1 2 3 4\n1 2 3 4 5"
+      }
+    ],
+    "hints": [
+      "Use nested loops: outer loop from 1 to N, inner loop from 1 to i."
+    ],
+    "editorial": {
+      "approach": "Nested Loops Simulation",
+      "solutionMarkdown": "### Method\nFor row $i$, generate elements from 1 to $i$ (or 'A' to chr(65 + $i - 1$)) and join with space.",
+      "timeComplexity": "O(N^2)",
+      "spaceComplexity": "O(N^2)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def printNumberAndCharacterPatterns(*args):\n    # TODO: Implement solution for Print Number and Character Patterns\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = printNumberAndCharacterPatterns(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(printNumberAndCharacterPatterns(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function printNumberAndCharacterPatterns(...args) {\n    // TODO: Implement solution for Print Number and Character Patterns\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(printNumberAndCharacterPatterns(...parsed)));\n    } catch (e) {\n        console.log(printNumberAndCharacterPatterns(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Print Number and Character Patterns\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Print Number and Character Patterns\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Producer-Consumer Bounded Buffer",
+    "slug": "producer-consumer-bounded-buffer",
+    "description": "Simulate a thread-safe Bounded Buffer (Queue) of capacity $C$ that processes sequential producer `PRODUCE x` and consumer `CONSUME` instructions. If a producer attempts to insert into a full buffer, it is blocked until an element is consumed. If a consumer attempts to read from an empty buffer, it is blocked until an item is produced.\\n\\nOutput the sequence of successfully consumed elements in order, followed by the remaining elements in the buffer at termination.\\n\\n### Example 1:\\n```\\nInput:\\n2\\nPRODUCE 10\\nPRODUCE 20\\nCONSUME\\nPRODUCE 30\\nCONSUME\\nOutput:\\nCONSUMED: 10 20\\nBUFFER: 30\\nExplanation: 10 and 20 consumed; 30 remains in buffer.\\n```\\n\\n### Constraints:\\n- $1 \\le C \\le 10^4$\\n- Up to $10^5$ operations.",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Queue",
+      "Design",
+      "Simulation"
+    ],
+    "topics": [
+      "Queue",
+      "Design",
+      "Concurrency"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "2\nPRODUCE 10\nPRODUCE 20\nCONSUME\nPRODUCE 30\nCONSUME",
+        "output": "CONSUMED: 10 20\nBUFFER: 30",
+        "explanation": "Bounded queue FIFO simulation."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "1\nPRODUCE 5\nCONSUME",
+        "output": "CONSUMED: 5\nBUFFER:"
+      },
+      {
+        "input": "3\nPRODUCE 1\nPRODUCE 2\nPRODUCE 3",
+        "output": "CONSUMED:\nBUFFER: 1 2 3"
+      },
+      {
+        "input": "2\nPRODUCE 7\nCONSUME\nPRODUCE 8",
+        "output": "CONSUMED: 7\nBUFFER: 8"
+      }
+    ],
+    "hints": [
+      "Use a FIFO circular queue or standard deque.",
+      "Track pending blocked producers and consumers."
+    ],
+    "editorial": {
+      "approach": "FIFO Queue State Simulation",
+      "solutionMarkdown": "Queue simulation processing produces and consumes tracking output order.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(C)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def producerConsumerBoundedBuffer(*args):\n    # TODO: Implement solution for Producer-Consumer Bounded Buffer\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = producerConsumerBoundedBuffer(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(producerConsumerBoundedBuffer(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function producerConsumerBoundedBuffer(...args) {\n    // TODO: Implement solution for Producer-Consumer Bounded Buffer\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(producerConsumerBoundedBuffer(...parsed)));\n    } catch (e) {\n        console.log(producerConsumerBoundedBuffer(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Producer-Consumer Bounded Buffer\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Producer-Consumer Bounded Buffer\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      }
+    ]
+  },
+  {
     "title": "Product of Array Except Self",
     "slug": "product-of-array-except-self",
     "description": "Given an integer array `nums`, return an array `answer` such that `answer[i]` is equal to the product of all the elements of `nums` except `nums[i]`.\n\nYou must write an algorithm that runs in `O(n)` time and without using the division operation.\n\n### Example 1:\n```\nInput: [1,2,3,4]\nOutput: [24, 12, 8, 6]\nExplanation: 24 = 2*3*4, 12 = 1*3*4, 8 = 1*2*4, 6 = 1*2*3.\n```\n\n### Example 2:\n```\nInput: [-1,1,0,-3,3]\nOutput: [0, 0, 9, 0, 0]\nExplanation: Zero handled cleanly.\n```",
@@ -6809,6 +9099,26 @@ export const faang3 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #21"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Wipro",
+        "frequencyCount": 7,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -6962,6 +9272,90 @@ export const faang3 = [
       "timeComplexity": "O(N * K)",
       "spaceComplexity": "O(N)"
     },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Quick Sort",
+    "slug": "quick-sort-array",
+    "description": "Given an array of integers `nums`, sort the array in ascending order using the Quick Sort algorithm (Lomuto or Hoare partitioning) and return the sorted array.\\n\\n### Example 1:\\n```\\nInput: [5, 2, 3, 1]\\nOutput: [1, 2, 3, 5]\\nExplanation: Array sorted in ascending order.\\n```\\n\\n### Example 2:\\n```\\nInput: [5, 1, 1, 2, 0, 0]\\nOutput: [0, 0, 1, 1, 2, 5]\\nExplanation: Duplicates handled properly.\\n```\\n\\n### Constraints:\\n- $1 \\le |nums| \\le 5 \\times 10^4$\\n- $-5 \\times 10^4 \\le nums[i] \\le 5 \\times 10^4$",
+    "difficulty": "MEDIUM",
+    "category": "DSA",
+    "patterns": [
+      "Divide and Conquer",
+      "Quickselect"
+    ],
+    "topics": [
+      "Array",
+      "Divide and Conquer",
+      "Sorting"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 8,
+        "yearReported": 2025
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[5, 2, 3, 1]",
+        "output": "[1, 2, 3, 5]",
+        "explanation": "Sorted ascendingly."
+      },
+      {
+        "input": "[5, 1, 1, 2, 0, 0]",
+        "output": "[0, 0, 1, 1, 2, 5]",
+        "explanation": "Sorted with duplicate values."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1]",
+        "output": "[1]"
+      },
+      {
+        "input": "[10, 7, 8, 9, 1, 5]",
+        "output": "[1, 5, 7, 8, 9, 10]"
+      },
+      {
+        "input": "[3, 3, 3]",
+        "output": "[3, 3, 3]"
+      }
+    ],
+    "hints": [
+      "Pick a pivot (e.g. median of three or random), partition elements smaller to the left and larger to the right, then recurse."
+    ],
+    "editorial": {
+      "approach": "In-place Partitioning Quick Sort",
+      "solutionMarkdown": "### Quick Sort\nPartition around pivot, place pivot at its final index, and recursively sort left and right partitions.",
+      "timeComplexity": "O(N log N) average, O(N^2) worst case",
+      "spaceComplexity": "O(log N) stack space"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def quickSortArray(*args):\n    # TODO: Implement solution for Quick Sort\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = quickSortArray(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(quickSortArray(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function quickSortArray(...args) {\n    // TODO: Implement solution for Quick Sort\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(quickSortArray(...parsed)));\n    } catch (e) {\n        console.log(quickSortArray(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Quick Sort\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Quick Sort\n    }\n}\n"
+      }
+    ],
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
@@ -7626,6 +10020,87 @@ export const faang3 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Reconstruct Itinerary",
+    "slug": "reconstruct-itinerary",
+    "description": "You are given a list of airline `tickets` where `tickets[i] = [fromi, toi]` represent the departure and the arrival airports of one flight. Reconstruct the itinerary in order and return it.\\n\\nAll of the tickets belong to a man who departs from \"JFK\", thus, the itinerary must begin with \"JFK\". If there are multiple valid itineraries, you should return the itinerary that has the smallest lexical order when read as a single string.\\n\\n### Example 1:\\n```\\nInput: tickets = [[\"MUC\",\"LHR\"],[\"JFK\",\"MUC\"],[\"SFO\",\"SJC\"],[\"LHR\",\"SFO\"]]\\nOutput: [\"JFK\",\"MUC\",\"LHR\",\"SFO\",\"SJC\"]\\nExplanation: Unique valid itinerary from JFK.\\n```\\n\\n### Example 2:\\n```\\nInput: tickets = [[\"JFK\",\"SFO\"],[\"JFK\",\"ATL\"],[\"SFO\",\"ATL\"],[\"ATL\",\"JFK\"],[\"ATL\",\"SFO\"]]\\nOutput: [\"JFK\",\"ATL\",\"JFK\",\"SFO\",\"ATL\",\"SFO\"]\\nExplanation: \"JFK\",\"ATL\",\"JFK\" is smaller than \"JFK\",\"SFO\".\\n```\\n\\n### Constraints:\\n- $1 \\le |tickets| \\le 300$\\n- `tickets[i].length == 2`",
+    "difficulty": "HARD",
+    "patterns": [
+      "Graph",
+      "Eulerian Path",
+      "DFS"
+    ],
+    "topics": [
+      "Depth-First Search",
+      "Graph",
+      "Eulerian Circuit"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "tickets = [[\"MUC\",\"LHR\"],[\"JFK\",\"MUC\"],[\"SFO\",\"SJC\"],[\"LHR\",\"SFO\"]]",
+        "output": "[\"JFK\",\"MUC\",\"LHR\",\"SFO\",\"SJC\"]",
+        "explanation": "Eulerian path starting from JFK."
+      },
+      {
+        "input": "tickets = [[\"JFK\",\"SFO\"],[\"JFK\",\"ATL\"],[\"SFO\",\"ATL\"],[\"ATL\",\"JFK\"],[\"ATL\",\"SFO\"]]",
+        "output": "[\"JFK\",\"ATL\",\"JFK\",\"SFO\",\"ATL\",\"SFO\"]",
+        "explanation": "Lexicographically smallest order."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "tickets = [[\"JFK\",\"KUL\"],[\"JFK\",\"NRT\"],[\"NRT\",\"JFK\"]]",
+        "output": "[\"JFK\",\"NRT\",\"JFK\",\"KUL\"]"
+      },
+      {
+        "input": "tickets = [[\"JFK\",\"AAA\"],[\"AAA\",\"JFK\"]]",
+        "output": "[\"JFK\",\"AAA\",\"JFK\"]"
+      },
+      {
+        "input": "tickets = [[\"JFK\",\"ATL\"]]",
+        "output": "[\"JFK\",\"ATL\"]"
+      }
+    ],
+    "hints": [
+      "This is finding an Eulerian path in a directed graph using Hierholzer's algorithm.",
+      "Store destinations in min-heaps or sorted lists, post-order DFS appends to result."
+    ],
+    "editorial": {
+      "approach": "Hierholzer's Algorithm with Priority Queue",
+      "solutionMarkdown": "Greedily traverse smallest lexical neighbor, push to result when backtracking.",
+      "timeComplexity": "O(E log E)",
+      "spaceComplexity": "O(V + E)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def reconstructItinerary(*args):\n    # TODO: Implement solution for Reconstruct Itinerary\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = reconstructItinerary(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(reconstructItinerary(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function reconstructItinerary(...args) {\n    // TODO: Implement solution for Reconstruct Itinerary\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(reconstructItinerary(...parsed)));\n    } catch (e) {\n        console.log(reconstructItinerary(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Reconstruct Itinerary\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Reconstruct Itinerary\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
     "title": "Redundant Connection",
     "slug": "redundant-connection",
     "description": "A tree with `n` nodes has one additional edge added. Return an edge that can be removed so that the resulting graph is a tree of `n` nodes. If multiple answers, return the one that appears last in `edges`.\n\n### Example 1:\n```\nInput: [[1,2],[1,3],[2,3]]\nOutput: [2,3]\nExplanation: [2,3] closes the cycle 1-2-3-1.\n```\n\n### Example 2:\n```\nInput: [[1,2],[2,3],[3,4],[1,4],[1,5]]\nOutput: [1,4]\nExplanation: [1,4] creates redundant cycle.\n```",
@@ -7657,6 +10132,21 @@ export const faang3 = [
         "verified": true,
         "frequencyCount": 42,
         "sourceNote": "Infosys Interview Question #76"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Adobe",
+        "frequencyCount": 7,
+        "yearReported": 2025
       }
     ],
     "supportedLanguages": [
@@ -7721,6 +10211,84 @@ export const faang3 = [
       "timeComplexity": "O(N * alpha(N))",
       "spaceComplexity": "O(N)"
     },
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0
+  },
+  {
+    "title": "Remove Duplicates from Sorted Array",
+    "slug": "remove-duplicates-from-sorted-array",
+    "description": "Given an integer array `nums` sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in `nums`.\\n\\nInput is array `nums`. Output should be the array of unique elements up to the new length.\\n\\n### Example 1:\\n```\\nInput: [1, 1, 2]\\nOutput: [1, 2]\\nExplanation: 2 unique elements: 1, 2.\\n```\\n\\n### Example 2:\\n```\\nInput: [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]\\nOutput: [0, 1, 2, 3, 4]\\nExplanation: 5 unique elements: 0, 1, 2, 3, 4.\\n```\\n\\n### Constraints:\\n- $1 \\le |nums| \\le 3 \\times 10^4$\\n- $-100 \\le nums[i] \\le 100$\\n- `nums` is sorted in non-decreasing order.",
+    "difficulty": "EASY",
+    "category": "DSA",
+    "patterns": [
+      "Two Pointers",
+      "Array"
+    ],
+    "topics": [
+      "Array",
+      "Two Pointers"
+    ],
+    "companyTags": [
+      {
+        "company": "Wipro",
+        "frequencyCount": 9,
+        "yearReported": 2026
+      }
+    ],
+    "sampleTestCases": [
+      {
+        "input": "[1, 1, 2]",
+        "output": "[1, 2]",
+        "explanation": "Duplicates removed in-place."
+      },
+      {
+        "input": "[0, 0, 1, 1, 1, 2, 2, 3, 3, 4]",
+        "output": "[0, 1, 2, 3, 4]",
+        "explanation": "Unique prefix."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "[1]",
+        "output": "[1]"
+      },
+      {
+        "input": "[1, 2, 3]",
+        "output": "[1, 2, 3]"
+      },
+      {
+        "input": "[-5, -5, -3, 0, 0, 2]",
+        "output": "[-5, -3, 0, 2]"
+      }
+    ],
+    "hints": [
+      "Use a write pointer `k = 1`. For each index `i` from 1 to n-1, if `nums[i] != nums[i-1]`, write `nums[k] = nums[i]` and increment `k`."
+    ],
+    "editorial": {
+      "approach": "Slow and Fast Two Pointers",
+      "solutionMarkdown": "### In-Place Two Pointers\nFast pointer scans elements, slow pointer writes unique values.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(1)"
+    },
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def removeDuplicatesFromSortedArray(*args):\n    # TODO: Implement solution for Remove Duplicates from Sorted Array\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = removeDuplicatesFromSortedArray(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(removeDuplicatesFromSortedArray(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function removeDuplicatesFromSortedArray(...args) {\n    // TODO: Implement solution for Remove Duplicates from Sorted Array\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(removeDuplicatesFromSortedArray(...parsed)));\n    } catch (e) {\n        console.log(removeDuplicatesFromSortedArray(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Remove Duplicates from Sorted Array\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Remove Duplicates from Sorted Array\n    }\n}\n"
+      }
+    ],
     "totalSubmissions": 0,
     "acceptedSubmissions": 0,
     "acceptanceRate": 0
@@ -7844,6 +10412,11 @@ export const faang3 = [
         "verified": true,
         "frequencyCount": 50,
         "sourceNote": "Reported in Google 2021-2026 interview set"
+      },
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -7913,6 +10486,87 @@ export const faang3 = [
     "acceptanceRate": 0
   },
   {
+    "title": "Remove K Digits",
+    "slug": "remove-k-digits",
+    "description": "Given string `num` representing a non-negative integer `num`, and an integer `k`, return the smallest possible integer after removing `k` digits from `num`.\\n\\n### Example 1:\\n```\\nInput: num = \"1432219\", k = 3\\nOutput: \"1219\"\\nExplanation: Remove 4, 3, and 2 to get 1219 which is the smallest.\\n```\\n\\n### Example 2:\\n```\\nInput: num = \"10200\", k = 1\\nOutput: \"200\"\\nExplanation: Remove 1, then strip leading zeros to get 200.\\n```\\n\\n### Constraints:\\n- $1 \\le k \\le |num| \\le 10^5$\\n- `num` consists of only digits.",
+    "difficulty": "MEDIUM",
+    "patterns": [
+      "Monotonic Stack",
+      "Greedy"
+    ],
+    "topics": [
+      "String",
+      "Stack",
+      "Greedy",
+      "Monotonic Stack"
+    ],
+    "sampleTestCases": [
+      {
+        "input": "num = \"1432219\"\nk = 3",
+        "output": "\"1219\"",
+        "explanation": "Remove digits 4, 3, 2."
+      },
+      {
+        "input": "num = \"10200\"\nk = 1",
+        "output": "\"200\"",
+        "explanation": "Leading zero stripped."
+      }
+    ],
+    "hiddenTestCases": [
+      {
+        "input": "num = \"10\"\nk = 2",
+        "output": "\"0\""
+      },
+      {
+        "input": "num = \"9\"\nk = 1",
+        "output": "\"0\""
+      },
+      {
+        "input": "num = \"112\"\nk = 1",
+        "output": "\"11\""
+      }
+    ],
+    "hints": [
+      "Use a monotonic increasing stack.",
+      "Whenever the current digit is smaller than the stack top and k > 0, pop from the stack and decrement k."
+    ],
+    "editorial": {
+      "approach": "Monotonic Stack Greedy Reduction",
+      "solutionMarkdown": "Pop larger previous digits while $k > 0$. Strip leading zeroes from resulting digits.",
+      "timeComplexity": "O(N)",
+      "spaceComplexity": "O(N)"
+    },
+    "category": "DSA",
+    "starterCode": [
+      {
+        "language": "python",
+        "boilerplate": "def removeKDigits(*args):\n    # TODO: Implement solution for Remove K Digits\n    pass\n\n# Driver Code\nimport sys, json\ninput_data = sys.stdin.read().strip().splitlines()\nif input_data:\n    try:\n        parsed = [json.loads(line) for line in input_data if line.strip()]\n        result = removeKDigits(*parsed)\n        print(json.dumps(result))\n    except Exception:\n        print(removeKDigits(*input_data))\n"
+      },
+      {
+        "language": "javascript",
+        "boilerplate": "function removeKDigits(...args) {\n    // TODO: Implement solution for Remove K Digits\n}\n\nconst fs = require('fs');\nconst lines = fs.readFileSync(0, 'utf-8').trim().split('\\n');\nif (lines.length > 0) {\n    try {\n        const parsed = lines.map(l => JSON.parse(l));\n        console.log(JSON.stringify(removeKDigits(...parsed)));\n    } catch (e) {\n        console.log(removeKDigits(...lines));\n    }\n}\n"
+      },
+      {
+        "language": "cpp",
+        "boilerplate": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // TODO: Read input from cin and implement solution for Remove K Digits\n    }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    Solution sol;\n    sol.solve();\n    return 0;\n}\n"
+      },
+      {
+        "language": "java",
+        "boilerplate": "import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        // TODO: Read from br and implement solution for Remove K Digits\n    }\n}\n"
+      }
+    ],
+    "totalSubmissions": 0,
+    "acceptedSubmissions": 0,
+    "acceptanceRate": 0,
+    "companyTags": [
+      {
+        "company": "Flipkart",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      }
+    ]
+  },
+  {
     "title": "Remove Nth Node From End of List",
     "slug": "remove-nth-node-from-end-of-list",
     "description": "Given the `head` of a linked list, remove the `n-th` node from the end of the list and return its head.\n\n### Example 1:\n```\nInput: [1,2,3,4,5]\n2\nOutput: [1, 2, 3, 5]\nExplanation: 2nd node from end (4) is removed.\n```\n\n### Example 2:\n```\nInput: [1]\n1\nOutput: []\nExplanation: Head is removed.\n```",
@@ -7954,6 +10608,16 @@ export const faang3 = [
         "verified": false,
         "frequencyCount": 30,
         "sourceNote": "TCS Practice Bank #55"
+      },
+      {
+        "company": "Capgemini",
+        "frequencyCount": 7,
+        "yearReported": 2024
+      },
+      {
+        "company": "Oracle",
+        "frequencyCount": 7,
+        "yearReported": 2024
       }
     ],
     "supportedLanguages": [
@@ -8023,3 +10687,4 @@ export const faang3 = [
     "acceptanceRate": 0
   }
 ];
+export const faangProblems3 = faang3;
