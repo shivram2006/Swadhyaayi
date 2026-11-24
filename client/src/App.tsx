@@ -28,6 +28,9 @@ import { ApplicationTrackerPage } from './pages/opportunity/ApplicationTrackerPa
 import { PlacementAnalyticsPage } from './pages/admin/PlacementAnalyticsPage';
 import { CollegeSubscriptionPage } from './pages/admin/CollegeSubscriptionPage';
 import { SuperAdminSubscriptionsPage } from './pages/super/SuperAdminSubscriptionsPage';
+import { FacultySectionsPage } from './pages/faculty/FacultySectionsPage';
+import { CreateAssessmentPage } from './pages/faculty/CreateAssessmentPage';
+import { FacultyQuestionBankPage } from './pages/faculty/FacultyQuestionBankPage';
 
 const HomeRedirect: React.FC = () => {
   const { isAuthenticated, user, isLoading } = useAuth();
@@ -101,8 +104,12 @@ export const App: React.FC = () => {
             </Route>
 
             {/* Faculty Portal */}
-            <Route element={<ProtectedRoute allowedRoles={['FACULTY']} />}>
+            <Route element={<ProtectedRoute allowedRoles={['FACULTY', 'INSTITUTION_ADMIN', 'PLACEMENT_OFFICER']} />}>
               <Route path="/dashboard/faculty" element={<FacultyDashboard />} />
+              <Route path="/faculty/classes" element={<FacultySectionsPage />} />
+              <Route path="/faculty/tests/new" element={<CreateAssessmentPage />} />
+              <Route path="/faculty/create-test" element={<CreateAssessmentPage />} />
+              <Route path="/faculty/question-bank" element={<FacultyQuestionBankPage />} />
               <Route path="/faculty/tests" element={<AssessmentListPage />} />
               <Route path="/assessments/:id/monitor" element={<FacultyAssessmentMonitorPage />} />
             </Route>
