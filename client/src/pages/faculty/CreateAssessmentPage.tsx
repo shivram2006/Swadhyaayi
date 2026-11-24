@@ -175,6 +175,15 @@ export const CreateAssessmentPage: React.FC = () => {
         const list = Array.isArray(res.data?.data) ? res.data.data : (res.data?.data?.questions || []);
         const q = list.find((item: any) => item._id === qId);
         if (q) {
+          const rawTags = q.companyTags || q.patterns || [];
+          const formattedTags: string[] = [];
+          if (Array.isArray(rawTags)) {
+            rawTags.forEach((t: any) => {
+              if (typeof t === 'string' && t.trim()) formattedTags.push(t.trim());
+              else if (t && typeof t === 'object' && t.company) formattedTags.push(String(t.company));
+            });
+          }
+
           setSections([
             {
               sectionId: 'sec-1',
@@ -187,11 +196,11 @@ export const CreateAssessmentPage: React.FC = () => {
               questions: [
                 {
                   questionId: q._id,
-                  title: q.title,
+                  title: String(q.title || 'Coding Challenge'),
                   type: 'CODING',
                   points: 20,
-                  difficulty: q.difficulty,
-                  tags: q.companyTags || [],
+                  difficulty: typeof q.difficulty === 'string' ? q.difficulty : 'MEDIUM',
+                  tags: formattedTags,
                 },
               ],
             },
@@ -485,15 +494,27 @@ export const CreateAssessmentPage: React.FC = () => {
     if (isAlreadySelected) {
       updatedQuestions = targetSec.questions.filter((item) => item.questionId !== qId);
     } else {
+      const rawTags = q.companyTags || q.patterns || q.tags || [];
+      const formattedTags: string[] = [];
+      if (Array.isArray(rawTags)) {
+        rawTags.forEach((t: any) => {
+          if (typeof t === 'string' && t.trim()) formattedTags.push(t.trim());
+          else if (t && typeof t === 'object') {
+            if (t.company) formattedTags.push(String(t.company));
+            else if (t.name) formattedTags.push(String(t.name));
+          }
+        });
+      }
+
       updatedQuestions = [
         ...targetSec.questions,
         {
           questionId: qId,
-          title: q.title || q.questionText || 'Question',
+          title: String(q.title || q.questionText || 'Question'),
           type: targetSec.type,
           points: targetSec.type === 'CODING' ? 20 : 2,
-          difficulty: q.difficulty,
-          tags: q.companyTags || q.tags || [],
+          difficulty: typeof q.difficulty === 'string' ? q.difficulty : 'MEDIUM',
+          tags: formattedTags,
         },
       ];
     }
@@ -1120,22 +1141,25 @@ export const CreateAssessmentPage: React.FC = () => {
                                   {q.difficulty && (
                                     <Badge
                                       variant={
-                                        q.difficulty.toUpperCase() === 'EASY'
+                                        String(q.difficulty).toUpperCase() === 'EASY'
                                           ? 'success'
-                                          : q.difficulty.toUpperCase() === 'HARD'
+                                          : String(q.difficulty).toUpperCase() === 'HARD'
                                           ? 'danger'
                                           : 'warning'
                                       }
                                       size="sm"
                                     >
-                                      {q.difficulty}
+                                      {String(q.difficulty)}
                                     </Badge>
                                   )}
-                                  {q.tags?.slice(0, 2).map((t: string) => (
-                                    <span key={t} className="text-[10px] text-slate-400 font-mono">
-                                      #{t}
-                                    </span>
-                                  ))}
+                                  {q.tags?.slice(0, 2).map((t: any, idx: number) => {
+                                    const tagName = typeof t === 'object' ? (t.company || t.name || 'Tag') : String(t);
+                                    return (
+                                      <span key={idx} className="text-[10px] text-slate-400 font-mono">
+                                        #{tagName}
+                                      </span>
+                                    );
+                                  })}
                                 </div>
                               </div>
                             </div>
@@ -1514,7 +1538,10 @@ export const CreateAssessmentPage: React.FC = () => {
                             <input
                               type="checkbox"
                               checked={isSelected}
-                              onChange={() => {}} // handled by parent onClick
+                              onChange={(e) => {
+                                e.stopPropagation();
+                                toggleQuestionSelection(q);
+                              }}
                               className="w-4 h-4 accent-brand-500 cursor-pointer"
                             />
                             <div>
@@ -1525,15 +1552,15 @@ export const CreateAssessmentPage: React.FC = () => {
                                 {q.difficulty && (
                                   <Badge
                                     variant={
-                                      q.difficulty.toUpperCase() === 'EASY'
+                                      String(q.difficulty).toUpperCase() === 'EASY'
                                         ? 'success'
-                                        : q.difficulty.toUpperCase() === 'HARD'
+                                        : String(q.difficulty).toUpperCase() === 'HARD'
                                         ? 'danger'
                                         : 'warning'
                                     }
                                     size="sm"
                                   >
-                                    {q.difficulty}
+                                    {String(q.difficulty)}
                                   </Badge>
                                 )}
                                 {q.companyTags?.slice(0, 3).map((comp: any) => {
@@ -1544,11 +1571,14 @@ export const CreateAssessmentPage: React.FC = () => {
                                     </span>
                                   );
                                 })}
-                                {q.patterns?.slice(0, 2).map((p: string) => (
-                                  <span key={p} className="text-[10px] text-slate-400 font-mono">
-                                    Pattern: {p}
-                                  </span>
-                                ))}
+                                {q.patterns?.slice(0, 2).map((p: any, pIdx: number) => {
+                                  const pName = typeof p === 'object' ? (p.name || p.pattern || 'Pattern') : String(p);
+                                  return (
+                                    <span key={pIdx} className="text-[10px] text-slate-400 font-mono">
+                                      Pattern: {pName}
+                                    </span>
+                                  );
+                                })}
                               </div>
                             </div>
                           </div>
