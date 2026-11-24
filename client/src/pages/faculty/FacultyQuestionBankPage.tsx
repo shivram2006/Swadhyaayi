@@ -79,9 +79,10 @@ export const FacultyQuestionBankPage: React.FC = () => {
 
       const res = await axios.get('/coding', { params });
       if (res.data?.success) {
-        setCodingQuestions(res.data.data.questions || []);
-        setCodingTotalPages(res.data.data.meta?.pages || 1);
-        setCodingTotalCount(res.data.data.meta?.total || 0);
+        const qList = Array.isArray(res.data.data) ? res.data.data : (res.data.data?.questions || []);
+        setCodingQuestions(qList);
+        setCodingTotalPages(res.data.meta?.totalPages || 1);
+        setCodingTotalCount(res.data.meta?.totalCount || qList.length);
       }
     } catch (err) {
       console.error('Failed to load coding questions:', err);
@@ -99,7 +100,8 @@ export const FacultyQuestionBankPage: React.FC = () => {
 
       const res = await axios.get('/aptitude/questions', { params });
       if (res.data?.success) {
-        setAptitudeQuestions(res.data.data.questions || []);
+        const qList = Array.isArray(res.data.data) ? res.data.data : (res.data.data?.questions || []);
+        setAptitudeQuestions(qList);
       }
     } catch (err) {
       console.error('Failed to load aptitude questions:', err);

@@ -17,6 +17,8 @@ import {
   ArrowRight,
   ArrowLeft,
   X,
+  Upload,
+  FileText,
 } from 'lucide-react';
 
 interface SelectedQuestion {
@@ -97,11 +99,36 @@ export const CreateAssessmentPage: React.FC = () => {
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const [pickerTargetSectionIndex, setPickerTargetSectionIndex] = useState<number>(0);
   const [pickerTab, setPickerTab] = useState<'CODING' | 'APTITUDE'>('CODING');
+  const [pickerSubMode, setPickerSubMode] = useState<'BANK' | 'MANUAL' | 'BULK'>('BANK');
   const [pickerSearch, setPickerSearch] = useState('');
   const [pickerCompany, setPickerCompany] = useState('');
   const [pickerDifficulty, setPickerDifficulty] = useState('');
   const [availableQuestions, setAvailableQuestions] = useState<any[]>([]);
   const [pickerLoading, setPickerLoading] = useState(false);
+
+  // Manual Question Authoring State
+  const [manualTitle, setManualTitle] = useState('');
+  const [manualDifficulty, setManualDifficulty] = useState<'EASY' | 'MEDIUM' | 'HARD'>('MEDIUM');
+  const [manualPoints, setManualPoints] = useState<number>(20);
+  const [manualDescription, setManualDescription] = useState('');
+  const [manualPattern, setManualPattern] = useState('Arrays, Problem Solving');
+  const [manualSampleInput, setManualSampleInput] = useState('');
+  const [manualSampleOutput, setManualSampleOutput] = useState('');
+  // Aptitude specific manual fields
+  const [manualCategory, setManualCategory] = useState<'QUANTITATIVE' | 'LOGICAL_REASONING' | 'VERBAL_ABILITY' | 'TECHNICAL_MCQ'>('QUANTITATIVE');
+  const [manualSubcategory, setManualSubcategory] = useState('Core Problem Solving');
+  const [manualOptionA, setManualOptionA] = useState('');
+  const [manualOptionB, setManualOptionB] = useState('');
+  const [manualOptionC, setManualOptionC] = useState('');
+  const [manualOptionD, setManualOptionD] = useState('');
+  const [manualCorrectOpt, setManualCorrectOpt] = useState<'opt_1' | 'opt_2' | 'opt_3' | 'opt_4'>('opt_1');
+  const [manualExplanation, setManualExplanation] = useState('');
+  const [manualSaving, setManualSaving] = useState(false);
+  const [manualMessage, setManualMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  // Bulk Upload State
+  const [bulkJsonText, setBulkJsonText] = useState('');
+  const [bulkStatus, setBulkStatus] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   // Submission State
   const [submitting, setSubmitting] = useState(false);
@@ -119,7 +146,8 @@ export const CreateAssessmentPage: React.FC = () => {
     try {
       if (qType === 'APTITUDE') {
         const res = await axios.get('/aptitude/questions');
-        const q = (res.data?.data?.questions || []).find((item: any) => item._id === qId);
+        const list = Array.isArray(res.data?.data) ? res.data.data : (res.data?.data?.questions || []);
+        const q = list.find((item: any) => item._id === qId);
         if (q) {
           setSections([
             {
@@ -144,7 +172,8 @@ export const CreateAssessmentPage: React.FC = () => {
         }
       } else {
         const res = await axios.get('/coding', { params: { limit: 100 } });
-        const q = (res.data?.data?.questions || []).find((item: any) => item._id === qId);
+        const list = Array.isArray(res.data?.data) ? res.data.data : (res.data?.data?.questions || []);
+        const q = list.find((item: any) => item._id === qId);
         if (q) {
           setSections([
             {
@@ -184,37 +213,264 @@ export const CreateAssessmentPage: React.FC = () => {
   };
 
   // Open question selector
-  const handleOpenPicker = async (sectionIndex: number) => {
+  const handleOpenPicker = async (sectionIndex: number, subMode: 'BANK' | 'MANUAL' | 'BULK' = 'BANK') => {
     setPickerTargetSectionIndex(sectionIndex);
     const targetSec = sections[sectionIndex];
     const secType = targetSec?.type || 'CODING';
     setPickerTab(secType);
+    setPickerSubMode(subMode);
+    setPickerSearch('');
+    setPickerCompany('');
+    setPickerDifficulty('');
+    setManualPoints(secType === 'CODING' ? 20 : 2);
+    setManualMessage(null);
+    setBulkStatus(null);
     setIsPickerOpen(true);
-    await loadQuestions(secType, pickerCompany, pickerDifficulty, pickerSearch);
+    await loadQuestions(secType, '', '', '');
   };
 
   const loadQuestions = async (secType: 'CODING' | 'APTITUDE', company?: string, diff?: string, q?: string) => {
     setPickerLoading(true);
     try {
       if (secType === 'CODING') {
-        const params: any = { limit: 60 };
+        const params: any = { limit: 100 };
         if (company) params.company = company;
         if (diff) params.difficulty = diff.toUpperCase();
         if (q) params.search = q;
         const res = await axios.get('/coding', { params });
-        setAvailableQuestions(res.data?.data?.questions || []);
+        const list = Array.isArray(res.data?.data) ? res.data.data : (res.data?.data?.questions || []);
+        setAvailableQuestions(list);
       } else {
-        const params: any = { limit: 50 };
+        const params: any = { limit: 100 };
         if (diff) params.difficulty = diff.toUpperCase();
         if (q) params.category = q;
         const res = await axios.get('/aptitude/questions', { params });
-        setAvailableQuestions(res.data?.data?.questions || []);
+        const list = Array.isArray(res.data?.data) ? res.data.data : (res.data?.data?.questions || []);
+        setAvailableQuestions(list);
       }
     } catch (err) {
       console.error('Error loading questions:', err);
       setAvailableQuestions([]);
     } finally {
       setPickerLoading(false);
+    }
+  };
+
+  const handleSaveManualQuestion = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setManualMessage(null);
+
+    if (!manualTitle.trim() || manualTitle.length < 3) {
+      setManualMessage({ type: 'error', text: 'Please enter a valid title/question text (min 3 chars).' });
+      return;
+    }
+    if (!manualDescription.trim() || manualDescription.length < 5) {
+      setManualMessage({ type: 'error', text: 'Please enter a problem description/explanation (min 5 chars).' });
+      return;
+    }
+
+    try {
+      setManualSaving(true);
+      const targetSec = sections[pickerTargetSectionIndex];
+
+      if (targetSec.type === 'CODING') {
+        const slug =
+          manualTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') ||
+          `custom-${Date.now()}`;
+
+        const payload = {
+          title: manualTitle.trim(),
+          slug,
+          description: manualDescription.trim(),
+          difficulty: manualDifficulty,
+          category: 'DSA',
+          patterns: manualPattern.split(',').map((p) => p.trim()).filter(Boolean),
+          supportedLanguages: ['cpp', 'java', 'python', 'javascript'],
+          starterCode: [
+            {
+              language: 'cpp',
+              boilerplate: '// C++ Solution\n#include <iostream>\nusing namespace std;\n\nint main() {\n    // Code here\n    return 0;\n}',
+            },
+            {
+              language: 'python',
+              boilerplate: '# Python Solution\ndef main():\n    pass\n\nif __name__ == "__main__":\n    main()',
+            },
+            {
+              language: 'java',
+              boilerplate: '// Java Solution\nimport java.util.*;\n\npublic class Solution {\n    public static void main(String[] args) {}\n}',
+            },
+          ],
+          testCases: [
+            {
+              input: manualSampleInput || '1 2 3',
+              expectedOutput: manualSampleOutput || '6',
+              isSample: true,
+              explanation: 'Sample test verification',
+            },
+          ],
+        };
+
+        const res = await axios.post('/coding', payload);
+        const created = res.data?.data;
+        const newQ: SelectedQuestion = {
+          questionId: created?._id || `temp-${Date.now()}`,
+          title: created?.title || manualTitle.trim(),
+          type: 'CODING',
+          points: Number(manualPoints) || 20,
+          difficulty: manualDifficulty,
+          tags: ['Custom Upload'],
+        };
+
+        const updatedSections = [...sections];
+        updatedSections[pickerTargetSectionIndex] = {
+          ...targetSec,
+          questions: [...targetSec.questions, newQ],
+        };
+        setSections(updatedSections);
+        setManualMessage({ type: 'success', text: `Coding problem "${newQ.title}" authored & added to Section!` });
+        setManualTitle('');
+        setManualDescription('');
+        setManualSampleInput('');
+        setManualSampleOutput('');
+        loadQuestions('CODING', '', '', '');
+      } else {
+        // APTITUDE
+        if (!manualOptionA.trim() || !manualOptionB.trim()) {
+          setManualMessage({ type: 'error', text: 'At least Option A and Option B are required.' });
+          setManualSaving(false);
+          return;
+        }
+
+        const options = [
+          { id: 'opt_1', text: manualOptionA.trim() },
+          { id: 'opt_2', text: manualOptionB.trim() },
+        ];
+        if (manualOptionC.trim()) options.push({ id: 'opt_3', text: manualOptionC.trim() });
+        if (manualOptionD.trim()) options.push({ id: 'opt_4', text: manualOptionD.trim() });
+
+        const payload = {
+          category: manualCategory,
+          subcategory: manualSubcategory || 'General',
+          difficulty: manualDifficulty,
+          questionText: manualTitle.trim(),
+          options,
+          correctOptionId: manualCorrectOpt,
+          explanation: manualExplanation.trim() || manualDescription.trim() || 'Correct answer explanation',
+          companyTags: [],
+        };
+
+        const res = await axios.post('/aptitude', payload);
+        const created = res.data?.data;
+        const newQ: SelectedQuestion = {
+          questionId: created?._id || `temp-${Date.now()}`,
+          title: created?.questionText || manualTitle.trim(),
+          type: 'APTITUDE',
+          points: Number(manualPoints) || 2,
+          difficulty: manualDifficulty,
+          tags: [manualCategory],
+        };
+
+        const updatedSections = [...sections];
+        updatedSections[pickerTargetSectionIndex] = {
+          ...targetSec,
+          questions: [...targetSec.questions, newQ],
+        };
+        setSections(updatedSections);
+        setManualMessage({ type: 'success', text: `Aptitude question authored & added to Section!` });
+        setManualTitle('');
+        setManualDescription('');
+        setManualOptionA('');
+        setManualOptionB('');
+        setManualOptionC('');
+        setManualOptionD('');
+        setManualExplanation('');
+        loadQuestions('APTITUDE', '', '', '');
+      }
+    } catch (err: any) {
+      console.error('Failed to create custom question:', err);
+      const msg = err.response?.data?.error?.message || err.response?.data?.message || err.message;
+      setManualMessage({ type: 'error', text: msg || 'Failed to save question.' });
+    } finally {
+      setManualSaving(false);
+    }
+  };
+
+  const handleBulkJsonUpload = () => {
+    setBulkStatus(null);
+    if (!bulkJsonText.trim()) {
+      setBulkStatus({ type: 'error', text: 'Please paste valid JSON questions array.' });
+      return;
+    }
+
+    try {
+      const parsed = JSON.parse(bulkJsonText.trim());
+      if (!Array.isArray(parsed) || parsed.length === 0) {
+        setBulkStatus({ type: 'error', text: 'JSON must be a non-empty array of question objects.' });
+        return;
+      }
+
+      const targetSec = sections[pickerTargetSectionIndex];
+      const parsedQuestions: SelectedQuestion[] = parsed.map((item, idx) => ({
+        questionId: item._id || item.id || `custom-bulk-${Date.now()}-${idx}`,
+        title: item.title || item.questionText || item.question || `Question ${idx + 1}`,
+        type: targetSec.type,
+        points: Number(item.points) || (targetSec.type === 'CODING' ? 20 : 2),
+        difficulty: item.difficulty || 'MEDIUM',
+        tags: item.tags || ['Bulk Uploaded'],
+      }));
+
+      const updatedSections = [...sections];
+      updatedSections[pickerTargetSectionIndex] = {
+        ...targetSec,
+        questions: [...targetSec.questions, ...parsedQuestions],
+      };
+      setSections(updatedSections);
+      setBulkStatus({
+        type: 'success',
+        text: `Successfully uploaded and added ${parsedQuestions.length} questions to ${targetSec.title}!`,
+      });
+      setBulkJsonText('');
+    } catch (err: any) {
+      setBulkStatus({ type: 'error', text: `Invalid JSON syntax: ${err.message}` });
+    }
+  };
+
+  const handleLoadSampleJsonTemplate = () => {
+    const targetSec = sections[pickerTargetSectionIndex];
+    if (targetSec.type === 'CODING') {
+      const sample = [
+        {
+          title: "Find Longest Substring Without Repeating Characters",
+          description: "Given a string s, find the length of the longest substring without repeating characters.",
+          difficulty: "MEDIUM",
+          points: 20,
+          sampleInput: "abcabcbb",
+          sampleOutput: "3",
+          tags: ["Sliding Window", "Strings"]
+        },
+        {
+          title: "Search in Rotated Sorted Array",
+          description: "Given the array nums after possible rotation and target integer, return index of target.",
+          difficulty: "MEDIUM",
+          points: 20,
+          sampleInput: "4 5 6 7 0 1 2\n0",
+          sampleOutput: "4",
+          tags: ["Binary Search"]
+        }
+      ];
+      setBulkJsonText(JSON.stringify(sample, null, 2));
+    } else {
+      const sample = [
+        {
+          title: "A can do a work in 15 days and B in 20 days. Fraction left after 4 days of working together is:",
+          difficulty: "EASY",
+          points: 2,
+          options: ["7/15", "8/15", "1/4", "1/10"],
+          correctOption: "8/15",
+          explanation: "Total 4 days work = 4*(1/15 + 1/20) = 7/15. Left = 8/15."
+        }
+      ];
+      setBulkJsonText(JSON.stringify(sample, null, 2));
     }
   };
 
@@ -797,11 +1053,20 @@ export const CreateAssessmentPage: React.FC = () => {
                       <Button
                         variant="primary"
                         size="sm"
-                        onClick={() => handleOpenPicker(secIdx)}
+                        onClick={() => handleOpenPicker(secIdx, 'BANK')}
                         leftIcon={<Plus className="w-3.5 h-3.5" />}
                         className="text-xs bg-brand-600 hover:bg-brand-500"
                       >
                         Pick Questions
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleOpenPicker(secIdx, 'MANUAL')}
+                        leftIcon={<Upload className="w-3.5 h-3.5" />}
+                        className="text-xs"
+                      >
+                        + Manual Question
                       </Button>
 
                       {sections.length > 1 && (
@@ -819,16 +1084,26 @@ export const CreateAssessmentPage: React.FC = () => {
                   {/* Questions in Section */}
                   <div className="p-4 space-y-3">
                     {sec.questions.length === 0 ? (
-                      <div className="py-8 text-center">
-                        <p className="text-xs text-slate-400 mb-2">No questions added to this section yet.</p>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleOpenPicker(secIdx)}
-                          leftIcon={<Plus className="w-3.5 h-3.5" />}
-                        >
-                          Browse Question Catalog
-                        </Button>
+                      <div className="py-8 text-center space-y-3">
+                        <p className="text-xs text-slate-400">No questions added to this section yet.</p>
+                        <div className="flex gap-2 justify-center">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleOpenPicker(secIdx, 'BANK')}
+                            leftIcon={<Plus className="w-3.5 h-3.5" />}
+                          >
+                            Browse Question Bank
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleOpenPicker(secIdx, 'MANUAL')}
+                            leftIcon={<Upload className="w-3.5 h-3.5" />}
+                          >
+                            + Manual Question
+                          </Button>
+                        </div>
                       </div>
                     ) : (
                       <div className="space-y-2">
@@ -1088,154 +1363,494 @@ export const CreateAssessmentPage: React.FC = () => {
               </button>
             </div>
 
-            {/* Filter Toolbar */}
-            <div className="p-4 border-b border-slate-800/80 bg-slate-900 flex flex-col md:flex-row gap-3 items-center justify-between">
-              <div className="relative w-full md:w-72">
-                <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
-                <input
-                  type="text"
-                  placeholder="Search question title or topic..."
-                  value={pickerSearch}
-                  onChange={(e) => {
-                    setPickerSearch(e.target.value);
-                    loadQuestions(pickerTab, pickerCompany, pickerDifficulty, e.target.value);
-                  }}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-500"
-                />
-              </div>
-
-              <div className="flex items-center gap-2 w-full md:w-auto">
-                {pickerTab === 'CODING' && (
-                  <select
-                    value={pickerCompany}
-                    onChange={(e) => {
-                      setPickerCompany(e.target.value);
-                      loadQuestions(pickerTab, e.target.value, pickerDifficulty, pickerSearch);
-                    }}
-                    className="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-xl px-3 py-2 focus:outline-none focus:border-brand-500"
-                  >
-                    <option value="">All Companies</option>
-                    {[
-                      'Apple',
-                      'Google',
-                      'Meta',
-                      'Microsoft',
-                      'Amazon',
-                      'TCS',
-                      'Infosys',
-                      'Wipro',
-                      'Capgemini',
-                      'Flipkart',
-                      'Oracle',
-                      'Adobe',
-                      'Accenture',
-                    ].map((comp) => (
-                      <option key={comp} value={comp}>
-                        {comp}
-                      </option>
-                    ))}
-                  </select>
-                )}
-
-                <select
-                  value={pickerDifficulty}
-                  onChange={(e) => {
-                    setPickerDifficulty(e.target.value);
-                    loadQuestions(pickerTab, pickerCompany, e.target.value, pickerSearch);
-                  }}
-                  className="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-xl px-3 py-2 focus:outline-none focus:border-brand-500"
-                >
-                  <option value="">All Difficulties</option>
-                  <option value="EASY">Easy</option>
-                  <option value="MEDIUM">Medium</option>
-                  <option value="HARD">Hard</option>
-                </select>
-              </div>
+            {/* Sub-mode Navigation Tabs */}
+            <div className="flex border-b border-slate-800 bg-slate-950 px-6 gap-6 text-xs font-semibold">
+              <button
+                onClick={() => setPickerSubMode('BANK')}
+                className={`py-3.5 border-b-2 transition-all flex items-center gap-2 ${
+                  pickerSubMode === 'BANK'
+                    ? 'border-brand-500 text-brand-400 font-bold'
+                    : 'border-transparent text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Search className="w-3.5 h-3.5" />
+                Select from Question Bank ({availableQuestions.length})
+              </button>
+              <button
+                onClick={() => {
+                  setPickerSubMode('MANUAL');
+                  setManualMessage(null);
+                }}
+                className={`py-3.5 border-b-2 transition-all flex items-center gap-2 ${
+                  pickerSubMode === 'MANUAL'
+                    ? 'border-brand-500 text-brand-400 font-bold'
+                    : 'border-transparent text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Plus className="w-3.5 h-3.5" />
+                + Manual Question Form
+              </button>
+              <button
+                onClick={() => {
+                  setPickerSubMode('BULK');
+                  setBulkStatus(null);
+                }}
+                className={`py-3.5 border-b-2 transition-all flex items-center gap-2 ${
+                  pickerSubMode === 'BULK'
+                    ? 'border-brand-500 text-brand-400 font-bold'
+                    : 'border-transparent text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Upload className="w-3.5 h-3.5" />
+                Bulk JSON Upload
+              </button>
             </div>
 
-            {/* Questions List */}
-            <div className="overflow-y-auto flex-1 p-4 space-y-2">
-              {pickerLoading ? (
-                <div className="py-16 flex flex-col items-center justify-center gap-2">
-                  <div className="w-7 h-7 border-2 border-brand-500 border-t-transparent rounded-full animate-spin"></div>
-                  <p className="text-xs text-slate-400">Loading questions from catalog...</p>
-                </div>
-              ) : availableQuestions.length === 0 ? (
-                <div className="py-16 text-center text-slate-400 text-xs">
-                  No matching questions found in this category.
-                </div>
-              ) : (
-                availableQuestions.map((q) => {
-                  const qId = q._id || q.id;
-                  const isSelected = sections[pickerTargetSectionIndex]?.questions.some(
-                    (item) => item.questionId === qId
-                  );
+            {/* MODE 1: QUESTION BANK LIST */}
+            {pickerSubMode === 'BANK' && (
+              <>
+                {/* Filter Toolbar */}
+                <div className="p-4 border-b border-slate-800/80 bg-slate-900 flex flex-col md:flex-row gap-3 items-center justify-between">
+                  <div className="relative w-full md:w-72">
+                    <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
+                    <input
+                      type="text"
+                      placeholder="Search question title or topic..."
+                      value={pickerSearch}
+                      onChange={(e) => {
+                        setPickerSearch(e.target.value);
+                        loadQuestions(pickerTab, pickerCompany, pickerDifficulty, e.target.value);
+                      }}
+                      className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-500"
+                    />
+                  </div>
 
-                  return (
-                    <div
-                      key={qId}
-                      onClick={() => toggleQuestionSelection(q)}
-                      className={`p-3.5 rounded-xl border cursor-pointer transition-all flex items-center justify-between text-xs ${
-                        isSelected
-                          ? 'bg-brand-500/10 border-brand-500/80 shadow-md'
-                          : 'bg-slate-950/60 border-slate-800/80 hover:border-slate-700'
-                      }`}
+                  <div className="flex items-center gap-2 w-full md:w-auto">
+                    {pickerTab === 'CODING' && (
+                      <select
+                        value={pickerCompany}
+                        onChange={(e) => {
+                          setPickerCompany(e.target.value);
+                          loadQuestions(pickerTab, e.target.value, pickerDifficulty, pickerSearch);
+                        }}
+                        className="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-xl px-3 py-2 focus:outline-none focus:border-brand-500"
+                      >
+                        <option value="">All Companies</option>
+                        {[
+                          'Apple',
+                          'Google',
+                          'Meta',
+                          'Microsoft',
+                          'Amazon',
+                          'TCS',
+                          'Infosys',
+                          'Wipro',
+                          'Capgemini',
+                          'Flipkart',
+                          'Oracle',
+                          'Adobe',
+                          'Accenture',
+                        ].map((comp) => (
+                          <option key={comp} value={comp}>
+                            {comp}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+
+                    <select
+                      value={pickerDifficulty}
+                      onChange={(e) => {
+                        setPickerDifficulty(e.target.value);
+                        loadQuestions(pickerTab, pickerCompany, e.target.value, pickerSearch);
+                      }}
+                      className="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-xl px-3 py-2 focus:outline-none focus:border-brand-500"
                     >
-                      <div className="flex items-center gap-3">
-                        <input
-                          type="checkbox"
-                          checked={isSelected}
-                          onChange={() => {}} // handled by parent onClick
-                          className="w-4 h-4 accent-brand-500 cursor-pointer"
-                        />
-                        <div>
-                          <p className={`font-semibold ${isSelected ? 'text-brand-200' : 'text-slate-200'}`}>
-                            {q.title || q.questionText}
-                          </p>
-                          <div className="flex items-center gap-2 mt-1">
-                            {q.difficulty && (
-                              <Badge
-                                variant={
-                                  q.difficulty.toUpperCase() === 'EASY'
-                                    ? 'success'
-                                    : q.difficulty.toUpperCase() === 'HARD'
-                                    ? 'danger'
-                                    : 'warning'
-                                }
-                                size="sm"
-                              >
-                                {q.difficulty}
-                              </Badge>
-                            )}
-                            {q.companyTags?.slice(0, 3).map((comp: string) => (
-                              <span key={comp} className="text-[10px] text-amber-400/90 font-mono">
-                                {comp}
-                              </span>
-                            ))}
-                            {q.pattern && (
-                              <span className="text-[10px] text-slate-400 font-mono">
-                                Pattern: {q.pattern}
-                              </span>
-                            )}
+                      <option value="">All Difficulties</option>
+                      <option value="EASY">Easy</option>
+                      <option value="MEDIUM">Medium</option>
+                      <option value="HARD">Hard</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Questions List */}
+                <div className="overflow-y-auto flex-1 p-4 space-y-2">
+                  {pickerLoading ? (
+                    <div className="py-16 flex flex-col items-center justify-center gap-2">
+                      <div className="w-7 h-7 border-2 border-brand-500 border-t-transparent rounded-full animate-spin"></div>
+                      <p className="text-xs text-slate-400">Loading questions from catalog...</p>
+                    </div>
+                  ) : availableQuestions.length === 0 ? (
+                    <div className="py-16 text-center text-slate-400 text-xs space-y-3">
+                      <p>No matching questions found in this category.</p>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setPickerSubMode('MANUAL')}
+                        leftIcon={<Plus className="w-3.5 h-3.5" />}
+                      >
+                        Author Custom Question
+                      </Button>
+                    </div>
+                  ) : (
+                    availableQuestions.map((q) => {
+                      const qId = q._id || q.id;
+                      const isSelected = sections[pickerTargetSectionIndex]?.questions.some(
+                        (item) => item.questionId === qId
+                      );
+
+                      return (
+                        <div
+                          key={qId}
+                          onClick={() => toggleQuestionSelection(q)}
+                          className={`p-3.5 rounded-xl border cursor-pointer transition-all flex items-center justify-between text-xs ${
+                            isSelected
+                              ? 'bg-brand-500/10 border-brand-500/80 shadow-md'
+                              : 'bg-slate-950/60 border-slate-800/80 hover:border-slate-700'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            <input
+                              type="checkbox"
+                              checked={isSelected}
+                              onChange={() => {}} // handled by parent onClick
+                              className="w-4 h-4 accent-brand-500 cursor-pointer"
+                            />
+                            <div>
+                              <p className={`font-semibold ${isSelected ? 'text-brand-200' : 'text-slate-200'}`}>
+                                {q.title || q.questionText}
+                              </p>
+                              <div className="flex items-center gap-2 mt-1">
+                                {q.difficulty && (
+                                  <Badge
+                                    variant={
+                                      q.difficulty.toUpperCase() === 'EASY'
+                                        ? 'success'
+                                        : q.difficulty.toUpperCase() === 'HARD'
+                                        ? 'danger'
+                                        : 'warning'
+                                    }
+                                    size="sm"
+                                  >
+                                    {q.difficulty}
+                                  </Badge>
+                                )}
+                                {q.companyTags?.slice(0, 3).map((comp: any) => {
+                                  const cName = typeof comp === 'object' ? comp.company : comp;
+                                  return (
+                                    <span key={cName} className="text-[10px] text-amber-400/90 font-mono">
+                                      {cName}
+                                    </span>
+                                  );
+                                })}
+                                {q.patterns?.slice(0, 2).map((p: string) => (
+                                  <span key={p} className="text-[10px] text-slate-400 font-mono">
+                                    Pattern: {p}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="text-right">
+                            <span className="font-mono text-slate-400 text-[11px]">
+                              {pickerTab === 'CODING' ? '20 pts' : '2 pts'}
+                            </span>
                           </div>
                         </div>
-                      </div>
+                      );
+                    })
+                  )}
+                </div>
+              </>
+            )}
 
-                      <div className="text-right">
-                        <span className="font-mono text-slate-400 text-[11px]">
-                          {pickerTab === 'CODING' ? '20 pts' : '2 pts'}
-                        </span>
+            {/* MODE 2: MANUAL QUESTION FORM */}
+            {pickerSubMode === 'MANUAL' && (
+              <form onSubmit={handleSaveManualQuestion} className="overflow-y-auto flex-1 p-6 space-y-4 text-xs">
+                {manualMessage && (
+                  <div
+                    className={`p-3.5 rounded-xl border text-xs flex items-center gap-2.5 ${
+                      manualMessage.type === 'success'
+                        ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
+                        : 'bg-rose-500/10 border-rose-500/30 text-rose-300'
+                    }`}
+                  >
+                    {manualMessage.type === 'success' ? (
+                      <CheckCircle2 className="w-4 h-4 flex-shrink-0 text-emerald-400" />
+                    ) : (
+                      <AlertCircle className="w-4 h-4 flex-shrink-0 text-rose-400" />
+                    )}
+                    <span>{manualMessage.text}</span>
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="sm:col-span-2">
+                    <label className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                      {pickerTab === 'CODING' ? 'Problem Title *' : 'Question Statement *'}
+                    </label>
+                    <input
+                      type="text"
+                      placeholder={
+                        pickerTab === 'CODING'
+                          ? 'e.g. Reverse Linked List in K-Groups'
+                          : 'e.g. Find the missing number in the sequence: 2, 6, 12, 20, ?'
+                      }
+                      value={manualTitle}
+                      onChange={(e) => setManualTitle(e.target.value)}
+                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-brand-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                      Difficulty & Marks
+                    </label>
+                    <div className="flex gap-2">
+                      <select
+                        value={manualDifficulty}
+                        onChange={(e: any) => setManualDifficulty(e.target.value)}
+                        className="bg-slate-950 border border-slate-800 rounded-xl px-2 py-2 text-xs text-slate-200 focus:outline-none focus:border-brand-500 flex-1"
+                      >
+                        <option value="EASY">Easy</option>
+                        <option value="MEDIUM">Medium</option>
+                        <option value="HARD">Hard</option>
+                      </select>
+                      <input
+                        type="number"
+                        min={1}
+                        value={manualPoints}
+                        onChange={(e) => setManualPoints(Number(e.target.value))}
+                        className="w-16 bg-slate-950 border border-slate-800 rounded-xl px-2 py-2 text-xs text-center font-mono text-white focus:outline-none focus:border-brand-500"
+                        title="Points / Marks"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                    {pickerTab === 'CODING' ? 'Detailed Statement & Constraints *' : 'Question Details & Explanation *'}
+                  </label>
+                  <textarea
+                    rows={4}
+                    placeholder="Enter full statement, sample input/output expectations, and any time/space limits..."
+                    value={manualDescription}
+                    onChange={(e) => setManualDescription(e.target.value)}
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 font-mono focus:outline-none focus:border-brand-500"
+                  />
+                </div>
+
+                {pickerTab === 'CODING' ? (
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                          Sample Test Input
+                        </label>
+                        <textarea
+                          rows={2}
+                          placeholder="e.g. 5&#10;1 2 3 4 5"
+                          value={manualSampleInput}
+                          onChange={(e) => setManualSampleInput(e.target.value)}
+                          className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 font-mono focus:outline-none focus:border-brand-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                          Expected Test Output
+                        </label>
+                        <textarea
+                          rows={2}
+                          placeholder="e.g. 15"
+                          value={manualSampleOutput}
+                          onChange={(e) => setManualSampleOutput(e.target.value)}
+                          className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 font-mono focus:outline-none focus:border-brand-500"
+                        />
                       </div>
                     </div>
-                  );
-                })
-              )}
-            </div>
+
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                        Algorithmic Patterns / Tags (comma separated)
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g. Dynamic Programming, Two Pointers, Trees"
+                        value={manualPattern}
+                        onChange={(e) => setManualPattern(e.target.value)}
+                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-brand-500"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                          Aptitude Category
+                        </label>
+                        <select
+                          value={manualCategory}
+                          onChange={(e: any) => setManualCategory(e.target.value)}
+                          className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-brand-500"
+                        >
+                          <option value="QUANTITATIVE">Quantitative Aptitude</option>
+                          <option value="LOGICAL_REASONING">Logical Reasoning</option>
+                          <option value="VERBAL_ABILITY">Verbal Ability</option>
+                          <option value="TECHNICAL_MCQ">Technical MCQ</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                          Subcategory Topic
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g. Speed, Time & Distance"
+                          value={manualSubcategory}
+                          onChange={(e) => setManualSubcategory(e.target.value)}
+                          className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-brand-500"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Options A, B, C, D */}
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-2">
+                        Options & Select Correct Option
+                      </label>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        {[
+                          { id: 'opt_1', label: 'Option A', val: manualOptionA, set: setManualOptionA },
+                          { id: 'opt_2', label: 'Option B', val: manualOptionB, set: setManualOptionB },
+                          { id: 'opt_3', label: 'Option C', val: manualOptionC, set: setManualOptionC },
+                          { id: 'opt_4', label: 'Option D', val: manualOptionD, set: setManualOptionD },
+                        ].map((opt) => (
+                          <div
+                            key={opt.id}
+                            className={`flex items-center gap-2 p-2 rounded-xl border ${
+                              manualCorrectOpt === opt.id
+                                ? 'bg-emerald-500/10 border-emerald-500/50'
+                                : 'bg-slate-950 border-slate-800'
+                            }`}
+                          >
+                            <input
+                              type="radio"
+                              name="correctOptGroup"
+                              checked={manualCorrectOpt === opt.id}
+                              onChange={() => setManualCorrectOpt(opt.id as any)}
+                              className="w-4 h-4 accent-emerald-500 cursor-pointer"
+                              title="Mark as correct option"
+                            />
+                            <input
+                              type="text"
+                              placeholder={opt.label}
+                              value={opt.val}
+                              onChange={(e) => opt.set(e.target.value)}
+                              className="w-full bg-transparent text-xs text-slate-200 focus:outline-none"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                        Answer Explanation
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Detailed derivation or reasoning for the correct option..."
+                        value={manualExplanation}
+                        onChange={(e) => setManualExplanation(e.target.value)}
+                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-brand-500"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <div className="pt-2 flex justify-end">
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    type="submit"
+                    isLoading={manualSaving}
+                    leftIcon={<Plus className="w-3.5 h-3.5" />}
+                    className="bg-brand-600 hover:bg-brand-500 shadow-md shadow-brand-600/30"
+                  >
+                    Save & Add to Section
+                  </Button>
+                </div>
+              </form>
+            )}
+
+            {/* MODE 3: BULK JSON UPLOAD */}
+            {pickerSubMode === 'BULK' && (
+              <div className="overflow-y-auto flex-1 p-6 space-y-4 text-xs">
+                {bulkStatus && (
+                  <div
+                    className={`p-3.5 rounded-xl border text-xs flex items-center gap-2.5 ${
+                      bulkStatus.type === 'success'
+                        ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
+                        : 'bg-rose-500/10 border-rose-500/30 text-rose-300'
+                    }`}
+                  >
+                    {bulkStatus.type === 'success' ? (
+                      <CheckCircle2 className="w-4 h-4 flex-shrink-0 text-emerald-400" />
+                    ) : (
+                      <AlertCircle className="w-4 h-4 flex-shrink-0 text-rose-400" />
+                    )}
+                    <span>{bulkStatus.text}</span>
+                  </div>
+                )}
+
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h4 className="font-semibold text-white">Paste JSON Questions Array</h4>
+                    <p className="text-[11px] text-slate-400">
+                      Bulk-add multiple questions directly into {sections[pickerTargetSectionIndex]?.title}
+                    </p>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleLoadSampleJsonTemplate}
+                    leftIcon={<FileText className="w-3.5 h-3.5" />}
+                  >
+                    Load Sample Template
+                  </Button>
+                </div>
+
+                <textarea
+                  rows={10}
+                  placeholder={`[\n  {\n    "title": "Example Problem",\n    "description": "Problem statement...",\n    "difficulty": "MEDIUM",\n    "points": 20,\n    "sampleInput": "...",\n    "sampleOutput": "..."\n  }\n]`}
+                  value={bulkJsonText}
+                  onChange={(e) => setBulkJsonText(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 font-mono focus:outline-none focus:border-brand-500"
+                />
+
+                <div className="flex justify-end gap-2">
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={handleBulkJsonUpload}
+                    leftIcon={<Upload className="w-3.5 h-3.5" />}
+                    className="bg-brand-600 hover:bg-brand-500"
+                  >
+                    Parse & Add to Section
+                  </Button>
+                </div>
+              </div>
+            )}
 
             {/* Modal Footer */}
             <div className="p-4 border-t border-slate-800 bg-slate-950/80 flex justify-between items-center">
               <span className="text-xs text-slate-400">
-                {sections[pickerTargetSectionIndex]?.questions.length || 0} questions selected for this section
+                {sections[pickerTargetSectionIndex]?.questions.length || 0} questions configured in this section
               </span>
               <Button variant="primary" size="sm" onClick={() => setIsPickerOpen(false)}>
                 Done Selecting
