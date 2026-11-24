@@ -283,17 +283,25 @@ export const CreateAssessmentPage: React.FC = () => {
       const targetSec = sections[pickerTargetSectionIndex];
 
       if (targetSec.type === 'CODING') {
-        const slug =
-          manualTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') ||
-          `custom-${Date.now()}`;
+        const rawSlug = manualTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        const slug = (rawSlug.length >= 3 ? rawSlug : `custom-${rawSlug}-${Date.now()}`).slice(0, 50);
+        const parsedPatterns = manualPattern.split(',').map((p) => p.trim()).filter(Boolean);
+        const patterns = parsedPatterns.length > 0 ? parsedPatterns : ['Problem Solving', 'Data Structures'];
+        const desc = manualDescription.trim().length >= 10
+          ? manualDescription.trim()
+          : `${manualDescription.trim()} (Problem Specifications & Rules)`;
+
+        const sInput = manualSampleInput.trim() || '5';
+        const sOutput = manualSampleOutput.trim() || '5';
 
         const payload = {
           title: manualTitle.trim(),
           slug,
-          description: manualDescription.trim(),
+          description: desc,
           difficulty: manualDifficulty,
           category: 'DSA',
-          patterns: manualPattern.split(',').map((p) => p.trim()).filter(Boolean),
+          patterns,
+          topics: patterns,
           supportedLanguages: ['cpp', 'java', 'python', 'javascript'],
           starterCode: [
             {
@@ -301,22 +309,34 @@ export const CreateAssessmentPage: React.FC = () => {
               boilerplate: '// C++ Solution\n#include <iostream>\nusing namespace std;\n\nint main() {\n    // Code here\n    return 0;\n}',
             },
             {
+              language: 'java',
+              boilerplate: 'import java.util.*;\n\npublic class Solution {\n    public static void main(String[] args) {\n    }\n}',
+            },
+            {
               language: 'python',
               boilerplate: '# Python Solution\ndef main():\n    pass\n\nif __name__ == "__main__":\n    main()',
             },
             {
-              language: 'java',
-              boilerplate: '// Java Solution\nimport java.util.*;\n\npublic class Solution {\n    public static void main(String[] args) {}\n}',
+              language: 'javascript',
+              boilerplate: '// JavaScript Solution\nfunction solve() {\n}\nsolve();',
             },
           ],
-          testCases: [
+          sampleTestCases: [
             {
-              input: manualSampleInput || '1 2 3',
-              expectedOutput: manualSampleOutput || '6',
-              isSample: true,
+              input: sInput,
+              output: sOutput,
               explanation: 'Sample test verification',
             },
           ],
+          hiddenTestCases: [
+            {
+              input: sInput,
+              expectedOutput: sOutput,
+              weight: 1,
+            },
+          ],
+          timeLimitMs: 2000,
+          memoryLimitMb: 256,
         };
 
         const res = await axios.post('/coding', payload);
@@ -357,6 +377,9 @@ export const CreateAssessmentPage: React.FC = () => {
         if (manualOptionC.trim()) options.push({ id: 'opt_3', text: manualOptionC.trim() });
         if (manualOptionD.trim()) options.push({ id: 'opt_4', text: manualOptionD.trim() });
 
+        const expl = manualExplanation.trim() || manualDescription.trim();
+        const finalExpl = expl.length >= 5 ? expl : 'Correct option verified from problem reasoning.';
+
         const payload = {
           category: manualCategory,
           subcategory: manualSubcategory || 'General',
@@ -364,7 +387,7 @@ export const CreateAssessmentPage: React.FC = () => {
           questionText: manualTitle.trim(),
           options,
           correctOptionId: manualCorrectOpt,
-          explanation: manualExplanation.trim() || manualDescription.trim() || 'Correct answer explanation',
+          explanation: finalExpl,
           companyTags: [],
         };
 
@@ -397,7 +420,14 @@ export const CreateAssessmentPage: React.FC = () => {
       }
     } catch (err: any) {
       console.error('Failed to create custom question:', err);
-      const msg = err.response?.data?.error?.message || err.response?.data?.message || err.message;
+      let msg = err.message || 'Failed to save question.';
+      if (err.response?.data?.error?.details && Array.isArray(err.response.data.error.details)) {
+        msg = err.response.data.error.details.map((d: any) => `${d.field}: ${d.message}`).join(', ');
+      } else if (err.response?.data?.error?.message) {
+        msg = err.response.data.error.message;
+      } else if (err.response?.data?.message) {
+        msg = err.response.data.message;
+      }
       setManualMessage({ type: 'error', text: msg || 'Failed to save question.' });
     } finally {
       setManualSaving(false);

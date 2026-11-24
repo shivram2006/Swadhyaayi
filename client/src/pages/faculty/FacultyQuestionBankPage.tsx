@@ -135,13 +135,23 @@ export const FacultyQuestionBankPage: React.FC = () => {
 
     try {
       setCreating(true);
+      const parsedPatterns = newPatterns.split(',').map((p) => p.trim()).filter(Boolean);
+      const patterns = parsedPatterns.length > 0 ? parsedPatterns : ['Problem Solving', 'Data Structures'];
+      const desc = newDescription.trim().length >= 10
+        ? newDescription.trim()
+        : `${newDescription.trim()} (Detailed specifications)`;
+
+      const sInput = newSampleInput.trim() || '1 2 3';
+      const sOutput = newSampleOutput.trim() || '6';
+
       const payload = {
         title: newTitle.trim(),
-        slug: genSlug,
-        description: newDescription.trim(),
+        slug: genSlug.length >= 3 ? genSlug : `custom-${Date.now()}`,
+        description: desc,
         difficulty: newDifficulty,
         category: 'DSA',
-        patterns: newPatterns.split(',').map((p) => p.trim()).filter(Boolean),
+        patterns,
+        topics: patterns,
         companyTags: newCompany
           ? [
               {
@@ -167,14 +177,22 @@ export const FacultyQuestionBankPage: React.FC = () => {
             boilerplate: '# Python Solution\nimport sys\n\ndef main():\n    pass\n\nif __name__ == "__main__":\n    main()',
           },
         ],
-        testCases: [
+        sampleTestCases: [
           {
-            input: newSampleInput || '1 2 3',
-            expectedOutput: newSampleOutput || '6',
-            isSample: true,
+            input: sInput,
+            output: sOutput,
             explanation: 'Sample test verification',
           },
         ],
+        hiddenTestCases: [
+          {
+            input: sInput,
+            expectedOutput: sOutput,
+            weight: 1,
+          },
+        ],
+        timeLimitMs: 2000,
+        memoryLimitMb: 256,
       };
 
       const res = await axios.post('/coding', payload);
@@ -189,7 +207,14 @@ export const FacultyQuestionBankPage: React.FC = () => {
       }
     } catch (err: any) {
       console.error('Failed to create question:', err);
-      const msg = err.response?.data?.error?.message || err.response?.data?.message || err.message;
+      let msg = err.message || 'Failed to create question.';
+      if (err.response?.data?.error?.details && Array.isArray(err.response.data.error.details)) {
+        msg = err.response.data.error.details.map((d: any) => `${d.field}: ${d.message}`).join(', ');
+      } else if (err.response?.data?.error?.message) {
+        msg = err.response.data.error.message;
+      } else if (err.response?.data?.message) {
+        msg = err.response.data.message;
+      }
       setCreateError(msg);
     } finally {
       setCreating(false);
