@@ -106,7 +106,12 @@ export const ResumeAtsCheckerModal: React.FC<ResumeAtsCheckerModalProps> = ({
       );
       setResult(data);
     } catch (err: any) {
-      setError(err?.response?.data?.message || err?.message || 'Failed to analyze resume ATS score.');
+      const msg =
+        err?.response?.data?.error?.message ||
+        err?.response?.data?.message ||
+        err?.message ||
+        'Failed to analyze resume ATS score.';
+      setError(msg);
     } finally {
       setScanning(false);
     }

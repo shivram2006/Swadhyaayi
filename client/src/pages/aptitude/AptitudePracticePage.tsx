@@ -30,7 +30,7 @@ export const AptitudePracticePage: React.FC = () => {
 
   // Mock Mode state (recorded selections)
   const [mockSelections, setMockSelections] = useState<Record<string, string>>({});
-  const [timeRemainingSeconds, setTimeRemainingSeconds] = useState(mode === 'MOCK' ? 15 * 60 : 0);
+  const [timeRemainingSeconds, setTimeRemainingSeconds] = useState(mode === 'MOCK' ? 20 * 60 : 0);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [scorecard, setScorecard] = useState<any>(null);
@@ -39,7 +39,7 @@ export const AptitudePracticePage: React.FC = () => {
     const fetchQuestions = async () => {
       try {
         const res = await axios.get('/aptitude/questions', {
-          params: { category, mode },
+          params: { category, mode, limit: 20 },
         });
         if (res.data.success && res.data.data.length > 0) {
           setQuestions(res.data.data);

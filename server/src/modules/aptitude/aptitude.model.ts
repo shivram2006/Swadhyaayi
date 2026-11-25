@@ -40,6 +40,7 @@ export interface IQuestionAptitudeDocument extends Document {
     yearReported: number;
   }[];
   isGlobal: boolean;
+  isAssessmentOnly: boolean;
   institutionId?: Types.ObjectId;
   status: 'PUBLISHED' | 'DRAFT';
   createdAt: Date;
@@ -77,6 +78,7 @@ const QuestionAptitudeSchema = new Schema<IQuestionAptitudeDocument>(
       },
     ],
     isGlobal: { type: Boolean, default: true, index: true },
+    isAssessmentOnly: { type: Boolean, default: false, index: true },
     institutionId: { type: Schema.Types.ObjectId, ref: 'Institution', index: true },
     status: { type: String, enum: ['PUBLISHED', 'DRAFT'], default: 'PUBLISHED', index: true },
   },

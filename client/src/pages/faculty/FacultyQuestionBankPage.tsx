@@ -154,13 +154,13 @@ export const FacultyQuestionBankPage: React.FC = () => {
         topics: patterns,
         companyTags: newCompany
           ? [
-              {
-                company: newCompany.trim(),
-                yearReported: 2026,
-                verified: true,
-                frequencyCount: 1,
-              },
-            ]
+            {
+              company: newCompany.trim(),
+              yearReported: 2026,
+              verified: true,
+              frequencyCount: 1,
+            },
+          ]
           : [],
         supportedLanguages: ['cpp', 'java', 'python', 'javascript'],
         starterCode: [
@@ -270,11 +270,10 @@ export const FacultyQuestionBankPage: React.FC = () => {
       <div className="flex border-b border-slate-800 gap-2">
         <button
           onClick={() => setActiveTab('CODING')}
-          className={`flex items-center gap-2 px-5 py-3 text-xs font-bold transition-all border-b-2 -mb-px ${
-            activeTab === 'CODING'
-              ? 'border-cyan-500 text-cyan-400'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
-          }`}
+          className={`flex items-center gap-2 px-5 py-3 text-xs font-bold transition-all border-b-2 -mb-px ${activeTab === 'CODING'
+            ? 'border-cyan-500 text-cyan-400'
+            : 'border-transparent text-slate-400 hover:text-slate-200'
+            }`}
         >
           <Code2 className="w-4 h-4" />
           Coding Problems (443+)
@@ -282,11 +281,10 @@ export const FacultyQuestionBankPage: React.FC = () => {
 
         <button
           onClick={() => setActiveTab('APTITUDE')}
-          className={`flex items-center gap-2 px-5 py-3 text-xs font-bold transition-all border-b-2 -mb-px ${
-            activeTab === 'APTITUDE'
-              ? 'border-purple-500 text-purple-400'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
-          }`}
+          className={`flex items-center gap-2 px-5 py-3 text-xs font-bold transition-all border-b-2 -mb-px ${activeTab === 'APTITUDE'
+            ? 'border-purple-500 text-purple-400'
+            : 'border-transparent text-slate-400 hover:text-slate-200'
+            }`}
         >
           <BrainCircuit className="w-4 h-4" />
           Aptitude MCQs
@@ -294,11 +292,10 @@ export const FacultyQuestionBankPage: React.FC = () => {
 
         <button
           onClick={() => setActiveTab('CREATE')}
-          className={`flex items-center gap-2 px-5 py-3 text-xs font-bold transition-all border-b-2 -mb-px ${
-            activeTab === 'CREATE'
-              ? 'border-brand-500 text-brand-400'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
-          }`}
+          className={`flex items-center gap-2 px-5 py-3 text-xs font-bold transition-all border-b-2 -mb-px ${activeTab === 'CREATE'
+            ? 'border-brand-500 text-brand-400'
+            : 'border-transparent text-slate-400 hover:text-slate-200'
+            }`}
         >
           <Plus className="w-4 h-4" />
           Author Custom Question
@@ -315,11 +312,10 @@ export const FacultyQuestionBankPage: React.FC = () => {
                 setCodingCompany('');
                 setCodingPage(1);
               }}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border ${
-                codingCompany === ''
-                  ? 'bg-brand-600 text-white border-brand-500'
-                  : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700'
-              }`}
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border ${codingCompany === ''
+                ? 'bg-brand-600 text-white border-brand-500'
+                : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700'
+                }`}
             >
               All Companies
             </button>
@@ -330,11 +326,10 @@ export const FacultyQuestionBankPage: React.FC = () => {
                   setCodingCompany(comp);
                   setCodingPage(1);
                 }}
-                className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border flex items-center gap-1.5 ${
-                  codingCompany === comp
-                    ? 'bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-md'
-                    : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700'
-                }`}
+                className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border flex items-center gap-1.5 ${codingCompany === comp
+                  ? 'bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-md'
+                  : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700'
+                  }`}
               >
                 <Building className="w-3 h-3 text-amber-400" />
                 {comp}
@@ -580,11 +575,10 @@ export const FacultyQuestionBankPage: React.FC = () => {
                     {q.options?.map((opt: any) => (
                       <div
                         key={opt.optionId}
-                        className={`p-2.5 rounded-lg border flex items-center justify-between ${
-                          opt.isCorrect
-                            ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300 font-medium'
-                            : 'bg-slate-950 border-slate-800 text-slate-300'
-                        }`}
+                        className={`p-2.5 rounded-lg border flex items-center justify-between ${opt.isCorrect
+                          ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300 font-medium'
+                          : 'bg-slate-950 border-slate-800 text-slate-300'
+                          }`}
                       >
                         <span>{opt.text}</span>
                         {opt.isCorrect && (
@@ -759,8 +753,8 @@ export const FacultyQuestionBankPage: React.FC = () => {
                     previewItem.difficulty === 'EASY'
                       ? 'success'
                       : previewItem.difficulty === 'HARD'
-                      ? 'danger'
-                      : 'warning'
+                        ? 'danger'
+                        : 'warning'
                   }
                   size="sm"
                 >

@@ -320,7 +320,7 @@ export const CreateAssessmentPage: React.FC = () => {
         const slug = `${cleanSlug.slice(0, 30)}-${Date.now()}`.replace(/--+/g, '-');
         const parsedPatterns = manualPattern.split(',').map((p) => p.trim()).filter(Boolean);
         const patterns = parsedPatterns.length > 0 ? parsedPatterns : ['Problem Solving', 'Data Structures'];
-        
+
         // Pad description if needed to satisfy backend zod min(10)
         const desc = trimmedDesc.length >= 10 ? trimmedDesc : `${trimmedDesc} (Problem Specifications & Rules)`;
 
@@ -370,6 +370,7 @@ export const CreateAssessmentPage: React.FC = () => {
           ],
           timeLimitMs: 2000,
           memoryLimitMb: 256,
+          isAssessmentOnly: true,
         };
 
         let createdId = `custom-coding-${Date.now()}`;
@@ -417,6 +418,7 @@ export const CreateAssessmentPage: React.FC = () => {
           correctOptionId: manualCorrectOpt,
           explanation: finalExpl,
           companyTags: [],
+          isAssessmentOnly: true,
         };
 
         let createdId = `custom-apt-${Date.now()}`;
@@ -843,13 +845,12 @@ export const CreateAssessmentPage: React.FC = () => {
           <button
             key={item.step}
             onClick={() => setCurrentStep(item.step)}
-            className={`flex-1 py-3 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-all border ${
-              currentStep === item.step
-                ? 'bg-brand-600 text-white border-brand-500 shadow-lg shadow-brand-600/20'
-                : currentStep > item.step
+            className={`flex-1 py-3 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-all border ${currentStep === item.step
+              ? 'bg-brand-600 text-white border-brand-500 shadow-lg shadow-brand-600/20'
+              : currentStep > item.step
                 ? 'bg-slate-900 text-slate-200 border-slate-700/80 hover:bg-slate-800'
                 : 'bg-slate-950/60 text-slate-500 border-slate-800 hover:bg-slate-900'
-            }`}
+              }`}
           >
             {item.label}
           </button>
@@ -1016,11 +1017,10 @@ export const CreateAssessmentPage: React.FC = () => {
                               setSelectedClassIds([...selectedClassIds, cls._id]);
                             }
                           }}
-                          className={`p-3 rounded-xl border cursor-pointer transition-all ${
-                            isSelected
-                              ? 'bg-brand-500/10 border-brand-500 text-brand-200 shadow-md'
-                              : 'bg-slate-950/60 border-slate-800 text-slate-300 hover:border-slate-700'
-                          }`}
+                          className={`p-3 rounded-xl border cursor-pointer transition-all ${isSelected
+                            ? 'bg-brand-500/10 border-brand-500 text-brand-200 shadow-md'
+                            : 'bg-slate-950/60 border-slate-800 text-slate-300 hover:border-slate-700'
+                            }`}
                         >
                           <div className="flex items-center justify-between">
                             <span className="font-bold text-xs">Section {cls.section}</span>
@@ -1137,11 +1137,10 @@ export const CreateAssessmentPage: React.FC = () => {
                   <div className="p-4 bg-slate-900/90 border-b border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="flex flex-wrap items-center gap-2.5">
                       <div
-                        className={`p-2 rounded-xl border ${
-                          sec.type === 'CODING'
-                            ? 'bg-cyan-500/10 border-cyan-500/20 text-cyan-400'
-                            : 'bg-purple-500/10 border-purple-500/20 text-purple-400'
-                        }`}
+                        className={`p-2 rounded-xl border ${sec.type === 'CODING'
+                          ? 'bg-cyan-500/10 border-cyan-500/20 text-cyan-400'
+                          : 'bg-purple-500/10 border-purple-500/20 text-purple-400'
+                          }`}
                       >
                         {sec.type === 'CODING' ? <Code2 className="w-4 h-4" /> : <BrainCircuit className="w-4 h-4" />}
                       </div>
@@ -1259,8 +1258,8 @@ export const CreateAssessmentPage: React.FC = () => {
                                         String(q.difficulty).toUpperCase() === 'EASY'
                                           ? 'success'
                                           : String(q.difficulty).toUpperCase() === 'HARD'
-                                          ? 'danger'
-                                          : 'warning'
+                                            ? 'danger'
+                                            : 'warning'
                                       }
                                       size="sm"
                                     >
@@ -1506,11 +1505,10 @@ export const CreateAssessmentPage: React.FC = () => {
             <div className="flex border-b border-slate-800 bg-slate-950 px-6 gap-6 text-xs font-semibold">
               <button
                 onClick={() => setPickerSubMode('BANK')}
-                className={`py-3.5 border-b-2 transition-all flex items-center gap-2 ${
-                  pickerSubMode === 'BANK'
-                    ? 'border-brand-500 text-brand-400 font-bold'
-                    : 'border-transparent text-slate-400 hover:text-slate-200'
-                }`}
+                className={`py-3.5 border-b-2 transition-all flex items-center gap-2 ${pickerSubMode === 'BANK'
+                  ? 'border-brand-500 text-brand-400 font-bold'
+                  : 'border-transparent text-slate-400 hover:text-slate-200'
+                  }`}
               >
                 <Search className="w-3.5 h-3.5" />
                 Select from Question Bank ({availableQuestions.length})
@@ -1520,11 +1518,10 @@ export const CreateAssessmentPage: React.FC = () => {
                   setPickerSubMode('MANUAL');
                   setManualMessage(null);
                 }}
-                className={`py-3.5 border-b-2 transition-all flex items-center gap-2 ${
-                  pickerSubMode === 'MANUAL'
-                    ? 'border-brand-500 text-brand-400 font-bold'
-                    : 'border-transparent text-slate-400 hover:text-slate-200'
-                }`}
+                className={`py-3.5 border-b-2 transition-all flex items-center gap-2 ${pickerSubMode === 'MANUAL'
+                  ? 'border-brand-500 text-brand-400 font-bold'
+                  : 'border-transparent text-slate-400 hover:text-slate-200'
+                  }`}
               >
                 <Plus className="w-3.5 h-3.5" />
                 + Manual Question Form
@@ -1534,11 +1531,10 @@ export const CreateAssessmentPage: React.FC = () => {
                   setPickerSubMode('BULK');
                   setBulkStatus(null);
                 }}
-                className={`py-3.5 border-b-2 transition-all flex items-center gap-2 ${
-                  pickerSubMode === 'BULK'
-                    ? 'border-brand-500 text-brand-400 font-bold'
-                    : 'border-transparent text-slate-400 hover:text-slate-200'
-                }`}
+                className={`py-3.5 border-b-2 transition-all flex items-center gap-2 ${pickerSubMode === 'BULK'
+                  ? 'border-brand-500 text-brand-400 font-bold'
+                  : 'border-transparent text-slate-400 hover:text-slate-200'
+                  }`}
               >
                 <Upload className="w-3.5 h-3.5" />
                 Bulk JSON Upload
@@ -1643,11 +1639,10 @@ export const CreateAssessmentPage: React.FC = () => {
                         <div
                           key={qId}
                           onClick={() => toggleQuestionSelection(q)}
-                          className={`p-3.5 rounded-xl border cursor-pointer transition-all flex items-center justify-between text-xs ${
-                            isSelected
-                              ? 'bg-brand-500/10 border-brand-500/80 shadow-md'
-                              : 'bg-slate-950/60 border-slate-800/80 hover:border-slate-700'
-                          }`}
+                          className={`p-3.5 rounded-xl border cursor-pointer transition-all flex items-center justify-between text-xs ${isSelected
+                            ? 'bg-brand-500/10 border-brand-500/80 shadow-md'
+                            : 'bg-slate-950/60 border-slate-800/80 hover:border-slate-700'
+                            }`}
                         >
                           <div className="flex items-center gap-3">
                             <input
@@ -1670,8 +1665,8 @@ export const CreateAssessmentPage: React.FC = () => {
                                       String(q.difficulty).toUpperCase() === 'EASY'
                                         ? 'success'
                                         : String(q.difficulty).toUpperCase() === 'HARD'
-                                        ? 'danger'
-                                        : 'warning'
+                                          ? 'danger'
+                                          : 'warning'
                                     }
                                     size="sm"
                                   >
@@ -1716,11 +1711,10 @@ export const CreateAssessmentPage: React.FC = () => {
               <form onSubmit={handleSaveManualQuestion} className="overflow-y-auto flex-1 p-6 space-y-4 text-xs">
                 {manualMessage && (
                   <div
-                    className={`p-3.5 rounded-xl border text-xs flex items-center gap-2.5 ${
-                      manualMessage.type === 'success'
-                        ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
-                        : 'bg-rose-500/10 border-rose-500/30 text-rose-300'
-                    }`}
+                    className={`p-3.5 rounded-xl border text-xs flex items-center gap-2.5 ${manualMessage.type === 'success'
+                      ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
+                      : 'bg-rose-500/10 border-rose-500/30 text-rose-300'
+                      }`}
                   >
                     {manualMessage.type === 'success' ? (
                       <CheckCircle2 className="w-4 h-4 flex-shrink-0 text-emerald-400" />
@@ -1877,11 +1871,10 @@ export const CreateAssessmentPage: React.FC = () => {
                         ].map((opt) => (
                           <div
                             key={opt.id}
-                            className={`flex items-center gap-2 p-2 rounded-xl border ${
-                              manualCorrectOpt === opt.id
-                                ? 'bg-emerald-500/10 border-emerald-500/50'
-                                : 'bg-slate-950 border-slate-800'
-                            }`}
+                            className={`flex items-center gap-2 p-2 rounded-xl border ${manualCorrectOpt === opt.id
+                              ? 'bg-emerald-500/10 border-emerald-500/50'
+                              : 'bg-slate-950 border-slate-800'
+                              }`}
                           >
                             <input
                               type="radio"
@@ -1938,11 +1931,10 @@ export const CreateAssessmentPage: React.FC = () => {
               <div className="overflow-y-auto flex-1 p-6 space-y-4 text-xs">
                 {bulkStatus && (
                   <div
-                    className={`p-3.5 rounded-xl border text-xs flex items-center gap-2.5 ${
-                      bulkStatus.type === 'success'
-                        ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
-                        : 'bg-rose-500/10 border-rose-500/30 text-rose-300'
-                    }`}
+                    className={`p-3.5 rounded-xl border text-xs flex items-center gap-2.5 ${bulkStatus.type === 'success'
+                      ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
+                      : 'bg-rose-500/10 border-rose-500/30 text-rose-300'
+                      }`}
                   >
                     {bulkStatus.type === 'success' ? (
                       <CheckCircle2 className="w-4 h-4 flex-shrink-0 text-emerald-400" />

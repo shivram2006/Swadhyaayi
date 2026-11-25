@@ -1,0 +1,585 @@
+export const WEB_AND_MOBILE_ROADMAPS = [
+  {
+    slug: 'full-stack-web-development',
+    title: 'Full-Stack Web Development',
+    category: 'Web & Mobile',
+    description: 'Complete beginner-to-production roadmap: start with HTML, CSS & JavaScript, master React & TypeScript, build Node.js/Express backends with SQL & MongoDB, and deploy with Docker.',
+    version: 2,
+    estimatedHours: 240,
+    prerequisites: ['Basic Computer Literacy', 'Problem Solving Mindset'],
+    icon: 'Globe',
+    stages: [
+      {
+        stageId: 'fs-s1',
+        title: 'Frontend Foundations (HTML, CSS, JS & Git)',
+        order: 1,
+        topics: [
+          {
+            topicId: 'fs-t1',
+            title: 'HTML5 & Semantic Web',
+            subtopics: ['HTML Document Structure & DOM', 'Semantic Tags (header, nav, main, article, footer)', 'Forms, Inputs & Native Validation', 'Audio, Video & Canvas Basics', 'SEO Meta Tags & Accessibility (ARIA)'],
+            toolsAndTechnologies: ['HTML5', 'VS Code', 'Chrome DevTools'],
+            industrySkills: ['Semantic Markup', 'Web Accessibility (a11y)', 'SEO Foundations'],
+            recommendedResources: [{ title: 'MDN Web Docs: HTML Guide', type: 'DOCUMENTATION' }],
+          },
+          {
+            topicId: 'fs-t2',
+            title: 'CSS3, Layouts & Tailwind CSS',
+            subtopics: ['Selectors, Specificity & Box Model', 'Flexbox Alignment & Layouts', 'CSS Grid Two-Dimensional Layouts', 'Responsive Design & Media Queries', 'Transitions, Animations & Tailwind CSS'],
+            toolsAndTechnologies: ['CSS3', 'Tailwind CSS', 'PostCSS'],
+            industrySkills: ['Responsive UI Design', 'Mobile-First Styling', 'Design Systems'],
+            recommendedResources: [{ title: 'CSS-Tricks Complete Guide to Flexbox & Grid', type: 'DOCUMENTATION' }],
+          },
+          {
+            topicId: 'fs-t3',
+            title: 'JavaScript Fundamentals (ES6+)',
+            subtopics: ['Variables (let/const), Data Types & Operators', 'Conditionals, Loops & Functions', 'Arrays, Objects & Destructuring', 'DOM Manipulation & Event Listeners', 'Closures, Promises, Async/Await & Fetch API'],
+            toolsAndTechnologies: ['JavaScript ES2024', 'Browser Console'],
+            industrySkills: ['Asynchronous Programming', 'DOM Event Handling', 'Functional JS'],
+            recommendedResources: [{ title: 'JavaScript.info - The Modern JavaScript Tutorial', type: 'DOCUMENTATION' }],
+          },
+          {
+            topicId: 'fs-t4',
+            title: 'Version Control with Git & GitHub',
+            subtopics: ['git init, add, commit & status', 'Branching, Merging & Rebasing', 'Remote Repositories, Push & Pull', 'Pull Requests & Resolving Merge Conflicts'],
+            toolsAndTechnologies: ['Git', 'GitHub'],
+            industrySkills: ['Collaborative Workflows', 'Code Review Practices'],
+            recommendedResources: [{ title: 'Pro Git Book', type: 'BOOK' }],
+          },
+        ],
+        practicalAssignments: [
+          { id: 'fs-a1', title: 'Responsive Portfolio Website', description: 'Build a multi-section personal portfolio using semantic HTML5 and Tailwind CSS.', difficulty: 'BEGINNER' },
+          { id: 'fs-a2', title: 'Interactive Weather & Task App', description: 'Fetch live API data using async/await and persist state in localStorage.', difficulty: 'BEGINNER' },
+        ],
+        capstoneProjects: [],
+        interviewPreparation: [
+          { question: 'What is the difference between event bubbling and event capturing in the DOM?', concept: 'Events propagate down during capture and bubble up from target to root; event delegation leverages bubbling.' },
+        ],
+      },
+      {
+        stageId: 'fs-s2',
+        title: 'Modern Frontend Engineering (TypeScript & React)',
+        order: 2,
+        topics: [
+          {
+            topicId: 'fs-t5',
+            title: 'TypeScript Essentials',
+            subtopics: ['Basic Types, Unions & Intersections', 'Interfaces vs Type Aliases', 'Generics & Utility Types (Partial, Pick, Omit)', 'Type Narrowing & Strict Mode'],
+            toolsAndTechnologies: ['TypeScript', 'tsc'],
+            industrySkills: ['Type-Safe Frontend Code', 'Contract-Driven Development'],
+            recommendedResources: [{ title: 'TypeScript Official Handbook', type: 'DOCUMENTATION' }],
+          },
+          {
+            topicId: 'fs-t6',
+            title: 'React.js & State Management',
+            subtopics: ['JSX, Components & Props', 'Hooks (useState, useEffect, useRef, useMemo)', 'React Router & Protected Routes', 'Forms & Validation (React Hook Form + Zod)', 'Global State (Context API, Zustand, Redux Toolkit)'],
+            toolsAndTechnologies: ['React 19', 'Vite', 'React Router', 'Zustand', 'TanStack Query'],
+            industrySkills: ['Component Architecture', 'Server State Caching', 'Optimistic UI'],
+            recommendedResources: [{ title: 'React Official Docs (react.dev)', type: 'DOCUMENTATION' }],
+          },
+        ],
+        practicalAssignments: [
+          { id: 'fs-a3', title: 'E-Commerce Product Filter & Cart UI', description: 'Build a typed React storefront with search, filters, and cart persistence.', difficulty: 'INTERMEDIATE' },
+        ],
+        capstoneProjects: [],
+        interviewPreparation: [
+          { question: 'Why does React require unique keys when rendering lists?', concept: 'Keys help React reconciliation identify which items changed, were added, or removed without unnecessary DOM re-mounts.' },
+        ],
+      },
+      {
+        stageId: 'fs-s3',
+        title: 'Backend Engineering & Security',
+        order: 3,
+        topics: [
+          {
+            topicId: 'fs-t7',
+            title: 'Node.js & Express.js APIs',
+            subtopics: ['Node.js Event Loop & Modules', 'Express Routing & Middleware Pipeline', 'RESTful API Design & HTTP Status Codes', 'Request Validation (Zod) & Centralized Error Handling', 'File Uploads & Pagination'],
+            toolsAndTechnologies: ['Node.js', 'Express.js', 'Postman'],
+            industrySkills: ['REST API Architecture', 'Middleware Design'],
+            recommendedResources: [{ title: 'Node.js & Express Official Guides', type: 'DOCUMENTATION' }],
+          },
+          {
+            topicId: 'fs-t8',
+            title: 'Authentication, Authorization & Web Security',
+            subtopics: ['Password Hashing with bcrypt / Argon2', 'JWT Access & Refresh Tokens', 'HttpOnly Cookies & Session Management', 'Role-Based Access Control (RBAC)', 'CORS, Rate Limiting, Helmet & XSS/CSRF Protection'],
+            toolsAndTechnologies: ['jsonwebtoken', 'bcryptjs', 'helmet'],
+            industrySkills: ['Secure Auth Flows', 'OWASP Top 10 Mitigation'],
+            recommendedResources: [{ title: 'OWASP Cheat Sheet Series', type: 'DOCUMENTATION' }],
+          },
+        ],
+        practicalAssignments: [
+          { id: 'fs-a4', title: 'Auth & Role-Protected REST API', description: 'Implement signup, login, JWT refresh, and admin/user role guards.', difficulty: 'INTERMEDIATE' },
+        ],
+        capstoneProjects: [],
+        interviewPreparation: [
+          { question: 'How do Access Tokens and Refresh Tokens work together?', concept: 'Short-lived access tokens authorize API calls while long-lived httpOnly refresh tokens mint new access tokens safely.' },
+        ],
+      },
+      {
+        stageId: 'fs-s4',
+        title: 'Databases, Caching & Deployment',
+        order: 4,
+        topics: [
+          {
+            topicId: 'fs-t9',
+            title: 'SQL (PostgreSQL) & NoSQL (MongoDB)',
+            subtopics: ['Relational Schema Design & Normalization', 'SQL Joins, Indexes & Transactions', 'MongoDB Documents, Mongoose & Aggregations', 'Redis Caching & Session Store'],
+            toolsAndTechnologies: ['PostgreSQL', 'Prisma', 'MongoDB', 'Redis'],
+            industrySkills: ['Data Modeling', 'Query Optimization', 'Caching Strategies'],
+            recommendedResources: [{ title: 'PostgreSQL Tutorial & MongoDB University', type: 'COURSE' }],
+          },
+          {
+            topicId: 'fs-t10',
+            title: 'Testing, Docker & Cloud Deployment',
+            subtopics: ['Unit & Integration Testing (Vitest, Supertest)', 'Dockerfiles & Docker Compose', 'CI/CD Pipelines (GitHub Actions)', 'Deploying Frontend & Backend (Vercel, Render, AWS, Nginx)'],
+            toolsAndTechnologies: ['Docker', 'GitHub Actions', 'Vitest', 'Nginx'],
+            industrySkills: ['Containerization', 'CI/CD Automation', 'Production Hosting'],
+            recommendedResources: [{ title: 'Docker Getting Started Guide', type: 'DOCUMENTATION' }],
+          },
+        ],
+        practicalAssignments: [],
+        capstoneProjects: [
+          { id: 'fs-p1', title: 'Full-Stack SaaS Project Management Platform', description: 'End-to-end multi-user app with React, TypeScript, Node/Express, PostgreSQL/MongoDB, Auth, and Docker deployment.', deliverables: ['Live deployed URL', 'GitHub repo with CI/CD', 'API documentation'] },
+        ],
+        interviewPreparation: [
+          { question: 'When would you choose PostgreSQL over MongoDB?', concept: 'Choose PostgreSQL for complex relational joins and strict ACID transactions; MongoDB for flexible, document-centric schemas.' },
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'frontend-development',
+    title: 'Frontend Engineering',
+    category: 'Web & Mobile',
+    description: 'Master modern frontend from scratch: HTML5, CSS3, JavaScript internals, TypeScript, React/Next.js, testing, accessibility, and Core Web Vitals optimization.',
+    version: 2,
+    estimatedHours: 180,
+    prerequisites: ['Basic Computer Literacy'],
+    icon: 'Layout',
+    stages: [
+      {
+        stageId: 'fe-s1',
+        title: 'HTML, CSS & Responsive Design',
+        order: 1,
+        topics: [
+          {
+            topicId: 'fe-t1',
+            title: 'HTML5 & Web Accessibility (a11y)',
+            subtopics: ['Semantic HTML Elements', 'Forms, Validation & Input Types', 'ARIA Roles, Landmarks & Keyboard Navigation', 'SEO Fundamentals & OpenGraph Tags'],
+            toolsAndTechnologies: ['HTML5', 'Axe DevTools', 'Lighthouse'],
+            industrySkills: ['WCAG Compliance', 'Semantic Markup'],
+            recommendedResources: [{ title: 'web.dev Learn HTML & Accessibility', type: 'COURSE' }],
+          },
+          {
+            topicId: 'fe-t2',
+            title: 'Modern CSS, Flexbox, Grid & Tailwind',
+            subtopics: ['Box Model, Stacking Context & Specificity', 'Flexbox & CSS Grid Mastery', 'Responsive Breakpoints & Fluid Typography', 'CSS Custom Properties, Keyframes & Tailwind CSS'],
+            toolsAndTechnologies: ['CSS3', 'Tailwind CSS', 'Figma'],
+            industrySkills: ['Pixel-Perfect Layouts', 'Design Token Systems'],
+            recommendedResources: [{ title: 'web.dev Learn CSS', type: 'COURSE' }],
+          },
+        ],
+        practicalAssignments: [
+          { id: 'fe-a1', title: 'SaaS Landing Page Clone', description: 'Build a responsive landing page with Grid, Flexbox, and keyboard-accessible navigation.', difficulty: 'BEGINNER' },
+        ],
+        capstoneProjects: [],
+        interviewPreparation: [
+          { question: 'How does CSS specificity work?', concept: 'Inline styles > IDs > Classes/Attributes/Pseudo-classes > Elements/Pseudo-elements.' },
+        ],
+      },
+      {
+        stageId: 'fe-s2',
+        title: 'JavaScript Internals & TypeScript',
+        order: 2,
+        topics: [
+          {
+            topicId: 'fe-t3',
+            title: 'Deep JavaScript & Browser APIs',
+            subtopics: ['Execution Context, Hoisting & Closures', 'Prototypes, `this` Binding & Classes', 'Event Loop, Microtasks vs Macrotasks', 'Fetch API, Web Storage & IntersectionObserver'],
+            toolsAndTechnologies: ['JavaScript ES2024', 'Chrome DevTools'],
+            industrySkills: ['Async Control Flow', 'Memory & Event Debugging'],
+            recommendedResources: [{ title: 'You Don’t Know JS (YDKJS)', type: 'BOOK' }],
+          },
+          {
+            topicId: 'fe-t4',
+            title: 'TypeScript for Frontend',
+            subtopics: ['Interfaces, Types & Enums', 'Generics & Discriminated Unions', 'Typing React Props, Events & API Responses'],
+            toolsAndTechnologies: ['TypeScript'],
+            industrySkills: ['Strict Static Typing'],
+            recommendedResources: [{ title: 'Total TypeScript Essentials', type: 'COURSE' }],
+          },
+        ],
+        practicalAssignments: [
+          { id: 'fe-a2', title: 'Infinite Scroll & Debounced Search App', description: 'Implement debouncing and IntersectionObserver without third-party libraries.', difficulty: 'INTERMEDIATE' },
+        ],
+        capstoneProjects: [],
+        interviewPreparation: [
+          { question: 'Explain the JavaScript Event Loop and Microtask Queue.', concept: 'Call stack executes synchronously; microtasks (Promises) drain completely before the next macrotask (setTimeout, UI render).' },
+        ],
+      },
+      {
+        stageId: 'fe-s3',
+        title: 'React, Next.js & Performance',
+        order: 3,
+        topics: [
+          {
+            topicId: 'fe-t5',
+            title: 'React & Next.js App Router',
+            subtopics: ['Hooks, Custom Hooks & Context', 'State Management (Zustand / Redux Toolkit)', 'Server-Side Rendering (SSR) & Static Generation (SSG)', 'React Server Components & Data Fetching (TanStack Query)'],
+            toolsAndTechnologies: ['React 19', 'Next.js 15', 'TanStack Query'],
+            industrySkills: ['SSR/SSG Architecture', 'State Synchronization'],
+            recommendedResources: [{ title: 'Next.js Official Learn Course', type: 'COURSE' }],
+          },
+          {
+            topicId: 'fe-t6',
+            title: 'Web Performance & Frontend Testing',
+            subtopics: ['Core Web Vitals (LCP, INP, CLS)', 'Code Splitting, Lazy Loading & Memoization', 'Unit & Component Tests (Vitest, React Testing Library)', 'E2E Testing (Playwright)'],
+            toolsAndTechnologies: ['Vitest', 'Playwright', 'Lighthouse'],
+            industrySkills: ['Bundle Optimization', 'Automated UI Testing'],
+            recommendedResources: [{ title: 'Patterns.dev', type: 'BOOK' }],
+          },
+        ],
+        practicalAssignments: [],
+        capstoneProjects: [
+          { id: 'fe-p1', title: 'High-Performance Analytics & Kanban Workspace', description: 'Build a drag-and-drop Next.js + TypeScript dashboard achieving 95+ Lighthouse scores with Playwright tests.', deliverables: ['Deployed Next.js app', 'Lighthouse 95+ report', 'E2E test suite'] },
+        ],
+        interviewPreparation: [
+          { question: 'What is Cumulative Layout Shift (CLS) and how do you prevent it?', concept: 'CLS measures unexpected visual shifts; prevent it by reserving explicit width/height on images, fonts, and dynamic containers.' },
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'backend-development',
+    title: 'Backend Engineering & Distributed Systems',
+    category: 'Web & Mobile',
+    description: 'Go from HTTP & Linux basics to designing scalable APIs, relational/NoSQL databases, caching, message queues, microservices, and system design.',
+    version: 2,
+    estimatedHours: 200,
+    prerequisites: ['Basic Programming in any language'],
+    icon: 'Server',
+    stages: [
+      {
+        stageId: 'be-s1',
+        title: 'Internet, OS & Language Foundations',
+        order: 1,
+        topics: [
+          {
+            topicId: 'be-t1',
+            title: 'HTTP, Networking & Linux Basics',
+            subtopics: ['How the Internet Works (DNS, TCP/IP, TLS)', 'HTTP Methods, Headers, Status Codes & Cookies', 'Linux CLI, Processes, Ports & SSH', 'Git & Branching Workflows'],
+            toolsAndTechnologies: ['Linux', 'curl', 'Git'],
+            industrySkills: ['Network Debugging', 'Server Administration'],
+            recommendedResources: [{ title: 'MDN HTTP Overview', type: 'DOCUMENTATION' }],
+          },
+          {
+            topicId: 'be-t2',
+            title: 'Backend Runtime & API Frameworks',
+            subtopics: ['Node.js / Express or Go / Python FastAPI', 'Routing, Controllers & Service Layer Pattern', 'Schema Validation & Structured Logging', 'REST vs GraphQL vs gRPC'],
+            toolsAndTechnologies: ['Node.js', 'Express', 'Go', 'Postman'],
+            industrySkills: ['Clean API Design', 'Layered Architecture'],
+            recommendedResources: [{ title: 'REST API Design Best Practices', type: 'DOCUMENTATION' }],
+          },
+        ],
+        practicalAssignments: [
+          { id: 'be-a1', title: 'Rate-Limited URL Shortener API', description: 'Build a clean REST API with validation, structured logs, and custom error handling.', difficulty: 'BEGINNER' },
+        ],
+        capstoneProjects: [],
+        interviewPreparation: [
+          { question: 'What is the difference between PUT and PATCH in REST?', concept: 'PUT replaces an entire resource idempotently, whereas PATCH applies partial updates.' },
+        ],
+      },
+      {
+        stageId: 'be-s2',
+        title: 'Databases, Auth & Caching',
+        order: 2,
+        topics: [
+          {
+            topicId: 'be-t3',
+            title: 'Relational & NoSQL Databases',
+            subtopics: ['PostgreSQL Tables, Joins & Normalization', 'Indexing (B-Tree) & EXPLAIN Query Plans', 'ACID Transactions & Connection Pooling', 'MongoDB Modeling & Aggregation'],
+            toolsAndTechnologies: ['PostgreSQL', 'MongoDB', 'Prisma'],
+            industrySkills: ['Database Modeling', 'SQL Performance Tuning'],
+            recommendedResources: [{ title: 'Use The Index, Luke', type: 'BOOK' }],
+          },
+          {
+            topicId: 'be-t4',
+            title: 'Authentication, Security & Redis Caching',
+            subtopics: ['JWT, OAuth2 & Session Cookies', 'RBAC & Multi-Tenant Data Isolation', 'Redis Caching Patterns (Cache-Aside, Write-Through)', 'Distributed Rate Limiting & Idempotency Keys'],
+            toolsAndTechnologies: ['Redis', 'JWT', 'OAuth 2.0'],
+            industrySkills: ['API Security', 'Low-Latency Caching'],
+            recommendedResources: [{ title: 'Redis University', type: 'COURSE' }],
+          },
+        ],
+        practicalAssignments: [
+          { id: 'be-a2', title: 'Redis-Cached Feed & Rate Limiter', description: 'Add sliding-window rate limiting and cache-aside reads to an API.', difficulty: 'INTERMEDIATE' },
+        ],
+        capstoneProjects: [],
+        interviewPreparation: [
+          { question: 'What is Cache Stampede and how do you mitigate it?', concept: 'When a hot key expires and many requests hit the DB at once; mitigate via mutex locks, jittered TTLs, or early refresh.' },
+        ],
+      },
+      {
+        stageId: 'be-s3',
+        title: 'Messaging, Containers & System Design',
+        order: 3,
+        topics: [
+          {
+            topicId: 'be-t5',
+            title: 'Message Queues & Asynchronous Workers',
+            subtopics: ['Pub/Sub vs Point-to-Point Queues', 'Background Job Processing (BullMQ / RabbitMQ)', 'Event-Driven Architecture & Kafka Basics', 'Dead-Letter Queues & Retries'],
+            toolsAndTechnologies: ['RabbitMQ', 'Apache Kafka', 'BullMQ'],
+            industrySkills: ['Async Decoupling', 'Fault-Tolerant Processing'],
+            recommendedResources: [{ title: 'Designing Data-Intensive Applications', type: 'BOOK' }],
+          },
+          {
+            topicId: 'be-t6',
+            title: 'Docker, Observability & System Design',
+            subtopics: ['Docker Containers & Multi-Stage Builds', 'Load Balancing, Reverse Proxies (Nginx) & Horizontal Scaling', 'Consistent Hashing, Sharding & Replication', 'Metrics, Tracing & Health Checks'],
+            toolsAndTechnologies: ['Docker', 'Nginx', 'Prometheus'],
+            industrySkills: ['Scalable System Design', 'Production Observability'],
+            recommendedResources: [{ title: 'System Design Primer (GitHub)', type: 'DOCUMENTATION' }],
+          },
+        ],
+        practicalAssignments: [],
+        capstoneProjects: [
+          { id: 'be-p1', title: 'Distributed Notification & Webhook Engine', description: 'Fault-tolerant service accepting events, queueing deliveries in RabbitMQ/Redis with exponential backoff retries and metrics.', deliverables: ['Dockerized services', 'Load test report', 'Architecture diagram'] },
+        ],
+        interviewPreparation: [
+          { question: 'How do you guarantee at-least-once delivery without duplicate side effects?', concept: 'Combine message acknowledgments/retries with idempotency keys stored in Redis/DB.' },
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'mern-stack',
+    title: 'MERN Stack (MongoDB, Express, React, Node)',
+    category: 'Web & Mobile',
+    description: 'Step-by-step JavaScript full-stack path: HTML/CSS/JS foundations, React UIs, Node.js & Express APIs, MongoDB/Mongoose modeling, and production deployment.',
+    version: 2,
+    estimatedHours: 180,
+    prerequisites: ['Basic Programming Logic'],
+    icon: 'Layers',
+    stages: [
+      {
+        stageId: 'mern-s1',
+        title: 'Web & JavaScript Foundations',
+        order: 1,
+        topics: [
+          {
+            topicId: 'mern-t1',
+            title: 'HTML5, CSS3 & Tailwind CSS',
+            subtopics: ['Semantic HTML & Forms', 'Flexbox & CSS Grid', 'Responsive Design & Tailwind Utility Classes'],
+            toolsAndTechnologies: ['HTML5', 'CSS3', 'Tailwind CSS'],
+            industrySkills: ['Responsive Web Layouts'],
+            recommendedResources: [{ title: 'Tailwind CSS Official Docs', type: 'DOCUMENTATION' }],
+          },
+          {
+            topicId: 'mern-t2',
+            title: 'Modern JavaScript (ES6+) & Git',
+            subtopics: ['Variables, Functions, Closures & Scope', 'Array Methods (map, filter, reduce)', 'Promises, Async/Await & Fetch', 'Git & GitHub Collaboration'],
+            toolsAndTechnologies: ['JavaScript', 'Git'],
+            industrySkills: ['Async JS', 'Version Control'],
+            recommendedResources: [{ title: 'JavaScript.info', type: 'DOCUMENTATION' }],
+          },
+        ],
+        practicalAssignments: [
+          { id: 'mern-a1', title: 'Interactive Expense Tracker (Vanilla JS)', description: 'Build a responsive tracker with localStorage persistence.', difficulty: 'BEGINNER' },
+        ],
+        capstoneProjects: [],
+        interviewPreparation: [
+          { question: 'Explain the difference between map(), filter(), and reduce().', concept: 'map transforms each element, filter selects a subset, and reduce accumulates elements into a single value.' },
+        ],
+      },
+      {
+        stageId: 'mern-s2',
+        title: 'React Frontend & State Management',
+        order: 2,
+        topics: [
+          {
+            topicId: 'mern-t3',
+            title: 'React Components, Hooks & Routing',
+            subtopics: ['Functional Components & JSX', 'useState, useEffect, useContext & Custom Hooks', 'React Router v6+ & Protected Routes', 'Axios Interceptors & Form Handling'],
+            toolsAndTechnologies: ['React', 'React Router', 'Axios', 'Zustand'],
+            industrySkills: ['SPA Architecture', 'API State Integration'],
+            recommendedResources: [{ title: 'React.dev Official Docs', type: 'DOCUMENTATION' }],
+          },
+        ],
+        practicalAssignments: [
+          { id: 'mern-a2', title: 'Movie & Job Search SPA', description: 'Build a multi-page React app consuming public APIs with loading/error states.', difficulty: 'INTERMEDIATE' },
+        ],
+        capstoneProjects: [],
+        interviewPreparation: [
+          { question: 'When should you use useMemo or useCallback in React?', concept: 'Use them to memoize expensive calculations or preserve referential equality for memoized child components.' },
+        ],
+      },
+      {
+        stageId: 'mern-s3',
+        title: 'MongoDB, Express & Node.js Backend',
+        order: 3,
+        topics: [
+          {
+            topicId: 'mern-t4',
+            title: 'Node.js & Express REST APIs',
+            subtopics: ['Express Middleware & Modular Routers', 'JWT Authentication & Refresh Tokens', 'File Uploads (Multer) & Input Validation (Zod)'],
+            toolsAndTechnologies: ['Node.js', 'Express.js', 'JWT', 'Multer'],
+            industrySkills: ['REST API Security', 'Middleware Architecture'],
+            recommendedResources: [{ title: 'Express.js Guide', type: 'DOCUMENTATION' }],
+          },
+          {
+            topicId: 'mern-t5',
+            title: 'MongoDB, Mongoose & Real-Time Features',
+            subtopics: ['Schema Design (Embedding vs Referencing)', 'Mongoose Virtuals, Hooks & Populate', 'Aggregation Pipeline & Compound Indexes', 'WebSockets (Socket.io) & Cloud Deployment'],
+            toolsAndTechnologies: ['MongoDB Atlas', 'Mongoose', 'Socket.io'],
+            industrySkills: ['NoSQL Data Modeling', 'Real-Time Sync'],
+            recommendedResources: [{ title: 'MongoDB University M001 & M220JS', type: 'COURSE' }],
+          },
+        ],
+        practicalAssignments: [],
+        capstoneProjects: [
+          { id: 'mern-p1', title: 'Real-Time Collaborative Workspace / Chat App', description: 'Full MERN app with JWT auth, MongoDB aggregations, Socket.io live updates, and cloud deployment.', deliverables: ['Deployed frontend + backend', 'Postman collection', 'README'] },
+        ],
+        interviewPreparation: [
+          { question: 'In MongoDB, when should you embed documents vs reference them?', concept: 'Embed for 1:few bounded data read together; reference for 1:many unbounded or independently queried data.' },
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'android-development',
+    title: 'Android App Development (Kotlin & Compose)',
+    category: 'Web & Mobile',
+    description: 'Build production Android apps from Kotlin fundamentals to Jetpack Compose UI, MVVM architecture, Room local storage, Retrofit networking, and Play Store release.',
+    version: 2,
+    estimatedHours: 170,
+    prerequisites: ['Basic OOP Concepts'],
+    icon: 'Smartphone',
+    stages: [
+      {
+        stageId: 'and-s1',
+        title: 'Kotlin & Android Foundations',
+        order: 1,
+        topics: [
+          {
+            topicId: 'and-t1',
+            title: 'Kotlin Programming Fundamentals',
+            subtopics: ['Variables, Null Safety (?., ?:, !!) & Control Flow', 'Functions, Lambdas & Extension Functions', 'Data Classes, Sealed Classes & Collections', 'Coroutines & Flow Basics'],
+            toolsAndTechnologies: ['Kotlin', 'Android Studio'],
+            industrySkills: ['Null-Safe Kotlin', 'Structured Concurrency'],
+            recommendedResources: [{ title: 'Kotlin Official Koans & Docs', type: 'DOCUMENTATION' }],
+          },
+          {
+            topicId: 'and-t2',
+            title: 'Android Components & Lifecycle',
+            subtopics: ['Activity & Fragment Lifecycles', 'Intents, Permissions & App Manifest', 'Gradle Build System & Dependencies'],
+            toolsAndTechnologies: ['Android SDK', 'Gradle'],
+            industrySkills: ['Lifecycle Management'],
+            recommendedResources: [{ title: 'Android Developers Basics', type: 'COURSE' }],
+          },
+        ],
+        practicalAssignments: [
+          { id: 'and-a1', title: 'Unit Converter & Quiz App', description: 'Build a multi-screen Kotlin app handling configuration changes.', difficulty: 'BEGINNER' },
+        ],
+        capstoneProjects: [],
+        interviewPreparation: [
+          { question: 'Why is Sealed Class preferred over Enum for representing UI states in Kotlin?', concept: 'Sealed classes can hold distinct data payloads per state (e.g., Success(data), Error(msg)) while remaining exhaustive in `when`.' },
+        ],
+      },
+      {
+        stageId: 'and-s2',
+        title: 'Jetpack Compose & App Architecture',
+        order: 2,
+        topics: [
+          {
+            topicId: 'and-t3',
+            title: 'Declarative UI with Jetpack Compose',
+            subtopics: ['Composable Functions & Modifiers', 'State Hoisting, remember & LazyColumn', 'Material 3 Theming & Compose Navigation'],
+            toolsAndTechnologies: ['Jetpack Compose', 'Material 3'],
+            industrySkills: ['Modern Declarative UI'],
+            recommendedResources: [{ title: 'Jetpack Compose Pathway', type: 'COURSE' }],
+          },
+          {
+            topicId: 'and-t4',
+            title: 'MVVM, Networking & Local Persistence',
+            subtopics: ['ViewModel & StateFlow', 'Dependency Injection with Hilt', 'REST APIs with Retrofit & Kotlinx Serialization', 'Offline Caching with Room Database & WorkManager'],
+            toolsAndTechnologies: ['Hilt', 'Retrofit', 'Room', 'WorkManager'],
+            industrySkills: ['Offline-First Architecture', 'Clean MVVM'],
+            recommendedResources: [{ title: 'Guide to App Architecture - Android', type: 'DOCUMENTATION' }],
+          },
+        ],
+        practicalAssignments: [],
+        capstoneProjects: [
+          { id: 'and-p1', title: 'Offline-First Campus News & Notes App', description: 'Compose + MVVM app syncing remote APIs with Room local cache and Hilt DI.', deliverables: ['APK & GitHub repo', 'Unit tests for ViewModel'] },
+        ],
+        interviewPreparation: [
+          { question: 'How does ViewModel survive configuration changes like screen rotation?', concept: 'ViewModelStore retains the ViewModel instance across Activity recreation until the Activity permanently finishes.' },
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'ios-development',
+    title: 'iOS App Development (Swift & SwiftUI)',
+    category: 'Web & Mobile',
+    description: 'Learn Swift from scratch, build declarative SwiftUI interfaces, master async/await networking, SwiftData persistence, and ship apps to TestFlight & App Store.',
+    version: 2,
+    estimatedHours: 160,
+    prerequisites: ['Basic Programming Logic', 'macOS / Xcode'],
+    icon: 'Smartphone',
+    stages: [
+      {
+        stageId: 'ios-s1',
+        title: 'Swift Fundamentals & UI Basics',
+        order: 1,
+        topics: [
+          {
+            topicId: 'ios-t1',
+            title: 'Swift Language Essentials',
+            subtopics: ['Optionals, Guard & If-Let Unwrapping', 'Structs vs Classes (Value vs Reference Types)', 'Protocols, Extensions & Generics', 'Closures & Error Handling (do-try-catch)'],
+            toolsAndTechnologies: ['Swift 6', 'Xcode'],
+            industrySkills: ['Type-Safe Swift', 'Protocol-Oriented Programming'],
+            recommendedResources: [{ title: 'The Swift Programming Language Book', type: 'BOOK' }],
+          },
+          {
+            topicId: 'ios-t2',
+            title: 'SwiftUI Layouts & State',
+            subtopics: ['VStack, HStack, ZStack & Lists', '@State, @Binding, @Observable & @Environment', 'NavigationStack & TabView', 'SF Symbols & Dark Mode Styling'],
+            toolsAndTechnologies: ['SwiftUI', 'Xcode Previews'],
+            industrySkills: ['Declarative iOS UI'],
+            recommendedResources: [{ title: '100 Days of SwiftUI - Paul Hudson', type: 'COURSE' }],
+          },
+        ],
+        practicalAssignments: [
+          { id: 'ios-a1', title: 'Habit Tracker UI in SwiftUI', description: 'Create an interactive habit checklist with @Observable state.', difficulty: 'BEGINNER' },
+        ],
+        capstoneProjects: [],
+        interviewPreparation: [
+          { question: 'When should you prefer a struct over a class in Swift?', concept: 'Prefer structs for value semantics and thread safety; use classes when shared mutable identity or inheritance is needed.' },
+        ],
+      },
+      {
+        stageId: 'ios-s2',
+        title: 'Networking, Persistence & App Release',
+        order: 2,
+        topics: [
+          {
+            topicId: 'ios-t3',
+            title: 'Concurrency, Networking & SwiftData',
+            subtopics: ['Async/Await & Structured Concurrency', 'URLSession & Codable JSON Parsing', 'SwiftData Models & Persistence', 'Unit Testing (XCTest) & TestFlight Distribution'],
+            toolsAndTechnologies: ['URLSession', 'SwiftData', 'XCTest', 'TestFlight'],
+            industrySkills: ['Async Networking', 'App Store Deployment'],
+            recommendedResources: [{ title: 'Apple SwiftUI Tutorials', type: 'DOCUMENTATION' }],
+          },
+        ],
+        practicalAssignments: [],
+        capstoneProjects: [
+          { id: 'ios-p1', title: 'Expense Tracker with SwiftData & Charts', description: 'Track expenses offline with SwiftData, visualize trends with Swift Charts, and sync exchange rates.', deliverables: ['Xcode workspace', 'Unit tests'] },
+        ],
+        interviewPreparation: [
+          { question: 'How does @MainActor prevent UI concurrency bugs in Swift?', concept: 'It guarantees annotated properties or functions execute on the main thread.' },
+        ],
+      },
+    ],
+  },
+];

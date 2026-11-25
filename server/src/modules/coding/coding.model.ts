@@ -64,6 +64,7 @@ export interface IQuestionCodingDocument extends Document {
   };
   hints: string[];
   isGlobal: boolean;
+  isAssessmentOnly: boolean;
   institutionId?: Types.ObjectId;
   status: 'PUBLISHED' | 'DRAFT' | 'ARCHIVED';
   totalSubmissions: number;
@@ -130,6 +131,7 @@ const QuestionCodingSchema = new Schema<IQuestionCodingDocument>(
     },
     hints: [{ type: String }],
     isGlobal: { type: Boolean, default: true, index: true },
+    isAssessmentOnly: { type: Boolean, default: false, index: true },
     institutionId: { type: Schema.Types.ObjectId, ref: 'Institution', index: true },
     status: { type: String, enum: ['PUBLISHED', 'DRAFT', 'ARCHIVED'], default: 'PUBLISHED', index: true },
     totalSubmissions: { type: Number, default: 0 },

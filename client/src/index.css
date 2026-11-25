@@ -26,3 +26,56 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #475569;
 }
+
+/* Animated Roadmap Line & Subtopic Reveal */
+@keyframes roadmapBeam {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(500%);
+    opacity: 0;
+  }
+}
+
+@keyframes subtopicReveal {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px) translateY(-4px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateY(0) scale(1);
+  }
+}
+
+@keyframes branchGrow {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+.animate-roadmap-beam {
+  animation: roadmapBeam 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-subtopic-reveal {
+  animation: subtopicReveal 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-branch-grow {
+  transform-origin: top;
+  animation: branchGrow 0.25s ease-out both;
+}

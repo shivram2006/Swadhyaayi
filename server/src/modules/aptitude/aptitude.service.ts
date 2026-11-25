@@ -2,6 +2,16 @@ import { Types } from 'mongoose';
 import { QuestionAptitude, AptitudeSession, AptitudeCategory, AptitudeDifficulty } from './aptitude.model';
 import { User } from '../user/user.model';
 import { NotFoundError } from '../../core/utils/appError';
+import { getTenantContext } from '../../core/context/tenantContext';
+
+function shuffleArray<T>(items: T[]): T[] {
+  const arr = [...items];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 
 export class AptitudeService {
   static async getCategories() {
@@ -30,7 +40,7 @@ export class AptitudeService {
 
     // Compute live question counts per category
     const counts = await QuestionAptitude.aggregate([
-      { $match: { status: 'PUBLISHED' } },
+      { $match: { status: 'PUBLISHED', isAssessmentOnly: { $ne: true } } },
       { $group: { _id: '$category', total: { $sum: 1 } } },
     ]);
 
@@ -52,22 +62,40 @@ export class AptitudeService {
       mode?: 'PRACTICE' | 'MOCK';
     }
   ) {
-    const query: any = { status: 'PUBLISHED' };
+    const matchQuery: any = { status: 'PUBLISHED', isAssessmentOnly: { $ne: true } };
 
-    if (filters.category) query.category = filters.category;
-    if (filters.subcategory) query.subcategory = new RegExp(`^${filters.subcategory}$`, 'i');
-    if (filters.difficulty) query.difficulty = filters.difficulty;
+    const context = getTenantContext();
+    if (context?.tenantId && !context?.isSuperAdmin) {
+      matchQuery.$or = [
+        { isGlobal: true },
+        { institutionId: new Types.ObjectId(context.tenantId) },
+      ];
+    }
 
-    const limit = Math.min(50, Math.max(1, filters.limit || 15));
+    if (filters.category) matchQuery.category = filters.category;
+    if (filters.subcategory) matchQuery.subcategory = new RegExp(`^${filters.subcategory}$`, 'i');
+    if (filters.difficulty) matchQuery.difficulty = filters.difficulty;
 
-    const mQuery: any = QuestionAptitude.find(query).limit(limit);
+    const limit = Math.min(50, Math.max(1, filters.limit || 20));
+
+    const pipeline: any[] = [
+      { $match: matchQuery },
+      { $sample: { size: limit } },
+    ];
 
     // In Mock mode, hide answer and explanation to prevent client inspection
     if (filters.mode === 'MOCK') {
-      mQuery.select('-correctOptionId -explanation');
+      pipeline.push({ $project: { correctOptionId: 0, explanation: 0 } });
     }
 
-    const questions = await mQuery;
+    const questions = await QuestionAptitude.aggregate(pipeline);
+
+    // Fisher-Yates shuffle to ensure randomized order on every test attempt
+    for (let i = questions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [questions[i], questions[j]] = [questions[j], questions[i]];
+    }
+
     return questions;
   }
 

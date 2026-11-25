@@ -19,6 +19,12 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 axios.defaults.baseURL = 'http://localhost:5000/api/v1';
 axios.defaults.withCredentials = true;
 
+// Initialize Authorization header synchronously if token exists in localStorage
+const initialToken = localStorage.getItem('swadhyayi_token');
+if (initialToken) {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${initialToken}`;
+}
+
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [institution, setInstitution] = useState<Institution | null>(null);
@@ -35,6 +41,72 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       localStorage.removeItem('swadhyayi_token');
     }
   }, [token]);
+
+  // Silent token refresh interceptor on 401 responses
+  useEffect(() => {
+    let refreshPromise: Promise<string | null> | null = null;
+
+    const interceptorId = axios.interceptors.response.use(
+      (response) => response,
+      async (error) => {
+        const originalRequest = error.config;
+        const status = error.response?.status;
+        const url: string = originalRequest?.url || '';
+
+        // Skip refresh for auth endpoints or already retried requests
+        if (
+          status === 401 &&
+          originalRequest &&
+          !originalRequest._retry &&
+          !url.includes('/auth/login') &&
+          !url.includes('/auth/refresh-token') &&
+          !url.includes('/auth/register-institution')
+        ) {
+          originalRequest._retry = true;
+
+          try {
+            if (!refreshPromise) {
+              const storedRefresh = localStorage.getItem('swadhyayi_refresh_token');
+              refreshPromise = axios
+                .post('/auth/refresh-token', storedRefresh ? { refreshToken: storedRefresh } : {})
+                .then((res) => {
+                  const newAccessToken = res.data?.data?.accessToken;
+                  if (newAccessToken) {
+                    setToken(newAccessToken);
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`;
+                    localStorage.setItem('swadhyayi_token', newAccessToken);
+                    return newAccessToken;
+                  }
+                  return null;
+                })
+                .finally(() => {
+                  refreshPromise = null;
+                });
+            }
+
+            const newToken = await refreshPromise;
+            if (newToken) {
+              originalRequest.headers = originalRequest.headers || {};
+              originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
+              return axios(originalRequest);
+            }
+          } catch {
+            // Refresh failed — clear session so user can log in again
+            localStorage.removeItem('swadhyayi_refresh_token');
+            setToken(null);
+            setUser(null);
+            setInstitution(null);
+          }
+        }
+
+        return Promise.reject(error);
+      }
+    );
+
+    return () => {
+      axios.interceptors.response.eject(interceptorId);
+    };
+  }, []);
 
   // Load current user profile on initial mount
   useEffect(() => {
@@ -81,6 +153,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const res = await axios.post('/auth/login', { email, password });
       if (res.data.success) {
         const { user: userData, tokens } = res.data.data;
+        if (tokens?.refreshToken) {
+          localStorage.setItem('swadhyayi_refresh_token', tokens.refreshToken);
+        }
         setToken(tokens.accessToken);
         setUser(userData);
         return userData;
@@ -97,6 +172,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const res = await axios.post('/auth/register-institution', data);
       if (res.data.success) {
         const { user: userData, institution: instData, tokens } = res.data.data;
+        if (tokens?.refreshToken) {
+          localStorage.setItem('swadhyayi_refresh_token', tokens.refreshToken);
+        }
         setToken(tokens.accessToken);
         setUser(userData);
         setInstitution(instData);
@@ -112,6 +190,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } catch {
       // Ignore logout errors
     } finally {
+      localStorage.removeItem('swadhyayi_refresh_token');
       setToken(null);
       setUser(null);
       setInstitution(null);

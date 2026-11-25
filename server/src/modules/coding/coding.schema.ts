@@ -75,6 +75,7 @@ export const createQuestionSchema = z.object({
     timeLimitMs: z.number().int().min(500).max(10000).default(2000),
     memoryLimitMb: z.number().int().min(64).max(1024).default(256),
     hints: z.array(z.string()).default([]),
+    isAssessmentOnly: z.boolean().optional().default(false),
     editorial: z
       .object({
         solutionMarkdown: z.string(),

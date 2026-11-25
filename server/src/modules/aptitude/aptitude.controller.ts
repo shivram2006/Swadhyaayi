@@ -21,7 +21,7 @@ export class AptitudeController {
         category: category as AptitudeCategory,
         subcategory: subcategory as string,
         difficulty: difficulty as AptitudeDifficulty,
-        limit: limit ? parseInt(limit as string, 10) : 15,
+        limit: limit ? parseInt(limit as string, 10) : 20,
         mode: mode as 'PRACTICE' | 'MOCK',
       });
 

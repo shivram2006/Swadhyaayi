@@ -54,5 +54,6 @@ export const createAptitudeQuestionSchema = z.object({
         yearReported: z.number().int().min(2015).max(2030),
       })
     ).default([]),
+    isAssessmentOnly: z.boolean().optional().default(false),
   }),
 });

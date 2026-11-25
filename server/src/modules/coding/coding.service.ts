@@ -18,7 +18,7 @@ export class CodingService {
     },
     userId?: string
   ) {
-    const query: any = { status: 'PUBLISHED' };
+    const query: any = { status: 'PUBLISHED', isAssessmentOnly: { $ne: true } };
 
     if (filters.difficulty) query.difficulty = filters.difficulty;
     if (filters.category) query.category = filters.category;

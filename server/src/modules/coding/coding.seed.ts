@@ -1,5 +1,6 @@
 import { QuestionCoding } from './coding.model';
 import { faangQuestionsList } from './faangProblems.seed';
+import { seedEasyPractice100 } from './easyPractice100.seed';
 
 export const seedInitialCodingProblems = async () => {
   const problems = [
@@ -531,6 +532,8 @@ public class Solution {
   for (const prob of allProblems) {
     await QuestionCoding.findOneAndUpdate({ slug: prob.slug }, prob, { upsert: true, new: true });
   }
+
+  await seedEasyPractice100();
 
   console.log(`[SEED] Pre-seeded ${allProblems.length} algorithmic pattern questions (including complete company catalogs: Apple 100, Meta 100, Microsoft 100, Google 100, Accenture 100, Infosys 100, TCS 100, Capgemini 100, Wipro 100, Flipkart 100, Oracle 100, Adobe 100).`);
 };
