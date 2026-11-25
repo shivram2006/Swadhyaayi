@@ -353,7 +353,7 @@ export class AssessmentService {
     };
   }
 
-  static async submitAssessment(assessmentId: string, userId: string) {
+  static async submitAssessment(assessmentId: string, userId: string, submittedAnswers?: any[]) {
     const aId = new Types.ObjectId(assessmentId);
     const uId = new Types.ObjectId(userId);
 
@@ -362,6 +362,35 @@ export class AssessmentService {
 
     if (session.status === 'SUBMITTED') {
       return session;
+    }
+
+    // Merge latest client-side answers before grading so unsaved edits are never lost
+    if (Array.isArray(submittedAnswers) && submittedAnswers.length > 0) {
+      for (const item of submittedAnswers) {
+        if (!item?.questionId) continue;
+        const qIdStr = item.questionId.toString();
+        const existingIdx = session.answers.findIndex((a) => a.questionId.toString() === qIdStr);
+        const qObjectId = Types.ObjectId.isValid(item.questionId)
+          ? new Types.ObjectId(item.questionId)
+          : (item.questionId as any);
+
+        if (existingIdx >= 0) {
+          if (item.selectedOptionId !== undefined) session.answers[existingIdx].selectedOptionId = item.selectedOptionId;
+          if (item.code !== undefined) session.answers[existingIdx].code = item.code;
+          if (item.language !== undefined) session.answers[existingIdx].language = item.language;
+        } else {
+          session.answers.push({
+            questionId: qObjectId,
+            type: item.type || 'CODING',
+            selectedOptionId: item.selectedOptionId,
+            code: item.code,
+            language: item.language,
+            isCorrect: false,
+            scoreAwarded: 0,
+            timeSpentSeconds: 0,
+          });
+        }
+      }
     }
 
     const assessment = await Assessment.findById(aId);

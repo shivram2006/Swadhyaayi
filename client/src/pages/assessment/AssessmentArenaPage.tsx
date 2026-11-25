@@ -485,9 +485,20 @@ export const AssessmentArenaPage: React.FC = () => {
     try {
       const payload: any = {
         questionId: currentQ.questionId,
+        type: currentQ.type,
         language: selectedLanguage,
         code: currentCode,
       };
+
+      // Auto-persist the latest code & language when running tests
+      axios
+        .post(`/assessments/${id}/save-answer`, {
+          questionId: currentQ.questionId,
+          type: currentQ.type,
+          code: currentCode,
+          language: selectedLanguage,
+        })
+        .catch(() => {});
 
       if (activeConsoleTab === 'custom' && customInput.trim()) {
         payload.customInput = customInput;
@@ -508,11 +519,31 @@ export const AssessmentArenaPage: React.FC = () => {
     }
   };
 
+  const buildSubmitAnswersPayload = () => {
+    const merged: Record<string, any> = { ...answers };
+    const currentQ = questions[currentIdx];
+    if (currentQ && currentQ.type === 'CODING') {
+      const qIdStr = currentQ.questionId.toString();
+      const latestCode =
+        codeByLangByQuestion[qIdStr]?.[selectedLanguage] ?? merged[qIdStr]?.code ?? '';
+      merged[qIdStr] = {
+        ...merged[qIdStr],
+        questionId: currentQ.questionId,
+        type: 'CODING',
+        code: latestCode,
+        language: selectedLanguage,
+      };
+    }
+    return Object.values(merged);
+  };
+
   const handleSubmitTest = async () => {
     if (!confirm('Are you sure you want to finish and submit this test? All algorithmic and aptitude answers will be evaluated.'))
       return;
     try {
-      const res = await axios.post(`/assessments/${id}/submit`);
+      const res = await axios.post(`/assessments/${id}/submit`, {
+        answers: buildSubmitAnswersPayload(),
+      });
       if (res.data?.success) {
         setScorecard(res.data.data);
       }
@@ -523,7 +554,9 @@ export const AssessmentArenaPage: React.FC = () => {
 
   const handleAutoSubmit = async () => {
     try {
-      const res = await axios.post(`/assessments/${id}/submit`);
+      const res = await axios.post(`/assessments/${id}/submit`, {
+        answers: buildSubmitAnswersPayload(),
+      });
       if (res.data?.success) {
         setScorecard(res.data.data);
       }

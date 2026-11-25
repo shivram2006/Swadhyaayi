@@ -145,7 +145,7 @@ export class AssessmentController {
       const user = (req as any).user;
       const userId = user?.userId || user?._id?.toString();
 
-      const scorecard = await AssessmentService.submitAssessment(id, userId);
+      const scorecard = await AssessmentService.submitAssessment(id, userId, req.body?.answers);
       sendSuccess(res, scorecard);
     } catch (error) {
       next(error);
