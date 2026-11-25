@@ -577,8 +577,51 @@ export class AssessmentService {
         tabSwitchCount: s.tabSwitchCount,
         isFlaggedForCheating: s.isFlaggedForCheating,
         totalScore: s.totalScore,
+        maxPossibleScore: s.maxPossibleScore,
         percentage: s.percentage,
         isPassed: s.isPassed,
+      })),
+    };
+  }
+
+  static async getFacultySubmissionsOverview(institutionId: string) {
+    const instId = new Types.ObjectId(institutionId);
+
+    const sessions = await AssessmentSession.find({ institutionId: instId })
+      .populate('userId', 'firstName lastName rollNumber email')
+      .populate('assessmentId', 'title')
+      .sort({ submittedAt: -1, startedAt: -1 })
+      .limit(50)
+      .lean();
+
+    const submitted = sessions.filter((s: any) => s.status === 'SUBMITTED' || s.status === 'AUTO_SUBMITTED');
+    const avgPct =
+      submitted.length > 0
+        ? Math.round(submitted.reduce((acc: number, s: any) => acc + (s.percentage || 0), 0) / submitted.length)
+        : 0;
+
+    return {
+      stats: {
+        totalAttempts: sessions.length,
+        totalSubmissions: submitted.length,
+        averagePercentage: avgPct,
+      },
+      submissions: sessions.map((s: any) => ({
+        sessionId: s._id,
+        assessmentId: s.assessmentId?._id || s.assessmentId,
+        assessmentTitle: s.assessmentId?.title || 'Assessment',
+        userId: s.userId?._id,
+        studentName: s.userId ? `${s.userId.firstName} ${s.userId.lastName}` : 'Student',
+        rollNumber: s.userId?.rollNumber,
+        email: s.userId?.email,
+        status: s.status,
+        totalScore: s.totalScore || 0,
+        maxPossibleScore: s.maxPossibleScore || 0,
+        percentage: s.percentage || 0,
+        isPassed: !!s.isPassed,
+        tabSwitchCount: s.tabSwitchCount || 0,
+        startedAt: s.startedAt,
+        submittedAt: s.submittedAt,
       })),
     };
   }

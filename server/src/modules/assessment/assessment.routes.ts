@@ -10,6 +10,13 @@ router.use(authenticateToken);
 // List assessments (Students see targeted tests; Faculty/Admins see all institutional tests)
 router.get('/', AssessmentController.getAssessments);
 
+// Faculty / TPO Institutional Submissions & Marks Overview
+router.get(
+  '/faculty/submissions',
+  requireRoles('SUPER_ADMIN', 'INSTITUTION_ADMIN', 'PLACEMENT_OFFICER', 'FACULTY'),
+  AssessmentController.getFacultySubmissions
+);
+
 // Create Assessment (Faculty / Placement Officer / Admin)
 router.post(
   '/',

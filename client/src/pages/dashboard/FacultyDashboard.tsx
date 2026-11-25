@@ -21,6 +21,12 @@ export const FacultyDashboard: React.FC = () => {
   const [classesCount, setClassesCount] = useState<number>(3);
   const [studentsCount, setStudentsCount] = useState<number>(180);
   const [assessments, setAssessments] = useState<any[]>([]);
+  const [submissions, setSubmissions] = useState<any[]>([]);
+  const [submissionStats, setSubmissionStats] = useState<{
+    totalAttempts: number;
+    totalSubmissions: number;
+    averagePercentage: number;
+  }>({ totalAttempts: 0, totalSubmissions: 0, averagePercentage: 0 });
 
   useEffect(() => {
     fetchDashboardTelemetry();
@@ -28,19 +34,29 @@ export const FacultyDashboard: React.FC = () => {
 
   const fetchDashboardTelemetry = async () => {
     try {
-      const [classRes, studRes, assessRes] = await Promise.all([
+      const [classRes, studRes, assessRes, subRes] = await Promise.all([
         axios.get('/tenant/classes').catch(() => ({ data: { data: [] } })),
         axios.get('/students', { params: { limit: 100 } }).catch(() => ({ data: { data: [] } })),
         axios.get('/assessments').catch(() => ({ data: { data: [] } })),
+        axios.get('/assessments/faculty/submissions').catch(() => ({ data: { data: { submissions: [], stats: {} } } })),
       ]);
 
       const classList = classRes.data?.data || [];
       const studentList = studRes.data?.data || [];
       const assessList = assessRes.data?.data || [];
+      const subData = subRes.data?.data || {};
 
       if (classList.length > 0) setClassesCount(classList.length);
       if (studentList.length > 0) setStudentsCount(studentList.length);
       setAssessments(assessList);
+      setSubmissions(subData.submissions || []);
+      if (subData.stats) {
+        setSubmissionStats({
+          totalAttempts: subData.stats.totalAttempts || 0,
+          totalSubmissions: subData.stats.totalSubmissions || 0,
+          averagePercentage: subData.stats.averagePercentage || 0,
+        });
+      }
     } catch (err) {
       console.error('Failed to load dashboard telemetry:', err);
     }
@@ -131,8 +147,14 @@ export const FacultyDashboard: React.FC = () => {
               </div>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Average Class Score</p>
-                <h3 className="text-2xl font-bold text-white mt-0.5">72.4%</h3>
-                <p className="text-xs text-emerald-400 font-medium">+5.2% vs last test</p>
+                <h3 className="text-2xl font-bold text-white mt-0.5">
+                  {submissionStats.totalSubmissions > 0 ? `${submissionStats.averagePercentage}%` : '—'}
+                </h3>
+                <p className="text-xs text-emerald-400 font-medium">
+                  {submissionStats.totalSubmissions > 0
+                    ? `Across ${submissionStats.totalSubmissions} submitted test${submissionStats.totalSubmissions === 1 ? '' : 's'}`
+                    : 'No submissions graded yet'}
+                </p>
               </div>
             </div>
             <span className="text-xs font-mono px-2 py-1 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
@@ -260,6 +282,113 @@ export const FacultyDashboard: React.FC = () => {
           </div>
         </Card>
       </div>
+
+      {/* Live Student Submissions & Marks Table */}
+      <Card className="bg-slate-900/90 border-slate-800 p-0 overflow-hidden">
+        <div className="p-5 border-b border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 className="text-base font-bold text-white flex items-center gap-2">
+              <ClipboardCheck className="w-4 h-4 text-emerald-400" />
+              Student Submissions &amp; Marks
+            </h2>
+            <p className="text-xs text-slate-400 mt-0.5">
+              Live record of every student who attempted or submitted an institutional assessment and their exact score.
+            </p>
+          </div>
+          <span className="text-xs font-mono text-slate-400">
+            {submissionStats.totalAttempts} Attempted • {submissionStats.totalSubmissions} Submitted
+          </span>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="border-b border-slate-800 bg-slate-950/60 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                <th className="py-3 px-4">Student</th>
+                <th className="py-3 px-4">Assessment</th>
+                <th className="py-3 px-4">Status</th>
+                <th className="py-3 px-4">Marks &amp; Result</th>
+                <th className="py-3 px-4">Submitted At</th>
+                <th className="py-3 px-4 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-800/60 text-xs">
+              {submissions.length === 0 ? (
+                <tr>
+                  <td colSpan={6} className="py-10 text-center text-slate-400">
+                    No student assessment attempts recorded yet.
+                  </td>
+                </tr>
+              ) : (
+                submissions.map((sub) => {
+                  const isSubmitted = sub.status === 'SUBMITTED' || sub.status === 'AUTO_SUBMITTED';
+                  return (
+                    <tr key={sub.sessionId} className="hover:bg-slate-800/40 transition-colors">
+                      <td className="py-3.5 px-4">
+                        <div className="font-semibold text-white">{sub.studentName}</div>
+                        <div className="text-[11px] text-slate-400 font-mono">
+                          {sub.rollNumber ? `${sub.rollNumber} • ` : ''}
+                          {sub.email}
+                        </div>
+                      </td>
+
+                      <td className="py-3.5 px-4 font-medium text-slate-200">{sub.assessmentTitle}</td>
+
+                      <td className="py-3.5 px-4">
+                        <Badge
+                          variant={
+                            sub.status === 'IN_PROGRESS'
+                              ? 'brand'
+                              : sub.status === 'AUTO_SUBMITTED'
+                              ? 'warning'
+                              : 'success'
+                          }
+                          size="sm"
+                        >
+                          {sub.status === 'IN_PROGRESS'
+                            ? 'In Progress'
+                            : sub.status === 'AUTO_SUBMITTED'
+                            ? 'Auto-Submitted'
+                            : 'Submitted'}
+                        </Badge>
+                      </td>
+
+                      <td className="py-3.5 px-4">
+                        {isSubmitted ? (
+                          <div className="flex items-center gap-2">
+                            <span className="font-mono font-bold text-white">
+                              {sub.totalScore} / {sub.maxPossibleScore} pts ({sub.percentage}%)
+                            </span>
+                            <Badge variant={sub.isPassed ? 'success' : 'danger'} size="sm">
+                              {sub.isPassed ? 'PASSED' : 'FAILED'}
+                            </Badge>
+                          </div>
+                        ) : (
+                          <span className="text-slate-500 font-mono">Writing test...</span>
+                        )}
+                      </td>
+
+                      <td className="py-3.5 px-4 text-slate-400 text-[11px]">
+                        {sub.submittedAt
+                          ? new Date(sub.submittedAt).toLocaleString()
+                          : `Started ${new Date(sub.startedAt).toLocaleString()}`}
+                      </td>
+
+                      <td className="py-3.5 px-4 text-right">
+                        <Link to={`/assessments/${sub.assessmentId}/monitor`}>
+                          <Button variant="outline" size="sm" className="text-[11px] py-1 px-2.5">
+                            Details
+                          </Button>
+                        </Link>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
+      </Card>
     </div>
   );
 };

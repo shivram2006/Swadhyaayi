@@ -185,4 +185,20 @@ export class AssessmentController {
       next(error);
     }
   }
+
+  static async getFacultySubmissions(req: Request, res: Response, next: NextFunction) {
+    try {
+      const user = (req as any).user;
+      const institutionId = user?.institutionId?.toString();
+
+      if (!institutionId) {
+        throw new ValidationError('Institution context required');
+      }
+
+      const data = await AssessmentService.getFacultySubmissionsOverview(institutionId);
+      sendSuccess(res, data);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

@@ -25,6 +25,7 @@ interface CandidateMonitorItem {
   tabSwitchCount: number;
   isFlaggedForCheating: boolean;
   totalScore: number;
+  maxPossibleScore?: number;
   percentage: number;
   isPassed: boolean;
 }
@@ -303,7 +304,9 @@ export const FacultyAssessmentMonitorPage: React.FC = () => {
                     </td>
 
                     <td className="py-3.5 px-4 text-right font-mono font-bold text-white">
-                      {c.status === 'IN_PROGRESS' ? '—' : `${c.totalScore} pts (${c.percentage}%)`}
+                      {c.status === 'IN_PROGRESS'
+                        ? '—'
+                        : `${c.totalScore}${c.maxPossibleScore ? ` / ${c.maxPossibleScore}` : ''} pts (${c.percentage}%)`}
                     </td>
                   </tr>
                 ))
