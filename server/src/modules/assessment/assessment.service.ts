@@ -131,23 +131,33 @@ export class AssessmentService {
       const maxScore = shuffled.reduce((sum, q) => sum + q.points, 0);
       const expiresAt = new Date(Math.min(now.getTime() + assessment.durationMinutes * 60 * 1000, assessment.endTime.getTime()));
 
-      session = await AssessmentSession.create({
-        assessmentId: aId,
-        userId: uId,
-        institutionId: instId,
-        status: 'IN_PROGRESS',
-        startedAt: now,
-        expiresAt,
-        shuffledQuestions: shuffled,
-        answers: [],
-        proctoringEvents: [],
-        tabSwitchCount: 0,
-        isFlaggedForCheating: false,
-        totalScore: 0,
-        maxPossibleScore: maxScore,
-        percentage: 0,
-        isPassed: false,
-      });
+      try {
+        session = await AssessmentSession.create({
+          assessmentId: aId,
+          userId: uId,
+          institutionId: instId,
+          status: 'IN_PROGRESS',
+          startedAt: now,
+          expiresAt,
+          shuffledQuestions: shuffled,
+          answers: [],
+          proctoringEvents: [],
+          tabSwitchCount: 0,
+          isFlaggedForCheating: false,
+          totalScore: 0,
+          maxPossibleScore: maxScore,
+          percentage: 0,
+          isPassed: false,
+        });
+      } catch (createErr: any) {
+        // Handle concurrent StrictMode / double-click duplicate insert gracefully
+        if (createErr?.code === 11000) {
+          session = await AssessmentSession.findOne({ assessmentId: aId, userId: uId });
+          if (!session) throw createErr;
+        } else {
+          throw createErr;
+        }
+      }
     }
 
     // Fetch actual question content safely (hide answers & hidden test cases)

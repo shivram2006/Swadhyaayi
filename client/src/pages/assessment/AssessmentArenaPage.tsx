@@ -151,8 +151,11 @@ export const AssessmentArenaPage: React.FC = () => {
   const [warningMessage, setWarningMessage] = useState<string>('');
   const [scorecard, setScorecard] = useState<any>(null);
 
+  const initiatedAssessmentRef = React.useRef<string | null>(null);
+
   useEffect(() => {
-    if (id) {
+    if (id && initiatedAssessmentRef.current !== id) {
+      initiatedAssessmentRef.current = id;
       initiateAssessment(id);
     }
   }, [id]);
