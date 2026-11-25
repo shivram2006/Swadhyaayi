@@ -13,9 +13,12 @@ export class StudentService {
       lastName: string;
       email: string;
       rollNumber: string;
-      departmentId: string;
-      batchId: string;
-      classId: string;
+      departmentId?: string;
+      batchId?: string;
+      classId?: string;
+      course?: string;
+      semester?: number;
+      section?: string;
       password?: string;
     }
   ) {
@@ -36,18 +39,21 @@ export class StudentService {
       throw new ConflictError(`Roll number '${data.rollNumber}' is already registered in this institution`);
     }
 
-    // Verify foreign keys belong to tenant
+    // Verify foreign keys if provided
     const [dept, batch, cls] = await Promise.all([
-      Department.findOne({ _id: new Types.ObjectId(data.departmentId), institutionId: instId }),
-      Batch.findOne({ _id: new Types.ObjectId(data.batchId), institutionId: instId }),
-      Class.findOne({ _id: new Types.ObjectId(data.classId), institutionId: instId }),
+      data.departmentId ? Department.findOne({ _id: new Types.ObjectId(data.departmentId), institutionId: instId }) : Promise.resolve(null),
+      data.batchId ? Batch.findOne({ _id: new Types.ObjectId(data.batchId), institutionId: instId }) : Promise.resolve(null),
+      data.classId ? Class.findOne({ _id: new Types.ObjectId(data.classId), institutionId: instId }) : Promise.resolve(null),
     ]);
 
-    if (!dept) throw new NotFoundError('Department not found in this institution');
-    if (!batch) throw new NotFoundError('Batch not found in this institution');
-    if (!cls) throw new NotFoundError('Class not found in this institution');
+    if (data.departmentId && !dept) throw new NotFoundError('Department not found in this institution');
+    if (data.batchId && !batch) throw new NotFoundError('Batch not found in this institution');
+    if (data.classId && !cls) throw new NotFoundError('Class not found in this institution');
 
     const passwordHash = await hashPassword(data.password || 'Password@123');
+    const resolvedCourse = data.course?.trim() || dept?.name || undefined;
+    const resolvedSemester = data.semester ? Number(data.semester) : cls?.semester || undefined;
+    const resolvedSection = data.section?.trim().toUpperCase() || cls?.section || undefined;
 
     const student = await User.create({
       institutionId: instId,
@@ -57,20 +63,25 @@ export class StudentService {
       firstName: data.firstName,
       lastName: data.lastName,
       rollNumber: data.rollNumber.toUpperCase(),
-      departmentId: dept._id,
-      batchId: batch._id,
-      classId: cls._id,
-      academicHistory: [
-        {
-          batchId: batch._id,
-          classId: cls._id,
-          departmentId: dept._id,
-          academicYear: batch.currentAcademicYear,
-          semester: cls.semester,
-          transitionedAt: new Date(),
-          reason: 'Initial enrollment',
-        },
-      ],
+      departmentId: dept?._id,
+      batchId: batch?._id,
+      classId: cls?._id,
+      course: resolvedCourse,
+      semester: resolvedSemester,
+      section: resolvedSection,
+      academicHistory: batch && cls && dept
+        ? [
+            {
+              batchId: batch._id,
+              classId: cls._id,
+              departmentId: dept._id,
+              academicYear: batch.currentAcademicYear,
+              semester: cls.semester,
+              transitionedAt: new Date(),
+              reason: 'Initial enrollment',
+            },
+          ]
+        : [],
       status: 'ACTIVE',
     });
 
@@ -221,10 +232,34 @@ export class StudentService {
       status?: string;
       page?: number;
       limit?: number;
-    }
+    },
+    requester?: { userId?: string; role?: string }
   ) {
     const instId = new Types.ObjectId(tenantId);
     const query: any = { institutionId: instId, role: 'STUDENT' };
+
+    const page = Math.max(1, filters.page || 1);
+    const limit = Math.min(100, Math.max(1, filters.limit || 20));
+
+    if (requester?.role === 'FACULTY' && requester.userId) {
+      const faculty = await User.findById(requester.userId).select('assignedCohorts').lean();
+      const cohorts = (faculty?.assignedCohorts || []).filter(
+        (c) => c.course && c.semester !== undefined && c.section
+      );
+      if (cohorts.length === 0) {
+        return {
+          students: [],
+          meta: { page, limit, totalCount: 0, totalPages: 0 },
+        };
+      }
+      const escapeRegex = (val: string) => val.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const cohortOr = cohorts.map((c) => ({
+        course: new RegExp(`^${escapeRegex(c.course.trim())}$`, 'i'),
+        semester: Number(c.semester),
+        section: new RegExp(`^${escapeRegex(c.section.trim())}$`, 'i'),
+      }));
+      query.$and = [...(query.$and || []), { $or: cohortOr }];
+    }
 
     if (filters.departmentId) query.departmentId = new Types.ObjectId(filters.departmentId);
     if (filters.batchId) query.batchId = new Types.ObjectId(filters.batchId);
@@ -236,8 +271,6 @@ export class StudentService {
       query.$or = [{ firstName: searchRegex }, { lastName: searchRegex }, { email: searchRegex }, { rollNumber: searchRegex }];
     }
 
-    const page = Math.max(1, filters.page || 1);
-    const limit = Math.min(100, Math.max(1, filters.limit || 20));
     const skip = (page - 1) * limit;
 
     const [students, totalCount] = await Promise.all([

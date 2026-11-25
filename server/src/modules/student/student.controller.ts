@@ -36,15 +36,19 @@ export class StudentController {
       const tenantId = StudentController.getTenantId(req);
       const { departmentId, batchId, classId, search, status, page, limit } = req.query;
 
-      const result = await StudentService.getStudents(tenantId, {
-        departmentId: departmentId as string,
-        batchId: batchId as string,
-        classId: classId as string,
-        search: search as string,
-        status: status as string,
-        page: page ? parseInt(page as string, 10) : 1,
-        limit: limit ? parseInt(limit as string, 10) : 20,
-      });
+      const result = await StudentService.getStudents(
+        tenantId,
+        {
+          departmentId: departmentId as string,
+          batchId: batchId as string,
+          classId: classId as string,
+          search: search as string,
+          status: status as string,
+          page: page ? parseInt(page as string, 10) : 1,
+          limit: limit ? parseInt(limit as string, 10) : 20,
+        },
+        { userId: req.user?.userId, role: req.user?.role }
+      );
 
       sendSuccess(res, result.students, 200, result.meta);
     } catch (error) {

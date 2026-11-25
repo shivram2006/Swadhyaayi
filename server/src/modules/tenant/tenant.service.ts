@@ -169,4 +169,56 @@ export class TenantService {
       },
     };
   }
+
+  static async getFacultyMembers(institutionId: string) {
+    return User.find({
+      institutionId: new Types.ObjectId(institutionId),
+      role: 'FACULTY',
+      status: { $ne: 'SUSPENDED' },
+    })
+      .select('firstName lastName email assignedCohorts status')
+      .sort({ firstName: 1, lastName: 1 })
+      .lean();
+  }
+
+  static async getMyAssignedCohorts(userId: string) {
+    const user = await User.findById(userId).select('assignedCohorts').lean();
+    return user?.assignedCohorts || [];
+  }
+
+  static async assignFacultyCohorts(
+    institutionId: string,
+    facultyId: string,
+    cohorts: { course: string; semester: number; section: string }[]
+  ) {
+    const normalized = (cohorts || [])
+      .filter((c) => c.course?.trim() && c.section?.trim() && Number(c.semester) > 0)
+      .map((c) => ({
+        course: c.course.trim(),
+        semester: Number(c.semester),
+        section: c.section.trim().toUpperCase(),
+      }));
+
+    // Deduplicate
+    const uniqueMap = new Map<string, { course: string; semester: number; section: string }>();
+    normalized.forEach((c) => {
+      uniqueMap.set(`${c.course.toLowerCase()}|${c.semester}|${c.section}`, c);
+    });
+
+    const updated = await User.findOneAndUpdate(
+      {
+        _id: new Types.ObjectId(facultyId),
+        institutionId: new Types.ObjectId(institutionId),
+        role: 'FACULTY',
+      },
+      { $set: { assignedCohorts: Array.from(uniqueMap.values()) } },
+      { new: true }
+    ).select('firstName lastName email assignedCohorts');
+
+    if (!updated) {
+      throw new NotFoundError('Faculty member not found in this institution');
+    }
+
+    return updated;
+  }
 }

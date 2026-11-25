@@ -34,20 +34,22 @@ export const FacultyDashboard: React.FC = () => {
 
   const fetchDashboardTelemetry = async () => {
     try {
-      const [classRes, studRes, assessRes, subRes] = await Promise.all([
-        axios.get('/tenant/classes').catch(() => ({ data: { data: [] } })),
+      const [classRes, studRes, assessRes, subRes, cohortRes] = await Promise.all([
+        axios.get('/tenants/classes').catch(() => ({ data: { data: [] } })),
         axios.get('/students', { params: { limit: 100 } }).catch(() => ({ data: { data: [] } })),
         axios.get('/assessments').catch(() => ({ data: { data: [] } })),
         axios.get('/assessments/faculty/submissions').catch(() => ({ data: { data: { submissions: [], stats: {} } } })),
+        axios.get('/tenants/faculty/my-cohorts').catch(() => ({ data: { data: [] } })),
       ]);
 
       const classList = classRes.data?.data || [];
       const studentList = studRes.data?.data || [];
       const assessList = assessRes.data?.data || [];
       const subData = subRes.data?.data || {};
+      const myCohorts = cohortRes.data?.data || [];
 
-      if (classList.length > 0) setClassesCount(classList.length);
-      if (studentList.length > 0) setStudentsCount(studentList.length);
+      setClassesCount(myCohorts.length > 0 ? myCohorts.length : classList.length);
+      setStudentsCount(studentList.length);
       setAssessments(assessList);
       setSubmissions(subData.submissions || []);
       if (subData.stats) {

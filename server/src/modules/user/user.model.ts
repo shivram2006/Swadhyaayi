@@ -32,6 +32,10 @@ export interface IUserDocument extends Document {
   departmentId?: Types.ObjectId;
   batchId?: Types.ObjectId;
   classId?: Types.ObjectId;
+  course?: string;
+  semester?: number;
+  section?: string;
+  assignedCohorts?: { course: string; semester: number; section: string }[];
   academicHistory: IAcademicHistory[];
   profile: {
     avatarUrl?: string;
@@ -86,6 +90,16 @@ const UserSchema = new Schema<IUserDocument>(
     departmentId: { type: Schema.Types.ObjectId, ref: 'Department', index: true },
     batchId: { type: Schema.Types.ObjectId, ref: 'Batch', index: true },
     classId: { type: Schema.Types.ObjectId, ref: 'Class', index: true },
+    course: { type: String, trim: true, index: true },
+    semester: { type: Number, index: true },
+    section: { type: String, trim: true, uppercase: true, index: true },
+    assignedCohorts: [
+      {
+        course: { type: String, required: true, trim: true },
+        semester: { type: Number, required: true },
+        section: { type: String, required: true, trim: true, uppercase: true },
+      },
+    ],
     academicHistory: [
       {
         batchId: { type: Schema.Types.ObjectId, ref: 'Batch' },

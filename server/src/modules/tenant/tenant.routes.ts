@@ -45,3 +45,8 @@ tenantRouter.post(
 
 // Institutional Overview
 tenantRouter.get('/overview', requireRoles('INSTITUTION_ADMIN', 'PLACEMENT_OFFICER'), TenantController.getTenantOverview);
+
+// Faculty Cohort Assignment (Course, Semester, Section)
+tenantRouter.get('/faculty', requireRoles('INSTITUTION_ADMIN', 'PLACEMENT_OFFICER'), TenantController.getFacultyMembers);
+tenantRouter.get('/faculty/my-cohorts', requireRoles('FACULTY', 'INSTITUTION_ADMIN', 'PLACEMENT_OFFICER'), TenantController.getMyCohorts);
+tenantRouter.put('/faculty/:facultyId/cohorts', requireRoles('INSTITUTION_ADMIN'), TenantController.assignFacultyCohorts);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import { Card, CardHeader, CardTitle, CardDescription } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
@@ -43,6 +44,8 @@ interface TestSection {
 
 export const CreateAssessmentPage: React.FC = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const isFaculty = user?.role === 'FACULTY';
   const [searchParams] = useSearchParams();
   const preSelectedClassId = searchParams.get('classId');
   const preSelectedQuestionId = searchParams.get('questionId');
@@ -53,6 +56,8 @@ export const CreateAssessmentPage: React.FC = () => {
 
   // Institution Cohorts
   const [classes, setClasses] = useState<any[]>([]);
+  const [assignedCohorts, setAssignedCohorts] = useState<{ course: string; semester: number; section: string }[]>([]);
+  const [selectedCohorts, setSelectedCohorts] = useState<{ course: string; semester: number; section: string }[]>([]);
 
   // Step 1: Basic Config
   const [title, setTitle] = useState('');
@@ -68,7 +73,7 @@ export const CreateAssessmentPage: React.FC = () => {
   const [endTime, setEndTime] = useState(endDefault);
 
   // Step 2: Target Audience
-  const [allStudents, setAllStudents] = useState<boolean>(!preSelectedClassId);
+  const [allStudents, setAllStudents] = useState<boolean>(!preSelectedClassId && !isFaculty);
   const [selectedClassIds, setSelectedClassIds] = useState<string[]>(preSelectedClassId ? [preSelectedClassId] : []);
   const selectedDeptIds: string[] = [];
   const selectedBatchIds: string[] = [];
@@ -244,8 +249,17 @@ export const CreateAssessmentPage: React.FC = () => {
 
   const fetchCohorts = async () => {
     try {
-      const classRes = await axios.get('/tenant/classes');
+      const [classRes, cohortRes] = await Promise.all([
+        axios.get('/tenants/classes').catch(() => ({ data: { data: [] } })),
+        axios.get('/tenants/faculty/my-cohorts').catch(() => ({ data: { data: [] } })),
+      ]);
       setClasses(classRes.data?.data || []);
+      const myCohorts = cohortRes.data?.data || [];
+      setAssignedCohorts(myCohorts);
+      if (isFaculty) {
+        setAllStudents(false);
+        setSelectedCohorts(myCohorts);
+      }
     } catch (err) {
       console.error('Failed to load cohorts:', err);
     }
@@ -702,10 +716,11 @@ export const CreateAssessmentPage: React.FC = () => {
         endTime: new Date(endTime).toISOString(),
         durationMinutes: Number(durationMinutes),
         targeting: {
-          allStudents,
+          allStudents: isFaculty ? false : allStudents,
           departmentIds: selectedDeptIds,
           batchIds: selectedBatchIds,
           classIds: selectedClassIds,
+          cohorts: isFaculty || !allStudents ? selectedCohorts : [],
           accessCode: accessCode.trim() || undefined,
         },
         sections: sections.map((sec) => ({
@@ -984,6 +999,81 @@ export const CreateAssessmentPage: React.FC = () => {
           </CardHeader>
 
           <div className="space-y-6">
+            {isFaculty ? (
+              <div className="space-y-4">
+                <div className="p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-xs text-cyan-200">
+                  This test will only be visible and accessible to students enrolled in your selected assigned cohorts.
+                </div>
+                {assignedCohorts.length === 0 ? (
+                  <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-xs text-rose-300">
+                    No Course / Semester / Section cohorts are assigned to you yet. Ask your College Admin to assign cohorts before creating a test.
+                  </div>
+                ) : (
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+                      Select Your Assigned Cohorts
+                    </label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                      {assignedCohorts.map((c, idx) => {
+                        const isSelected = selectedCohorts.some(
+                          (sc) =>
+                            sc.course.toLowerCase() === c.course.toLowerCase() &&
+                            Number(sc.semester) === Number(c.semester) &&
+                            sc.section.toLowerCase() === c.section.toLowerCase()
+                        );
+                        return (
+                          <div
+                            key={`${c.course}-${c.semester}-${c.section}-${idx}`}
+                            onClick={() => {
+                              if (isSelected) {
+                                setSelectedCohorts(
+                                  selectedCohorts.filter(
+                                    (sc) =>
+                                      !(
+                                        sc.course.toLowerCase() === c.course.toLowerCase() &&
+                                        Number(sc.semester) === Number(c.semester) &&
+                                        sc.section.toLowerCase() === c.section.toLowerCase()
+                                      )
+                                  )
+                                );
+                              } else {
+                                setSelectedCohorts([...selectedCohorts, c]);
+                              }
+                            }}
+                            className={`p-3 rounded-xl border cursor-pointer transition-all ${
+                              isSelected
+                                ? 'bg-brand-500/10 border-brand-500 text-brand-200 shadow-md'
+                                : 'bg-slate-950/60 border-slate-800 text-slate-300 hover:border-slate-700'
+                            }`}
+                          >
+                            <div className="flex items-center justify-between">
+                              <span className="font-bold text-xs">{c.course}</span>
+                              <Badge variant={isSelected ? 'brand' : 'neutral'} size="sm">
+                                Sem {c.semester}
+                              </Badge>
+                            </div>
+                            <p className="text-[11px] text-slate-400 mt-1">Section {c.section}</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+                <div className="pt-2">
+                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+                    Optional Exam Passcode / Access Code
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. EXAM-CSE-2026 (leave blank for open access)"
+                    value={accessCode}
+                    onChange={(e) => setAccessCode(e.target.value)}
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-500"
+                  />
+                </div>
+              </div>
+            ) : (
+              <>
             <div className="flex items-center gap-4 p-4 rounded-xl bg-slate-950/80 border border-slate-800">
               <input
                 type="checkbox"
@@ -1053,6 +1143,8 @@ export const CreateAssessmentPage: React.FC = () => {
                   </p>
                 </div>
               </div>
+            )}
+              </>
             )}
           </div>
 

@@ -92,4 +92,35 @@ export class TenantController {
       next(error);
     }
   }
+
+  static async getFacultyMembers(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const tenantId = TenantController.getTenantId(req);
+      const faculty = await TenantService.getFacultyMembers(tenantId);
+      sendSuccess(res, faculty, 200);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getMyCohorts(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const userId = req.user!.userId;
+      const cohorts = await TenantService.getMyAssignedCohorts(userId);
+      sendSuccess(res, cohorts, 200);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async assignFacultyCohorts(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const tenantId = TenantController.getTenantId(req);
+      const facultyId = Array.isArray(req.params.facultyId) ? req.params.facultyId[0] : req.params.facultyId;
+      const updated = await TenantService.assignFacultyCohorts(tenantId, facultyId, req.body.cohorts || []);
+      sendSuccess(res, updated, 200);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

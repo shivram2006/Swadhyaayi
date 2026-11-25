@@ -45,6 +45,7 @@ export interface IAssessment extends Document {
     departmentIds: Types.ObjectId[];
     batchIds: Types.ObjectId[];
     classIds: Types.ObjectId[];
+    cohorts?: { course: string; semester: number; section: string }[];
     accessCode?: string;
   };
   sections: IAssessmentSection[];
@@ -85,6 +86,13 @@ const AssessmentSchema = new Schema<IAssessment>(
       departmentIds: [{ type: Schema.Types.ObjectId, ref: 'Department' }],
       batchIds: [{ type: Schema.Types.ObjectId, ref: 'Batch' }],
       classIds: [{ type: Schema.Types.ObjectId, ref: 'Class' }],
+      cohorts: [
+        {
+          course: { type: String, trim: true },
+          semester: { type: Number },
+          section: { type: String, trim: true, uppercase: true },
+        },
+      ],
       accessCode: { type: String, trim: true },
     },
     sections: [

@@ -4,10 +4,53 @@ import { QuestionAptitude } from '../aptitude/aptitude.model';
 import { QuestionCoding } from '../coding/coding.model';
 import { SandboxRunner } from '../coding/runner/sandboxRunner';
 import { User } from '../user/user.model';
-import { NotFoundError, ValidationError, ConflictError } from '../../core/utils/appError';
+import { NotFoundError, ValidationError, ConflictError, ForbiddenError } from '../../core/utils/appError';
 
 export class AssessmentService {
-  static async createAssessment(data: any, institutionId: string, userId: string) {
+  private static cohortMatches(
+    a?: { course?: string; semester?: number; section?: string },
+    b?: { course?: string; semester?: number; section?: string }
+  ): boolean {
+    if (!a?.course || !b?.course || !a?.section || !b?.section) return false;
+    if (a.semester === undefined || b.semester === undefined) return false;
+    return (
+      a.course.trim().toLowerCase() === b.course.trim().toLowerCase() &&
+      Number(a.semester) === Number(b.semester) &&
+      a.section.trim().toLowerCase() === b.section.trim().toLowerCase()
+    );
+  }
+
+  private static isStudentEligibleForAssessment(
+    assessment: any,
+    studentCohort?: {
+      departmentId?: string;
+      batchId?: string;
+      classId?: string;
+      course?: string;
+      semester?: number;
+      section?: string;
+    }
+  ): boolean {
+    if (assessment.targeting?.allStudents) return true;
+    if (!studentCohort) return false;
+
+    const depMatch =
+      studentCohort.departmentId &&
+      assessment.targeting?.departmentIds?.some((id: any) => id.toString() === studentCohort.departmentId);
+    const batchMatch =
+      studentCohort.batchId &&
+      assessment.targeting?.batchIds?.some((id: any) => id.toString() === studentCohort.batchId);
+    const classMatch =
+      studentCohort.classId &&
+      assessment.targeting?.classIds?.some((id: any) => id.toString() === studentCohort.classId);
+    const cohortMatch =
+      assessment.targeting?.cohorts?.length > 0 &&
+      assessment.targeting.cohorts.some((c: any) => AssessmentService.cohortMatches(c, studentCohort));
+
+    return !!(depMatch || batchMatch || classMatch || cohortMatch);
+  }
+
+  static async createAssessment(data: any, institutionId: string, userId: string, userRole?: string) {
     const start = new Date(data.startTime);
     const end = new Date(data.endTime);
 
@@ -18,8 +61,40 @@ export class AssessmentService {
     const instId = new Types.ObjectId(institutionId);
     const uId = new Types.ObjectId(userId);
 
+    const payload = { ...data };
+
+    if (userRole === 'FACULTY') {
+      const faculty = await User.findById(uId).select('assignedCohorts').lean();
+      const assignedCohorts = (faculty?.assignedCohorts || []).filter(
+        (c) => c.course && c.semester !== undefined && c.section
+      );
+      if (assignedCohorts.length === 0) {
+        throw new ValidationError(
+          'You have no assigned course, semester, or section cohorts. Ask your College Admin to assign cohorts first.'
+        );
+      }
+
+      const requestedCohorts = Array.isArray(data.targeting?.cohorts) ? data.targeting.cohorts : [];
+      const scopedCohorts =
+        requestedCohorts.length > 0
+          ? requestedCohorts.filter((reqC: any) =>
+              assignedCohorts.some((fc) => AssessmentService.cohortMatches(reqC, fc))
+            )
+          : assignedCohorts;
+
+      if (scopedCohorts.length === 0) {
+        throw new ValidationError('Selected cohorts are not assigned to you');
+      }
+
+      payload.targeting = {
+        ...(data.targeting || {}),
+        allStudents: false,
+        cohorts: scopedCohorts,
+      };
+    }
+
     const assessment = await Assessment.create({
-      ...data,
+      ...payload,
       institutionId: instId,
       createdBy: uId,
       startTime: start,
@@ -29,11 +104,42 @@ export class AssessmentService {
     return assessment;
   }
 
-  static async getAssessments(institutionId: string, studentCohort?: { departmentId?: string; batchId?: string; classId?: string }) {
+  static async getAssessments(
+    institutionId: string,
+    studentCohort?: {
+      departmentId?: string;
+      batchId?: string;
+      classId?: string;
+      course?: string;
+      semester?: number;
+      section?: string;
+    },
+    requester?: { userId?: string; role?: string }
+  ) {
     const instId = new Types.ObjectId(institutionId);
     const query: any = { institutionId: instId, status: { $ne: 'ARCHIVED' } };
 
-    const assessments = await Assessment.find(query).sort({ startTime: -1 }).lean();
+    let assessments = await Assessment.find(query).sort({ startTime: -1 }).lean();
+
+    if (requester?.role === 'FACULTY' && requester.userId) {
+      const faculty = await User.findById(requester.userId).select('assignedCohorts').lean();
+      const assignedCohorts = (faculty?.assignedCohorts || []).filter(
+        (c) => c.course && c.semester !== undefined && c.section
+      );
+      assessments = assessments.filter(
+        (a) =>
+          a.createdBy?.toString() === requester.userId ||
+          (a.targeting?.cohorts || []).some((c: any) =>
+            assignedCohorts.some((fc) => AssessmentService.cohortMatches(c, fc))
+          )
+      );
+    }
+
+    if (studentCohort) {
+      assessments = assessments.filter((a) =>
+        AssessmentService.isStudentEligibleForAssessment(a, studentCohort)
+      );
+    }
 
     // Aggregate session counts (attempts, submissions, avg percentage) per assessment
     const assessmentIds = assessments.map((a) => a._id);
@@ -59,15 +165,7 @@ export class AssessmentService {
     const statsMap = new Map(sessionStats.map((s: any) => [s._id.toString(), s]));
 
     return assessments.map((a) => {
-      let isEligible = true;
-
-      if (studentCohort && !a.targeting?.allStudents) {
-        const depMatch = studentCohort.departmentId && a.targeting.departmentIds?.some((id: any) => id.toString() === studentCohort.departmentId);
-        const batchMatch = studentCohort.batchId && a.targeting.batchIds?.some((id: any) => id.toString() === studentCohort.batchId);
-        const classMatch = studentCohort.classId && a.targeting.classIds?.some((id: any) => id.toString() === studentCohort.classId);
-
-        isEligible = !!(depMatch || batchMatch || classMatch);
-      }
+      const isEligible = AssessmentService.isStudentEligibleForAssessment(a, studentCohort);
 
       const totalQuestions = a.sections.reduce((acc, s) => acc + (s.questions?.length || 0), 0);
       const totalPoints = a.sections.reduce(
@@ -126,6 +224,25 @@ export class AssessmentService {
 
     if (assessment.targeting.accessCode && assessment.targeting.accessCode !== accessCode) {
       throw new ValidationError('Invalid assessment access code');
+    }
+
+    if (!assessment.targeting?.allStudents) {
+      const studentDoc = await User.findById(uId)
+        .select('role departmentId batchId classId course semester section')
+        .lean();
+      if (studentDoc?.role === 'STUDENT') {
+        const eligible = AssessmentService.isStudentEligibleForAssessment(assessment, {
+          departmentId: studentDoc.departmentId?.toString(),
+          batchId: studentDoc.batchId?.toString(),
+          classId: studentDoc.classId?.toString(),
+          course: studentDoc.course,
+          semester: studentDoc.semester,
+          section: studentDoc.section,
+        });
+        if (!eligible) {
+          throw new ForbiddenError('You are not mapped to the course, semester, or section for this assessment');
+        }
+      }
     }
 
     // Check existing session
@@ -544,17 +661,36 @@ export class AssessmentService {
     return session;
   }
 
-  static async getLiveMonitor(assessmentId: string, institutionId: string) {
+  static async getLiveMonitor(
+    assessmentId: string,
+    institutionId: string,
+    requester?: { userId?: string; role?: string }
+  ) {
     const aId = new Types.ObjectId(assessmentId);
     const instId = new Types.ObjectId(institutionId);
 
     const assessment = await Assessment.findOne({ _id: aId, institutionId: instId }).lean();
     if (!assessment) throw new NotFoundError('Assessment not found');
 
-    const sessions = await AssessmentSession.find({ assessmentId: aId })
-      .populate('userId', 'firstName lastName rollNumber email')
+    let sessions = await AssessmentSession.find({ assessmentId: aId })
+      .populate('userId', 'firstName lastName rollNumber email course semester section')
       .sort({ startedAt: -1 })
       .lean();
+
+    if (requester?.role === 'FACULTY' && requester.userId) {
+      const faculty = await User.findById(requester.userId).select('assignedCohorts').lean();
+      const assignedCohorts = (faculty?.assignedCohorts || []).filter(
+        (c) => c.course && c.semester !== undefined && c.section
+      );
+      sessions =
+        assignedCohorts.length === 0
+          ? []
+          : sessions.filter(
+              (s: any) =>
+                s.userId &&
+                assignedCohorts.some((fc) => AssessmentService.cohortMatches(fc, s.userId))
+            );
+    }
 
     return {
       assessment: {
@@ -584,15 +720,33 @@ export class AssessmentService {
     };
   }
 
-  static async getFacultySubmissionsOverview(institutionId: string) {
+  static async getFacultySubmissionsOverview(
+    institutionId: string,
+    requester?: { userId?: string; role?: string }
+  ) {
     const instId = new Types.ObjectId(institutionId);
 
-    const sessions = await AssessmentSession.find({ institutionId: instId })
-      .populate('userId', 'firstName lastName rollNumber email')
+    let sessions = await AssessmentSession.find({ institutionId: instId })
+      .populate('userId', 'firstName lastName rollNumber email course semester section')
       .populate('assessmentId', 'title')
       .sort({ submittedAt: -1, startedAt: -1 })
-      .limit(50)
+      .limit(100)
       .lean();
+
+    if (requester?.role === 'FACULTY' && requester.userId) {
+      const faculty = await User.findById(requester.userId).select('assignedCohorts').lean();
+      const assignedCohorts = (faculty?.assignedCohorts || []).filter(
+        (c) => c.course && c.semester !== undefined && c.section
+      );
+      sessions =
+        assignedCohorts.length === 0
+          ? []
+          : sessions.filter(
+              (s: any) =>
+                s.userId &&
+                assignedCohorts.some((fc) => AssessmentService.cohortMatches(fc, s.userId))
+            );
+    }
 
     const submitted = sessions.filter((s: any) => s.status === 'SUBMITTED' || s.status === 'AUTO_SUBMITTED');
     const avgPct =

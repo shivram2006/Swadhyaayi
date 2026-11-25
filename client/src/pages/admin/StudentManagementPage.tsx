@@ -21,6 +21,7 @@ export const StudentManagementPage: React.FC = () => {
   const [departments, setDepartments] = useState<any[]>([]);
   const [batches, setBatches] = useState<any[]>([]);
   const [classes, setClasses] = useState<any[]>([]);
+  const [facultyList, setFacultyList] = useState<any[]>([]);
   const [meta, setMeta] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -33,7 +34,12 @@ export const StudentManagementPage: React.FC = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isBulkModalOpen, setIsBulkModalOpen] = useState(false);
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
+  const [isFacultyCohortModalOpen, setIsFacultyCohortModalOpen] = useState(false);
   const [selectedStudentForTransfer, setSelectedStudentForTransfer] = useState<any>(null);
+  const [selectedFacultyId, setSelectedFacultyId] = useState('');
+  const [cohortRows, setCohortRows] = useState<{ course: string; semester: number; section: string }[]>([
+    { course: '', semester: 1, section: '' },
+  ]);
 
   // Form states
   const [studentForm, setStudentForm] = useState({
@@ -41,6 +47,9 @@ export const StudentManagementPage: React.FC = () => {
     lastName: '',
     email: '',
     rollNumber: '',
+    course: '',
+    semester: '1',
+    section: '',
     departmentId: '',
     batchId: '',
     classId: '',
@@ -55,7 +64,7 @@ export const StudentManagementPage: React.FC = () => {
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const [studRes, deptRes, batchRes, classRes] = await Promise.all([
+      const [studRes, deptRes, batchRes, classRes, facRes] = await Promise.all([
         axios.get('/students', {
           params: {
             search: search || undefined,
@@ -66,6 +75,7 @@ export const StudentManagementPage: React.FC = () => {
         axios.get('/tenants/departments'),
         axios.get('/tenants/batches'),
         axios.get('/tenants/classes'),
+        axios.get('/tenants/faculty').catch(() => ({ data: { success: false, data: [] } })),
       ]);
 
       if (studRes.data.success) {
@@ -75,6 +85,7 @@ export const StudentManagementPage: React.FC = () => {
       if (deptRes.data.success) setDepartments(deptRes.data.data);
       if (batchRes.data.success) setBatches(batchRes.data.data);
       if (classRes.data.success) setClasses(classRes.data.data);
+      if (facRes.data?.success) setFacultyList(facRes.data.data);
     } catch (err) {
       console.error('Failed to fetch student data:', err);
     } finally {
@@ -94,13 +105,28 @@ export const StudentManagementPage: React.FC = () => {
   const handleCreateStudent = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('/students', studentForm);
+      const payload: any = {
+        firstName: studentForm.firstName.trim(),
+        lastName: studentForm.lastName.trim(),
+        email: studentForm.email.trim(),
+        rollNumber: studentForm.rollNumber.trim(),
+        course: studentForm.course.trim() || undefined,
+        semester: studentForm.semester ? Number(studentForm.semester) : undefined,
+        section: studentForm.section.trim().toUpperCase() || undefined,
+        departmentId: studentForm.departmentId || undefined,
+        batchId: studentForm.batchId || undefined,
+        classId: studentForm.classId || undefined,
+      };
+      await axios.post('/students', payload);
       setIsAddModalOpen(false);
       setStudentForm({
         firstName: '',
         lastName: '',
         email: '',
         rollNumber: '',
+        course: '',
+        semester: '1',
+        section: '',
         departmentId: '',
         batchId: '',
         classId: '',
@@ -109,6 +135,60 @@ export const StudentManagementPage: React.FC = () => {
       fetchData();
     } catch (err: any) {
       setActionMessage({ type: 'error', text: err.response?.data?.error?.message || 'Failed to create student' });
+    }
+  };
+
+  const handleOpenFacultyModal = () => {
+    const first = facultyList[0];
+    setSelectedFacultyId(first?._id || '');
+    setCohortRows(
+      first?.assignedCohorts?.length > 0
+        ? first.assignedCohorts.map((c: any) => ({
+            course: c.course || '',
+            semester: Number(c.semester) || 1,
+            section: c.section || '',
+          }))
+        : [{ course: '', semester: 1, section: '' }]
+    );
+    setIsFacultyCohortModalOpen(true);
+  };
+
+  const handleSelectFacultyForCohorts = (facId: string) => {
+    setSelectedFacultyId(facId);
+    const fac = facultyList.find((f) => f._id === facId);
+    setCohortRows(
+      fac?.assignedCohorts?.length > 0
+        ? fac.assignedCohorts.map((c: any) => ({
+            course: c.course || '',
+            semester: Number(c.semester) || 1,
+            section: c.section || '',
+          }))
+        : [{ course: '', semester: 1, section: '' }]
+    );
+  };
+
+  const handleSaveFacultyCohorts = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedFacultyId) return;
+    try {
+      const validCohorts = cohortRows
+        .filter((r) => r.course.trim() && r.section.trim() && r.semester)
+        .map((r) => ({
+          course: r.course.trim(),
+          semester: Number(r.semester),
+          section: r.section.trim().toUpperCase(),
+        }));
+      await axios.put(`/tenants/faculty/${selectedFacultyId}/cohorts`, {
+        cohorts: validCohorts,
+      });
+      setIsFacultyCohortModalOpen(false);
+      setActionMessage({ type: 'success', text: 'Faculty cohort assignments updated successfully!' });
+      fetchData();
+    } catch (err: any) {
+      setActionMessage({
+        type: 'error',
+        text: err.response?.data?.error?.message || 'Failed to assign faculty cohorts',
+      });
     }
   };
 
@@ -188,6 +268,14 @@ Ankit,Sharma,ankit.sharma@nitsurat.ac.in,U23IT101,IT,Batch 2023-2027,A`;
             leftIcon={<Upload className="w-4 h-4" />}
           >
             Bulk CSV Upload
+          </Button>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={handleOpenFacultyModal}
+            leftIcon={<Users className="w-4 h-4" />}
+          >
+            Assign Faculty Cohorts
           </Button>
           <Button
             variant="primary"
@@ -285,7 +373,15 @@ Ankit,Sharma,ankit.sharma@nitsurat.ac.in,U23IT101,IT,Batch 2023-2027,A`;
                       <p className="text-[11px] text-slate-400">{s.email}</p>
                     </td>
                     <td className="py-3 px-4 text-slate-300">
-                      {s.departmentId?.code} • Sec {s.classId?.section}
+                      {s.course ? (
+                        <span>
+                          {s.course} • Sem {s.semester ?? '-'} • Sec {s.section || '-'}
+                        </span>
+                      ) : (
+                        <span>
+                          {s.departmentId?.code || '-'} • Sec {s.classId?.section || '-'}
+                        </span>
+                      )}
                     </td>
                     <td className="py-3 px-4 text-slate-400">{s.batchId?.name}</td>
                     <td className="py-3 px-4 font-mono font-semibold text-emerald-400">
@@ -373,13 +469,41 @@ Ankit,Sharma,ankit.sharma@nitsurat.ac.in,U23IT101,IT,Batch 2023-2027,A`;
               </div>
 
               <div className="grid grid-cols-3 gap-3">
+                <Input
+                  label="Course"
+                  placeholder="e.g. B.Tech CSE"
+                  value={studentForm.course}
+                  onChange={(e) => setStudentForm({ ...studentForm, course: e.target.value })}
+                  required
+                />
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase">Department</label>
+                  <label className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase">Semester</label>
+                  <input
+                    type="number"
+                    min={1}
+                    max={12}
+                    className="w-full bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 py-2.5 px-2.5"
+                    value={studentForm.semester}
+                    onChange={(e) => setStudentForm({ ...studentForm, semester: e.target.value })}
+                    required
+                  />
+                </div>
+                <Input
+                  label="Section"
+                  placeholder="e.g. A"
+                  value={studentForm.section}
+                  onChange={(e) => setStudentForm({ ...studentForm, section: e.target.value })}
+                  required
+                />
+              </div>
+
+              <div className="grid grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase">Department (Opt)</label>
                   <select
                     className="w-full bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 py-2.5 px-2"
                     value={studentForm.departmentId}
                     onChange={(e) => setStudentForm({ ...studentForm, departmentId: e.target.value })}
-                    required
                   >
                     <option value="">Select Dept</option>
                     {departments.map((d) => (
@@ -389,12 +513,11 @@ Ankit,Sharma,ankit.sharma@nitsurat.ac.in,U23IT101,IT,Batch 2023-2027,A`;
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase">Batch</label>
+                  <label className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase">Batch (Opt)</label>
                   <select
                     className="w-full bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 py-2.5 px-2"
                     value={studentForm.batchId}
                     onChange={(e) => setStudentForm({ ...studentForm, batchId: e.target.value })}
-                    required
                   >
                     <option value="">Select Batch</option>
                     {batches.map((b) => (
@@ -404,14 +527,13 @@ Ankit,Sharma,ankit.sharma@nitsurat.ac.in,U23IT101,IT,Batch 2023-2027,A`;
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase">Section</label>
+                  <label className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase">Class (Opt)</label>
                   <select
                     className="w-full bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 py-2.5 px-2"
                     value={studentForm.classId}
                     onChange={(e) => setStudentForm({ ...studentForm, classId: e.target.value })}
-                    required
                   >
-                    <option value="">Select Section</option>
+                    <option value="">Select Class</option>
                     {classes.map((c) => (
                       <option key={c._id} value={c._id}>{c.departmentId?.code} - {c.section}</option>
                     ))}
@@ -543,6 +665,110 @@ Ankit,Sharma,ankit.sharma@nitsurat.ac.in,U23IT101,IT,Batch 2023-2027,A`;
                 </Button>
                 <Button type="submit" variant="primary" size="sm">
                   Confirm Transfer
+                </Button>
+              </div>
+            </form>
+          </Card>
+        </div>
+      )}
+      {/* Faculty Cohort Assignment Modal */}
+      {isFacultyCohortModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+          <Card className="w-full max-w-lg bg-slate-900 border-slate-800 shadow-2xl">
+            <CardHeader>
+              <CardTitle>Assign Course, Semester & Section to Faculty</CardTitle>
+              <CardDescription>
+                Faculty will only see students and manage tests for their assigned cohorts.
+              </CardDescription>
+            </CardHeader>
+            <form onSubmit={handleSaveFacultyCohorts} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase">Select Faculty</label>
+                <select
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 py-2.5 px-3"
+                  value={selectedFacultyId}
+                  onChange={(e) => handleSelectFacultyForCohorts(e.target.value)}
+                  required
+                >
+                  <option value="">Choose Faculty Member</option>
+                  {facultyList.map((f) => (
+                    <option key={f._id} value={f._id}>
+                      {f.firstName} {f.lastName} ({f.email})
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
+                <div className="flex items-center justify-between">
+                  <label className="block text-xs font-semibold text-slate-400 uppercase">Assigned Cohorts</label>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setCohortRows([...cohortRows, { course: '', semester: 1, section: '' }])}
+                  >
+                    + Add Cohort
+                  </Button>
+                </div>
+                {cohortRows.map((row, idx) => (
+                  <div key={idx} className="grid grid-cols-12 gap-2 items-center">
+                    <input
+                      type="text"
+                      placeholder="Course (e.g. B.Tech CSE)"
+                      className="col-span-5 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 py-2 px-2.5"
+                      value={row.course}
+                      onChange={(e) => {
+                        const next = [...cohortRows];
+                        next[idx] = { ...next[idx], course: e.target.value };
+                        setCohortRows(next);
+                      }}
+                      required
+                    />
+                    <input
+                      type="number"
+                      min={1}
+                      max={12}
+                      placeholder="Sem"
+                      className="col-span-3 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 py-2 px-2.5"
+                      value={row.semester}
+                      onChange={(e) => {
+                        const next = [...cohortRows];
+                        next[idx] = { ...next[idx], semester: Number(e.target.value) };
+                        setCohortRows(next);
+                      }}
+                      required
+                    />
+                    <input
+                      type="text"
+                      placeholder="Sec (A)"
+                      className="col-span-3 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 py-2 px-2.5"
+                      value={row.section}
+                      onChange={(e) => {
+                        const next = [...cohortRows];
+                        next[idx] = { ...next[idx], section: e.target.value };
+                        setCohortRows(next);
+                      }}
+                      required
+                    />
+                    <button
+                      type="button"
+                      className="col-span-1 text-rose-400 hover:text-rose-300 text-sm font-bold"
+                      onClick={() => setCohortRows(cohortRows.filter((_, i) => i !== idx))}
+                      title="Remove cohort"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex justify-end gap-2 pt-4 border-t border-slate-800">
+                <Button type="button" variant="outline" size="sm" onClick={() => setIsFacultyCohortModalOpen(false)}>
+                  Cancel
+                </Button>
+                <Button type="submit" variant="primary" size="sm" disabled={!selectedFacultyId}>
+                  Save Assignments
                 </Button>
               </div>
             </form>

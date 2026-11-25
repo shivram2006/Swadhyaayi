@@ -56,6 +56,8 @@ export const FacultySectionsPage: React.FC = () => {
   const [classes, setClasses] = useState<ClassItem[]>([]);
   const [departments, setDepartments] = useState<Department[]>([]);
   const [batches, setBatches] = useState<Batch[]>([]);
+  const [assignedCohorts, setAssignedCohorts] = useState<{ course: string; semester: number; section: string }[]>([]);
+  const [mappedStudents, setMappedStudents] = useState<StudentItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Filters
@@ -76,15 +78,18 @@ export const FacultySectionsPage: React.FC = () => {
   const fetchInitialData = async () => {
     setLoading(true);
     try {
-      const [classRes, deptRes, batchRes, studRes] = await Promise.all([
-        axios.get('/tenant/classes'),
-        axios.get('/tenant/departments'),
-        axios.get('/tenant/batches'),
+      const [classRes, deptRes, batchRes, studRes, cohortRes] = await Promise.all([
+        axios.get('/tenants/classes'),
+        axios.get('/tenants/departments'),
+        axios.get('/tenants/batches'),
         axios.get('/students', { params: { limit: 100 } }),
+        axios.get('/tenants/faculty/my-cohorts').catch(() => ({ data: { data: [] } })),
       ]);
 
       const classList: ClassItem[] = classRes.data?.data || [];
       const studentList: StudentItem[] = studRes.data?.data || [];
+      setAssignedCohorts(cohortRes.data?.data || []);
+      setMappedStudents(studentList);
 
       // Calculate student counts per class
       const countMap: Record<string, number> = {};
@@ -142,7 +147,7 @@ export const FacultySectionsPage: React.FC = () => {
     return deptMatches && batchMatches && searchMatches;
   });
 
-  const totalStudents = classes.reduce((acc, c) => acc + (c.studentCount || 0), 0);
+  const totalStudents = mappedStudents.length;
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-16">
@@ -189,8 +194,8 @@ export const FacultySectionsPage: React.FC = () => {
               <Layers className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Total Sections</p>
-              <h3 className="text-xl font-bold text-white mt-0.5">{classes.length} Classes</h3>
+              <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Assigned Cohorts</p>
+              <h3 className="text-xl font-bold text-white mt-0.5">{assignedCohorts.length || classes.length} Cohorts</h3>
             </div>
           </div>
         </Card>
@@ -201,8 +206,8 @@ export const FacultySectionsPage: React.FC = () => {
               <Users className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Active Students</p>
-              <h3 className="text-xl font-bold text-white mt-0.5">{totalStudents || 180} Enrolled</h3>
+              <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Mapped Students</p>
+              <h3 className="text-xl font-bold text-white mt-0.5">{totalStudents} Enrolled</h3>
             </div>
           </div>
         </Card>
@@ -280,6 +285,69 @@ export const FacultySectionsPage: React.FC = () => {
           </div>
         </div>
       </Card>
+
+      {/* Assigned Course/Semester/Section Cohorts & Mapped Students */}
+      {assignedCohorts.length > 0 && (
+        <Card className="p-5 bg-slate-900 border-slate-800 space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-base font-bold text-white">Your Assigned Cohorts</h2>
+              <p className="text-xs text-slate-400">Students matching these course, semester &amp; section assignments</p>
+            </div>
+            <Badge variant="brand" size="sm">{mappedStudents.length} Mapped Students</Badge>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            {assignedCohorts.map((c, idx) => {
+              const count = mappedStudents.filter(
+                (st: any) =>
+                  st.course?.trim().toLowerCase() === c.course.trim().toLowerCase() &&
+                  Number(st.semester) === Number(c.semester) &&
+                  st.section?.trim().toLowerCase() === c.section.trim().toLowerCase()
+              ).length;
+              return (
+                <div key={idx} className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-bold text-white">{c.course}</p>
+                    <p className="text-xs text-slate-400">Semester {c.semester} • Section {c.section}</p>
+                  </div>
+                  <Badge variant="success" size="sm">{count} Students</Badge>
+                </div>
+              );
+            })}
+          </div>
+          {mappedStudents.length > 0 && (
+            <div className="overflow-x-auto border border-slate-800 rounded-xl">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-slate-950 text-slate-400 uppercase border-b border-slate-800">
+                  <tr>
+                    <th className="py-2.5 px-3">Roll No</th>
+                    <th className="py-2.5 px-3">Student</th>
+                    <th className="py-2.5 px-3">Course / Sem / Sec</th>
+                    <th className="py-2.5 px-3">Status</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-800/70">
+                  {mappedStudents.map((st: any) => (
+                    <tr key={st._id} className="hover:bg-slate-800/30">
+                      <td className="py-2.5 px-3 font-mono text-cyan-400">{st.rollNumber || '-'}</td>
+                      <td className="py-2.5 px-3">
+                        <p className="font-semibold text-slate-200">{st.firstName} {st.lastName}</p>
+                        <p className="text-[11px] text-slate-400">{st.email}</p>
+                      </td>
+                      <td className="py-2.5 px-3 text-slate-300">
+                        {st.course} • Sem {st.semester} • Sec {st.section}
+                      </td>
+                      <td className="py-2.5 px-3">
+                        <Badge variant={st.status === 'ACTIVE' ? 'success' : 'neutral'} size="sm">{st.status}</Badge>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </Card>
+      )}
 
       {/* Classes Grid */}
       {loading ? (

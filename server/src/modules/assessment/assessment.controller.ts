@@ -17,7 +17,7 @@ export class AssessmentController {
         throw new ValidationError('Institution context required to create an assessment');
       }
 
-      const assessment = await AssessmentService.createAssessment(parsed, institutionId, userId);
+      const assessment = await AssessmentService.createAssessment(parsed, institutionId, userId, user?.role);
       sendSuccess(res, assessment, 201);
     } catch (error) {
       next(error);
@@ -37,17 +37,25 @@ export class AssessmentController {
       const userId = user?.userId || user?._id?.toString();
 
       if (user.role === 'STUDENT' && userId) {
-        const studentDoc = await User.findById(userId).select('departmentId batchId classId').lean();
+        const studentDoc = await User.findById(userId)
+          .select('departmentId batchId classId course semester section')
+          .lean();
         if (studentDoc) {
           studentCohort = {
             departmentId: studentDoc.departmentId?.toString(),
             batchId: studentDoc.batchId?.toString(),
             classId: studentDoc.classId?.toString(),
+            course: studentDoc.course,
+            semester: studentDoc.semester,
+            section: studentDoc.section,
           };
         }
       }
 
-      const assessments = await AssessmentService.getAssessments(institutionId, studentCohort);
+      const assessments = await AssessmentService.getAssessments(institutionId, studentCohort, {
+        userId,
+        role: user?.role,
+      });
       sendSuccess(res, assessments);
     } catch (error) {
       next(error);
@@ -162,7 +170,10 @@ export class AssessmentController {
         throw new ValidationError('Institution context required');
       }
 
-      const monitorData = await AssessmentService.getLiveMonitor(id, institutionId);
+      const monitorData = await AssessmentService.getLiveMonitor(id, institutionId, {
+        userId: user?.userId || user?._id?.toString(),
+        role: user?.role,
+      });
       sendSuccess(res, monitorData);
     } catch (error) {
       next(error);
@@ -195,7 +206,10 @@ export class AssessmentController {
         throw new ValidationError('Institution context required');
       }
 
-      const data = await AssessmentService.getFacultySubmissionsOverview(institutionId);
+      const data = await AssessmentService.getFacultySubmissionsOverview(institutionId, {
+        userId: user?.userId || user?._id?.toString(),
+        role: user?.role,
+      });
       sendSuccess(res, data);
     } catch (error) {
       next(error);

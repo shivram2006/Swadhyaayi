@@ -30,9 +30,18 @@ export const createAssessmentSchema = z.object({
       departmentIds: z.array(z.string()).default([]),
       batchIds: z.array(z.string()).default([]),
       classIds: z.array(z.string()).default([]),
+      cohorts: z
+        .array(
+          z.object({
+            course: z.string().trim().min(1),
+            semester: z.coerce.number().int().min(1).max(12),
+            section: z.string().trim().min(1),
+          })
+        )
+        .default([]),
       accessCode: z.string().optional(),
     })
-    .default({ allStudents: true, departmentIds: [], batchIds: [], classIds: [] }),
+    .default({ allStudents: true, departmentIds: [], batchIds: [], classIds: [], cohorts: [] }),
   sections: z.array(assessmentSectionSchema).min(1, 'Assessment must contain at least one section'),
   proctoring: z
     .object({
