@@ -55,7 +55,7 @@ ${p.challenge}`;
     starterCode: [
       {
         language: 'python',
-        boilerplate: `import sys\n\ndef ${fnName}(data: str) -> str:\n    # Write your solution here\n    return ""\n\nif __name__ == "__main__":\n    raw = sys.stdin.read().strip()\n    print(${fnName}(raw))`,
+        boilerplate: `import sys, math\nfrom collections import defaultdict, deque, Counter\nimport heapq\n\ndef ${fnName}(data: str) -> str:\n    # Write your solution here\n    return ""\n\nif __name__ == "__main__":\n    raw = sys.stdin.read().strip()\n    print(${fnName}(raw))`,
       },
       {
         language: 'javascript',
@@ -63,11 +63,11 @@ ${p.challenge}`;
       },
       {
         language: 'cpp',
-        boilerplate: `#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    // Write your solution here\n    return 0;\n}`,
+        boilerplate: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // Write your solution here\n    return 0;\n}`,
       },
       {
         language: 'java',
-        boilerplate: `import java.util.*;\n\npublic class Solution {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution here\n    }\n}`,
+        boilerplate: `import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution here\n    }\n}`,
       },
     ],
     sampleTestCases: [

@@ -117,7 +117,11 @@ export class SandboxRunner {
         extraPath = path.dirname(gppPath);
         const srcFile = path.join(tempDir, 'solution.cpp');
         const exeFile = path.join(tempDir, os.platform() === 'win32' ? 'solution.exe' : 'solution');
-        fs.writeFileSync(srcFile, code, 'utf-8');
+        // Auto-include full STL if <bits/stdc++.h> is not already present so users never hit missing-header errors
+        const cppSource = code.includes('<bits/stdc++.h>')
+          ? code
+          : `#include <bits/stdc++.h>\nusing namespace std;\n${code}`;
+        fs.writeFileSync(srcFile, cppSource, 'utf-8');
 
         const compileProc = spawnSync(gppPath, ['-O2', '-std=c++17', srcFile, '-o', exeFile], {
           cwd: tempDir,

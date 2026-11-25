@@ -339,15 +339,15 @@ export const CreateAssessmentPage: React.FC = () => {
           starterCode: [
             {
               language: 'cpp',
-              boilerplate: '// C++ Solution\n#include <iostream>\nusing namespace std;\n\nint main() {\n    // Code here\n    return 0;\n}',
+              boilerplate: '// C++ Solution\n#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Code here\n    return 0;\n}',
             },
             {
               language: 'java',
-              boilerplate: 'import java.util.*;\n\npublic class Solution {\n    public static void main(String[] args) {\n    }\n}',
+              boilerplate: 'import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) {\n    }\n}',
             },
             {
               language: 'python',
-              boilerplate: '# Python Solution\ndef main():\n    pass\n\nif __name__ == "__main__":\n    main()',
+              boilerplate: '# Python Solution\nimport sys, math\nfrom collections import defaultdict, deque, Counter\n\ndef main():\n    pass\n\nif __name__ == "__main__":\n    main()',
             },
             {
               language: 'javascript',

@@ -33,12 +33,7 @@ const getDefaultBoilerplate = (lang: string, title: string = 'solution'): string
   const camelName = pascalName.charAt(0).toLowerCase() + pascalName.slice(1);
 
   if (lang === 'cpp') {
-    return `#include <iostream>
-#include <vector>
-#include <string>
-#include <unordered_map>
-#include <algorithm>
-
+    return `#include <bits/stdc++.h>
 using namespace std;
 
 // Solution Class / Function
