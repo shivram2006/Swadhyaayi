@@ -8,10 +8,14 @@ import {
   Layers,
   ChevronRight,
   ShieldAlert,
+  Users,
+  BarChart3,
+  Plus,
 } from 'lucide-react';
 import { Card } from '../../components/common/Card';
 import { Badge } from '../../components/common/Badge';
 import { Button } from '../../components/common/Button';
+import { useAuth } from '../../context/AuthContext';
 
 interface AssessmentSummary {
   _id: string;
@@ -27,10 +31,17 @@ interface AssessmentSummary {
   totalQuestions: number;
   totalPoints: number;
   proctoringEnabled: boolean;
+  attemptedCount?: number;
+  submittedCount?: number;
+  averagePercentage?: number | null;
 }
 
 export const AssessmentListPage: React.FC = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const isFacultyOrAdmin = ['FACULTY', 'INSTITUTION_ADMIN', 'PLACEMENT_OFFICER', 'SUPER_ADMIN'].includes(
+    user?.role || ''
+  );
 
   const [assessments, setAssessments] = useState<AssessmentSummary[]>([]);
   const [activeTab, setActiveTab] = useState<'LIVE' | 'UPCOMING' | 'COMPLETED'>('LIVE');
@@ -80,17 +91,32 @@ export const AssessmentListPage: React.FC = () => {
     <div className="space-y-6 max-w-6xl mx-auto pb-12">
       {/* Banner */}
       <div className="rounded-2xl bg-gradient-to-r from-blue-900/40 via-indigo-900/30 to-brand-900/40 border border-blue-500/20 p-6 sm:p-8">
-        <div className="max-w-3xl space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-semibold">
-            <ClipboardCheck className="w-3.5 h-3.5" />
-            Institutional Assessments & Proctored Tests
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="max-w-3xl space-y-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-semibold">
+              <ClipboardCheck className="w-3.5 h-3.5" />
+              Institutional Assessments &amp; Proctored Tests
+            </div>
+            <h1 className="text-3xl font-extrabold text-white tracking-tight">
+              Campus Placement Assessments
+            </h1>
+            <p className="text-slate-300 text-sm leading-relaxed">
+              {isFacultyOrAdmin
+                ? 'Monitor student attempts, inspect live proctoring telemetry, and review graded scores across all configured tests.'
+                : 'Take timed institutional exams configured by your university placement cell. Simulated industry tests with section cutoffs, negative marking, and proctoring telemetry.'}
+            </p>
           </div>
-          <h1 className="text-3xl font-extrabold text-white tracking-tight">
-            Campus Placement Assessments
-          </h1>
-          <p className="text-slate-300 text-sm leading-relaxed">
-            Take timed institutional exams configured by your university placement cell. Simulated industry tests with section cutoffs, negative marking, and proctoring telemetry.
-          </p>
+
+          {isFacultyOrAdmin && (
+            <Button
+              variant="primary"
+              onClick={() => navigate('/faculty/tests/new')}
+              className="shrink-0 flex items-center gap-2 font-bold"
+            >
+              <Plus className="w-4 h-4" />
+              Create New Test
+            </Button>
+          )}
         </div>
 
         {/* Tab Switcher */}
@@ -191,11 +217,36 @@ export const AssessmentListPage: React.FC = () => {
                       <span>{test.totalPoints} pts</span>
                     </div>
                   </div>
+                  {/* Faculty Live Attempt & Score Summary */}
+                  {isFacultyOrAdmin && (
+                    <div className="flex flex-wrap items-center justify-between gap-2 px-3 py-2 rounded-lg bg-slate-950/70 border border-slate-800/90 text-xs">
+                      <span className="flex items-center gap-1.5 text-cyan-300 font-medium">
+                        <Users className="w-3.5 h-3.5 text-cyan-400" />
+                        {test.attemptedCount || 0} Attempted • {test.submittedCount || 0} Submitted
+                      </span>
+                      {test.averagePercentage !== null && test.averagePercentage !== undefined && (
+                        <span className="flex items-center gap-1 text-emerald-400 font-semibold">
+                          <BarChart3 className="w-3.5 h-3.5" />
+                          Avg: {test.averagePercentage}%
+                        </span>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {/* Action Button */}
                 <div className="pt-4 mt-4 border-t border-slate-800/80">
-                  {isLive ? (
+                  {isFacultyOrAdmin ? (
+                    <Button
+                      onClick={() => navigate(`/assessments/${test._id}/monitor`)}
+                      variant="primary"
+                      className="w-full flex items-center justify-center gap-2 font-bold"
+                    >
+                      <BarChart3 className="w-4 h-4" />
+                      View Submissions &amp; Results
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
+                  ) : isLive ? (
                     <Button
                       onClick={() => navigate(`/assessments/${test._id}/arena`)}
                       variant="primary"

@@ -35,6 +35,29 @@ export class AssessmentService {
 
     const assessments = await Assessment.find(query).sort({ startTime: -1 }).lean();
 
+    // Aggregate session counts (attempts, submissions, avg percentage) per assessment
+    const assessmentIds = assessments.map((a) => a._id);
+    const sessionStats = await AssessmentSession.aggregate([
+      { $match: { assessmentId: { $in: assessmentIds } } },
+      {
+        $group: {
+          _id: '$assessmentId',
+          attemptedCount: { $sum: 1 },
+          submittedCount: {
+            $sum: {
+              $cond: [{ $in: ['$status', ['SUBMITTED', 'AUTO_SUBMITTED']] }, 1, 0],
+            },
+          },
+          avgPct: {
+            $avg: {
+              $cond: [{ $in: ['$status', ['SUBMITTED', 'AUTO_SUBMITTED']] }, '$percentage', null],
+            },
+          },
+        },
+      },
+    ]);
+    const statsMap = new Map(sessionStats.map((s: any) => [s._id.toString(), s]));
+
     return assessments.map((a) => {
       let isEligible = true;
 
@@ -52,6 +75,8 @@ export class AssessmentService {
         0
       );
 
+      const stats = statsMap.get(a._id.toString());
+
       return {
         _id: a._id,
         title: a.title,
@@ -66,6 +91,9 @@ export class AssessmentService {
         totalQuestions,
         totalPoints,
         proctoringEnabled: a.proctoring?.enableProctoring ?? true,
+        attemptedCount: stats?.attemptedCount || 0,
+        submittedCount: stats?.submittedCount || 0,
+        averagePercentage: stats?.avgPct != null ? Math.round(stats.avgPct) : null,
       };
     });
   }

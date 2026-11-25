@@ -167,7 +167,10 @@ export const FacultyDashboard: React.FC = () => {
                   <div>
                     <p className="font-semibold text-slate-200">{test.title}</p>
                     <p className="text-[11px] text-slate-500">
-                      {test.durationMinutes} min • {test.totalQuestions || test.sections?.[0]?.questions?.length || 5} Questions
+                      {test.durationMinutes} min • {test.totalQuestions || test.sections?.[0]?.questions?.length || 0} Questions •{' '}
+                      <span className="text-cyan-400 font-medium">
+                        {test.attemptedCount || 0} Attempted / {test.submittedCount || 0} Submitted
+                      </span>
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
