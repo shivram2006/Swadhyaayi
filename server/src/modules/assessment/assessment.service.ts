@@ -94,6 +94,7 @@ export class AssessmentService {
     }
 
     const assessment = await Assessment.create({
+      ...data,
       ...payload,
       institutionId: instId,
       createdBy: uId,
