@@ -3,6 +3,32 @@ import { AuthService } from './auth.service';
 import { sendSuccess } from '../../core/utils/response';
 
 export class AuthController {
+  static async getPublicInstitutions(_req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const institutions = await AuthService.getPublicInstitutions();
+      sendSuccess(res, institutions, 200);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async registerStudent(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const result = await AuthService.registerStudent(req.body);
+
+      res.cookie('refreshToken', result.tokens.refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      });
+
+      sendSuccess(res, result, 201);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async registerInstitution(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const result = await AuthService.registerInstitution(req.body);

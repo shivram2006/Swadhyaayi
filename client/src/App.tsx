@@ -5,6 +5,7 @@ import { DashboardLayout } from './components/layout/DashboardLayout';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { LoginPage } from './pages/auth/LoginPage';
 import { RegisterInstitutionPage } from './pages/auth/RegisterInstitutionPage';
+import { RegisterStudentPage } from './pages/auth/RegisterStudentPage';
 import { StudentDashboard } from './pages/dashboard/StudentDashboard';
 import { InstitutionAdminDashboard } from './pages/dashboard/InstitutionAdminDashboard';
 import { FacultyDashboard } from './pages/dashboard/FacultyDashboard';
@@ -68,6 +69,8 @@ export const App: React.FC = () => {
         <Routes>
           {/* Public Routes */}
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterStudentPage />} />
+          <Route path="/register-student" element={<RegisterStudentPage />} />
           <Route path="/register-institution" element={<RegisterInstitutionPage />} />
           <Route path="/" element={<HomeRedirect />} />
 

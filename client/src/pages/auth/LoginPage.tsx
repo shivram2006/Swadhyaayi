@@ -121,12 +121,12 @@ export const LoginPage: React.FC = () => {
             </Button>
           </form>
 
-          {/* Institutional Registration CTA */}
+          {/* Student Registration CTA */}
           <div className="mt-6 pt-5 border-t border-slate-800 text-center">
             <p className="text-xs text-slate-400">
-              Is your University/College not onboarded yet?{' '}
-              <Link to="/register-institution" className="text-brand-400 hover:text-brand-300 font-semibold underline underline-offset-2">
-                Register Institution
+              New Student?{' '}
+              <Link to="/register-student" className="text-brand-400 hover:text-brand-300 font-semibold underline underline-offset-2">
+                Register Here
               </Link>
             </p>
           </div>

@@ -9,6 +9,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<User | null>;
+  registerStudent: (data: any) => Promise<User | null>;
   registerInstitution: (data: any) => Promise<void>;
   markSubscribed: (plan: string) => void;
   logout: () => Promise<void>;
@@ -169,6 +170,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const registerStudent = async (data: any): Promise<User | null> => {
+    setIsLoading(true);
+    try {
+      const res = await axios.post('/auth/register-student', data);
+      if (res.data.success) {
+        const { user: userData, institution: instData, tokens } = res.data.data;
+        if (tokens?.refreshToken) {
+          localStorage.setItem('swadhyayi_refresh_token', tokens.refreshToken);
+        }
+        setToken(tokens.accessToken);
+        setUser(userData);
+        setInstitution(instData);
+        return userData;
+      }
+      return null;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const registerInstitution = async (data: any) => {
     setIsLoading(true);
     try {
@@ -213,6 +234,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isAuthenticated: !!user,
         isLoading,
         login,
+        registerStudent,
         registerInstitution,
         markSubscribed,
         logout,

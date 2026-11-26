@@ -31,12 +31,15 @@ export const refreshTokenSchema = z.object({
 
 export const studentRegisterSchema = z.object({
   body: z.object({
-    institutionCode: z.string().min(2),
-    firstName: z.string().min(1),
-    lastName: z.string().min(1),
-    email: z.string().email(),
-    password: z.string().min(8),
-    rollNumber: z.string().min(1),
-    departmentCode: z.string().min(2),
+    institutionId: z.string().optional(),
+    institutionCode: z.string().optional(),
+    firstName: z.string().trim().min(1, 'First name is required'),
+    lastName: z.string().trim().min(1, 'Last name is required'),
+    email: z.string().trim().email('Invalid email address'),
+    password: z.string().min(6, 'Password must be at least 6 characters'),
+    rollNumber: z.string().trim().min(1, 'Roll number is required'),
+    course: z.string().trim().min(1, 'Course is required'),
+    semester: z.coerce.number().int().min(1).max(12),
+    section: z.string().trim().min(1, 'Section is required'),
   }),
 });
