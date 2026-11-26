@@ -71,16 +71,16 @@ export class StudentService {
       section: resolvedSection,
       academicHistory: batch && cls && dept
         ? [
-            {
-              batchId: batch._id,
-              classId: cls._id,
-              departmentId: dept._id,
-              academicYear: batch.currentAcademicYear,
-              semester: cls.semester,
-              transitionedAt: new Date(),
-              reason: 'Initial enrollment',
-            },
-          ]
+          {
+            batchId: batch._id,
+            classId: cls._id,
+            departmentId: dept._id,
+            academicYear: batch.currentAcademicYear,
+            semester: cls.semester,
+            transitionedAt: new Date(),
+            reason: 'Initial enrollment',
+          },
+        ]
         : [],
       status: 'ACTIVE',
     });
@@ -253,11 +253,20 @@ export class StudentService {
         };
       }
       const escapeRegex = (val: string) => val.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const cohortOr = cohorts.map((c) => ({
-        course: new RegExp(`^${escapeRegex(c.course.trim())}$`, 'i'),
-        semester: Number(c.semester),
-        section: new RegExp(`^${escapeRegex(c.section.trim())}$`, 'i'),
-      }));
+      const normalizeSection = (sec: string) =>
+        sec
+          .trim()
+          .replace(/^(?:section|sec)\b[\s\-:(]*/i, '')
+          .replace(/[)\s]+$/g, '')
+          .trim();
+      const cohortOr = cohorts.map((c) => {
+        const normSec = normalizeSection(c.section);
+        return {
+          course: new RegExp(`^${escapeRegex(c.course.trim())}$`, 'i'),
+          semester: Number(c.semester),
+          section: new RegExp(`^(?:section|sec)?[\\s\\-:(]*${escapeRegex(normSec)}[\\s)]*$`, 'i'),
+        };
+      });
       query.$and = [...(query.$and || []), { $or: cohortOr }];
     }
 

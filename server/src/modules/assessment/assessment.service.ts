@@ -7,6 +7,15 @@ import { User } from '../user/user.model';
 import { NotFoundError, ValidationError, ConflictError, ForbiddenError } from '../../core/utils/appError';
 
 export class AssessmentService {
+  private static normalizeSection(sec: string): string {
+    return sec
+      .trim()
+      .replace(/^(?:section|sec)\b[\s\-:(]*/i, '')
+      .replace(/[)\s]+$/g, '')
+      .trim()
+      .toLowerCase();
+  }
+
   private static cohortMatches(
     a?: { course?: string; semester?: number; section?: string },
     b?: { course?: string; semester?: number; section?: string }
@@ -16,7 +25,7 @@ export class AssessmentService {
     return (
       a.course.trim().toLowerCase() === b.course.trim().toLowerCase() &&
       Number(a.semester) === Number(b.semester) &&
-      a.section.trim().toLowerCase() === b.section.trim().toLowerCase()
+      AssessmentService.normalizeSection(a.section) === AssessmentService.normalizeSection(b.section)
     );
   }
 
@@ -78,8 +87,8 @@ export class AssessmentService {
       const scopedCohorts =
         requestedCohorts.length > 0
           ? requestedCohorts.filter((reqC: any) =>
-              assignedCohorts.some((fc) => AssessmentService.cohortMatches(reqC, fc))
-            )
+            assignedCohorts.some((fc) => AssessmentService.cohortMatches(reqC, fc))
+          )
           : assignedCohorts;
 
       if (scopedCohorts.length === 0) {
@@ -487,12 +496,12 @@ export class AssessmentService {
         firstFailedCase:
           singleRes.status !== 'ACCEPTED'
             ? {
-                caseNumber: 1,
-                input: '(None)',
-                expectedOutput: '(Clean Execution)',
-                actualOutput: singleRes.stdout || singleRes.stderr,
-                errorLog: singleRes.errorLog,
-              }
+              caseNumber: 1,
+              input: '(None)',
+              expectedOutput: '(Clean Execution)',
+              actualOutput: singleRes.stdout || singleRes.stderr,
+              errorLog: singleRes.errorLog,
+            }
             : undefined,
       };
     }
@@ -687,10 +696,10 @@ export class AssessmentService {
         assignedCohorts.length === 0
           ? []
           : sessions.filter(
-              (s: any) =>
-                s.userId &&
-                assignedCohorts.some((fc) => AssessmentService.cohortMatches(fc, s.userId))
-            );
+            (s: any) =>
+              s.userId &&
+              assignedCohorts.some((fc) => AssessmentService.cohortMatches(fc, s.userId))
+          );
     }
 
     return {
@@ -743,10 +752,10 @@ export class AssessmentService {
         assignedCohorts.length === 0
           ? []
           : sessions.filter(
-              (s: any) =>
-                s.userId &&
-                assignedCohorts.some((fc) => AssessmentService.cohortMatches(fc, s.userId))
-            );
+            (s: any) =>
+              s.userId &&
+              assignedCohorts.some((fc) => AssessmentService.cohortMatches(fc, s.userId))
+          );
     }
 
     const submitted = sessions.filter((s: any) => s.status === 'SUBMITTED' || s.status === 'AUTO_SUBMITTED');

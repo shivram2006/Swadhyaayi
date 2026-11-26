@@ -58,7 +58,21 @@ export const FacultySectionsPage: React.FC = () => {
   const [batches, setBatches] = useState<Batch[]>([]);
   const [assignedCohorts, setAssignedCohorts] = useState<{ course: string; semester: number; section: string }[]>([]);
   const [mappedStudents, setMappedStudents] = useState<StudentItem[]>([]);
+  const [selectedCohortFilter, setSelectedCohortFilter] = useState<{ course: string; semester: number; section: string } | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const normalizeSection = (sec?: string) =>
+    (sec || '')
+      .trim()
+      .replace(/^(?:section|sec)\b[\s\-:(]*/i, '')
+      .replace(/[)\s]+$/g, '')
+      .trim()
+      .toLowerCase();
+
+  const matchesCohort = (st: any, c: { course: string; semester: number; section: string }) =>
+    st.course?.trim().toLowerCase() === c.course.trim().toLowerCase() &&
+    Number(st.semester) === Number(c.semester) &&
+    normalizeSection(st.section) === normalizeSection(c.section);
 
   // Filters
   const [search, setSearch] = useState('');
@@ -293,68 +307,129 @@ export const FacultySectionsPage: React.FC = () => {
       {/* Assigned Course/Semester/Section Cohorts & Mapped Students */}
       {assignedCohorts.length > 0 && (
         <Card className="p-5 bg-slate-900 border-slate-800 space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
-              <h2 className="text-base font-bold text-white">Your Assigned Cohorts</h2>
-              <p className="text-xs text-slate-400">Students matching these course, semester &amp; section assignments</p>
+              <h2 className="text-base font-bold text-white">Your Assigned Sections &amp; Student Progress</h2>
+              <p className="text-xs text-slate-400">
+                Click any section card to filter students, view solved questions &amp; points
+              </p>
             </div>
-            <Badge variant="brand" size="sm">{mappedStudents.length} Mapped Students</Badge>
+            <div className="flex items-center gap-2">
+              {selectedCohortFilter && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setSelectedCohortFilter(null)}
+                >
+                  Show All Sections
+                </Button>
+              )}
+              <Badge variant="brand" size="sm">{mappedStudents.length} Mapped Students</Badge>
+            </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             {assignedCohorts.map((c, idx) => {
-              const count = mappedStudents.filter(
-                (st: any) =>
-                  st.course?.trim().toLowerCase() === c.course.trim().toLowerCase() &&
-                  Number(st.semester) === Number(c.semester) &&
-                  st.section?.trim().toLowerCase() === c.section.trim().toLowerCase()
-              ).length;
+              const sectionStudents = mappedStudents.filter((st: any) => matchesCohort(st, c));
+              const totalSolved = sectionStudents.reduce(
+                (acc: number, st: any) => acc + (st.metrics?.codingProblemsSolved || 0),
+                0
+              );
+              const isSelected =
+                selectedCohortFilter &&
+                selectedCohortFilter.course === c.course &&
+                selectedCohortFilter.semester === c.semester &&
+                selectedCohortFilter.section === c.section;
               return (
-                <div key={idx} className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-bold text-white">{c.course}</p>
-                    <p className="text-xs text-slate-400">Semester {c.semester} • Section {c.section}</p>
+                <div
+                  key={idx}
+                  onClick={() => setSelectedCohortFilter(isSelected ? null : c)}
+                  className={`p-4 rounded-xl border cursor-pointer transition-all space-y-2 ${
+                    isSelected
+                      ? 'bg-cyan-500/10 border-cyan-500 shadow-lg'
+                      : 'bg-slate-950 border-slate-800 hover:border-slate-700'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-bold text-white">{c.course}</p>
+                      <p className="text-xs text-slate-400">Semester {c.semester} • Section {c.section}</p>
+                    </div>
+                    <Badge variant="success" size="sm">{sectionStudents.length} Students</Badge>
                   </div>
-                  <Badge variant="success" size="sm">{count} Students</Badge>
+                  <div className="flex items-center justify-between pt-2 border-t border-slate-800/70 text-[11px] text-slate-400">
+                    <span>Total Solved: <strong className="text-emerald-400">{totalSolved}</strong></span>
+                    <button
+                      type="button"
+                      className="text-cyan-400 hover:text-cyan-300 font-semibold"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate('/faculty/tests/new');
+                      }}
+                    >
+                      Schedule Test →
+                    </button>
+                  </div>
                 </div>
               );
             })}
           </div>
-          {mappedStudents.length > 0 && (
-            <div className="overflow-x-auto border border-slate-800 rounded-xl">
-              <table className="w-full text-left text-xs">
-                <thead className="bg-slate-950 text-slate-400 uppercase border-b border-slate-800">
-                  <tr>
-                    <th className="py-2.5 px-3">Roll No</th>
-                    <th className="py-2.5 px-3">Student</th>
-                    <th className="py-2.5 px-3">Course / Sem / Sec</th>
-                    <th className="py-2.5 px-3">Status</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-800/70">
-                  {mappedStudents.map((st: any) => (
-                    <tr key={st._id} className="hover:bg-slate-800/30">
-                      <td className="py-2.5 px-3 font-mono text-cyan-400">{st.rollNumber || '-'}</td>
-                      <td className="py-2.5 px-3">
-                        <p className="font-semibold text-slate-200">{st.firstName} {st.lastName}</p>
-                        <p className="text-[11px] text-slate-400">{st.email}</p>
-                      </td>
-                      <td className="py-2.5 px-3 text-slate-300">
-                        {st.course} • Sem {st.semester} • Sec {st.section}
-                      </td>
-                      <td className="py-2.5 px-3">
-                        <Badge variant={st.status === 'ACTIVE' ? 'success' : 'neutral'} size="sm">{st.status}</Badge>
-                      </td>
+          {(() => {
+            const visibleStudents = selectedCohortFilter
+              ? mappedStudents.filter((st: any) => matchesCohort(st, selectedCohortFilter))
+              : mappedStudents;
+            return visibleStudents.length === 0 ? (
+              <div className="py-8 text-center text-xs text-slate-400 border border-slate-800 rounded-xl bg-slate-950/40">
+                No students enrolled in {selectedCohortFilter ? `${selectedCohortFilter.course} Sem ${selectedCohortFilter.semester} Sec ${selectedCohortFilter.section}` : 'your assigned sections'} yet.
+              </div>
+            ) : (
+              <div className="overflow-x-auto border border-slate-800 rounded-xl">
+                <table className="w-full text-left text-xs">
+                  <thead className="bg-slate-950 text-slate-400 uppercase border-b border-slate-800">
+                    <tr>
+                      <th className="py-2.5 px-3">Roll No</th>
+                      <th className="py-2.5 px-3">Student</th>
+                      <th className="py-2.5 px-3">Course / Sem / Sec</th>
+                      <th className="py-2.5 px-3">Coding Solved</th>
+                      <th className="py-2.5 px-3">Aptitude Tests</th>
+                      <th className="py-2.5 px-3">Total Points</th>
+                      <th className="py-2.5 px-3">Status</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+                  </thead>
+                  <tbody className="divide-y divide-slate-800/70">
+                    {visibleStudents.map((st: any) => (
+                      <tr key={st._id} className="hover:bg-slate-800/30">
+                        <td className="py-2.5 px-3 font-mono text-cyan-400">{st.rollNumber || '-'}</td>
+                        <td className="py-2.5 px-3">
+                          <p className="font-semibold text-slate-200">{st.firstName} {st.lastName}</p>
+                          <p className="text-[11px] text-slate-400">{st.email}</p>
+                        </td>
+                        <td className="py-2.5 px-3 text-slate-300">
+                          {st.course} • Sem {st.semester} • Sec {st.section}
+                        </td>
+                        <td className="py-2.5 px-3 font-mono font-semibold text-emerald-400">
+                          {st.metrics?.codingProblemsSolved || 0}
+                        </td>
+                        <td className="py-2.5 px-3 font-mono text-indigo-300">
+                          {st.metrics?.aptitudeTestsTaken || 0}
+                        </td>
+                        <td className="py-2.5 px-3 font-mono font-semibold text-amber-400">
+                          {st.metrics?.totalPoints || 0}
+                        </td>
+                        <td className="py-2.5 px-3">
+                          <Badge variant={st.status === 'ACTIVE' ? 'success' : 'neutral'} size="sm">{st.status}</Badge>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
+          })()}
         </Card>
       )}
 
-      {/* Classes Grid */}
-      {loading ? (
+      {/* Classes Grid (only shown when no cohort assignments exist) */}
+      {assignedCohorts.length === 0 && (loading ? (
         <div className="py-20 flex flex-col items-center justify-center gap-3">
           <div className="w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
           <p className="text-sm text-slate-400">Loading assigned academic sections...</p>
@@ -373,7 +448,7 @@ export const FacultySectionsPage: React.FC = () => {
             const deptCode = cls.departmentId?.code || 'ENG';
             const deptName = cls.departmentId?.name || 'Engineering';
             const batchName = cls.batchId?.name || 'Class of 2026';
-            const studentCount = cls.studentCount || 60;
+            const studentCount = cls.studentCount ?? 0;
 
             return (
               <Card
@@ -444,9 +519,7 @@ export const FacultySectionsPage: React.FC = () => {
             );
           })}
         </div>
-      )}
-
-      {/* Student Roster Modal */}
+      ))}
       {activeClassModal && (
         <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-3xl overflow-hidden shadow-2xl flex flex-col max-h-[85vh] animate-in fade-in zoom-in-95 duration-150">
