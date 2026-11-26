@@ -75,6 +75,24 @@ export class AssessmentController {
     }
   }
 
+  static async deleteAssessment(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+      const user = (req as any).user;
+      const institutionId = user?.institutionId?.toString();
+      const userId = user?.userId || user?._id?.toString();
+
+      if (!institutionId || !userId) {
+        throw new ValidationError('Authentication and institution context required');
+      }
+
+      const result = await AssessmentService.deleteAssessment(id, institutionId, userId, user?.role);
+      sendSuccess(res, result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async startSession(req: Request, res: Response, next: NextFunction) {
     try {
       const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;

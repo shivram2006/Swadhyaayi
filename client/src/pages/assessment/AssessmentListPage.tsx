@@ -11,6 +11,7 @@ import {
   Users,
   BarChart3,
   Plus,
+  Trash2,
 } from 'lucide-react';
 import { Card } from '../../components/common/Card';
 import { Badge } from '../../components/common/Badge';
@@ -25,6 +26,7 @@ interface AssessmentSummary {
   status: string;
   startTime: string;
   endTime: string;
+  createdBy?: string;
   durationMinutes: number;
   isEligible: boolean;
   totalSections: number;
@@ -46,6 +48,7 @@ export const AssessmentListPage: React.FC = () => {
   const [assessments, setAssessments] = useState<AssessmentSummary[]>([]);
   const [activeTab, setActiveTab] = useState<'LIVE' | 'UPCOMING' | 'COMPLETED'>('LIVE');
   const [loading, setLoading] = useState<boolean>(true);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchAssessments();
@@ -62,6 +65,21 @@ export const AssessmentListPage: React.FC = () => {
       console.error('Error fetching assessments:', err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDeleteAssessment = async (test: AssessmentSummary) => {
+    if (!window.confirm(`Delete "${test.title}"? This will remove the test and any existing student sessions.`)) {
+      return;
+    }
+    try {
+      setDeletingId(test._id);
+      await axios.delete(`/assessments/${test._id}`);
+      setAssessments((prev) => prev.filter((a) => a._id !== test._id));
+    } catch (err: any) {
+      alert(err?.response?.data?.error?.message || 'Failed to delete assessment');
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -237,15 +255,29 @@ export const AssessmentListPage: React.FC = () => {
                 {/* Action Button */}
                 <div className="pt-4 mt-4 border-t border-slate-800/80">
                   {isFacultyOrAdmin ? (
-                    <Button
-                      onClick={() => navigate(`/assessments/${test._id}/monitor`)}
-                      variant="primary"
-                      className="w-full flex items-center justify-center gap-2 font-bold"
-                    >
-                      <BarChart3 className="w-4 h-4" />
-                      View Submissions &amp; Results
-                      <ChevronRight className="w-4 h-4" />
-                    </Button>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        onClick={() => navigate(`/assessments/${test._id}/monitor`)}
+                        variant="primary"
+                        className="flex-1 flex items-center justify-center gap-2 font-bold"
+                      >
+                        <BarChart3 className="w-4 h-4" />
+                        View Submissions &amp; Results
+                        <ChevronRight className="w-4 h-4" />
+                      </Button>
+                      {new Date() < new Date(test.endTime) &&
+                        (user?.role !== 'FACULTY' || !test.createdBy || test.createdBy === user?.id) && (
+                          <Button
+                            onClick={() => handleDeleteAssessment(test)}
+                            variant="outline"
+                            isLoading={deletingId === test._id}
+                            className="border-rose-500/40 text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 px-3"
+                            title="Delete assessment before deadline"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        )}
+                    </div>
                   ) : isLive ? (
                     <Button
                       onClick={() => navigate(`/assessments/${test._id}/arena`)}

@@ -27,6 +27,13 @@ router.post(
 // Get single assessment metadata
 router.get('/:id', AssessmentController.getAssessmentById);
 
+// Delete assessment before deadline (Creator Faculty / Admin)
+router.delete(
+  '/:id',
+  requireRoles('SUPER_ADMIN', 'INSTITUTION_ADMIN', 'PLACEMENT_OFFICER', 'FACULTY'),
+  AssessmentController.deleteAssessment
+);
+
 // Student Test Execution & Proctoring Lifecycle
 router.post('/:id/start', requireRoles('STUDENT'), AssessmentController.startSession);
 router.post('/:id/telemetry', requireRoles('STUDENT'), AssessmentController.recordTelemetry);

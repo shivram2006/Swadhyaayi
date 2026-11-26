@@ -193,6 +193,7 @@ export class AssessmentService {
         status: a.status,
         startTime: a.startTime,
         endTime: a.endTime,
+        createdBy: a.createdBy?.toString(),
         durationMinutes: a.durationMinutes,
         isEligible,
         totalSections: a.sections.length,
@@ -214,6 +215,34 @@ export class AssessmentService {
     if (!assessment) throw new NotFoundError('Assessment not found');
 
     return assessment;
+  }
+
+  static async deleteAssessment(
+    assessmentId: string,
+    institutionId: string,
+    userId: string,
+    userRole?: string
+  ) {
+    const aId = new Types.ObjectId(assessmentId);
+    const instId = new Types.ObjectId(institutionId);
+
+    const assessment = await Assessment.findOne({ _id: aId, institutionId: instId });
+    if (!assessment) {
+      throw new NotFoundError('Assessment not found');
+    }
+
+    if (userRole === 'FACULTY' && assessment.createdBy?.toString() !== userId) {
+      throw new ForbiddenError('You can only delete assessments created by you');
+    }
+
+    if (new Date() >= new Date(assessment.endTime)) {
+      throw new ValidationError('Cannot delete an assessment after its deadline has passed');
+    }
+
+    await AssessmentSession.deleteMany({ assessmentId: aId });
+    await Assessment.deleteOne({ _id: aId });
+
+    return { deleted: true, assessmentId };
   }
 
   static async startSession(assessmentId: string, userId: string, institutionId: string, accessCode?: string) {
