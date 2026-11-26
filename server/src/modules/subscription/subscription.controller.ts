@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { SubscriptionService } from './subscription.service';
+import { User } from '../user/user.model';
 import { sendSuccess } from '../../core/utils/response';
 import {
   upgradeSubscriptionSchema,
@@ -88,6 +89,38 @@ export class SubscriptionController {
       const parsed = billingWebhookSchema.parse(req.body);
       // In production, verify Stripe/Razorpay signature
       sendSuccess(res, { received: true, event: parsed.event });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async activateStudentSubscription(req: Request, res: Response, next: NextFunction) {
+    try {
+      const user = (req as any).user;
+      const userId = user?.userId || user?._id?.toString();
+      if (!userId) {
+        throw new ValidationError('Student authentication required');
+      }
+
+      const plan = typeof req.body?.plan === 'string' && req.body.plan.trim()
+        ? req.body.plan.trim()
+        : 'PRO_ANNUAL';
+
+      const updated = await User.findByIdAndUpdate(
+        userId,
+        {
+          isSubscribed: true,
+          subscriptionPlan: plan,
+          subscribedAt: new Date(),
+        },
+        { new: true }
+      ).select('isSubscribed subscriptionPlan subscribedAt');
+
+      sendSuccess(res, {
+        isSubscribed: !!updated?.isSubscribed,
+        subscriptionPlan: updated?.subscriptionPlan,
+        subscribedAt: updated?.subscribedAt,
+      });
     } catch (error) {
       next(error);
     }

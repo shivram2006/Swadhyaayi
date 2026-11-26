@@ -8,6 +8,8 @@ export interface User {
   role: UserRole;
   institutionId?: string;
   institutionName?: string;
+  isSubscribed?: boolean;
+  subscriptionPlan?: string;
   rollNumber?: string;
   departmentId?: string;
   batchId?: string;

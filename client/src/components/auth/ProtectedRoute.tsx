@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { UserRole } from '../../types/auth';
 
@@ -9,6 +9,7 @@ interface ProtectedRouteProps {
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles }) => {
   const { isAuthenticated, isLoading, user } = useAuth();
+  const location = useLocation();
 
   if (isLoading) {
     return (
@@ -30,10 +31,16 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles }) 
 
   if (allowedRoles && !allowedRoles.includes(user.role) && user.role !== 'SUPER_ADMIN') {
     // Redirect to respective role home
-    if (user.role === 'STUDENT') return <Navigate to="/dashboard/student" replace />;
+    if (user.role === 'STUDENT') {
+      return <Navigate to={user.isSubscribed ? '/dashboard/student' : '/subscription'} replace />;
+    }
     if (user.role === 'FACULTY') return <Navigate to="/dashboard/faculty" replace />;
     if (user.role === 'INSTITUTION_ADMIN' || user.role === 'PLACEMENT_OFFICER') return <Navigate to="/dashboard/admin" replace />;
     if (user.role === 'SUPER_ADMIN') return <Navigate to="/dashboard/super" replace />;
+  }
+
+  if (user.role === 'STUDENT' && !user.isSubscribed && location.pathname !== '/subscription') {
+    return <Navigate to="/subscription" replace />;
   }
 
   return <Outlet />;

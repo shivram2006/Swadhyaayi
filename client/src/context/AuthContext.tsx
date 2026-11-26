@@ -10,6 +10,7 @@ interface AuthContextType {
   isLoading: boolean;
   login: (email: string, password: string) => Promise<User | null>;
   registerInstitution: (data: any) => Promise<void>;
+  markSubscribed: (plan: string) => void;
   logout: () => Promise<void>;
 }
 
@@ -126,6 +127,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             lastName: u.lastName,
             role: u.role,
             institutionId: u.institutionId,
+            isSubscribed: !!u.isSubscribed,
+            subscriptionPlan: u.subscriptionPlan,
             rollNumber: u.rollNumber,
             departmentId: u.departmentId?._id || u.departmentId,
             batchId: u.batchId?._id || u.batchId,
@@ -197,6 +200,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const markSubscribed = (plan: string) => {
+    setUser((prev) => (prev ? { ...prev, isSubscribed: true, subscriptionPlan: plan } : prev));
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -207,6 +214,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isLoading,
         login,
         registerInstitution,
+        markSubscribed,
         logout,
       }}
     >

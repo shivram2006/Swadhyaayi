@@ -61,6 +61,9 @@ export interface IUserDocument extends Document {
     totalPoints: number;
   };
   status: 'ACTIVE' | 'INACTIVE' | 'SUSPENDED';
+  isSubscribed?: boolean;
+  subscriptionPlan?: string;
+  subscribedAt?: Date;
   refreshTokenHash?: string;
   createdAt: Date;
   updatedAt: Date;
@@ -140,6 +143,9 @@ const UserSchema = new Schema<IUserDocument>(
       default: 'ACTIVE',
       index: true,
     },
+    isSubscribed: { type: Boolean, default: false },
+    subscriptionPlan: { type: String, trim: true },
+    subscribedAt: { type: Date },
     refreshTokenHash: { type: String },
   },
   { timestamps: true }

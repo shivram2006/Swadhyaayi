@@ -119,6 +119,8 @@ export class AuthService {
         role: user.role,
         institutionId: user.institutionId,
         institutionName: institution?.name,
+        isSubscribed: !!user.isSubscribed,
+        subscriptionPlan: user.subscriptionPlan,
       },
       tokens: {
         accessToken,

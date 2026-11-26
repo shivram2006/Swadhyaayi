@@ -28,7 +28,7 @@ export const LoginPage: React.FC = () => {
       } else if (loggedInUser?.role === 'FACULTY') {
         navigate('/dashboard/faculty');
       } else {
-        navigate('/dashboard/student');
+        navigate(loggedInUser?.isSubscribed ? '/dashboard/student' : '/subscription');
       }
     } catch (err: any) {
       setError(err.response?.data?.error?.message || 'Login failed. Please verify credentials.');
@@ -43,8 +43,12 @@ export const LoginPage: React.FC = () => {
     setError(null);
     setIsLoading(true);
     try {
-      await login(demoEmail, 'Password@123');
-      navigate(roleRedirect);
+      const loggedInUser = await login(demoEmail, 'Password@123');
+      if (loggedInUser?.role === 'STUDENT') {
+        navigate(loggedInUser.isSubscribed ? '/dashboard/student' : '/subscription');
+      } else {
+        navigate(roleRedirect);
+      }
     } catch (err: any) {
       setError(err.response?.data?.error?.message || 'Demo user not seeded or server offline.');
     } finally {

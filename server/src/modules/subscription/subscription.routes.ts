@@ -28,6 +28,13 @@ router.get(
   SubscriptionController.getInvoices
 );
 
+// Student subscription activation
+router.post(
+  '/student/activate',
+  requireRoles('STUDENT'),
+  SubscriptionController.activateStudentSubscription
+);
+
 // Super Admin platform command
 router.get('/admin/telemetry', requireRoles('SUPER_ADMIN'), SubscriptionController.getAdminTelemetry);
 router.patch('/admin/:id/seats', requireRoles('SUPER_ADMIN'), SubscriptionController.adminAdjustSeats);

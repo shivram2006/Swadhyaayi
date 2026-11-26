@@ -11,6 +11,7 @@ import { FacultyDashboard } from './pages/dashboard/FacultyDashboard';
 import { SuperAdminDashboard } from './pages/dashboard/SuperAdminDashboard';
 import { StudentManagementPage } from './pages/admin/StudentManagementPage';
 import { StudentProfilePage } from './pages/student/StudentProfilePage';
+import { StudentSubscriptionPage } from './pages/student/StudentSubscriptionPage';
 import { CodingProblemListPage } from './pages/coding/CodingProblemListPage';
 import { CodingWorkspacePage } from './pages/coding/CodingWorkspacePage';
 import { AptitudeHubPage } from './pages/aptitude/AptitudeHubPage';
@@ -50,7 +51,9 @@ const HomeRedirect: React.FC = () => {
     return <Navigate to="/login" replace />;
   }
 
-  if (user.role === 'STUDENT') return <Navigate to="/dashboard/student" replace />;
+  if (user.role === 'STUDENT') {
+    return <Navigate to={user.isSubscribed ? '/dashboard/student' : '/subscription'} replace />;
+  }
   if (user.role === 'INSTITUTION_ADMIN' || user.role === 'PLACEMENT_OFFICER') return <Navigate to="/dashboard/admin" replace />;
   if (user.role === 'FACULTY') return <Navigate to="/dashboard/faculty" replace />;
   if (user.role === 'SUPER_ADMIN') return <Navigate to="/dashboard/super" replace />;
@@ -67,6 +70,11 @@ export const App: React.FC = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register-institution" element={<RegisterInstitutionPage />} />
           <Route path="/" element={<HomeRedirect />} />
+
+          {/* Student Subscription Gate */}
+          <Route element={<ProtectedRoute allowedRoles={['STUDENT']} />}>
+            <Route path="/subscription" element={<StudentSubscriptionPage />} />
+          </Route>
 
           {/* Protected Dashboard Routes */}
           <Route element={<DashboardLayout />}>
