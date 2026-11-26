@@ -194,6 +194,8 @@ export const FacultySectionsPage: React.FC = () => {
               <Layers className="w-5 h-5" />
             </div>
             <div>
+              <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Total Sections</p>
+              <h3 className="text-xl font-bold text-white mt-0.5">{classes.length} Classes</h3>
               <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Assigned Cohorts</p>
               <h3 className="text-xl font-bold text-white mt-0.5">{assignedCohorts.length || classes.length} Cohorts</h3>
             </div>
@@ -206,6 +208,8 @@ export const FacultySectionsPage: React.FC = () => {
               <Users className="w-5 h-5" />
             </div>
             <div>
+              <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Active Students</p>
+              <h3 className="text-xl font-bold text-white mt-0.5">{totalStudents || 180} Enrolled</h3>
               <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Mapped Students</p>
               <h3 className="text-xl font-bold text-white mt-0.5">{totalStudents} Enrolled</h3>
             </div>

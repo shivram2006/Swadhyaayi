@@ -105,6 +105,7 @@ export const StudentManagementPage: React.FC = () => {
   const handleCreateStudent = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      await axios.post('/students', studentForm);
       const payload: any = {
         firstName: studentForm.firstName.trim(),
         lastName: studentForm.lastName.trim(),
@@ -373,6 +374,7 @@ Ankit,Sharma,ankit.sharma@nitsurat.ac.in,U23IT101,IT,Batch 2023-2027,A`;
                       <p className="text-[11px] text-slate-400">{s.email}</p>
                     </td>
                     <td className="py-3 px-4 text-slate-300">
+                      {s.departmentId?.code} • Sec {s.classId?.section}
                       {s.course ? (
                         <span>
                           {s.course} • Sem {s.semester ?? '-'} • Sec {s.section || '-'}
@@ -477,6 +479,7 @@ Ankit,Sharma,ankit.sharma@nitsurat.ac.in,U23IT101,IT,Batch 2023-2027,A`;
                   required
                 />
                 <div>
+                  <label className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase">Department</label>
                   <label className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase">Semester</label>
                   <input
                     type="number"
@@ -504,6 +507,7 @@ Ankit,Sharma,ankit.sharma@nitsurat.ac.in,U23IT101,IT,Batch 2023-2027,A`;
                     className="w-full bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 py-2.5 px-2"
                     value={studentForm.departmentId}
                     onChange={(e) => setStudentForm({ ...studentForm, departmentId: e.target.value })}
+                    required
                   >
                     <option value="">Select Dept</option>
                     {departments.map((d) => (
@@ -513,11 +517,13 @@ Ankit,Sharma,ankit.sharma@nitsurat.ac.in,U23IT101,IT,Batch 2023-2027,A`;
                 </div>
 
                 <div>
+                  <label className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase">Batch</label>
                   <label className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase">Batch (Opt)</label>
                   <select
                     className="w-full bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 py-2.5 px-2"
                     value={studentForm.batchId}
                     onChange={(e) => setStudentForm({ ...studentForm, batchId: e.target.value })}
+                    required
                   >
                     <option value="">Select Batch</option>
                     {batches.map((b) => (
@@ -527,12 +533,15 @@ Ankit,Sharma,ankit.sharma@nitsurat.ac.in,U23IT101,IT,Batch 2023-2027,A`;
                 </div>
 
                 <div>
+                  <label className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase">Section</label>
                   <label className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase">Class (Opt)</label>
                   <select
                     className="w-full bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 py-2.5 px-2"
                     value={studentForm.classId}
                     onChange={(e) => setStudentForm({ ...studentForm, classId: e.target.value })}
+                    required
                   >
+                    <option value="">Select Section</option>
                     <option value="">Select Class</option>
                     {classes.map((c) => (
                       <option key={c._id} value={c._id}>{c.departmentId?.code} - {c.section}</option>
