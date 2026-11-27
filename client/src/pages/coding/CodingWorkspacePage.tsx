@@ -623,13 +623,17 @@ export const CodingWorkspacePage: React.FC = () => {
                     <div className="space-y-2">
                       <div
                         className={`p-2.5 rounded-lg border flex items-center justify-between ${
-                          executionResult.overallStatus === 'ACCEPTED' || executionResult.status === 'ACCEPTED'
+                          executionResult.overallStatus === 'SAMPLE_PASSED' ||
+                          executionResult.overallStatus === 'ACCEPTED' ||
+                          executionResult.status === 'ACCEPTED'
                             ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
                             : 'bg-rose-500/10 border-rose-500/30 text-rose-400'
                         }`}
                       >
                         <span className="font-bold">
-                          {executionResult.overallStatus || executionResult.status}
+                          {executionResult.overallStatus === 'SAMPLE_PASSED'
+                            ? 'SAMPLE PASSED'
+                            : executionResult.overallStatus || executionResult.status}
                         </span>
                         <span className="text-[11px] text-slate-300 font-sans">
                           {executionResult.passedCases !== undefined && `${executionResult.passedCases} / ${executionResult.totalCases} Sample Cases Passed`}

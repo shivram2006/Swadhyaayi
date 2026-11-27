@@ -31,6 +31,17 @@ export interface IStarterCode {
   driverCode?: string;
 }
 
+export interface IFunctionParam {
+  name: string;
+  type: 'int' | 'long' | 'double' | 'bool' | 'string' | 'int[]' | 'string[]' | 'int[][]';
+}
+
+export interface IFunctionSignature {
+  methodName: string;
+  params: IFunctionParam[];
+  returnType: 'int' | 'long' | 'double' | 'bool' | 'string' | 'int[]' | 'string[]' | 'int[][]' | 'void';
+}
+
 export interface ITestCase {
   input: string;
   output: string;
@@ -53,6 +64,7 @@ export interface IQuestionCodingDocument extends Document {
   topics: string[];
   companyTags: ICompanyTag[];
   supportedLanguages: string[];
+  functionSignature?: IFunctionSignature;
   starterCode: IStarterCode[];
   sampleTestCases: ITestCase[];
   hiddenTestCases: IHiddenTestCase[];
@@ -102,6 +114,16 @@ const QuestionCodingSchema = new Schema<IQuestionCodingDocument>(
       },
     ],
     supportedLanguages: [{ type: String, default: ['python', 'javascript', 'cpp', 'java'] }],
+    functionSignature: {
+      methodName: { type: String, trim: true },
+      params: [
+        {
+          name: { type: String, required: true, trim: true },
+          type: { type: String, required: true, trim: true },
+        },
+      ],
+      returnType: { type: String, trim: true },
+    },
     starterCode: [
       {
         language: { type: String, required: true },

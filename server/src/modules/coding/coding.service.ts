@@ -3,6 +3,7 @@ import { QuestionCoding, SubmissionCoding, CodingDifficulty, CodingCategory } fr
 import { User } from '../user/user.model';
 import { NotFoundError, ConflictError } from '../../core/utils/appError';
 import { SandboxRunner } from './runner/sandboxRunner';
+import { CodeHarnessBuilder } from './runner/codeHarness';
 
 export class CodingService {
   static async getQuestions(
@@ -99,8 +100,14 @@ export class CodingService {
     const question = await QuestionCoding.findById(questionId);
     if (!question) throw new NotFoundError('Question not found');
 
+    const normLang = CodeHarnessBuilder.normalizeLanguage(language);
+    const starter = question.starterCode?.find(
+      (s) => CodeHarnessBuilder.normalizeLanguage(s.language) === normLang
+    );
+    const executableCode = CodeHarnessBuilder.assemble(language, code, starter?.driverCode);
+
     if (customInput !== undefined) {
-      const singleRes = await SandboxRunner.executeSingle(language, code, customInput, question.timeLimitMs);
+      const singleRes = await SandboxRunner.executeSingle(language, executableCode, customInput, question.timeLimitMs);
       return {
         isCustomInput: true,
         output: singleRes.stdout,
@@ -117,10 +124,10 @@ export class CodingService {
       expectedOutput: s.output,
     }));
 
-    const result = await SandboxRunner.evaluateBatch(language, code, sampleCases, question.timeLimitMs);
+    const result = await SandboxRunner.evaluateBatch(language, executableCode, sampleCases, question.timeLimitMs);
     return {
       isCustomInput: false,
-      overallStatus: result.overallStatus,
+      overallStatus: result.overallStatus === 'ACCEPTED' ? 'SAMPLE_PASSED' : result.overallStatus,
       totalCases: result.totalCases,
       passedCases: result.passedCases,
       maxExecutionTimeMs: result.maxExecutionTimeMs,
@@ -142,15 +149,31 @@ export class CodingService {
     const question = await QuestionCoding.findById(qId);
     if (!question) throw new NotFoundError('Question not found');
 
-    const testCases = question.hiddenTestCases.map((tc) => ({
+    const normLang = CodeHarnessBuilder.normalizeLanguage(language);
+    const starter = question.starterCode?.find(
+      (s) => CodeHarnessBuilder.normalizeLanguage(s.language) === normLang
+    );
+    const executableCode = CodeHarnessBuilder.assemble(language, code, starter?.driverCode);
+
+    const sampleCases = question.sampleTestCases.map((s) => ({
+      input: s.input,
+      expectedOutput: s.output,
+    }));
+    const hiddenCases = question.hiddenTestCases.map((tc) => ({
       input: tc.input,
       expectedOutput: tc.expectedOutput,
     }));
 
-    // If no hidden testcases, fallback to sample cases
-    const casesToTest = testCases.length > 0 ? testCases : question.sampleTestCases.map((s) => ({ input: s.input, expectedOutput: s.output }));
+    // Evaluate both sample and hidden test cases (deduplicating identical inputs)
+    const seenInputs = new Set<string>();
+    const casesToTest = [...sampleCases, ...hiddenCases].filter((tc) => {
+      const key = tc.input.trim();
+      if (seenInputs.has(key)) return false;
+      seenInputs.add(key);
+      return true;
+    });
 
-    const evalResult = await SandboxRunner.evaluateBatch(language, code, casesToTest, question.timeLimitMs);
+    const evalResult = await SandboxRunner.evaluateBatch(language, executableCode, casesToTest, question.timeLimitMs);
 
     // Record submission
     const submission = await SubmissionCoding.create({
