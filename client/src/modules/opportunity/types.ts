@@ -41,6 +41,9 @@ export interface IOpportunityMatchDetails {
 export interface IOpportunity {
   _id: string;
   institutionId?: string;
+  isExternal?: boolean;
+  publisher?: string;
+  postedAt?: string;
   title: string;
   company: IOpportunityCompany;
   type: OpportunityType;

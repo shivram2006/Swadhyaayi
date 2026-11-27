@@ -18,6 +18,17 @@ export const OpportunityApi = {
     return res.data?.data || [];
   },
 
+  getExternalJobs: async (params?: {
+    q?: string;
+    country?: string;
+    datePosted?: string;
+    remoteOnly?: boolean;
+    employmentTypes?: string;
+  }): Promise<{ jobs: IOpportunity[]; cached: boolean; query: string }> => {
+    const res = await axios.get('/opportunities/external', { params });
+    return res.data?.data || { jobs: [], cached: false, query: '' };
+  },
+
   getOpportunityById: async (id: string): Promise<IOpportunity> => {
     const res = await axios.get(`/opportunities/${id}`);
     return res.data?.data;

@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { OpportunityService } from './opportunity.service';
+import { ExternalJobService } from './externalJob.service';
 import { sendSuccess } from '../../core/utils/response';
 import {
   createOpportunitySchema,
@@ -9,6 +10,23 @@ import {
 import { ValidationError } from '../../core/utils/appError';
 
 export class OpportunityController {
+  // External Live Jobs (RapidAPI JSearch)
+  static async getExternalJobs(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { q, country, datePosted, remoteOnly, employmentTypes } = req.query;
+      const result = await ExternalJobService.searchJobs({
+        query: typeof q === 'string' ? q : undefined,
+        country: typeof country === 'string' ? country : undefined,
+        datePosted: typeof datePosted === 'string' ? datePosted : undefined,
+        remoteOnly: remoteOnly === 'true',
+        employmentTypes: typeof employmentTypes === 'string' ? employmentTypes : undefined,
+      });
+      sendSuccess(res, result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   // Opportunities Endpoints
   static async getOpportunities(req: Request, res: Response, next: NextFunction) {
     try {

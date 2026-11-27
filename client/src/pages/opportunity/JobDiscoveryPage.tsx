@@ -25,30 +25,52 @@ export const JobDiscoveryPage: React.FC = () => {
   const [opportunities, setOpportunities] = useState<IOpportunity[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedOpp, setSelectedOpp] = useState<IOpportunity | null>(null);
+  const [jobTab, setJobTab] = useState<'CAMPUS' | 'EXTERNAL'>('EXTERNAL');
+  const [externalError, setExternalError] = useState<string | null>(null);
+  const [isCached, setIsCached] = useState<boolean>(false);
 
   // Filters
   const [search, setSearch] = useState<string>('');
+  const [externalQuery, setExternalQuery] = useState<string>('software developer in India');
   const [selectedType, setSelectedType] = useState<string>('ALL');
   const [selectedWorkMode, setSelectedWorkMode] = useState<string>('ALL');
   const [onlyEligible, setOnlyEligible] = useState<boolean>(false);
 
   useEffect(() => {
     fetchOpportunities();
-  }, [selectedType, selectedWorkMode, onlyEligible]);
+  }, [jobTab, selectedType, selectedWorkMode, onlyEligible]);
 
-  const fetchOpportunities = async () => {
+  const fetchOpportunities = async (overrideQuery?: string) => {
     try {
       setLoading(true);
-      const params: any = {};
-      if (selectedType !== 'ALL') params.type = selectedType;
-      if (selectedWorkMode !== 'ALL') params.workMode = selectedWorkMode;
-      if (onlyEligible) params.onlyEligible = true;
-      if (search.trim()) params.search = search.trim();
+      setExternalError(null);
+      if (jobTab === 'EXTERNAL') {
+        const q = (overrideQuery ?? externalQuery).trim() || 'software developer fresher India';
+        const data = await OpportunityApi.getExternalJobs({
+          q,
+          country: 'in',
+          datePosted: 'month',
+          remoteOnly: selectedWorkMode === 'REMOTE',
+          employmentTypes: selectedType === 'INTERNSHIP' ? 'INTERN' : selectedType === 'FULL_TIME' ? 'FULLTIME' : undefined,
+        });
+        setOpportunities(data.jobs || []);
+        setIsCached(!!data.cached);
+      } else {
+        const params: any = {};
+        if (selectedType !== 'ALL') params.type = selectedType;
+        if (selectedWorkMode !== 'ALL') params.workMode = selectedWorkMode;
+        if (onlyEligible) params.onlyEligible = true;
+        if (search.trim()) params.search = search.trim();
 
-      const data = await OpportunityApi.getOpportunities(params);
-      setOpportunities(data);
-    } catch {
-      // Fallback
+        const data = await OpportunityApi.getOpportunities(params);
+        setOpportunities(data);
+        setIsCached(false);
+      }
+    } catch (err: any) {
+      setOpportunities([]);
+      if (jobTab === 'EXTERNAL') {
+        setExternalError(err?.response?.data?.error?.message || 'Unable to load live external jobs right now.');
+      }
     } finally {
       setLoading(false);
     }
@@ -60,6 +82,11 @@ export const JobDiscoveryPage: React.FC = () => {
   };
 
   const handleApplyAndTrack = async (opp: IOpportunity) => {
+    if (opp.isExternal) {
+      window.open(opp.applyUrl, '_blank', 'noopener,noreferrer');
+      setSelectedOpp(null);
+      return;
+    }
     try {
       await OpportunityApi.createApplication({
         opportunityId: opp._id,
@@ -127,49 +154,103 @@ export const JobDiscoveryPage: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header & Fast Pipeline Link */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+      {/* Header & Source Switcher */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.08] pb-5">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold text-white tracking-tight">Jobs & Internships Portal</h1>
-            <Badge variant="brand" className="text-xs">
-              Verified & Campus Drives
-            </Badge>
-          </div>
-          <p className="text-sm text-slate-400 mt-1">
-            Discover verified tech roles with real-time skill matching and eligibility audits.
+          <h1 className="text-2xl sm:text-3xl font-medium text-[#ededed] tracking-tight">
+            Jobs &amp; Internships
+          </h1>
+          <p className="text-sm text-[#a1a1a6] mt-1">
+            Campus placement drives and live external listings from LinkedIn &amp; Indeed.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2.5">
+          <div className="inline-flex rounded-lg bg-[#0f0f10] border border-white/[0.08] p-1">
+            <button
+              type="button"
+              onClick={() => setJobTab('EXTERNAL')}
+              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
+                jobTab === 'EXTERNAL' ? 'bg-[#ededed] text-[#141415]' : 'text-[#a1a1a6] hover:text-[#ededed]'
+              }`}
+            >
+              Live External Jobs
+            </button>
+            <button
+              type="button"
+              onClick={() => setJobTab('CAMPUS')}
+              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
+                jobTab === 'CAMPUS' ? 'bg-[#ededed] text-[#141415]' : 'text-[#a1a1a6] hover:text-[#ededed]'
+              }`}
+            >
+              Campus Drives
+            </button>
+          </div>
           <Button
-            variant="outline"
+            variant="secondary"
             onClick={() => navigate('/applications')}
-            className="flex items-center gap-2 border-slate-700 text-slate-200 hover:bg-slate-800/60"
+            leftIcon={<Kanban className="w-4 h-4" strokeWidth={1.5} />}
           >
-            <Kanban className="w-4 h-4 text-brand-400" />
-            My Application Kanban
+            Application Kanban
           </Button>
         </div>
       </div>
 
       {/* Filter and Search Bar */}
-      <Card className="p-4 bg-slate-900/60 border-slate-800 space-y-3">
+      <Card className="p-4 space-y-3">
         <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row items-center gap-2">
           <div className="relative flex-1 w-full">
-            <Search className="w-4 h-4 absolute left-3 top-3 text-slate-500" />
+            <Search className="w-4 h-4 absolute left-3 top-3 text-[#85858b]" strokeWidth={1.5} />
             <input
               type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search by role title, company (Google, Amazon), or tech skills (React, Python)..."
-              className="w-full pl-9 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-500"
+              value={jobTab === 'EXTERNAL' ? externalQuery : search}
+              onChange={(e) => (jobTab === 'EXTERNAL' ? setExternalQuery(e.target.value) : setSearch(e.target.value))}
+              placeholder={
+                jobTab === 'EXTERNAL'
+                  ? 'Search live roles (e.g. React Developer India, Software Intern)...'
+                  : 'Search campus roles, companies, or skills...'
+              }
+              className="w-full pl-9 pr-4 h-10 bg-[#0f0f10] border border-white/[0.08] rounded-lg text-sm text-[#ededed] placeholder-[#85858b] focus:outline-none focus:border-white/[0.24]"
             />
           </div>
-          <Button type="submit" variant="primary" className="text-xs px-4 py-2 w-full sm:w-auto">
+          <Button type="submit" variant="primary" className="w-full sm:w-auto">
             Search
           </Button>
         </form>
+
+        {jobTab === 'EXTERNAL' && (
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-1 text-xs">
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="text-[#85858b] mr-1">Quick roles:</span>
+              {[
+                'software developer in India',
+                'frontend react developer in India',
+                'backend node.js developer in India',
+                'software engineering intern in India',
+                'data analyst in India',
+              ].map((preset) => (
+                <button
+                  key={preset}
+                  type="button"
+                  onClick={() => {
+                    setExternalQuery(preset);
+                    fetchOpportunities(preset);
+                  }}
+                  className={`px-2.5 py-1 rounded-md border transition-colors ${
+                    externalQuery.toLowerCase() === preset.toLowerCase()
+                      ? 'bg-[#232325] text-[#ededed] border-white/[0.2]'
+                      : 'bg-[#0f0f10] text-[#a1a1a6] border-white/[0.08] hover:text-[#ededed]'
+                  }`}
+                >
+                  {preset.replace(' India', '')}
+                </button>
+              ))}
+            </div>
+            {isCached && (
+              <span className="text-[11px] font-mono text-[#85858b]">Cached (6h)</span>
+            )}
+          </div>
+        )}
 
         <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-850 text-xs">
           {/* Role Type Pills */}
@@ -234,6 +315,12 @@ export const JobDiscoveryPage: React.FC = () => {
             </Card>
           ))}
         </div>
+      ) : externalError ? (
+        <Card className="p-8 text-center space-y-2 max-w-lg mx-auto">
+          <AlertCircle className="w-8 h-8 text-[#e5484d] mx-auto" strokeWidth={1.5} />
+          <h3 className="text-base font-medium text-[#ededed]">Could not load external jobs</h3>
+          <p className="text-xs text-[#a1a1a6]">{externalError}</p>
+        </Card>
       ) : opportunities.length === 0 ? (
         <Card className="p-12 text-center bg-slate-900/40 border-slate-800 space-y-3 max-w-md mx-auto">
           <Briefcase className="w-10 h-10 text-slate-600 mx-auto" />
@@ -270,9 +357,13 @@ export const JobDiscoveryPage: React.FC = () => {
                         <div className="flex items-center gap-1.5 mt-0.5">
                           <Badge
                             variant={opp.source === 'CAMPUS_DRIVE' ? 'brand' : 'neutral'}
-                            className="text-[10px] font-mono px-1.5 py-0"
+                            className="text-[11px] font-mono px-1.5 py-0"
                           >
-                            {opp.source === 'CAMPUS_DRIVE' ? 'Campus Drive' : 'Verified Partner'}
+                            {opp.isExternal
+                              ? opp.publisher || 'External'
+                              : opp.source === 'CAMPUS_DRIVE'
+                              ? 'Campus Drive'
+                              : 'Verified Partner'}
                           </Badge>
                         </div>
                       </div>
@@ -346,8 +437,20 @@ export const JobDiscoveryPage: React.FC = () => {
                 </div>
 
                 {/* Footer Actions */}
-                <div className="mt-4 pt-3 border-t border-slate-850 flex items-center justify-between text-xs">
-                  {appStatus?.isApplied ? (
+                <div className="mt-4 pt-3 border-t border-white/[0.08] flex items-center justify-between text-xs">
+                  {opp.isExternal ? (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.open(opp.applyUrl, '_blank', 'noopener,noreferrer');
+                      }}
+                      className="inline-flex items-center gap-1.5 text-brand-400 hover:text-brand-300 font-medium"
+                    >
+                      Apply on {opp.publisher || 'Portal'}
+                      <ExternalLink className="w-3 h-3" strokeWidth={1.5} />
+                    </button>
+                  ) : appStatus?.isApplied ? (
                     <span className="px-2 py-0.5 rounded bg-brand-500/10 border border-brand-500/30 text-brand-300 font-medium text-[11px] flex items-center gap-1">
                       <CheckCircle className="w-3 h-3 text-brand-400" />
                       {appStatus.stage?.replace('_', ' ')}
@@ -355,16 +458,13 @@ export const JobDiscoveryPage: React.FC = () => {
                   ) : (
                     <button
                       onClick={(e) => handleSaveToPipeline(opp, e)}
-                      className="text-slate-400 hover:text-white transition-colors"
+                      className="text-[#a1a1a6] hover:text-[#ededed] transition-colors"
                     >
                       Save to Pipeline
                     </button>
                   )}
 
-                  <Button
-                    variant="outline"
-                    className="text-xs px-2.5 py-1 border-slate-750 text-slate-200 group-hover:border-brand-500/40"
-                  >
+                  <Button variant="outline" size="sm">
                     View Details
                   </Button>
                 </div>

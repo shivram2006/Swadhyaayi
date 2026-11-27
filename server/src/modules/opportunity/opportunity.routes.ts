@@ -10,6 +10,7 @@ export const applicationRouter = Router();
 opportunityRouter.use(authenticateToken);
 
 opportunityRouter.get('/', OpportunityController.getOpportunities);
+opportunityRouter.get('/external', OpportunityController.getExternalJobs);
 opportunityRouter.post(
   '/',
   requireRoles('SUPER_ADMIN', 'INSTITUTION_ADMIN', 'PLACEMENT_OFFICER'),
