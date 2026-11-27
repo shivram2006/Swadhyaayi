@@ -233,4 +233,23 @@ export class AssessmentController {
       next(error);
     }
   }
+
+  static async getFacultyResultsArchive(req: Request, res: Response, next: NextFunction) {
+    try {
+      const user = (req as any).user;
+      const institutionId = user?.institutionId?.toString();
+
+      if (!institutionId) {
+        throw new ValidationError('Institution context required');
+      }
+
+      const data = await AssessmentService.getFacultyResultsArchive(institutionId, {
+        userId: user?.userId || user?._id?.toString(),
+        role: user?.role,
+      });
+      sendSuccess(res, data);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

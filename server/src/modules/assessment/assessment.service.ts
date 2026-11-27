@@ -239,10 +239,12 @@ export class AssessmentService {
       throw new ValidationError('Cannot delete an assessment after its deadline has passed');
     }
 
-    await AssessmentSession.deleteMany({ assessmentId: aId });
-    await Assessment.deleteOne({ _id: aId });
+    // Archive assessment so student results and assessment details remain preserved for faculty analytics
+    assessment.status = 'ARCHIVED';
+    assessment.deletedAt = new Date();
+    await assessment.save();
 
-    return { deleted: true, assessmentId };
+    return { deleted: true, archived: true, assessmentId };
   }
 
   static async startSession(assessmentId: string, userId: string, institutionId: string, accessCode?: string) {
@@ -861,5 +863,129 @@ export class AssessmentService {
         isFlagged: s.isFlaggedForCheating,
       })),
     };
+  }
+
+  static async getFacultyResultsArchive(
+    institutionId: string,
+    requester?: { userId?: string; role?: string }
+  ) {
+    const instId = new Types.ObjectId(institutionId);
+
+    let assessments = await Assessment.find({ institutionId: instId })
+      .sort({ createdAt: -1 })
+      .lean();
+
+    let assignedCohorts: { course: string; semester: number; section: string }[] = [];
+    if (requester?.role === 'FACULTY' && requester.userId) {
+      const faculty = await User.findById(requester.userId).select('assignedCohorts').lean();
+      assignedCohorts = (faculty?.assignedCohorts || []).filter(
+        (c) => c.course && c.semester !== undefined && c.section
+      );
+      assessments = assessments.filter(
+        (a) =>
+          a.createdBy?.toString() === requester.userId ||
+          (a.targeting?.cohorts || []).some((c: any) =>
+            assignedCohorts.some((fc) => AssessmentService.cohortMatches(c, fc))
+          )
+      );
+    }
+
+    const assessmentIds = assessments.map((a) => a._id);
+    let sessions = await AssessmentSession.find({ assessmentId: { $in: assessmentIds } })
+      .populate('userId', 'firstName lastName rollNumber email course semester section')
+      .sort({ submittedAt: -1, startedAt: -1 })
+      .lean();
+
+    if (requester?.role === 'FACULTY' && assignedCohorts.length > 0) {
+      sessions = sessions.filter(
+        (s: any) =>
+          s.userId && assignedCohorts.some((fc) => AssessmentService.cohortMatches(fc, s.userId))
+      );
+    }
+
+    const sessionsByAssessment = new Map<string, any[]>();
+    for (const s of sessions) {
+      const key = s.assessmentId.toString();
+      const arr = sessionsByAssessment.get(key) || [];
+      arr.push(s);
+      sessionsByAssessment.set(key, arr);
+    }
+
+    return assessments.map((a) => {
+      const list = sessionsByAssessment.get(a._id.toString()) || [];
+      const submitted = list.filter((s) => s.status === 'SUBMITTED' || s.status === 'AUTO_SUBMITTED');
+      const passedCount = submitted.filter((s) => s.isPassed).length;
+      const failedCount = submitted.length - passedCount;
+      const percentages = submitted.map((s) => Number(s.percentage || 0));
+      const averagePercentage =
+        percentages.length > 0
+          ? Math.round(percentages.reduce((acc, v) => acc + v, 0) / percentages.length)
+          : 0;
+      const highestPercentage = percentages.length > 0 ? Math.max(...percentages) : 0;
+      const lowestPercentage = percentages.length > 0 ? Math.min(...percentages) : 0;
+      const passRate = submitted.length > 0 ? Math.round((passedCount / submitted.length) * 100) : 0;
+
+      const buckets = [
+        { label: '0-25%', min: 0, max: 25, count: 0 },
+        { label: '26-50%', min: 26, max: 50, count: 0 },
+        { label: '51-75%', min: 51, max: 75, count: 0 },
+        { label: '76-100%', min: 76, max: 100, count: 0 },
+      ];
+      for (const pct of percentages) {
+        const b = buckets.find((x) => pct >= x.min && pct <= x.max) || buckets[0];
+        b.count += 1;
+      }
+
+      const totalQuestions = a.sections.reduce((acc, s) => acc + (s.questions?.length || 0), 0);
+      const totalPoints = a.sections.reduce(
+        (acc, s) => acc + s.questions.reduce((qAcc, q) => qAcc + q.points, 0),
+        0
+      );
+
+      return {
+        _id: a._id,
+        title: a.title,
+        description: a.description,
+        type: a.type,
+        status: a.status,
+        isDeleted: a.status === 'ARCHIVED',
+        deletedAt: a.deletedAt,
+        startTime: a.startTime,
+        endTime: a.endTime,
+        durationMinutes: a.durationMinutes,
+        totalQuestions,
+        totalPoints,
+        cohorts: a.targeting?.cohorts || [],
+        analytics: {
+          attemptedCount: list.length,
+          submittedCount: submitted.length,
+          passedCount,
+          failedCount,
+          passRate,
+          averagePercentage,
+          highestPercentage,
+          lowestPercentage,
+          scoreDistribution: buckets.map(({ label, count }) => ({ label, count })),
+        },
+        results: list.map((s: any) => ({
+          sessionId: s._id,
+          userId: s.userId?._id,
+          studentName: s.userId ? `${s.userId.firstName} ${s.userId.lastName}` : 'Student',
+          rollNumber: s.userId?.rollNumber || '-',
+          email: s.userId?.email || '',
+          course: s.userId?.course,
+          semester: s.userId?.semester,
+          section: s.userId?.section,
+          status: s.status,
+          totalScore: s.totalScore || 0,
+          maxPossibleScore: s.maxPossibleScore || totalPoints,
+          percentage: s.percentage || 0,
+          isPassed: !!s.isPassed,
+          tabSwitchCount: s.tabSwitchCount || 0,
+          startedAt: s.startedAt,
+          submittedAt: s.submittedAt,
+        })),
+      };
+    });
   }
 }

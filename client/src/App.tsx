@@ -33,6 +33,7 @@ import { SuperAdminSubscriptionsPage } from './pages/super/SuperAdminSubscriptio
 import { FacultySectionsPage } from './pages/faculty/FacultySectionsPage';
 import { CreateAssessmentPage } from './pages/faculty/CreateAssessmentPage';
 import { FacultyQuestionBankPage } from './pages/faculty/FacultyQuestionBankPage';
+import { FacultyResultsPage } from './pages/faculty/FacultyResultsPage';
 
 const HomeRedirect: React.FC = () => {
   const { isAuthenticated, user, isLoading } = useAuth();
@@ -122,6 +123,7 @@ export const App: React.FC = () => {
               <Route path="/faculty/create-test" element={<CreateAssessmentPage />} />
               <Route path="/faculty/question-bank" element={<FacultyQuestionBankPage />} />
               <Route path="/faculty/tests" element={<AssessmentListPage />} />
+              <Route path="/faculty/results" element={<FacultyResultsPage />} />
               <Route path="/assessments/:id/monitor" element={<FacultyAssessmentMonitorPage />} />
             </Route>
 

@@ -17,6 +17,12 @@ router.get(
   AssessmentController.getFacultySubmissions
 );
 
+router.get(
+  '/faculty/results',
+  requireRoles('SUPER_ADMIN', 'INSTITUTION_ADMIN', 'PLACEMENT_OFFICER', 'FACULTY'),
+  AssessmentController.getFacultyResultsArchive
+);
+
 // Create Assessment (Faculty / Placement Officer / Admin)
 router.post(
   '/',

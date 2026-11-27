@@ -37,6 +37,7 @@ export interface IAssessment extends Document {
   description: string;
   type: AssessmentType;
   status: AssessmentStatus;
+  deletedAt?: Date;
   startTime: Date;
   endTime: Date;
   durationMinutes: number;
@@ -78,6 +79,7 @@ const AssessmentSchema = new Schema<IAssessment>(
       default: 'PUBLISHED',
       index: true,
     },
+    deletedAt: { type: Date },
     startTime: { type: Date, required: true, index: true },
     endTime: { type: Date, required: true, index: true },
     durationMinutes: { type: Number, required: true, min: 5, max: 360 },

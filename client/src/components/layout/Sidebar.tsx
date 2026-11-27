@@ -14,6 +14,7 @@ import {
   Users,
   LayoutDashboard,
   User,
+  BarChart3,
 } from 'lucide-react';
 
 export const Sidebar: React.FC = () => {
@@ -45,6 +46,7 @@ export const Sidebar: React.FC = () => {
     { to: '/dashboard/faculty', label: 'Faculty Overview', icon: LayoutDashboard },
     { to: '/faculty/classes', label: 'My Sections', icon: Users },
     { to: '/faculty/tests/new', label: 'Create Test', icon: ClipboardCheck },
+    { to: '/faculty/results', label: 'Results & Analytics', icon: BarChart3 },
     { to: '/faculty/question-bank', label: 'Question Bank', icon: Code2 },
   ];
 
