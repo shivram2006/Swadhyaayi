@@ -4,6 +4,7 @@ import { User } from '../user/user.model';
 import { NotFoundError, ConflictError } from '../../core/utils/appError';
 import { SandboxRunner } from './runner/sandboxRunner';
 import { CodeHarnessBuilder } from './runner/codeHarness';
+import { DriverGenerator } from './runner/driverGenerator';
 
 export class CodingService {
   static async getQuestions(
@@ -258,8 +259,29 @@ export class CodingService {
       throw new ConflictError(`Question with slug '${data.slug}' already exists`);
     }
 
+    const payload = { ...data };
+    if (!payload.starterCode || payload.starterCode.length === 0) {
+      const combined = [
+        ...(Array.isArray(payload.sampleTestCases)
+          ? payload.sampleTestCases.map((s: any) => ({ input: s.input, expectedOutput: s.output }))
+          : []),
+        ...(Array.isArray(payload.hiddenTestCases)
+          ? payload.hiddenTestCases.map((h: any) => ({ input: h.input, expectedOutput: h.expectedOutput }))
+          : []),
+      ];
+      if (combined.length > 0) {
+        const bundle = DriverGenerator.generateFromCases(payload.title || 'Solution', combined, payload.description || '');
+        payload.functionSignature = {
+          methodName: bundle.methodName,
+          params: bundle.params,
+          returnType: bundle.returnType,
+        };
+        payload.starterCode = bundle.starterCode;
+      }
+    }
+
     const question = await QuestionCoding.create({
-      ...data,
+      ...payload,
       slug: data.slug.toLowerCase(),
       isGlobal,
       institutionId: institutionId ? new Types.ObjectId(institutionId) : undefined,

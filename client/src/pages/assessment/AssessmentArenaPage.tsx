@@ -827,7 +827,9 @@ export const AssessmentArenaPage: React.FC = () => {
                         {executionResult && (
                           <span
                             className={`w-2 h-2 rounded-full ${
-                              executionResult.overallStatus === 'ACCEPTED' || executionResult.status === 'ACCEPTED'
+                              executionResult.overallStatus === 'SAMPLE_PASSED' ||
+                              executionResult.overallStatus === 'ACCEPTED' ||
+                              executionResult.status === 'ACCEPTED'
                                 ? 'bg-emerald-400'
                                 : 'bg-rose-400'
                             }`}
@@ -889,13 +891,13 @@ export const AssessmentArenaPage: React.FC = () => {
                       {activeConsoleTab === 'custom' && (
                         <div className="space-y-2">
                           <span className="text-[11px] text-slate-400 block">
-                            Type stdin inputs to evaluate against your solution:
+                            Enter custom testcase input (matching sample format, e.g. [2, 5, 5]) to run against your solution:
                           </span>
                           <textarea
                             rows={3}
                             value={customInput}
                             onChange={(e) => setCustomInput(e.target.value)}
-                            placeholder="e.g. 5&#10;1 2 3 4 5"
+                            placeholder="e.g. [2, 5, 5]"
                             className="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 font-mono text-xs text-slate-200 focus:outline-none focus:border-brand-500"
                           />
                         </div>
@@ -913,9 +915,11 @@ export const AssessmentArenaPage: React.FC = () => {
                             <div className="space-y-3 font-mono text-xs">
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-2">
-                                  {executionResult.overallStatus === 'ACCEPTED' || executionResult.status === 'ACCEPTED' ? (
+                                  {executionResult.overallStatus === 'SAMPLE_PASSED' ||
+                                  executionResult.overallStatus === 'ACCEPTED' ||
+                                  executionResult.status === 'ACCEPTED' ? (
                                     <Badge variant="success" className="text-xs font-bold">
-                                      Accepted
+                                      {executionResult.overallStatus === 'SAMPLE_PASSED' ? 'Sample Passed' : 'Accepted'}
                                     </Badge>
                                   ) : (
                                     <Badge variant="danger" className="text-xs font-bold">

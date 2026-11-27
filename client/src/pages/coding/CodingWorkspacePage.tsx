@@ -567,11 +567,13 @@ export const CodingWorkspacePage: React.FC = () => {
 
               {activeConsoleTab === 'custom' && (
                 <div className="h-full flex flex-col">
-                  <span className="text-slate-400 uppercase text-[10px] mb-1">Standard Input (stdin)</span>
+                  <span className="text-slate-400 text-[11px] mb-1.5">
+                    Custom testcase input (matching sample format, e.g. [2, 5, 5])
+                  </span>
                   <textarea
                     rows={4}
-                    className="w-full flex-1 bg-slate-950 border border-slate-800 rounded p-2 text-slate-200 focus:outline-none"
-                    placeholder="Enter custom input..."
+                    className="w-full flex-1 bg-slate-950 border border-slate-800 rounded p-2 text-slate-200 focus:outline-none font-mono text-xs"
+                    placeholder="Enter custom testcase input (e.g. [2, 5, 5])..."
                     value={customInput}
                     onChange={(e) => setCustomInput(e.target.value)}
                   />
