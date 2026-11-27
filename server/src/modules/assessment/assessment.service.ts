@@ -3,6 +3,7 @@ import { Assessment, AssessmentSession, IAssessment, ProctoringEventType } from 
 import { QuestionAptitude } from '../aptitude/aptitude.model';
 import { QuestionCoding } from '../coding/coding.model';
 import { SandboxRunner } from '../coding/runner/sandboxRunner';
+import { CodeHarnessBuilder } from '../coding/runner/codeHarness';
 import { User } from '../user/user.model';
 import { NotFoundError, ValidationError, ConflictError, ForbiddenError } from '../../core/utils/appError';
 
@@ -497,9 +498,14 @@ export class AssessmentService {
     }
 
     const timeLimitMs = question?.timeLimitMs || 2000;
+    const normLang = CodeHarnessBuilder.normalizeLanguage(language);
+    const starter = question?.starterCode?.find(
+      (s: any) => CodeHarnessBuilder.normalizeLanguage(s.language) === normLang
+    );
+    const executableCode = CodeHarnessBuilder.assemble(language, code, starter?.driverCode);
 
     if (customInput !== undefined && customInput.trim() !== '') {
-      const singleRes = await SandboxRunner.executeSingle(language, code, customInput, timeLimitMs);
+      const singleRes = await SandboxRunner.executeSingle(language, executableCode, customInput, timeLimitMs);
       return {
         isCustomInput: true,
         output: singleRes.stdout,
@@ -516,10 +522,10 @@ export class AssessmentService {
     }));
 
     if (sampleCases.length === 0) {
-      const singleRes = await SandboxRunner.executeSingle(language, code, '', timeLimitMs);
+      const singleRes = await SandboxRunner.executeSingle(language, executableCode, '', timeLimitMs);
       return {
         isCustomInput: false,
-        overallStatus: singleRes.status,
+        overallStatus: singleRes.status === 'ACCEPTED' ? 'SAMPLE_PASSED' : singleRes.status,
         totalCases: 1,
         passedCases: singleRes.status === 'ACCEPTED' ? 1 : 0,
         maxExecutionTimeMs: singleRes.executionTimeMs,
@@ -537,10 +543,10 @@ export class AssessmentService {
       };
     }
 
-    const result = await SandboxRunner.evaluateBatch(language, code, sampleCases, timeLimitMs);
+    const result = await SandboxRunner.evaluateBatch(language, executableCode, sampleCases, timeLimitMs);
     return {
       isCustomInput: false,
-      overallStatus: result.overallStatus,
+      overallStatus: result.overallStatus === 'ACCEPTED' ? 'SAMPLE_PASSED' : result.overallStatus,
       totalCases: result.totalCases,
       passedCases: result.passedCases,
       maxExecutionTimeMs: result.maxExecutionTimeMs,
@@ -632,23 +638,37 @@ export class AssessmentService {
         const fullQ = codingMap.get(sq.questionId.toString());
         if (ans && ans.code && ans.code.trim().length > 0) {
           const lang = ans.language || 'python';
-          const testCasesToEvaluate: { input: string; expectedOutput: string; weight?: number }[] = [];
+          const normLang = CodeHarnessBuilder.normalizeLanguage(lang);
+          const starter = fullQ?.starterCode?.find(
+            (s: any) => CodeHarnessBuilder.normalizeLanguage(s.language) === normLang
+          );
+          const executableCode = CodeHarnessBuilder.assemble(lang, ans.code, starter?.driverCode);
 
-          if (fullQ?.hiddenTestCases && fullQ.hiddenTestCases.length > 0) {
-            fullQ.hiddenTestCases.forEach((tc: any) => {
-              testCasesToEvaluate.push({ input: tc.input, expectedOutput: tc.expectedOutput, weight: tc.weight || 1 });
-            });
-          } else if (fullQ?.sampleTestCases && fullQ.sampleTestCases.length > 0) {
+          const rawCombined: { input: string; expectedOutput: string; weight?: number }[] = [];
+          if (fullQ?.sampleTestCases && fullQ.sampleTestCases.length > 0) {
             fullQ.sampleTestCases.forEach((tc: any) => {
-              testCasesToEvaluate.push({ input: tc.input, expectedOutput: tc.output, weight: 1 });
+              rawCombined.push({ input: tc.input, expectedOutput: tc.output, weight: 1 });
             });
           }
+          if (fullQ?.hiddenTestCases && fullQ.hiddenTestCases.length > 0) {
+            fullQ.hiddenTestCases.forEach((tc: any) => {
+              rawCombined.push({ input: tc.input, expectedOutput: tc.expectedOutput, weight: tc.weight || 1 });
+            });
+          }
+
+          const seenInputs = new Set<string>();
+          const testCasesToEvaluate = rawCombined.filter((tc) => {
+            const key = tc.input.trim();
+            if (seenInputs.has(key)) return false;
+            seenInputs.add(key);
+            return true;
+          });
 
           if (testCasesToEvaluate.length > 0) {
             try {
               const evalResult = await SandboxRunner.evaluateBatch(
                 lang,
-                ans.code,
+                executableCode,
                 testCasesToEvaluate,
                 fullQ?.timeLimitMs || 2000
               );
