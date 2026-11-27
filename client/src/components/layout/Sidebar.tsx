@@ -65,10 +65,10 @@ export const Sidebar: React.FC = () => {
   }
 
   return (
-    <aside className="w-64 flex-shrink-0 bg-slate-900 border-r border-slate-800/80 flex flex-col justify-between p-4 min-h-[calc(100vh-4rem)]">
-      <div className="space-y-1">
-        <div className="px-3 py-2 text-[11px] font-bold tracking-wider uppercase text-slate-500">
-          Navigation
+    <aside className="w-60 flex-shrink-0 bg-[#0f0f10] border-r border-white/[0.08] flex flex-col justify-between p-4 min-h-[calc(100vh-3.5rem)]">
+      <div className="space-y-0.5">
+        <div className="px-3 pb-2 pt-1 text-xs font-medium text-[#85858b]">
+          Workspace
         </div>
         {links.map((link) => {
           const Icon = link.icon;
@@ -77,25 +77,25 @@ export const Sidebar: React.FC = () => {
               key={link.to}
               to={link.to}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                `flex items-center gap-2.5 h-9 px-3 rounded-lg text-sm font-medium transition-colors ${
                   isActive
-                    ? 'bg-brand-600 text-white shadow-md shadow-brand-600/20'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                    ? 'bg-[#232325] text-[#ededed] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
+                    : 'text-[#a1a1a6] hover:text-[#ededed] hover:bg-[#19191b]'
                 }`
               }
             >
-              <Icon className="w-4 h-4 flex-shrink-0" />
-              <span>{link.label}</span>
+              <Icon className="w-4 h-4 flex-shrink-0" strokeWidth={1.5} />
+              <span className="truncate">{link.label}</span>
             </NavLink>
           );
         })}
       </div>
 
-      <div className="pt-4 border-t border-slate-800/80 px-2 text-xs text-slate-500 flex justify-between items-center">
-        <span>Swadhyayi v1.0.0</span>
-        <span className="flex items-center gap-1.5 text-emerald-400">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          Live
+      <div className="pt-4 border-t border-white/[0.08] px-2 text-xs text-[#85858b] flex justify-between items-center font-mono tabular-nums">
+        <span>v1.0.0</span>
+        <span className="flex items-center gap-1.5 text-[#a1a1a6]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#4cc38a]"></span>
+          Online
         </span>
       </div>
     </aside>

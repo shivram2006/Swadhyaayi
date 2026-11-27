@@ -14,14 +14,14 @@ export const Badge: React.FC<BadgeProps> = ({
   size = 'md',
   ...props
 }) => {
-  const base = 'inline-flex items-center font-medium rounded-full';
+  const base = 'inline-flex items-center font-medium rounded-md tabular-nums';
 
   const variants = {
-    brand: 'bg-brand-500/10 text-brand-400 border border-brand-500/20',
-    success: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    warning: 'bg-amber-500/10 text-amber-400 border border-amber-500/20',
-    danger: 'bg-rose-500/10 text-rose-400 border border-rose-500/20',
-    neutral: 'bg-slate-800 text-slate-300 border border-slate-700',
+    brand: 'bg-brand-500/12 text-brand-300 border border-brand-500/20',
+    success: 'bg-[#4cc38a]/12 text-[#4cc38a] border border-[#4cc38a]/20',
+    warning: 'bg-amber-500/12 text-amber-300 border border-amber-500/20',
+    danger: 'bg-[#e5484d]/12 text-[#e5484d] border border-[#e5484d]/20',
+    neutral: 'bg-[#232325] text-[#a1a1a6] border border-white/[0.08]',
   };
 
   const sizes = {

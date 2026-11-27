@@ -9,7 +9,6 @@ import {
   Trophy,
   FileCheck,
   ArrowRight,
-  Sparkles,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -27,77 +26,66 @@ export const StudentDashboard: React.FC = () => {
 
   return (
     <div className="space-y-8">
-      {/* Welcome Banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-brand-900/60 via-slate-900 to-slate-900 border border-brand-500/20 p-8 shadow-2xl">
-        <div className="relative z-10 max-w-2xl">
-          <Badge variant="brand" className="mb-3">
-            <Sparkles className="w-3 h-3 mr-1" /> Placement Readiness: 78%
-          </Badge>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            Welcome back, {user?.firstName}!
+      {/* Page Header */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-medium text-[#ededed] tracking-tight">
+            Student Workspace
           </h1>
-          <p className="mt-2 text-sm text-slate-300 leading-relaxed">
-            Your daily target is within reach. Solve 2 DSA problems and complete 1 aptitude drill to maintain your streak.
+          <p className="mt-1 text-sm text-[#a1a1a6]">
+            {user?.firstName} {user?.lastName} · Daily DSA practice, aptitude drills and institutional tests
           </p>
-          <div className="mt-5 flex flex-wrap gap-3">
-            <Link to="/coding">
-              <Button variant="primary" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                Continue DSA Practice
-              </Button>
-            </Link>
-            <Link to="/tests">
-              <Button variant="secondary" size="md">
-                View Upcoming Tests
-              </Button>
-            </Link>
-          </div>
+        </div>
+        <div className="flex flex-wrap gap-2.5">
+          <Link to="/tests">
+            <Button variant="secondary" size="md">
+              Upcoming tests
+            </Button>
+          </Link>
+          <Link to="/coding">
+            <Button variant="primary" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
+              Continue DSA practice
+            </Button>
+          </Link>
         </div>
       </div>
 
       {/* Metric Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <Card className="flex items-center gap-4">
-          <div className="p-3 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-400">
-            <Flame className="w-6 h-6" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Card className="p-5">
+          <div className="flex items-center justify-between text-xs text-[#85858b]">
+            <span>Daily streak</span>
+            <Flame className="w-4 h-4 text-[#85858b]" strokeWidth={1.5} />
           </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Daily Streak</p>
-            <h3 className="text-2xl font-bold text-white mt-0.5">{metrics.currentStreak} Days</h3>
-            <p className="text-xs text-slate-500">Longest: {metrics.longestStreak} days</p>
-          </div>
+          <h3 className="text-3xl font-medium text-[#ededed] mt-3 tabular-nums">{metrics.currentStreak}d</h3>
+          <p className="text-xs text-[#a1a1a6] mt-1 tabular-nums">Longest: {metrics.longestStreak} days</p>
         </Card>
 
-        <Card className="flex items-center gap-4">
-          <div className="p-3 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400">
-            <Code2 className="w-6 h-6" />
+        <Card className="p-5">
+          <div className="flex items-center justify-between text-xs text-[#85858b]">
+            <span>Coding solved</span>
+            <Code2 className="w-4 h-4 text-[#85858b]" strokeWidth={1.5} />
           </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Coding Solved</p>
-            <h3 className="text-2xl font-bold text-white mt-0.5">{metrics.codingProblemsSolved}</h3>
-            <p className="text-xs text-emerald-400 font-medium">+3 this week</p>
-          </div>
+          <h3 className="text-3xl font-medium text-[#ededed] mt-3 tabular-nums">{metrics.codingProblemsSolved}</h3>
+          <p className="text-xs text-[#4cc38a] mt-1 tabular-nums">+3 vs last week</p>
         </Card>
 
-        <Card className="flex items-center gap-4">
-          <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400">
-            <Trophy className="w-6 h-6" />
+        <Card className="p-5">
+          <div className="flex items-center justify-between text-xs text-[#85858b]">
+            <span>College rank</span>
+            <Trophy className="w-4 h-4 text-[#85858b]" strokeWidth={1.5} />
           </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">College Rank</p>
-            <h3 className="text-2xl font-bold text-white mt-0.5">#{metrics.institutionRank}</h3>
-            <p className="text-xs text-slate-500">Global: #{metrics.globalRank}</p>
-          </div>
+          <h3 className="text-3xl font-medium text-[#ededed] mt-3 tabular-nums">#{metrics.institutionRank}</h3>
+          <p className="text-xs text-[#a1a1a6] mt-1 tabular-nums">Global: #{metrics.globalRank}</p>
         </Card>
 
-        <Card className="flex items-center gap-4">
-          <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-            <FileCheck className="w-6 h-6" />
+        <Card className="p-5">
+          <div className="flex items-center justify-between text-xs text-[#85858b]">
+            <span>ATS resume score</span>
+            <FileCheck className="w-4 h-4 text-[#85858b]" strokeWidth={1.5} />
           </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">ATS Resume Score</p>
-            <h3 className="text-2xl font-bold text-white mt-0.5">84 / 100</h3>
-            <p className="text-xs text-brand-400 font-medium">MERN Profile</p>
-          </div>
+          <h3 className="text-3xl font-medium text-[#ededed] mt-3 tabular-nums">84 / 100</h3>
+          <p className="text-xs text-[#a1a1a6] mt-1">Full stack profile</p>
         </Card>
       </div>
 
@@ -117,45 +105,24 @@ export const StudentDashboard: React.FC = () => {
             </CardHeader>
 
             <div className="space-y-4">
-              <div>
-                <div className="flex justify-between text-xs font-medium mb-1.5">
-                  <span className="text-slate-300">Two Pointers & Sliding Window</span>
-                  <span className="text-brand-400">14 / 20 (70%)</span>
+              {[
+                { label: 'Two Pointers & Sliding Window', solved: 14, total: 20, pct: 70 },
+                { label: 'Binary Search & Divide & Conquer', solved: 8, total: 15, pct: 53 },
+                { label: 'Trees, BST & Graphs (BFS/DFS)', solved: 12, total: 30, pct: 40 },
+                { label: 'Dynamic Programming (1D & 2D)', solved: 6, total: 25, pct: 24 },
+              ].map((pat) => (
+                <div key={pat.label}>
+                  <div className="flex justify-between text-xs mb-1.5">
+                    <span className="text-[#dedee2]">{pat.label}</span>
+                    <span className="font-mono tabular-nums text-[#a1a1a6]">
+                      {pat.solved} / {pat.total} ({pat.pct}%)
+                    </span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-[#232325] overflow-hidden">
+                    <div className="h-full bg-brand-500 rounded-full" style={{ width: `${pat.pct}%` }}></div>
+                  </div>
                 </div>
-                <div className="h-2 rounded-full bg-slate-800 overflow-hidden">
-                  <div className="h-full bg-brand-500 rounded-full" style={{ width: '70%' }}></div>
-                </div>
-              </div>
-
-              <div>
-                <div className="flex justify-between text-xs font-medium mb-1.5">
-                  <span className="text-slate-300">Binary Search & Divide & Conquer</span>
-                  <span className="text-brand-400">8 / 15 (53%)</span>
-                </div>
-                <div className="h-2 rounded-full bg-slate-800 overflow-hidden">
-                  <div className="h-full bg-indigo-500 rounded-full" style={{ width: '53%' }}></div>
-                </div>
-              </div>
-
-              <div>
-                <div className="flex justify-between text-xs font-medium mb-1.5">
-                  <span className="text-slate-300">Trees, BST & Graphs (BFS/DFS)</span>
-                  <span className="text-brand-400">12 / 30 (40%)</span>
-                </div>
-                <div className="h-2 rounded-full bg-slate-800 overflow-hidden">
-                  <div className="h-full bg-cyan-500 rounded-full" style={{ width: '40%' }}></div>
-                </div>
-              </div>
-
-              <div>
-                <div className="flex justify-between text-xs font-medium mb-1.5">
-                  <span className="text-slate-300">Dynamic Programming (1D & 2D)</span>
-                  <span className="text-brand-400">6 / 25 (24%)</span>
-                </div>
-                <div className="h-2 rounded-full bg-slate-800 overflow-hidden">
-                  <div className="h-full bg-rose-500 rounded-full" style={{ width: '24%' }}></div>
-                </div>
-              </div>
+              ))}
             </div>
           </Card>
 

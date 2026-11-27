@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
-import { CheckCircle2, Sparkles, ShieldCheck, ArrowRight, LogOut } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, ArrowRight, LogOut } from 'lucide-react';
 
 interface PlanOption {
   id: string;
@@ -85,19 +85,16 @@ export const StudentSubscriptionPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 py-10 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#141415] text-[#ededed] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto space-y-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/[0.08] pb-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-300 text-xs font-semibold mb-2">
-              <Sparkles className="w-3.5 h-3.5" />
-              Student Subscription Required
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              Choose Your Swadhyayi Student Plan
+            <p className="text-xs font-medium text-[#85858b] mb-1">Student subscription</p>
+            <h1 className="text-2xl sm:text-3xl font-medium text-[#ededed] tracking-tight">
+              Choose your Swadhyayi plan
             </h1>
-            <p className="text-sm text-slate-400 mt-1">
-              Welcome, <span className="text-white font-semibold">{user?.firstName} {user?.lastName}</span> ({user?.email}). Activate a plan to unlock your Student Dashboard.
+            <p className="text-sm text-[#a1a1a6] mt-1">
+              Signed in as <span className="text-[#ededed] font-medium">{user?.firstName} {user?.lastName}</span> ({user?.email}). Activate a plan to open your workspace.
             </p>
           </div>
           <div className="flex items-center gap-2">

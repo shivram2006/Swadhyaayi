@@ -72,98 +72,85 @@ export const FacultyDashboard: React.FC = () => {
   });
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto pb-16">
-      {/* Welcome Banner */}
-      <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xl">
+    <div className="space-y-8 pb-16">
+      {/* Page Header */}
+      <div className="pb-6 border-b border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-2">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-            Faculty Administration Portal
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Faculty Workspace</h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            Professor {user?.firstName} {user?.lastName} • Manage institutional cohorts, assessments & live proctoring diagnostics
+          <h1 className="text-2xl sm:text-3xl font-medium text-[#ededed] tracking-tight">Faculty Workspace</h1>
+          <p className="text-sm text-[#a1a1a6] mt-1">
+            Prof. {user?.firstName} {user?.lastName} · Cohorts, assessments and live proctoring
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <Link to="/faculty/question-bank">
-            <Button variant="outline" size="sm" leftIcon={<Code2 className="w-4 h-4 text-cyan-400" />}>
-              Question Bank
+            <Button variant="secondary" size="md" leftIcon={<Code2 className="w-4 h-4" strokeWidth={1.5} />}>
+              Question bank
             </Button>
           </Link>
           <Link to="/faculty/tests/new">
             <Button
               variant="primary"
-              size="sm"
-              className="bg-brand-600 hover:bg-brand-500 shadow-md shadow-brand-600/30"
-              leftIcon={<Plus className="w-4 h-4" />}
+              size="md"
+              leftIcon={<Plus className="w-4 h-4" strokeWidth={1.5} />}
             >
-              Create Assessment
+              Create assessment
             </Button>
           </Link>
         </div>
       </div>
 
       {/* Interactive Metric Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Link to="/faculty/classes" className="group">
-          <Card className="flex items-center justify-between p-5 bg-slate-900/90 border-slate-800 hover:border-cyan-500/50 transition-all cursor-pointer shadow-lg group-hover:scale-[1.01]">
-            <div className="flex items-center gap-4">
-              <div className="p-3.5 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 group-hover:bg-cyan-500/20 transition-all">
-                <Users className="w-6 h-6" />
-              </div>
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Assigned Sections</p>
-                <h3 className="text-2xl font-bold text-white mt-0.5">{classesCount} Classes</h3>
-                <p className="text-xs text-slate-400">{studentsCount} Active Students</p>
-              </div>
+          <Card hoverable className="p-5 cursor-pointer">
+            <div className="flex items-center justify-between text-xs text-[#85858b]">
+              <span>Assigned sections</span>
+              <Users className="w-4 h-4 text-[#85858b]" strokeWidth={1.5} />
             </div>
-            <ArrowRight className="w-4 h-4 text-slate-600 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" />
+            <div className="flex items-baseline justify-between mt-3">
+              <h3 className="text-3xl font-medium text-[#ededed] tabular-nums">{classesCount}</h3>
+              <ArrowRight className="w-4 h-4 text-[#85858b] group-hover:text-[#ededed] transition-colors" strokeWidth={1.5} />
+            </div>
+            <p className="text-xs text-[#a1a1a6] mt-1 tabular-nums">{studentsCount} mapped students</p>
           </Card>
         </Link>
 
         <Link to="/faculty/tests" className="group">
-          <Card className="flex items-center justify-between p-5 bg-slate-900/90 border-slate-800 hover:border-brand-500/50 transition-all cursor-pointer shadow-lg group-hover:scale-[1.01]">
-            <div className="flex items-center gap-4">
-              <div className="p-3.5 rounded-2xl bg-brand-500/10 border border-brand-500/20 text-brand-400 group-hover:bg-brand-500/20 transition-all">
-                <ClipboardCheck className="w-6 h-6" />
-              </div>
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Institutional Tests</p>
-                <h3 className="text-2xl font-bold text-white mt-0.5">
-                  {liveTests.length > 0 ? `${liveTests.length} Live` : `${assessments.length || 2} Configured`}
-                </h3>
-                <p className="text-xs text-brand-400 font-medium">94% Average Attendance</p>
-              </div>
+          <Card hoverable className="p-5 cursor-pointer">
+            <div className="flex items-center justify-between text-xs text-[#85858b]">
+              <span>Institutional tests</span>
+              <ClipboardCheck className="w-4 h-4 text-[#85858b]" strokeWidth={1.5} />
             </div>
-            <ArrowRight className="w-4 h-4 text-slate-600 group-hover:text-brand-400 group-hover:translate-x-1 transition-all" />
+            <div className="flex items-baseline justify-between mt-3">
+              <h3 className="text-3xl font-medium text-[#ededed] tabular-nums">
+                {liveTests.length > 0 ? `${liveTests.length} live` : assessments.length}
+              </h3>
+              <ArrowRight className="w-4 h-4 text-[#85858b] group-hover:text-[#ededed] transition-colors" strokeWidth={1.5} />
+            </div>
+            <p className="text-xs text-[#a1a1a6] mt-1 tabular-nums">{submissionStats.totalAttempts} total attempts</p>
           </Card>
         </Link>
 
-        <div className="group">
-          <Card className="flex items-center justify-between p-5 bg-slate-900/90 border-slate-800 shadow-lg">
-            <div className="flex items-center gap-4">
-              <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-                <BarChart3 className="w-6 h-6" />
-              </div>
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Average Class Score</p>
-                <h3 className="text-2xl font-bold text-white mt-0.5">
-                  {submissionStats.totalSubmissions > 0 ? `${submissionStats.averagePercentage}%` : '—'}
-                </h3>
-                <p className="text-xs text-emerald-400 font-medium">
-                  {submissionStats.totalSubmissions > 0
-                    ? `Across ${submissionStats.totalSubmissions} submitted test${submissionStats.totalSubmissions === 1 ? '' : 's'}`
-                    : 'No submissions graded yet'}
-                </p>
-              </div>
-            </div>
-            <span className="text-xs font-mono px-2 py-1 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
-              Optimal
-            </span>
-          </Card>
-        </div>
+        <Card className="p-5">
+          <div className="flex items-center justify-between text-xs text-[#85858b]">
+            <span>Average class score</span>
+            <BarChart3 className="w-4 h-4 text-[#85858b]" strokeWidth={1.5} />
+          </div>
+          <div className="flex items-baseline justify-between mt-3">
+            <h3 className="text-3xl font-medium text-[#ededed] tabular-nums">
+              {submissionStats.totalSubmissions > 0 ? `${submissionStats.averagePercentage}%` : '—'}
+            </h3>
+            {submissionStats.totalSubmissions > 0 && (
+              <Badge variant="success" size="sm">Graded</Badge>
+            )}
+          </div>
+          <p className="text-xs text-[#a1a1a6] mt-1 tabular-nums">
+            {submissionStats.totalSubmissions > 0
+              ? `Across ${submissionStats.totalSubmissions} submitted test${submissionStats.totalSubmissions === 1 ? '' : 's'}`
+              : 'No submissions graded yet'}
+          </p>
+        </Card>
       </div>
 
       {/* Quick Launch Cards */}

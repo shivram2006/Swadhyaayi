@@ -4,27 +4,32 @@
 
 @layer base {
   body {
-    @apply bg-slate-950 text-slate-100 antialiased font-sans;
+    @apply bg-[#141415] text-[#ededed] antialiased font-sans;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
   }
 }
 
-/* Custom Scrollbar for sleek dark enterprise UI */
+/* Neutral Graphite Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #141415;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #2e2e32;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #525258;
 }
 
 /* Animated Roadmap Line & Subtopic Reveal */

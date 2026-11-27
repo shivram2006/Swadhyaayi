@@ -23,13 +23,13 @@ export const Input: React.FC<InputProps> = ({
   return (
     <div className="w-full">
       {label && (
-        <label htmlFor={inputId} className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">
+        <label htmlFor={inputId} className="block text-xs font-medium text-[#a1a1a6] mb-1.5">
           {label}
         </label>
       )}
       <div className="relative flex items-center">
         {leftIcon && (
-          <div className="absolute left-3 flex items-center pointer-events-none text-slate-500">
+          <div className="absolute left-3 flex items-center pointer-events-none text-[#85858b]">
             {leftIcon}
           </div>
         )}
@@ -37,10 +37,10 @@ export const Input: React.FC<InputProps> = ({
           id={inputId}
           className={twMerge(
             clsx(
-              'w-full bg-slate-950/80 border border-slate-800 rounded-lg text-sm text-slate-100 placeholder-slate-500 py-2.5 px-3.5 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 disabled:opacity-50 disabled:bg-slate-900',
-              leftIcon && 'pl-10',
-              rightIcon && 'pr-10',
-              error && 'border-rose-500 focus:border-rose-500 focus:ring-rose-500/50',
+              'w-full bg-[#0f0f10] border border-white/[0.08] rounded-lg text-sm text-[#ededed] placeholder-[#85858b] h-10 px-3.5 transition-colors focus:outline-none focus:border-white/[0.24] disabled:opacity-50',
+              leftIcon && 'pl-9',
+              rightIcon && 'pr-9',
+              error && 'border-[#e5484d] focus:border-[#e5484d]',
               className
             )
           )}

@@ -63,28 +63,26 @@ export const RegisterStudentPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col justify-center py-10 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-brand-600/10 rounded-full blur-[120px] pointer-events-none" />
-
-      <div className="sm:mx-auto sm:w-full sm:max-w-lg relative z-10">
+    <div className="min-h-screen bg-[#141415] flex flex-col justify-center py-10 px-4 sm:px-6 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-lg">
         <div className="mb-4">
-          <Link to="/login" className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors">
-            <ArrowLeft className="w-3.5 h-3.5" />
-            Back to Login
+          <Link to="/login" className="inline-flex items-center gap-1.5 text-xs text-[#a1a1a6] hover:text-[#ededed] transition-colors">
+            <ArrowLeft className="w-3.5 h-3.5" strokeWidth={1.5} />
+            Back to login
           </Link>
         </div>
 
         <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-600/20 border border-brand-500/30 text-brand-400 mb-3">
-            <GraduationCap className="w-7 h-7" />
+          <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-[#19191b] border border-white/[0.08] text-[#ededed] mb-3">
+            <GraduationCap className="w-5 h-5" strokeWidth={1.5} />
           </div>
-          <h2 className="text-2xl font-extrabold text-white tracking-tight">Student Registration</h2>
-          <p className="mt-1 text-xs text-slate-400">
-            Create your Swadhyayi student account to subscribe and access your dashboard
+          <h2 className="text-2xl font-medium text-[#ededed] tracking-tight">Student registration</h2>
+          <p className="mt-1 text-sm text-[#a1a1a6]">
+            Create your account to select a plan and open your workspace
           </p>
         </div>
 
-        <Card className="border-slate-800 bg-slate-900/90 shadow-2xl p-6">
+        <Card className="border-white/[0.08] bg-[#19191b] p-6">
           <form className="space-y-4" onSubmit={handleSubmit}>
             {error && (
               <div className="p-3 text-xs rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-400 font-medium">

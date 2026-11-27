@@ -106,22 +106,18 @@ export const AssessmentListPage: React.FC = () => {
   if (activeTab === 'COMPLETED') currentList = pastTests;
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto pb-12">
-      {/* Banner */}
-      <div className="rounded-2xl bg-gradient-to-r from-blue-900/40 via-indigo-900/30 to-brand-900/40 border border-blue-500/20 p-6 sm:p-8">
+    <div className="space-y-6 pb-12">
+      {/* Header */}
+      <div className="pb-6 border-b border-white/[0.08]">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="max-w-3xl space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-semibold">
-              <ClipboardCheck className="w-3.5 h-3.5" />
-              Institutional Assessments &amp; Proctored Tests
-            </div>
-            <h1 className="text-3xl font-extrabold text-white tracking-tight">
-              Campus Placement Assessments
+          <div className="max-w-3xl space-y-1">
+            <h1 className="text-2xl sm:text-3xl font-medium text-[#ededed] tracking-tight">
+              Institutional assessments
             </h1>
-            <p className="text-slate-300 text-sm leading-relaxed">
+            <p className="text-[#a1a1a6] text-sm">
               {isFacultyOrAdmin
-                ? 'Monitor student attempts, inspect live proctoring telemetry, and review graded scores across all configured tests.'
-                : 'Take timed institutional exams configured by your university placement cell. Simulated industry tests with section cutoffs, negative marking, and proctoring telemetry.'}
+                ? 'Monitor student attempts, live proctoring telemetry, and graded scores.'
+                : 'Timed institutional exams with section cutoffs, negative marking, and proctoring.'}
             </p>
           </div>
 
@@ -129,32 +125,31 @@ export const AssessmentListPage: React.FC = () => {
             <Button
               variant="primary"
               onClick={() => navigate('/faculty/tests/new')}
-              className="shrink-0 flex items-center gap-2 font-bold"
+              leftIcon={<Plus className="w-4 h-4" strokeWidth={1.5} />}
             >
-              <Plus className="w-4 h-4" />
-              Create New Test
+              Create test
             </Button>
           )}
         </div>
 
         {/* Tab Switcher */}
-        <div className="mt-6 pt-5 border-t border-slate-800/80 flex items-center gap-2">
+        <div className="mt-5 flex items-center gap-2">
           <button
             onClick={() => setActiveTab('LIVE')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-medium tabular-nums transition-colors ${
               activeTab === 'LIVE'
-                ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25'
-                : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
+                ? 'bg-[#ededed] text-[#141415]'
+                : 'bg-[#19191b] border border-white/[0.08] text-[#a1a1a6] hover:text-[#ededed]'
             }`}
           >
-            Live Tests ({liveTests.length})
+            Live ({liveTests.length})
           </button>
           <button
             onClick={() => setActiveTab('UPCOMING')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-medium tabular-nums transition-colors ${
               activeTab === 'UPCOMING'
-                ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25'
-                : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
+                ? 'bg-[#ededed] text-[#141415]'
+                : 'bg-[#19191b] border border-white/[0.08] text-[#a1a1a6] hover:text-[#ededed]'
             }`}
           >
             Upcoming ({upcomingTests.length})

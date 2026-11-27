@@ -166,17 +166,13 @@ export const FacultySectionsPage: React.FC = () => {
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-16">
       {/* Page Header */}
-      <div className="rounded-2xl bg-gradient-to-r from-cyan-950/60 via-slate-900 to-indigo-950/60 border border-cyan-500/20 p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xl">
-        <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold">
-            <Users className="w-3.5 h-3.5" />
-            Institutional Academic Cohorts
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            My Sections & Class Rosters
+      <div className="pb-6 border-b border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <h1 className="text-2xl sm:text-3xl font-medium text-[#ededed] tracking-tight">
+            My sections &amp; rosters
           </h1>
-          <p className="text-slate-300 text-sm max-w-2xl leading-relaxed">
-            View assigned classes, inspect enrolled student profiles, monitor section participation, and schedule customized diagnostics or placement assessments.
+          <p className="text-[#a1a1a6] text-sm max-w-2xl">
+            View assigned cohorts, enrolled student progress, solved counts, and schedule tests.
           </p>
         </div>
 
