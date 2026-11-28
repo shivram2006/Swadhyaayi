@@ -4,19 +4,52 @@ import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
 import { VoiceOrb } from '../../components/interview/VoiceOrb';
-import { Play, Pause, Mic, MicOff, Send, RefreshCw, ChevronRight, Volume2 } from 'lucide-react';
+import {
+  Play,
+  Pause,
+  Mic,
+  MicOff,
+  RefreshCw,
+  ChevronRight,
+  Volume2,
+  CheckCircle2,
+  Briefcase,
+  Code2,
+  Users,
+  Send,
+  RotateCcw,
+} from 'lucide-react';
 
-interface StarterQuestion {
+interface InterviewQuestion {
   id: string;
   title: string;
   text: string;
   state: string;
 }
 
+interface AnswerRecord {
+  questionIndex: number;
+  title: string;
+  question: string;
+  answer: string;
+}
+
+const ROLES = [
+  'Software Engineer (SDE)',
+  'Frontend Developer',
+  'Backend Developer',
+  'Full Stack Developer',
+  'Data Analyst / ML',
+];
+
 export const MockInterviewPage: React.FC = () => {
-  const [questions, setQuestions] = useState<StarterQuestion[]>([]);
+  // Phase: 'setup' -> 'active' -> 'summary'
+  const [phase, setPhase] = useState<'setup' | 'active' | 'summary'>('setup');
+  const [interviewType, setInterviewType] = useState<'hr' | 'technical'>('hr');
+  const [selectedRole, setSelectedRole] = useState<string>(ROLES[0]);
+
+  const [questions, setQuestions] = useState<InterviewQuestion[]>([]);
   const [activeIdx, setActiveIdx] = useState<number>(0);
-  const [customPrompt, setCustomPrompt] = useState<string>('');
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [currentSubtitle, setCurrentSubtitle] = useState<string>('');
   const [currentState, setCurrentState] = useState<string>('smiling');
@@ -24,7 +57,7 @@ export const MockInterviewPage: React.FC = () => {
   const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Web Audio API analyser for real-time ChatGPT-style orb bubbling
+  // Web Audio API analyser for ChatGPT-style orb bubbling
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
@@ -33,14 +66,16 @@ export const MockInterviewPage: React.FC = () => {
   // Candidate answer & speech-to-text
   const [answerText, setAnswerText] = useState<string>('');
   const [isRecording, setIsRecording] = useState<boolean>(false);
-  const [submittedAnswers, setSubmittedAnswers] = useState<{ question: string; answer: string }[]>([]);
+  const [answers, setAnswers] = useState<Record<number, AnswerRecord>>({});
   const recognitionRef = useRef<any>(null);
 
   const apiBase = (axios.defaults.baseURL || 'http://localhost:5000/api/v1').replace(/\/$/, '');
 
   useEffect(() => {
-    loadStarterQuestions();
     return () => {
+      if (recognitionRef.current) {
+        try { recognitionRef.current.stop(); } catch {}
+      }
       if (audioCtxRef.current) {
         audioCtxRef.current.close().catch(() => {});
       }
@@ -68,16 +103,15 @@ export const MockInterviewPage: React.FC = () => {
     }
   };
 
-  const loadStarterQuestions = async () => {
-    try {
-      const res = await axios.get('/interview/starter-questions');
-      const list: StarterQuestion[] = res.data?.data?.questions || [];
-      setQuestions(list);
-      if (list.length > 0) {
-        speakQuestion(list[0].text, list[0].state);
-      }
-    } catch {
-      setError('Voice engine is offline. Make sure the Python service is running on port 8001.');
+  const stopAudioAndMic = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    setIsSpeaking(false);
+    if (isRecording && recognitionRef.current) {
+      try { recognitionRef.current.stop(); } catch {}
+      setIsRecording(false);
     }
   };
 
@@ -86,12 +120,15 @@ export const MockInterviewPage: React.FC = () => {
     setLoadingSpeech(true);
     setCurrentSubtitle(text);
     setCurrentState(state);
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
     try {
       const res = await axios.post('/interview/speech', { text });
       const jobId = res.data?.data?.job_id;
       if (jobId) {
-        const url = `${apiBase}/interview/media/${jobId}?t=${Date.now()}`;
-        setAudioUrl(url);
+        setAudioUrl(`${apiBase}/interview/media/${jobId}?t=${Date.now()}`);
       }
     } catch (err: any) {
       setError(err?.response?.data?.detail || err?.response?.data?.error?.message || 'Failed to generate interviewer speech.');
@@ -102,13 +139,37 @@ export const MockInterviewPage: React.FC = () => {
 
   useEffect(() => {
     const el = audioRef.current;
-    if (!el || !audioUrl) return;
+    if (!el || !audioUrl || phase !== 'active') return;
     ensureAudioAnalyser();
     el.src = audioUrl;
-    el.play().catch(() => {
-      // Browser may block autoplay before user gesture; user can click Play button
-    });
-  }, [audioUrl]);
+    el.play().catch(() => {});
+  }, [audioUrl, phase]);
+
+  const handleStartInterview = async () => {
+    setError(null);
+    setLoadingSpeech(true);
+    try {
+      const res = await axios.post('/interview/session-questions', {
+        interviewType,
+        role: selectedRole,
+      });
+      const list: InterviewQuestion[] = res.data?.data?.questions || [];
+      if (!list.length) {
+        setError('Could not load interview questions.');
+        setLoadingSpeech(false);
+        return;
+      }
+      setQuestions(list);
+      setActiveIdx(0);
+      setAnswers({});
+      setAnswerText('');
+      setPhase('active');
+      await speakQuestion(list[0].text, list[0].state);
+    } catch {
+      setError('Failed to start interview session. Make sure backend & Python voice service are running.');
+      setLoadingSpeech(false);
+    }
+  };
 
   const handleTogglePlayback = () => {
     const el = audioRef.current;
@@ -121,12 +182,47 @@ export const MockInterviewPage: React.FC = () => {
     }
   };
 
-  const handleSelectQuestion = (idx: number) => {
-    setActiveIdx(idx);
+  const saveCurrentAnswer = (idx: number) => {
     const q = questions[idx];
-    if (q) {
-      speakQuestion(q.text, q.state);
+    if (!q) return;
+    const trimmed = answerText.trim();
+    if (trimmed) {
+      setAnswers((prev) => ({
+        ...prev,
+        [idx]: {
+          questionIndex: idx,
+          title: q.title,
+          question: q.text,
+          answer: trimmed,
+        },
+      }));
     }
+  };
+
+  const handleNextQuestion = () => {
+    stopAudioAndMic();
+    saveCurrentAnswer(activeIdx);
+    const nextIdx = activeIdx + 1;
+    if (nextIdx < questions.length) {
+      setActiveIdx(nextIdx);
+      setAnswerText(answers[nextIdx]?.answer || '');
+      speakQuestion(questions[nextIdx].text, questions[nextIdx].state);
+    }
+  };
+
+  const handleJumpToQuestion = (idx: number) => {
+    if (idx === activeIdx) return;
+    stopAudioAndMic();
+    saveCurrentAnswer(activeIdx);
+    setActiveIdx(idx);
+    setAnswerText(answers[idx]?.answer || '');
+    speakQuestion(questions[idx].text, questions[idx].state);
+  };
+
+  const handleSubmitInterview = () => {
+    stopAudioAndMic();
+    saveCurrentAnswer(activeIdx);
+    setPhase('summary');
   };
 
   const handleToggleMic = () => {
@@ -160,22 +256,10 @@ export const MockInterviewPage: React.FC = () => {
     setIsRecording(true);
   };
 
-  const handleSaveAndNext = () => {
-    if (answerText.trim()) {
-      setSubmittedAnswers((prev) => [
-        ...prev,
-        { question: currentSubtitle || 'Interview Question', answer: answerText.trim() },
-      ]);
-      setAnswerText('');
-    }
-    if (activeIdx + 1 < questions.length) {
-      handleSelectQuestion(activeIdx + 1);
-    }
-  };
+  const answeredCount = Object.keys(answers).length;
 
   return (
     <div className="space-y-6 pb-12">
-      {/* Hidden CORS-enabled audio element feeding Web Audio AnalyserNode */}
       <audio
         ref={audioRef}
         crossOrigin="anonymous"
@@ -191,22 +275,34 @@ export const MockInterviewPage: React.FC = () => {
             AI Mock Interview
           </h1>
           <p className="text-sm text-[#a1a1a6] mt-1">
-            Interactive HR &amp; technical voice interview with Anjali Sharma (Piper TTS + live voice orb).
+            {phase === 'setup'
+              ? 'Choose your interview track (HR or Technical) and target role for a 10-question session.'
+              : `${interviewType === 'technical' ? 'Technical' : 'HR'} Interview · ${selectedRole}`}
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <Badge variant="neutral" size="sm">
-            {isSpeaking ? 'Speaking' : isRecording ? 'Listening' : loadingSpeech ? 'Thinking' : currentState}
-          </Badge>
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={() => speakQuestion(currentSubtitle || questions[activeIdx]?.text || 'Tell me about yourself.', currentState)}
-            leftIcon={<RefreshCw className={`w-3.5 h-3.5 ${loadingSpeech ? 'animate-spin' : ''}`} strokeWidth={1.5} />}
-          >
-            Replay Voice
-          </Button>
-        </div>
+        {phase === 'active' && (
+          <div className="flex items-center gap-2">
+            <Badge variant="neutral" size="sm">
+              Question {activeIdx + 1} / {questions.length}
+            </Badge>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => speakQuestion(currentSubtitle, currentState)}
+              leftIcon={<RefreshCw className={`w-3.5 h-3.5 ${loadingSpeech ? 'animate-spin' : ''}`} strokeWidth={1.5} />}
+            >
+              Replay
+            </Button>
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={handleSubmitInterview}
+              leftIcon={<Send className="w-3.5 h-3.5" />}
+            >
+              Submit Interview
+            </Button>
+          </div>
+        )}
       </div>
 
       {error && (
@@ -215,155 +311,288 @@ export const MockInterviewPage: React.FC = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left: ChatGPT-style Voice Orb Stage + Response Box */}
-        <div className="lg:col-span-8 space-y-5">
-          <Card className="p-0 overflow-hidden bg-[#0b0c10]">
-            <div className="relative min-h-[340px] bg-gradient-to-b from-[#0d1117] via-[#0b0c10] to-[#0f1014] flex flex-col items-center justify-center py-8 px-6">
-              <VoiceOrb
-                isSpeaking={isSpeaking}
-                isListening={isRecording}
-                isLoading={loadingSpeech}
-                analyser={analyserRef.current}
-              />
-
-              <div className="mt-3 flex items-center gap-3">
-                {audioUrl && (
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    size="sm"
-                    onClick={handleTogglePlayback}
-                    leftIcon={isSpeaking ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-                  >
-                    {isSpeaking ? 'Pause' : 'Listen'}
-                  </Button>
-                )}
-                <span className="text-xs text-[#85858b] flex items-center gap-1.5">
-                  <Volume2 className="w-3.5 h-3.5" />
-                  {loadingSpeech
-                    ? 'Generating voice...'
-                    : isSpeaking
-                      ? 'Anjali is speaking...'
-                      : isRecording
-                        ? 'Listening to your answer...'
-                        : 'Ready'}
-                </span>
-              </div>
-            </div>
-
-            {currentSubtitle && (
-              <div className="p-4 border-t border-white/[0.08] bg-[#19191b]">
-                <span className="text-[11px] font-mono text-[#85858b] block mb-1">
-                  Anjali Sharma · Human Resources
-                </span>
-                <p className="text-sm text-[#ededed] leading-relaxed">{currentSubtitle}</p>
-              </div>
-            )}
-          </Card>
-
-          {/* Candidate Response Area */}
-          <Card className="p-5 space-y-3">
-            <div className="flex items-center justify-between">
-              <h3 className="text-sm font-medium text-[#ededed]">Your Answer</h3>
-              <Button
-                type="button"
-                variant={isRecording ? 'danger' : 'secondary'}
-                size="sm"
-                onClick={handleToggleMic}
-                leftIcon={isRecording ? <MicOff className="w-3.5 h-3.5" /> : <Mic className="w-3.5 h-3.5" />}
-              >
-                {isRecording ? 'Stop Mic' : 'Speak Answer'}
-              </Button>
-            </div>
-            <textarea
-              rows={4}
-              value={answerText}
-              onChange={(e) => setAnswerText(e.target.value)}
-              placeholder="Speak using your microphone or type your structured response here..."
-              className="w-full bg-[#0f0f10] border border-white/[0.08] rounded-lg p-3 text-sm text-[#ededed] placeholder-[#85858b] focus:outline-none focus:border-white/[0.2]"
-            />
-            <div className="flex justify-end gap-2">
-              <Button
-                variant="primary"
-                size="sm"
-                onClick={handleSaveAndNext}
-                rightIcon={<ChevronRight className="w-4 h-4" />}
-              >
-                {activeIdx + 1 < questions.length ? 'Save & Next Question' : 'Save Answer'}
-              </Button>
-            </div>
-          </Card>
-        </div>
-
-        {/* Right: Basic Starter Questions & Custom Prompt */}
-        <div className="lg:col-span-4 space-y-5">
-          <Card className="p-5 space-y-3">
+      {/* PHASE 1: SETUP SCREEN */}
+      {phase === 'setup' && (
+        <div className="max-w-3xl mx-auto space-y-6">
+          <Card className="p-6 space-y-6">
             <div>
-              <h3 className="text-sm font-medium text-[#ededed]">Basic Starter Questions</h3>
-              <p className="text-xs text-[#85858b] mt-0.5">
-                Standard HR &amp; opening questions (starting with &ldquo;Tell me about yourself&rdquo;)
-              </p>
-            </div>
-            <div className="space-y-2">
-              {questions.map((q, idx) => (
+              <h2 className="text-base font-medium text-[#ededed]">1. Select Interview Type</h2>
+              <p className="text-xs text-[#85858b] mt-0.5">Choose whether you want an HR behavioral round or a Technical round.</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
                 <button
-                  key={q.id}
                   type="button"
-                  onClick={() => handleSelectQuestion(idx)}
-                  className={`w-full text-left p-3 rounded-lg border transition-colors ${
-                    activeIdx === idx
-                      ? 'bg-[#232325] border-white/[0.2] text-[#ededed]'
+                  onClick={() => setInterviewType('hr')}
+                  className={`p-4 rounded-xl border text-left transition-colors ${
+                    interviewType === 'hr'
+                      ? 'bg-[#232325] border-white/[0.3] text-[#ededed]'
                       : 'bg-[#0f0f10] border-white/[0.08] text-[#a1a1a6] hover:text-[#ededed]'
                   }`}
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-medium">{idx + 1}. {q.title}</span>
-                    <Play className="w-3 h-3 text-[#85858b]" strokeWidth={1.5} />
+                  <div className="flex items-center gap-2.5">
+                    <Users className="w-4 h-4 text-[#38bdf8]" />
+                    <span className="text-sm font-medium">HR Interview</span>
                   </div>
+                  <p className="text-xs text-[#85858b] mt-1.5">
+                    10 behavioral, strengths, teamwork, conflict, and career-goal questions.
+                  </p>
                 </button>
-              ))}
+
+                <button
+                  type="button"
+                  onClick={() => setInterviewType('technical')}
+                  className={`p-4 rounded-xl border text-left transition-colors ${
+                    interviewType === 'technical'
+                      ? 'bg-[#232325] border-white/[0.3] text-[#ededed]'
+                      : 'bg-[#0f0f10] border-white/[0.08] text-[#a1a1a6] hover:text-[#ededed]'
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Code2 className="w-4 h-4 text-[#38bdf8]" />
+                    <span className="text-sm font-medium">Technical Interview</span>
+                  </div>
+                  <p className="text-xs text-[#85858b] mt-1.5">
+                    10 role-specific architecture, DSA, debugging, and system questions.
+                  </p>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-base font-medium text-[#ededed]">2. Select Target Role</h2>
+              <p className="text-xs text-[#85858b] mt-0.5">Questions will be tailored for this role (starting with &ldquo;Tell me about yourself&rdquo;).</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-3">
+                {ROLES.map((role) => (
+                  <button
+                    key={role}
+                    type="button"
+                    onClick={() => setSelectedRole(role)}
+                    className={`p-3 rounded-lg border text-left flex items-center gap-2.5 transition-colors ${
+                      selectedRole === role
+                        ? 'bg-[#232325] border-white/[0.3] text-[#ededed]'
+                        : 'bg-[#0f0f10] border-white/[0.08] text-[#a1a1a6] hover:text-[#ededed]'
+                    }`}
+                  >
+                    <Briefcase className="w-3.5 h-3.5 text-[#85858b]" />
+                    <span className="text-xs font-medium">{role}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-2 flex justify-end">
+              <Button
+                variant="primary"
+                size="md"
+                onClick={handleStartInterview}
+                disabled={loadingSpeech}
+                rightIcon={<ChevronRight className="w-4 h-4" />}
+              >
+                {loadingSpeech ? 'Starting Interview...' : 'Start 10-Question Interview'}
+              </Button>
+            </div>
+          </Card>
+        </div>
+      )}
+
+      {/* PHASE 2: ACTIVE INTERVIEW */}
+      {phase === 'active' && (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Left: Voice Orb + Answer Input */}
+          <div className="lg:col-span-8 space-y-5">
+            <Card className="p-0 overflow-hidden bg-[#0b0c10]">
+              <div className="relative min-h-[300px] bg-gradient-to-b from-[#0d1117] via-[#0b0c10] to-[#0f1014] flex flex-col items-center justify-center py-6 px-6">
+                <VoiceOrb
+                  isSpeaking={isSpeaking}
+                  isListening={isRecording}
+                  isLoading={loadingSpeech}
+                  analyser={analyserRef.current}
+                />
+
+                <div className="mt-2 flex items-center gap-3">
+                  {audioUrl && (
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      size="sm"
+                      onClick={handleTogglePlayback}
+                      leftIcon={isSpeaking ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                    >
+                      {isSpeaking ? 'Pause' : 'Listen'}
+                    </Button>
+                  )}
+                  <span className="text-xs text-[#85858b] flex items-center gap-1.5">
+                    <Volume2 className="w-3.5 h-3.5" />
+                    {loadingSpeech
+                      ? 'Generating next question...'
+                      : isSpeaking
+                        ? 'Anjali is speaking...'
+                        : isRecording
+                          ? 'Listening to your answer...'
+                          : 'Your turn to answer'}
+                  </span>
+                </div>
+              </div>
+
+              {currentSubtitle && (
+                <div className="p-4 border-t border-white/[0.08] bg-[#19191b]">
+                  <span className="text-[11px] font-mono text-[#85858b] block mb-1">
+                    Question {activeIdx + 1} of {questions.length} · Anjali Sharma
+                  </span>
+                  <p className="text-sm text-[#ededed] leading-relaxed">{currentSubtitle}</p>
+                </div>
+              )}
+            </Card>
+
+            {/* Candidate Response Area */}
+            <Card className="p-5 space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-medium text-[#ededed]">Your Answer (Q{activeIdx + 1})</h3>
+                <Button
+                  type="button"
+                  variant={isRecording ? 'danger' : 'secondary'}
+                  size="sm"
+                  onClick={handleToggleMic}
+                  leftIcon={isRecording ? <MicOff className="w-3.5 h-3.5" /> : <Mic className="w-3.5 h-3.5" />}
+                >
+                  {isRecording ? 'Stop Mic' : 'Speak Answer'}
+                </Button>
+              </div>
+              <textarea
+                rows={4}
+                value={answerText}
+                onChange={(e) => setAnswerText(e.target.value)}
+                placeholder="Speak using your microphone or type your structured response here..."
+                className="w-full bg-[#0f0f10] border border-white/[0.08] rounded-lg p-3 text-sm text-[#ededed] placeholder-[#85858b] focus:outline-none focus:border-white/[0.2]"
+              />
+              <div className="flex justify-between items-center gap-2">
+                <span className="text-xs text-[#85858b]">
+                  Answered {answeredCount} of {questions.length}
+                </span>
+                <div className="flex items-center gap-2">
+                  {activeIdx + 1 < questions.length ? (
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      disabled={loadingSpeech}
+                      onClick={handleNextQuestion}
+                      rightIcon={<ChevronRight className="w-4 h-4" />}
+                    >
+                      Save &amp; Next Question
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={handleSubmitInterview}
+                      leftIcon={<Send className="w-3.5 h-3.5" />}
+                    >
+                      Submit Interview
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Right: 10-Question Progress List */}
+          <div className="lg:col-span-4 space-y-5">
+            <Card className="p-5 space-y-3">
+              <div>
+                <h3 className="text-sm font-medium text-[#ededed]">Interview Questions (10)</h3>
+                <p className="text-xs text-[#85858b] mt-0.5">
+                  Starts with basics and progresses through {interviewType === 'technical' ? 'technical' : 'HR'} rounds.
+                </p>
+              </div>
+              <div className="space-y-1.5 max-h-[460px] overflow-y-auto pr-1">
+                {questions.map((q, idx) => {
+                  const isDone = Boolean(answers[idx]?.answer);
+                  const isCurrent = activeIdx === idx;
+                  return (
+                    <button
+                      key={q.id}
+                      type="button"
+                      onClick={() => handleJumpToQuestion(idx)}
+                      className={`w-full text-left p-2.5 rounded-lg border transition-colors ${
+                        isCurrent
+                          ? 'bg-[#232325] border-white/[0.25] text-[#ededed]'
+                          : 'bg-[#0f0f10] border-white/[0.08] text-[#a1a1a6] hover:text-[#ededed]'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-xs font-medium truncate">
+                          {idx + 1}. {q.title}
+                        </span>
+                        {isDone ? (
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#34d399] shrink-0" />
+                        ) : (
+                          <Play className="w-3 h-3 text-[#85858b] shrink-0" strokeWidth={1.5} />
+                        )}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </Card>
+          </div>
+        </div>
+      )}
+
+      {/* PHASE 3: SUBMITTED INTERVIEW SUMMARY */}
+      {phase === 'summary' && (
+        <div className="max-w-4xl mx-auto space-y-5">
+          <Card className="p-6 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <Badge variant="neutral" size="sm">Interview Submitted</Badge>
+                <h2 className="text-xl font-medium text-[#ededed] mt-2">
+                  {interviewType === 'technical' ? 'Technical' : 'HR'} Mock Interview Summary — {selectedRole}
+                </h2>
+                <p className="text-xs text-[#85858b] mt-1">
+                  You completed {answeredCount} out of {questions.length} questions.
+                </p>
+              </div>
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => {
+                  setPhase('setup');
+                  setAudioUrl(null);
+                  setQuestions([]);
+                  setAnswers({});
+                  setAnswerText('');
+                }}
+                leftIcon={<RotateCcw className="w-3.5 h-3.5" />}
+              >
+                Start New Interview
+              </Button>
             </div>
           </Card>
 
-          <Card className="p-5 space-y-3">
-            <h3 className="text-sm font-medium text-[#ededed]">Custom Interview Prompt</h3>
-            <textarea
-              rows={3}
-              value={customPrompt}
-              onChange={(e) => setCustomPrompt(e.target.value)}
-              placeholder="Type any custom question for Anjali to ask..."
-              className="w-full bg-[#0f0f10] border border-white/[0.08] rounded-lg p-2.5 text-xs text-[#ededed] placeholder-[#85858b] focus:outline-none focus:border-white/[0.2]"
-            />
-            <Button
-              variant="secondary"
-              size="sm"
-              className="w-full"
-              disabled={!customPrompt.trim() || loadingSpeech}
-              onClick={() => speakQuestion(customPrompt.trim(), 'speaking')}
-              leftIcon={<Send className="w-3.5 h-3.5" />}
-            >
-              Ask via Voice Orb
-            </Button>
-          </Card>
-
-          {submittedAnswers.length > 0 && (
-            <Card className="p-5 space-y-2">
-              <h3 className="text-xs font-medium text-[#85858b]">
-                Recorded Responses ({submittedAnswers.length})
-              </h3>
-              <div className="space-y-2 max-h-48 overflow-y-auto">
-                {submittedAnswers.map((item, i) => (
-                  <div key={i} className="p-2.5 rounded-lg bg-[#0f0f10] border border-white/[0.06] text-xs">
-                    <p className="text-[#ededed] font-medium line-clamp-1">{item.question}</p>
-                    <p className="text-[#a1a1a6] mt-1 line-clamp-2">{item.answer}</p>
+          <div className="space-y-3">
+            {questions.map((q, idx) => {
+              const rec = answers[idx];
+              return (
+                <Card key={q.id} className="p-4 space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-medium text-[#ededed]">
+                      Q{idx + 1}. {q.title}
+                    </span>
+                    <Badge variant="neutral" size="sm">
+                      {rec?.answer ? 'Answered' : 'Skipped'}
+                    </Badge>
                   </div>
-                ))}
-              </div>
-            </Card>
-          )}
+                  <p className="text-xs text-[#85858b]">{q.text}</p>
+                  {rec?.answer && (
+                    <div className="mt-2 p-3 rounded-lg bg-[#0f0f10] border border-white/[0.06] text-xs text-[#ededed]">
+                      {rec.answer}
+                    </div>
+                  )}
+                </Card>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
