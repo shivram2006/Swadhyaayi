@@ -58,6 +58,7 @@ class VideoRenderer:
         text: str,
         anchor_image_path: str,
         state: str = "speaking",
+        frames: List[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         wav_path = self.output_dir / f"{job_id}.wav"
         silent_mp4 = self.output_dir / f"{job_id}.silent.mp4"
@@ -70,7 +71,7 @@ class VideoRenderer:
         duration = max(0.5, float(audio_info["duration_sec"]))
         total_frames = max(1, int(round(duration * self.fps)))
 
-        engine = LipSyncEngine(anchor_image_path)
+        engine = LipSyncEngine(anchor_image_path, library_frames=frames)
         controller = FacialAnimationController(state=state)
 
         fourcc = cv2.VideoWriter_fourcc(*"mp4v")

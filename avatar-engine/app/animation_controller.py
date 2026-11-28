@@ -96,7 +96,13 @@ def _run_render_job(job_id: str, text: str, state: str):
         if not anchor:
             raise RuntimeError("No valid avatar anchor frame found in manifest")
         renderer = VideoRenderer(str(MODELS_DIR), str(OUTPUT_DIR))
-        result = renderer.render(job_id, text, anchor["library_path"], state=state)
+        result = renderer.render(
+            job_id,
+            text,
+            anchor["library_path"],
+            state=state,
+            frames=manifest.get("frames", []),
+        )
         _jobs[job_id] = {"status": "COMPLETED", **result}
     except Exception as exc:
         _jobs[job_id] = {"status": "FAILED", "job_id": job_id, "error": str(exc)}
@@ -141,7 +147,13 @@ def prerender_basic_questions(x_avatar_key: Optional[str] = Header(default=None)
         if out_mp4.exists():
             results.append({"job_id": job_id, "title": q["title"], "cached": True, "video_path": str(out_mp4)})
             continue
-        res = renderer.render(job_id, q["text"], anchor["library_path"], state=q["state"])
+        res = renderer.render(
+            job_id,
+            q["text"],
+            anchor["library_path"],
+            state=q["state"],
+            frames=manifest.get("frames", []),
+        )
         _jobs[job_id] = {"status": "COMPLETED", **res}
         results.append({"job_id": job_id, "title": q["title"], "cached": False, "duration_sec": res["duration_sec"]})
     return {"prerendered": results}

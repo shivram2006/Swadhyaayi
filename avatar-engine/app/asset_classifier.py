@@ -103,12 +103,14 @@ class AssetClassifier:
         if with_lm:
             scales = sorted(f["landmarks"]["face_scale"] for f in with_lm)
             median_scale = scales[len(scales) // 2]
-            # Prefer gentle closed-mouth or listening/smiling frame near median scale for stable base
+            # Prefer clean closed-mouth, open-eyes frame near median scale for stable base
             anchor_frame = min(
                 with_lm,
                 key=lambda f: (
-                    abs(f["landmarks"]["face_scale"] - median_scale) * 10.0
-                    + f["landmarks"]["mouth_aspect_ratio"] * 2.0
+                    (5.0 if f["landmarks"]["mouth_aspect_ratio"] > 0.08 else 0.0)
+                    + (5.0 if f["landmarks"]["eye_aspect_ratio"] < 0.22 else 0.0)
+                    + abs(f["landmarks"]["face_scale"] - median_scale) * 8.0
+                    + f["landmarks"]["mouth_aspect_ratio"] * 6.0
                     - min(f["sharpness"], 500.0) / 1000.0
                 ),
             )

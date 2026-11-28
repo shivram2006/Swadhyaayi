@@ -115,7 +115,7 @@ class AssetAnalyzer:
         )
 
         records: List[Dict[str, Any]] = []
-        seen_hashes: List[Tuple[str, int]] = []
+        seen_hashes: List[Tuple[str, int, Optional[Dict[str, Any]]]] = []
         resolutions: set = set()
         scales: List[float] = []
         mars: List[float] = []
@@ -137,17 +137,6 @@ class AssetAnalyzer:
             brightness = float(np.mean(gray))
             dhash = compute_dhash(img)
 
-            dup_of: Optional[str] = None
-            for prev_name, prev_hash in seen_hashes:
-                if hamming_distance(dhash, prev_hash) <= self.duplicate_hamming_threshold:
-                    dup_of = prev_name
-                    break
-
-            if dup_of is None:
-                seen_hashes.append((path.name, dhash))
-            else:
-                duplicate_count += 1
-
             lm_info = self._extract_landmarks(img)
             if lm_info is None:
                 no_face_count += 1
@@ -155,6 +144,25 @@ class AssetAnalyzer:
                 scales.append(lm_info["face_scale"])
                 mars.append(lm_info["mouth_aspect_ratio"])
                 ears.append(lm_info["eye_aspect_ratio"])
+
+            dup_of: Optional[str] = None
+            for prev_name, prev_hash, prev_lm in seen_hashes:
+                if hamming_distance(dhash, prev_hash) <= self.duplicate_hamming_threshold:
+                    if lm_info is None or prev_lm is None:
+                        dup_of = prev_name
+                        break
+                    # Keep frames that differ in mouth openness, mouth width, or eye blink
+                    mar_diff = abs(lm_info["mouth_aspect_ratio"] - prev_lm["mouth_aspect_ratio"])
+                    ear_diff = abs(lm_info["eye_aspect_ratio"] - prev_lm["eye_aspect_ratio"])
+                    mw_diff = abs(lm_info["mouth_width_norm"] - prev_lm["mouth_width_norm"])
+                    if mar_diff < 0.015 and ear_diff < 0.025 and mw_diff < 0.015:
+                        dup_of = prev_name
+                        break
+
+            if dup_of is None:
+                seen_hashes.append((path.name, dhash, lm_info))
+            else:
+                duplicate_count += 1
 
             records.append(
                 {
