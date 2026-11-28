@@ -98,11 +98,25 @@ export const MockInterviewPage: React.FC = () => {
   const [evaluation, setEvaluation] = useState<EvaluationResult | null>(null);
   const [evaluating, setEvaluating] = useState<boolean>(false);
   const recognitionRef = useRef<any>(null);
+  const autoMicTimerRef = useRef<number | null>(null);
+  const phaseRef = useRef<'setup' | 'active' | 'summary'>(phase);
+  const isRecordingRef = useRef<boolean>(isRecording);
+
+  phaseRef.current = phase;
+  isRecordingRef.current = isRecording;
 
   const apiBase = (axios.defaults.baseURL || 'http://localhost:5000/api/v1').replace(/\/$/, '');
 
+  const clearAutoMicTimer = () => {
+    if (autoMicTimerRef.current !== null) {
+      window.clearTimeout(autoMicTimerRef.current);
+      autoMicTimerRef.current = null;
+    }
+  };
+
   useEffect(() => {
     return () => {
+      clearAutoMicTimer();
       if (recognitionRef.current) {
         try { recognitionRef.current.stop(); } catch {}
       }
@@ -134,18 +148,20 @@ export const MockInterviewPage: React.FC = () => {
   };
 
   const stopAudioAndMic = () => {
+    clearAutoMicTimer();
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     }
     setIsSpeaking(false);
-    if (isRecording && recognitionRef.current) {
+    if (recognitionRef.current) {
       try { recognitionRef.current.stop(); } catch {}
-      setIsRecording(false);
     }
+    setIsRecording(false);
   };
 
   const speakQuestion = async (text: string, state: string = 'speaking') => {
+    clearAutoMicTimer();
     setError(null);
     setLoadingSpeech(true);
     setCurrentSubtitle(text);
@@ -176,6 +192,7 @@ export const MockInterviewPage: React.FC = () => {
   }, [audioUrl, phase]);
 
   const handleStartInterview = async () => {
+    ensureAudioAnalyser();
     setError(null);
     setLoadingSpeech(true);
     try {
@@ -230,6 +247,7 @@ export const MockInterviewPage: React.FC = () => {
   };
 
   const handleNextQuestion = () => {
+    ensureAudioAnalyser();
     stopAudioAndMic();
     saveCurrentAnswer(activeIdx);
     const nextIdx = activeIdx + 1;
@@ -242,6 +260,7 @@ export const MockInterviewPage: React.FC = () => {
 
   const handleJumpToQuestion = (idx: number) => {
     if (idx === activeIdx) return;
+    ensureAudioAnalyser();
     stopAudioAndMic();
     saveCurrentAnswer(activeIdx);
     setActiveIdx(idx);
@@ -280,35 +299,58 @@ export const MockInterviewPage: React.FC = () => {
     }
   };
 
-  const handleToggleMic = () => {
+  const startMic = (silentIfUnsupported = false) => {
+    if (isRecordingRef.current) return;
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SpeechRecognition) {
-      alert('Speech recognition is not supported in this browser. You can type your response below.');
+      if (!silentIfUnsupported) {
+        alert('Speech recognition is not supported in this browser. You can type your response below.');
+      }
       return;
     }
 
+    try {
+      const rec = new SpeechRecognition();
+      rec.continuous = true;
+      rec.interimResults = false;
+      rec.lang = 'en-IN';
+      rec.onresult = (event: any) => {
+        let transcript = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript + ' ';
+        }
+        setAnswerText((prev) => `${prev}${prev ? ' ' : ''}${transcript.trim()}`);
+      };
+      rec.onerror = () => setIsRecording(false);
+      rec.onend = () => setIsRecording(false);
+      rec.start();
+      recognitionRef.current = rec;
+      setIsRecording(true);
+    } catch {
+      setIsRecording(false);
+    }
+  };
+
+  const handleToggleMic = () => {
+    clearAutoMicTimer();
     if (isRecording && recognitionRef.current) {
       recognitionRef.current.stop();
       setIsRecording(false);
       return;
     }
+    startMic(false);
+  };
 
-    const rec = new SpeechRecognition();
-    rec.continuous = true;
-    rec.interimResults = false;
-    rec.lang = 'en-IN';
-    rec.onresult = (event: any) => {
-      let transcript = '';
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        transcript += event.results[i][0].transcript + ' ';
-      }
-      setAnswerText((prev) => `${prev}${prev ? ' ' : ''}${transcript.trim()}`);
-    };
-    rec.onerror = () => setIsRecording(false);
-    rec.onend = () => setIsRecording(false);
-    rec.start();
-    recognitionRef.current = rec;
-    setIsRecording(true);
+  const handleAudioEnded = () => {
+    setIsSpeaking(false);
+    clearAutoMicTimer();
+    if (phaseRef.current === 'active') {
+      autoMicTimerRef.current = window.setTimeout(() => {
+        if (phaseRef.current === 'active') {
+          startMic(true);
+        }
+      }, 1000);
+    }
   };
 
   const answeredCount = Object.keys(answers).length;
@@ -318,9 +360,12 @@ export const MockInterviewPage: React.FC = () => {
       <audio
         ref={audioRef}
         crossOrigin="anonymous"
-        onPlay={() => setIsSpeaking(true)}
+        onPlay={() => {
+          clearAutoMicTimer();
+          setIsSpeaking(true);
+        }}
         onPause={() => setIsSpeaking(false)}
-        onEnded={() => setIsSpeaking(false)}
+        onEnded={handleAudioEnded}
       />
 
       {/* Header */}
