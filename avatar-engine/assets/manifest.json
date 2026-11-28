@@ -1,0 +1,459 @@
+{
+  "summary": {
+    "total_files": 50,
+    "unique_frames": 10,
+    "duplicate_frames": 40,
+    "faces_detected": 50,
+    "resolutions": [
+      "1280x720"
+    ],
+    "face_scale_range": [
+      0.2299,
+      0.3238
+    ],
+    "mar_range": [
+      0.0074,
+      0.3551
+    ],
+    "ear_range": [
+      0.0268,
+      0.4679
+    ],
+    "mediapipe_active": true,
+    "limitations": [
+      "Only 50 frames uploaded (target 100-200). Lip-sync uses landmark-guided mouth synthesis over a stabilized anchor frame."
+    ]
+  },
+  "category_counts": {
+    "neutral": 0,
+    "listening": 0,
+    "smiling": 0,
+    "speaking_open": 4,
+    "speaking_wide": 4,
+    "blinking": 1,
+    "thinking": 1,
+    "encouraging": 0,
+    "surprised": 0,
+    "positive_reaction": 0
+  },
+  "anchor_frame": {
+    "filename": "frame_029.jpg",
+    "source_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\raw_upload\\gemini_generated_video_1f752508_frames\\frame_029.jpg",
+    "library_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\library\\speaking_wide\\frame_029.jpg",
+    "expression": "speaking_wide",
+    "viseme": "AA",
+    "sharpness": 127.24,
+    "landmarks": {
+      "face_detected": true,
+      "face_bbox_norm": [
+        0.5143,
+        0.1365,
+        0.1349,
+        0.2554
+      ],
+      "face_center_norm": [
+        0.5818,
+        0.2642
+      ],
+      "face_scale": 0.2554,
+      "mouth_aspect_ratio": 0.247,
+      "mouth_width_norm": 0.4426,
+      "outer_open_ratio": 0.4834,
+      "eye_aspect_ratio": 0.2347,
+      "brow_height_ratio": 0.1565,
+      "yaw_ratio": -0.6213,
+      "mouth_center_px": [
+        732.2,
+        229.2
+      ],
+      "mouth_box_px": [
+        675,
+        194,
+        788,
+        275
+      ]
+    }
+  },
+  "frames": [
+    {
+      "filename": "frame_001.jpg",
+      "source_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\raw_upload\\gemini_generated_video_1f752508_frames\\frame_001.jpg",
+      "library_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\library\\speaking_open\\frame_001.jpg",
+      "expression": "speaking_open",
+      "viseme": "OO",
+      "sharpness": 227.62,
+      "landmarks": {
+        "face_detected": true,
+        "face_bbox_norm": [
+          0.5111,
+          0.1393,
+          0.1121,
+          0.2328
+        ],
+        "face_center_norm": [
+          0.5672,
+          0.2557
+        ],
+        "face_scale": 0.2328,
+        "mouth_aspect_ratio": 0.1933,
+        "mouth_width_norm": 0.4501,
+        "outer_open_ratio": 0.4329,
+        "eye_aspect_ratio": 0.355,
+        "brow_height_ratio": 0.1473,
+        "yaw_ratio": -0.5271,
+        "mouth_center_px": [
+          710.8,
+          219.1
+        ],
+        "mouth_box_px": [
+          662,
+          191,
+          759,
+          257
+        ]
+      }
+    },
+    {
+      "filename": "frame_007.jpg",
+      "source_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\raw_upload\\gemini_generated_video_1f752508_frames\\frame_007.jpg",
+      "library_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\library\\blinking\\frame_007.jpg",
+      "expression": "blinking",
+      "viseme": "REST",
+      "sharpness": 139.07,
+      "landmarks": {
+        "face_detected": true,
+        "face_bbox_norm": [
+          0.5095,
+          0.1489,
+          0.1126,
+          0.2382
+        ],
+        "face_center_norm": [
+          0.5658,
+          0.268
+        ],
+        "face_scale": 0.2382,
+        "mouth_aspect_ratio": 0.1772,
+        "mouth_width_norm": 0.3958,
+        "outer_open_ratio": 0.4628,
+        "eye_aspect_ratio": 0.0268,
+        "brow_height_ratio": 0.2024,
+        "yaw_ratio": -0.4929,
+        "mouth_center_px": [
+          706.8,
+          229.7
+        ],
+        "mouth_box_px": [
+          664,
+          204,
+          749,
+          265
+        ]
+      }
+    },
+    {
+      "filename": "frame_012.jpg",
+      "source_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\raw_upload\\gemini_generated_video_1f752508_frames\\frame_012.jpg",
+      "library_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\library\\speaking_wide\\frame_012.jpg",
+      "expression": "speaking_wide",
+      "viseme": "AA",
+      "sharpness": 149.23,
+      "landmarks": {
+        "face_detected": true,
+        "face_bbox_norm": [
+          0.5116,
+          0.137,
+          0.1182,
+          0.2458
+        ],
+        "face_center_norm": [
+          0.5707,
+          0.2599
+        ],
+        "face_scale": 0.2458,
+        "mouth_aspect_ratio": 0.2674,
+        "mouth_width_norm": 0.447,
+        "outer_open_ratio": 0.5273,
+        "eye_aspect_ratio": 0.368,
+        "brow_height_ratio": 0.1455,
+        "yaw_ratio": -0.5891,
+        "mouth_center_px": [
+          717.3,
+          225.7
+        ],
+        "mouth_box_px": [
+          666,
+          193,
+          767,
+          269
+        ]
+      }
+    },
+    {
+      "filename": "frame_022.jpg",
+      "source_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\raw_upload\\gemini_generated_video_1f752508_frames\\frame_022.jpg",
+      "library_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\library\\speaking_wide\\frame_022.jpg",
+      "expression": "speaking_wide",
+      "viseme": "AA",
+      "sharpness": 119.74,
+      "landmarks": {
+        "face_detected": true,
+        "face_bbox_norm": [
+          0.517,
+          0.1092,
+          0.1357,
+          0.2626
+        ],
+        "face_center_norm": [
+          0.5849,
+          0.2404
+        ],
+        "face_scale": 0.2626,
+        "mouth_aspect_ratio": 0.3005,
+        "mouth_width_norm": 0.4066,
+        "outer_open_ratio": 0.5813,
+        "eye_aspect_ratio": 0.2518,
+        "brow_height_ratio": 0.1435,
+        "yaw_ratio": -0.6057,
+        "mouth_center_px": [
+          738.5,
+          207.9
+        ],
+        "mouth_box_px": [
+          686,
+          171,
+          790,
+          253
+        ]
+      }
+    },
+    {
+      "filename": "frame_025.jpg",
+      "source_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\raw_upload\\gemini_generated_video_1f752508_frames\\frame_025.jpg",
+      "library_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\library\\speaking_wide\\frame_025.jpg",
+      "expression": "speaking_wide",
+      "viseme": "AA",
+      "sharpness": 142.12,
+      "landmarks": {
+        "face_detected": true,
+        "face_bbox_norm": [
+          0.5322,
+          0.1269,
+          0.1288,
+          0.2538
+        ],
+        "face_center_norm": [
+          0.5966,
+          0.2539
+        ],
+        "face_scale": 0.2538,
+        "mouth_aspect_ratio": 0.2734,
+        "mouth_width_norm": 0.4494,
+        "outer_open_ratio": 0.5184,
+        "eye_aspect_ratio": 0.2454,
+        "brow_height_ratio": 0.147,
+        "yaw_ratio": -0.5862,
+        "mouth_center_px": [
+          756.1,
+          219.2
+        ],
+        "mouth_box_px": [
+          701,
+          184,
+          810,
+          264
+        ]
+      }
+    },
+    {
+      "filename": "frame_029.jpg",
+      "source_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\raw_upload\\gemini_generated_video_1f752508_frames\\frame_029.jpg",
+      "library_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\library\\speaking_wide\\frame_029.jpg",
+      "expression": "speaking_wide",
+      "viseme": "AA",
+      "sharpness": 127.24,
+      "landmarks": {
+        "face_detected": true,
+        "face_bbox_norm": [
+          0.5143,
+          0.1365,
+          0.1349,
+          0.2554
+        ],
+        "face_center_norm": [
+          0.5818,
+          0.2642
+        ],
+        "face_scale": 0.2554,
+        "mouth_aspect_ratio": 0.247,
+        "mouth_width_norm": 0.4426,
+        "outer_open_ratio": 0.4834,
+        "eye_aspect_ratio": 0.2347,
+        "brow_height_ratio": 0.1565,
+        "yaw_ratio": -0.6213,
+        "mouth_center_px": [
+          732.2,
+          229.2
+        ],
+        "mouth_box_px": [
+          675,
+          194,
+          788,
+          275
+        ]
+      }
+    },
+    {
+      "filename": "frame_037.jpg",
+      "source_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\raw_upload\\gemini_generated_video_1f752508_frames\\frame_037.jpg",
+      "library_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\library\\speaking_open\\frame_037.jpg",
+      "expression": "speaking_open",
+      "viseme": "OO",
+      "sharpness": 80.45,
+      "landmarks": {
+        "face_detected": true,
+        "face_bbox_norm": [
+          0.4867,
+          0.1604,
+          0.1473,
+          0.293
+        ],
+        "face_center_norm": [
+          0.5604,
+          0.3069
+        ],
+        "face_scale": 0.293,
+        "mouth_aspect_ratio": 0.2336,
+        "mouth_width_norm": 0.4188,
+        "outer_open_ratio": 0.5036,
+        "eye_aspect_ratio": 0.2828,
+        "brow_height_ratio": 0.1463,
+        "yaw_ratio": -0.6629,
+        "mouth_center_px": [
+          708.3,
+          269.9
+        ],
+        "mouth_box_px": [
+          650,
+          234,
+          766,
+          318
+        ]
+      }
+    },
+    {
+      "filename": "frame_042.jpg",
+      "source_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\raw_upload\\gemini_generated_video_1f752508_frames\\frame_042.jpg",
+      "library_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\library\\speaking_open\\frame_042.jpg",
+      "expression": "speaking_open",
+      "viseme": "OO",
+      "sharpness": 77.41,
+      "landmarks": {
+        "face_detected": true,
+        "face_bbox_norm": [
+          0.5065,
+          0.1486,
+          0.1517,
+          0.3012
+        ],
+        "face_center_norm": [
+          0.5823,
+          0.2992
+        ],
+        "face_scale": 0.3012,
+        "mouth_aspect_ratio": 0.2104,
+        "mouth_width_norm": 0.4339,
+        "outer_open_ratio": 0.4459,
+        "eye_aspect_ratio": 0.3945,
+        "brow_height_ratio": 0.1408,
+        "yaw_ratio": -0.6943,
+        "mouth_center_px": [
+          732.2,
+          266.0
+        ],
+        "mouth_box_px": [
+          669,
+          230,
+          794,
+          316
+        ]
+      }
+    },
+    {
+      "filename": "frame_044.jpg",
+      "source_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\raw_upload\\gemini_generated_video_1f752508_frames\\frame_044.jpg",
+      "library_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\library\\speaking_open\\frame_044.jpg",
+      "expression": "speaking_open",
+      "viseme": "OO",
+      "sharpness": 73.28,
+      "landmarks": {
+        "face_detected": true,
+        "face_bbox_norm": [
+          0.5046,
+          0.1456,
+          0.1555,
+          0.3125
+        ],
+        "face_center_norm": [
+          0.5824,
+          0.3018
+        ],
+        "face_scale": 0.3125,
+        "mouth_aspect_ratio": 0.1823,
+        "mouth_width_norm": 0.4418,
+        "outer_open_ratio": 0.4556,
+        "eye_aspect_ratio": 0.3875,
+        "brow_height_ratio": 0.1453,
+        "yaw_ratio": -0.6525,
+        "mouth_center_px": [
+          730.7,
+          266.4
+        ],
+        "mouth_box_px": [
+          665,
+          228,
+          796,
+          320
+        ]
+      }
+    },
+    {
+      "filename": "frame_048.jpg",
+      "source_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\raw_upload\\gemini_generated_video_1f752508_frames\\frame_048.jpg",
+      "library_path": "C:\\Users\\shivr\\Desktop\\Swadhyay\\avatar-engine\\assets\\library\\thinking\\frame_048.jpg",
+      "expression": "thinking",
+      "viseme": "REST",
+      "sharpness": 72.01,
+      "landmarks": {
+        "face_detected": true,
+        "face_bbox_norm": [
+          0.5013,
+          0.1469,
+          0.1595,
+          0.317
+        ],
+        "face_center_norm": [
+          0.581,
+          0.3054
+        ],
+        "face_scale": 0.317,
+        "mouth_aspect_ratio": 0.0305,
+        "mouth_width_norm": 0.3754,
+        "outer_open_ratio": 0.3359,
+        "eye_aspect_ratio": 0.3636,
+        "brow_height_ratio": 0.1498,
+        "yaw_ratio": -0.6244,
+        "mouth_center_px": [
+          721.7,
+          271.9
+        ],
+        "mouth_box_px": [
+          664,
+          243,
+          778,
+          314
+        ]
+      }
+    }
+  ]
+}

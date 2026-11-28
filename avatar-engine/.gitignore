@@ -1,0 +1,6 @@
+models/
+output/
+assets/raw_upload/
+assets/library/
+__pycache__/
+*.pyc
