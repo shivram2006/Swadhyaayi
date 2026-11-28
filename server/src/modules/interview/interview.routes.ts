@@ -68,6 +68,20 @@ interviewRouter.post('/prerender-basics', async (_req: Request, res: Response, n
   }
 });
 
+interviewRouter.post('/speech', async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const upstream = await fetch(`${AVATAR_ENGINE_URL}/api/avatar/speech`, {
+      method: 'POST',
+      headers: engineHeaders({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify(req.body),
+    });
+    const data = await upstream.json();
+    res.status(upstream.status).json({ success: upstream.ok, data });
+  } catch (err) {
+    next(err);
+  }
+});
+
 interviewRouter.post('/render', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const upstream = await fetch(`${AVATAR_ENGINE_URL}/api/avatar/render`, {

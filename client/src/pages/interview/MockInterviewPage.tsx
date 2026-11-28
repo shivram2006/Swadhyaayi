@@ -3,7 +3,8 @@ import axios from 'axios';
 import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
-import { Video, Play, Mic, MicOff, Send, RefreshCw, ChevronRight } from 'lucide-react';
+import { VoiceOrb } from '../../components/interview/VoiceOrb';
+import { Play, Pause, Mic, MicOff, Send, RefreshCw, ChevronRight, Volume2 } from 'lucide-react';
 
 interface StarterQuestion {
   id: string;
@@ -16,11 +17,18 @@ export const MockInterviewPage: React.FC = () => {
   const [questions, setQuestions] = useState<StarterQuestion[]>([]);
   const [activeIdx, setActiveIdx] = useState<number>(0);
   const [customPrompt, setCustomPrompt] = useState<string>('');
-  const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [currentSubtitle, setCurrentSubtitle] = useState<string>('');
   const [currentState, setCurrentState] = useState<string>('smiling');
-  const [rendering, setRendering] = useState<boolean>(false);
+  const [loadingSpeech, setLoadingSpeech] = useState<boolean>(false);
+  const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Web Audio API analyser for real-time ChatGPT-style orb bubbling
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const sourceNodeRef = useRef<MediaElementAudioSourceNode | null>(null);
 
   // Candidate answer & speech-to-text
   const [answerText, setAnswerText] = useState<string>('');
@@ -32,7 +40,33 @@ export const MockInterviewPage: React.FC = () => {
 
   useEffect(() => {
     loadStarterQuestions();
+    return () => {
+      if (audioCtxRef.current) {
+        audioCtxRef.current.close().catch(() => {});
+      }
+    };
   }, []);
+
+  const ensureAudioAnalyser = () => {
+    const el = audioRef.current;
+    if (!el) return;
+    if (!audioCtxRef.current) {
+      const Ctx = window.AudioContext || (window as any).webkitAudioContext;
+      const ctx = new Ctx();
+      const analyser = ctx.createAnalyser();
+      analyser.fftSize = 128;
+      analyser.smoothingTimeConstant = 0.75;
+      const src = ctx.createMediaElementSource(el);
+      src.connect(analyser);
+      analyser.connect(ctx.destination);
+      audioCtxRef.current = ctx;
+      analyserRef.current = analyser;
+      sourceNodeRef.current = src;
+    }
+    if (audioCtxRef.current.state === 'suspended') {
+      audioCtxRef.current.resume().catch(() => {});
+    }
+  };
 
   const loadStarterQuestions = async () => {
     try {
@@ -40,47 +74,50 @@ export const MockInterviewPage: React.FC = () => {
       const list: StarterQuestion[] = res.data?.data?.questions || [];
       setQuestions(list);
       if (list.length > 0) {
-        // Trigger initial basic question ("Tell me about yourself")
-        renderQuestion(list[0].text, list[0].state, list[0].id);
+        speakQuestion(list[0].text, list[0].state);
       }
     } catch {
-      setError('Avatar engine is offline. Make sure the Python avatar service is running on port 8001.');
+      setError('Voice engine is offline. Make sure the Python service is running on port 8001.');
     }
   };
 
-  const renderQuestion = async (text: string, state: string = 'speaking', preRenderedId?: string) => {
+  const speakQuestion = async (text: string, state: string = 'speaking') => {
     setError(null);
-    setRendering(true);
+    setLoadingSpeech(true);
     setCurrentSubtitle(text);
     setCurrentState(state);
     try {
-      if (preRenderedId) {
-        // Check if already prerendered or trigger prerender-basics once
-        try {
-          const st = await axios.get(`/interview/status/${preRenderedId}`);
-          if (st.data?.data?.status === 'COMPLETED') {
-            setVideoUrl(`${apiBase}/interview/media/${preRenderedId}?t=${Date.now()}`);
-            setRendering(false);
-            return;
-          }
-        } catch {
-          // Not prerendered yet — render below
-        }
-      }
-
-      const res = await axios.post('/interview/render', {
-        text,
-        state,
-        async_mode: false,
-      });
+      const res = await axios.post('/interview/speech', { text });
       const jobId = res.data?.data?.job_id;
       if (jobId) {
-        setVideoUrl(`${apiBase}/interview/media/${jobId}?t=${Date.now()}`);
+        const url = `${apiBase}/interview/media/${jobId}?t=${Date.now()}`;
+        setAudioUrl(url);
       }
     } catch (err: any) {
-      setError(err?.response?.data?.detail || err?.response?.data?.error?.message || 'Failed to generate avatar video.');
+      setError(err?.response?.data?.detail || err?.response?.data?.error?.message || 'Failed to generate interviewer speech.');
     } finally {
-      setRendering(false);
+      setLoadingSpeech(false);
+    }
+  };
+
+  useEffect(() => {
+    const el = audioRef.current;
+    if (!el || !audioUrl) return;
+    ensureAudioAnalyser();
+    el.src = audioUrl;
+    el.play().catch(() => {
+      // Browser may block autoplay before user gesture; user can click Play button
+    });
+  }, [audioUrl]);
+
+  const handleTogglePlayback = () => {
+    const el = audioRef.current;
+    if (!el || !audioUrl) return;
+    ensureAudioAnalyser();
+    if (el.paused) {
+      el.play().catch(() => {});
+    } else {
+      el.pause();
     }
   };
 
@@ -88,7 +125,7 @@ export const MockInterviewPage: React.FC = () => {
     setActiveIdx(idx);
     const q = questions[idx];
     if (q) {
-      renderQuestion(q.text, q.state, q.id);
+      speakQuestion(q.text, q.state);
     }
   };
 
@@ -138,6 +175,15 @@ export const MockInterviewPage: React.FC = () => {
 
   return (
     <div className="space-y-6 pb-12">
+      {/* Hidden CORS-enabled audio element feeding Web Audio AnalyserNode */}
+      <audio
+        ref={audioRef}
+        crossOrigin="anonymous"
+        onPlay={() => setIsSpeaking(true)}
+        onPause={() => setIsSpeaking(false)}
+        onEnded={() => setIsSpeaking(false)}
+      />
+
       {/* Header */}
       <div className="pb-6 border-b border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
@@ -145,18 +191,20 @@ export const MockInterviewPage: React.FC = () => {
             AI Mock Interview
           </h1>
           <p className="text-sm text-[#a1a1a6] mt-1">
-            Interactive HR &amp; technical interview with Anjali Sharma (Piper TTS + MediaPipe lip-sync).
+            Interactive HR &amp; technical voice interview with Anjali Sharma (Piper TTS + live voice orb).
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Badge variant="neutral" size="sm">State: {currentState}</Badge>
+          <Badge variant="neutral" size="sm">
+            {isSpeaking ? 'Speaking' : isRecording ? 'Listening' : loadingSpeech ? 'Thinking' : currentState}
+          </Badge>
           <Button
             variant="secondary"
             size="sm"
-            onClick={() => renderQuestion(currentSubtitle || questions[activeIdx]?.text || 'Tell me about yourself.', currentState)}
-            leftIcon={<RefreshCw className={`w-3.5 h-3.5 ${rendering ? 'animate-spin' : ''}`} strokeWidth={1.5} />}
+            onClick={() => speakQuestion(currentSubtitle || questions[activeIdx]?.text || 'Tell me about yourself.', currentState)}
+            leftIcon={<RefreshCw className={`w-3.5 h-3.5 ${loadingSpeech ? 'animate-spin' : ''}`} strokeWidth={1.5} />}
           >
-            Re-render
+            Replay Voice
           </Button>
         </div>
       </div>
@@ -168,30 +216,40 @@ export const MockInterviewPage: React.FC = () => {
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left: Avatar Video Stage + Response Box */}
+        {/* Left: ChatGPT-style Voice Orb Stage + Response Box */}
         <div className="lg:col-span-8 space-y-5">
-          <Card className="p-0 overflow-hidden bg-[#0f0f10]">
-            <div className="relative aspect-video bg-[#0f0f10] flex items-center justify-center">
-              {rendering ? (
-                <div className="flex flex-col items-center gap-2 text-xs text-[#a1a1a6]">
-                  <div className="w-7 h-7 border-2 border-[#ededed] border-t-transparent rounded-full animate-spin" />
-                  <span>Synthesizing Piper speech &amp; lip-synced video...</span>
-                </div>
-              ) : videoUrl ? (
-                <video
-                  key={videoUrl}
-                  src={videoUrl}
-                  controls
-                  autoPlay
-                  playsInline
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="text-center space-y-2 p-6">
-                  <Video className="w-8 h-8 text-[#85858b] mx-auto" strokeWidth={1.5} />
-                  <p className="text-xs text-[#a1a1a6]">Select a question to start the AI mock interview.</p>
-                </div>
-              )}
+          <Card className="p-0 overflow-hidden bg-[#0b0c10]">
+            <div className="relative min-h-[340px] bg-gradient-to-b from-[#0d1117] via-[#0b0c10] to-[#0f1014] flex flex-col items-center justify-center py-8 px-6">
+              <VoiceOrb
+                isSpeaking={isSpeaking}
+                isListening={isRecording}
+                isLoading={loadingSpeech}
+                analyser={analyserRef.current}
+              />
+
+              <div className="mt-3 flex items-center gap-3">
+                {audioUrl && (
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    size="sm"
+                    onClick={handleTogglePlayback}
+                    leftIcon={isSpeaking ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                  >
+                    {isSpeaking ? 'Pause' : 'Listen'}
+                  </Button>
+                )}
+                <span className="text-xs text-[#85858b] flex items-center gap-1.5">
+                  <Volume2 className="w-3.5 h-3.5" />
+                  {loadingSpeech
+                    ? 'Generating voice...'
+                    : isSpeaking
+                      ? 'Anjali is speaking...'
+                      : isRecording
+                        ? 'Listening to your answer...'
+                        : 'Ready'}
+                </span>
+              </div>
             </div>
 
             {currentSubtitle && (
@@ -281,11 +339,11 @@ export const MockInterviewPage: React.FC = () => {
               variant="secondary"
               size="sm"
               className="w-full"
-              disabled={!customPrompt.trim() || rendering}
-              onClick={() => renderQuestion(customPrompt.trim(), 'speaking')}
+              disabled={!customPrompt.trim() || loadingSpeech}
+              onClick={() => speakQuestion(customPrompt.trim(), 'speaking')}
               leftIcon={<Send className="w-3.5 h-3.5" />}
             >
-              Ask via Avatar
+              Ask via Voice Orb
             </Button>
           </Card>
 
