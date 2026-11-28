@@ -27,6 +27,7 @@ import { ResumeListPage } from './pages/resume/ResumeListPage';
 import { ResumeEditorPage } from './pages/resume/ResumeEditorPage';
 import { JobDiscoveryPage } from './pages/opportunity/JobDiscoveryPage';
 import { ApplicationTrackerPage } from './pages/opportunity/ApplicationTrackerPage';
+import { MockInterviewPage } from './pages/interview/MockInterviewPage';
 import { PlacementAnalyticsPage } from './pages/admin/PlacementAnalyticsPage';
 import { CollegeSubscriptionPage } from './pages/admin/CollegeSubscriptionPage';
 import { SuperAdminSubscriptionsPage } from './pages/super/SuperAdminSubscriptionsPage';
@@ -103,6 +104,7 @@ export const App: React.FC = () => {
               <Route path="/opportunities" element={<JobDiscoveryPage />} />
               <Route path="/applications" element={<ApplicationTrackerPage />} />
               <Route path="/pipeline" element={<ApplicationTrackerPage />} />
+              <Route path="/mock-interview" element={<MockInterviewPage />} />
             </Route>
 
             {/* Institution Admin Portal */}

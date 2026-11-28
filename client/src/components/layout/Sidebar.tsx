@@ -15,6 +15,7 @@ import {
   LayoutDashboard,
   User,
   BarChart3,
+  Video,
 } from 'lucide-react';
 
 export const Sidebar: React.FC = () => {
@@ -31,6 +32,7 @@ export const Sidebar: React.FC = () => {
     { to: '/tests', label: 'My Assessments', icon: ClipboardCheck },
     { to: '/resume', label: 'ATS Resume Builder', icon: FileText },
     { to: '/jobs', label: 'Job Discovery', icon: Briefcase },
+    { to: '/mock-interview', label: 'AI Mock Interview', icon: Video },
   ];
 
   const adminLinks = [

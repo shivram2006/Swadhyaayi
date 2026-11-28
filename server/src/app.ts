@@ -17,6 +17,7 @@ import { assessmentRouter } from './modules/assessment/assessment.routes';
 import resumeRouter from './modules/resume/resume.routes';
 import { opportunityRouter, applicationRouter } from './modules/opportunity/opportunity.routes';
 import subscriptionRouter from './modules/subscription/subscription.routes';
+import { interviewRouter } from './modules/interview/interview.routes';
 import { errorHandler } from './core/middleware/errorHandler';
 import { sendSuccess } from './core/utils/response';
 import { NotFoundError } from './core/utils/appError';
@@ -96,6 +97,7 @@ export const createApp = (): Application => {
   app.use('/api/v1/opportunities', opportunityRouter);
   app.use('/api/v1/applications', applicationRouter);
   app.use('/api/v1/subscriptions', subscriptionRouter);
+  app.use('/api/v1/interview', interviewRouter);
 
   // 404 Fallback
   app.use((_req: Request, _res: Response, next) => {
