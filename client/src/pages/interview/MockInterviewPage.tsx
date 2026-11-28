@@ -34,6 +34,34 @@ interface AnswerRecord {
   answer: string;
 }
 
+interface QuestionFeedback {
+  index: number;
+  title: string;
+  score: number;
+  status: string;
+  feedback: string;
+  idealTip: string;
+}
+
+interface EvaluationResult {
+  interviewType: 'hr' | 'technical';
+  role: string;
+  overallScore: number;
+  grade: string;
+  verdict: string;
+  answeredCount: number;
+  totalQuestions: number;
+  metrics: {
+    communicationScore: number;
+    technicalOrRoleFitScore: number;
+    completenessScore: number;
+    clarityScore: number;
+  };
+  strengths: string[];
+  improvements: string[];
+  perQuestionFeedback: QuestionFeedback[];
+}
+
 const ROLES = [
   'Software Engineer (SDE)',
   'Frontend Developer',
@@ -67,6 +95,8 @@ export const MockInterviewPage: React.FC = () => {
   const [answerText, setAnswerText] = useState<string>('');
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const [answers, setAnswers] = useState<Record<number, AnswerRecord>>({});
+  const [evaluation, setEvaluation] = useState<EvaluationResult | null>(null);
+  const [evaluating, setEvaluating] = useState<boolean>(false);
   const recognitionRef = useRef<any>(null);
 
   const apiBase = (axios.defaults.baseURL || 'http://localhost:5000/api/v1').replace(/\/$/, '');
@@ -219,10 +249,35 @@ export const MockInterviewPage: React.FC = () => {
     speakQuestion(questions[idx].text, questions[idx].state);
   };
 
-  const handleSubmitInterview = () => {
+  const handleSubmitInterview = async () => {
     stopAudioAndMic();
-    saveCurrentAnswer(activeIdx);
+    const finalAnswers: Record<number, AnswerRecord> = { ...answers };
+    const currentQ = questions[activeIdx];
+    if (currentQ && answerText.trim()) {
+      finalAnswers[activeIdx] = {
+        questionIndex: activeIdx,
+        title: currentQ.title,
+        question: currentQ.text,
+        answer: answerText.trim(),
+      };
+      setAnswers(finalAnswers);
+    }
+
+    setEvaluating(true);
     setPhase('summary');
+    try {
+      const res = await axios.post('/interview/evaluate', {
+        interviewType,
+        role: selectedRole,
+        questions,
+        answers: finalAnswers,
+      });
+      setEvaluation(res.data?.data || null);
+    } catch {
+      setError('Could not compute evaluation report.');
+    } finally {
+      setEvaluating(false);
+    }
   };
 
   const handleToggleMic = () => {
@@ -537,60 +592,144 @@ export const MockInterviewPage: React.FC = () => {
         </div>
       )}
 
-      {/* PHASE 3: SUBMITTED INTERVIEW SUMMARY */}
+      {/* PHASE 3: SUBMITTED INTERVIEW RESULTS & EVALUATION */}
       {phase === 'summary' && (
         <div className="max-w-4xl mx-auto space-y-5">
-          <Card className="p-6 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <Badge variant="neutral" size="sm">Interview Submitted</Badge>
-                <h2 className="text-xl font-medium text-[#ededed] mt-2">
-                  {interviewType === 'technical' ? 'Technical' : 'HR'} Mock Interview Summary — {selectedRole}
-                </h2>
-                <p className="text-xs text-[#85858b] mt-1">
-                  You completed {answeredCount} out of {questions.length} questions.
-                </p>
-              </div>
-              <Button
-                variant="primary"
-                size="sm"
-                onClick={() => {
-                  setPhase('setup');
-                  setAudioUrl(null);
-                  setQuestions([]);
-                  setAnswers({});
-                  setAnswerText('');
-                }}
-                leftIcon={<RotateCcw className="w-3.5 h-3.5" />}
-              >
-                Start New Interview
-              </Button>
-            </div>
-          </Card>
-
-          <div className="space-y-3">
-            {questions.map((q, idx) => {
-              const rec = answers[idx];
-              return (
-                <Card key={q.id} className="p-4 space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-medium text-[#ededed]">
-                      Q{idx + 1}. {q.title}
-                    </span>
+          {evaluating ? (
+            <Card className="p-8 flex flex-col items-center justify-center gap-3 text-sm text-[#a1a1a6]">
+              <div className="w-7 h-7 border-2 border-[#ededed] border-t-transparent rounded-full animate-spin" />
+              <span>Evaluating your 10-question interview performance...</span>
+            </Card>
+          ) : (
+            <>
+              <Card className="p-6 space-y-5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
                     <Badge variant="neutral" size="sm">
-                      {rec?.answer ? 'Answered' : 'Skipped'}
+                      {evaluation?.grade || 'Completed'}
                     </Badge>
+                    <h2 className="text-xl font-medium text-[#ededed] mt-2">
+                      {interviewType === 'technical' ? 'Technical' : 'HR'} Interview Results — {selectedRole}
+                    </h2>
+                    <p className="text-xs text-[#a1a1a6] mt-1">
+                      {evaluation?.verdict || `You completed ${answeredCount} out of ${questions.length} questions.`}
+                    </p>
                   </div>
-                  <p className="text-xs text-[#85858b]">{q.text}</p>
-                  {rec?.answer && (
-                    <div className="mt-2 p-3 rounded-lg bg-[#0f0f10] border border-white/[0.06] text-xs text-[#ededed]">
-                      {rec.answer}
+
+                  <div className="flex items-center gap-4">
+                    <div className="text-right">
+                      <div className="text-3xl font-semibold text-[#38bdf8] tabular-nums">
+                        {evaluation?.overallScore ?? 0}
+                        <span className="text-sm text-[#85858b] font-normal"> / 100</span>
+                      </div>
+                      <div className="text-[11px] text-[#85858b]">
+                        {evaluation?.answeredCount ?? answeredCount} / {questions.length} Answered
+                      </div>
                     </div>
-                  )}
-                </Card>
-              );
-            })}
-          </div>
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={() => {
+                        setPhase('setup');
+                        setAudioUrl(null);
+                        setQuestions([]);
+                        setAnswers({});
+                        setAnswerText('');
+                        setEvaluation(null);
+                      }}
+                      leftIcon={<RotateCcw className="w-3.5 h-3.5" />}
+                    >
+                      New Interview
+                    </Button>
+                  </div>
+                </div>
+
+                {evaluation?.metrics && (
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 border-t border-white/[0.08]">
+                    {[
+                      { label: 'Communication', val: evaluation.metrics.communicationScore },
+                      { label: interviewType === 'technical' ? 'Technical Fit' : 'Role Fit', val: evaluation.metrics.technicalOrRoleFitScore },
+                      { label: 'Completeness', val: evaluation.metrics.completenessScore },
+                      { label: 'Clarity', val: evaluation.metrics.clarityScore },
+                    ].map((m) => (
+                      <div key={m.label} className="p-3 rounded-lg bg-[#0f0f10] border border-white/[0.06] space-y-1.5">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-[#85858b]">{m.label}</span>
+                          <span className="text-[#ededed] font-medium tabular-nums">{m.val}%</span>
+                        </div>
+                        <div className="h-1.5 w-full rounded-full bg-white/[0.08] overflow-hidden">
+                          <div
+                            className="h-full rounded-full bg-[#38bdf8]"
+                            style={{ width: `${m.val}%` }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </Card>
+
+              {evaluation && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Card className="p-5 space-y-2">
+                    <h3 className="text-sm font-medium text-[#34d399]">Key Strengths</h3>
+                    <ul className="space-y-1.5 text-xs text-[#a1a1a6] list-disc list-inside">
+                      {evaluation.strengths.map((s, i) => (
+                        <li key={i}>{s}</li>
+                      ))}
+                    </ul>
+                  </Card>
+                  <Card className="p-5 space-y-2">
+                    <h3 className="text-sm font-medium text-[#f59e0b]">Areas to Improve</h3>
+                    <ul className="space-y-1.5 text-xs text-[#a1a1a6] list-disc list-inside">
+                      {evaluation.improvements.map((imp, i) => (
+                        <li key={i}>{imp}</li>
+                      ))}
+                    </ul>
+                  </Card>
+                </div>
+              )}
+
+              <div className="space-y-3">
+                <h3 className="text-sm font-medium text-[#ededed]">Question-by-Question Breakdown</h3>
+                {questions.map((q, idx) => {
+                  const rec = answers[idx];
+                  const fb = evaluation?.perQuestionFeedback?.find((f) => f.index === idx);
+                  return (
+                    <Card key={q.id} className="p-4 space-y-2">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-xs font-medium text-[#ededed]">
+                          Q{idx + 1}. {q.title}
+                        </span>
+                        <div className="flex items-center gap-2">
+                          {fb && (
+                            <span className="text-xs font-semibold text-[#38bdf8] tabular-nums">
+                              {fb.score}/10
+                            </span>
+                          )}
+                          <Badge variant="neutral" size="sm">
+                            {rec?.answer ? 'Answered' : 'Skipped'}
+                          </Badge>
+                        </div>
+                      </div>
+                      <p className="text-xs text-[#85858b]">{q.text}</p>
+                      {rec?.answer && (
+                        <div className="p-3 rounded-lg bg-[#0f0f10] border border-white/[0.06] text-xs text-[#ededed]">
+                          {rec.answer}
+                        </div>
+                      )}
+                      {fb && (
+                        <div className="text-xs text-[#a1a1a6] pt-1 space-y-1">
+                          <p><span className="text-[#ededed] font-medium">Feedback:</span> {fb.feedback}</p>
+                          <p><span className="text-[#38bdf8] font-medium">Pro Tip:</span> {fb.idealTip}</p>
+                        </div>
+                      )}
+                    </Card>
+                  );
+                })}
+              </div>
+            </>
+          )}
         </div>
       )}
     </div>

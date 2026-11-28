@@ -147,6 +147,153 @@ interviewRouter.post('/session-questions', async (req: Request, res: Response) =
   res.json({ success: true, data: { interviewType, role, questions: techQuestions.slice(0, 10) } });
 });
 
+const HR_KEYWORDS = [
+  'team', 'project', 'learned', 'challenge', 'result', 'improved', 'communication',
+  'collaborate', 'deadline', 'ownership', 'feedback', 'goal', 'experience', 'built',
+];
+
+const TECH_KEYWORDS = [
+  'complexity', 'database', 'api', 'cache', 'index', 'async', 'test', 'scale',
+  'architecture', 'latency', 'security', 'token', 'state', 'performance', 'query', 'design',
+];
+
+interviewRouter.post('/evaluate', async (req: Request, res: Response) => {
+  const interviewType = req.body?.interviewType === 'technical' ? 'technical' : 'hr';
+  const role = String(req.body?.role || 'Software Engineer (SDE)').trim();
+  const questions: { id: string; title: string; text: string }[] = Array.isArray(req.body?.questions)
+    ? req.body.questions
+    : [];
+  const answersMap: Record<string, { answer?: string }> = req.body?.answers || {};
+
+  const keywords = interviewType === 'technical' ? TECH_KEYWORDS : HR_KEYWORDS;
+  let answeredCount = 0;
+  let totalWords = 0;
+  let totalScoreSum = 0;
+  let keywordHitsTotal = 0;
+
+  const perQuestionFeedback = questions.map((q, idx) => {
+    const raw = String(answersMap[String(idx)]?.answer || '').trim();
+    const words = raw ? raw.split(/\s+/).filter(Boolean) : [];
+    const wc = words.length;
+
+    if (!raw) {
+      return {
+        index: idx,
+        title: q.title,
+        score: 0,
+        status: 'Skipped',
+        feedback: 'No response was recorded for this question.',
+        idealTip:
+          interviewType === 'hr'
+            ? 'Use the STAR method (Situation, Task, Action, Result) in 4–6 concise sentences.'
+            : 'State the core concept first, then explain tradeoffs and a real project example.',
+      };
+    }
+
+    answeredCount += 1;
+    totalWords += wc;
+    const lower = raw.toLowerCase();
+    const kwHits = keywords.filter((kw) => lower.includes(kw)).length;
+    keywordHitsTotal += kwHits;
+
+    // Score 1..10 based on depth (word count), structure (sentences), and domain relevance
+    const sentences = raw.split(/[.!?]+/).filter((s) => s.trim().length > 3).length;
+    const depthPts = Math.min(4.5, (wc / 35) * 4.5);
+    const structurePts = Math.min(2.5, (sentences / 3) * 2.5);
+    const relevancePts = Math.min(3.0, 1.0 + kwHits * 0.65);
+    const qScore = Math.max(2, Math.min(10, Math.round(depthPts + structurePts + relevancePts)));
+    totalScoreSum += qScore;
+
+    let feedback = 'Good structured response with clear reasoning.';
+    if (wc < 15) {
+      feedback = 'Answer is quite brief. Elaborate with a concrete example and measurable outcome.';
+    } else if (kwHits === 0) {
+      feedback =
+        interviewType === 'technical'
+          ? 'Clear explanation, though adding specific technical terms and tradeoffs would strengthen it.'
+          : 'Clear answer; tying it back to specific team impact or results will make it stronger.';
+    }
+
+    return {
+      index: idx,
+      title: q.title,
+      score: qScore,
+      status: 'Answered',
+      feedback,
+      idealTip:
+        interviewType === 'hr'
+          ? 'Highlight your specific contribution and quantify the outcome where possible.'
+          : 'Mention time/space or scalability tradeoffs to show senior-level engineering judgment.',
+    };
+  });
+
+  const totalQs = Math.max(1, questions.length);
+  const completenessScore = Math.round((answeredCount / totalQs) * 100);
+  const avgQ = answeredCount > 0 ? totalScoreSum / answeredCount : 0;
+  const communicationScore = answeredCount > 0 ? Math.min(100, Math.round(avgQ * 9.5 + (totalWords / answeredCount >= 25 ? 5 : 0))) : 0;
+  const technicalOrRoleFitScore = answeredCount > 0 ? Math.min(100, Math.round(avgQ * 8.5 + Math.min(15, keywordHitsTotal * 2))) : 0;
+  const clarityScore = answeredCount > 0 ? Math.min(100, Math.round(avgQ * 9.2)) : 0;
+
+  const overallScore = Math.round(
+    completenessScore * 0.30 +
+      communicationScore * 0.25 +
+      technicalOrRoleFitScore * 0.25 +
+      clarityScore * 0.20
+  );
+
+  let grade = 'Needs Practice';
+  let verdict = 'Keep practicing structured answers and complete all 10 questions.';
+  if (overallScore >= 82) {
+    grade = 'Excellent';
+    verdict = `Strong performance! You are well-prepared for ${role} ${interviewType === 'technical' ? 'technical' : 'HR'} rounds.`;
+  } else if (overallScore >= 65) {
+    grade = 'Good';
+    verdict = `Solid foundation for ${role}. Adding deeper examples and tradeoffs will push you to the top tier.`;
+  } else if (overallScore >= 45) {
+    grade = 'Average';
+    verdict = 'Decent attempt — focus on answering every question with concrete examples.';
+  }
+
+  const strengths: string[] = [];
+  if (completenessScore >= 80) strengths.push(`Completed ${answeredCount}/${questions.length} questions consistently.`);
+  if (answeredCount > 0 && totalWords / answeredCount >= 25) strengths.push('Provided detailed, well-developed responses instead of one-liners.');
+  if (keywordHitsTotal >= 4) strengths.push(`Used relevant ${interviewType === 'technical' ? 'engineering & architecture' : 'behavioral & ownership'} terminology.`);
+  if (strengths.length === 0) strengths.push('Completed the mock interview flow and practiced speaking/writing under interview structure.');
+
+  const improvements: string[] = [];
+  if (completenessScore < 100) improvements.push(`Answer all 10 questions (currently ${questions.length - answeredCount} skipped) for full score.`);
+  if (answeredCount === 0 || totalWords / answeredCount < 25) improvements.push('Aim for 3–5 clear sentences per answer with a real project or STAR example.');
+  if (keywordHitsTotal < 4) {
+    improvements.push(
+      interviewType === 'technical'
+        ? `Include concrete ${role} concepts (tradeoffs, complexity, caching, testing, or scaling).`
+        : 'Include measurable outcomes, teamwork, and ownership details in behavioral stories.'
+    );
+  }
+
+  res.json({
+    success: true,
+    data: {
+      interviewType,
+      role,
+      overallScore,
+      grade,
+      verdict,
+      answeredCount,
+      totalQuestions: questions.length,
+      metrics: {
+        communicationScore,
+        technicalOrRoleFitScore,
+        completenessScore,
+        clarityScore,
+      },
+      strengths,
+      improvements,
+      perQuestionFeedback,
+    },
+  });
+});
+
 interviewRouter.post('/prerender-basics', async (_req: Request, res: Response, next: NextFunction) => {
   try {
     const upstream = await fetch(`${AVATAR_ENGINE_URL}/api/avatar/prerender-basics`, {
